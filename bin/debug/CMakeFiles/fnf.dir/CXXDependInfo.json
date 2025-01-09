@@ -1,0 +1,21 @@
+{
+	"bmi-installation" : null,
+	"compiler-frontend-variant" : "MSVC",
+	"compiler-id" : "MSVC",
+	"compiler-simulate-id" : "",
+	"config" : "Debug",
+	"cxx-modules" : {},
+	"dir-cur-bld" : "C:/Users/a.goi/fight-night-finale/bin/debug",
+	"dir-cur-src" : "C:/Users/a.goi/fight-night-finale",
+	"dir-top-bld" : "C:/Users/a.goi/fight-night-finale/bin/debug",
+	"dir-top-src" : "C:/Users/a.goi/fight-night-finale",
+	"exports" : [],
+	"forward-modules-from-target-dirs" : [],
+	"include-dirs" : 
+	[
+		"C:\\Users\\a.goi\\fight-night-finale\\inc"
+	],
+	"language" : "CXX",
+	"linked-target-dirs" : [],
+	"module-dir" : "C:/Users/a.goi/fight-night-finale/bin/debug/CMakeFiles/fnf.dir"
+}

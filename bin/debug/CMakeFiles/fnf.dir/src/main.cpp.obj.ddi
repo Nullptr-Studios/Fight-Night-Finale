@@ -1,0 +1,14 @@
+{
+    "version": 1,
+    "revision": 0,
+    "rules": [
+        {
+            "primary-output": "CMakeFiles\\fnf.dir\\src\\main.cpp.obj",
+            "outputs": [
+                "C:\\Users\\a.goi\\fight-night-finale\\bin\\debug\\vc140.pdb",
+                "CMakeFiles\\fnf.dir\\src\\main.cpp.obj.ddi"
+            ],
+            "requires": []
+        }
+    ]
+}
