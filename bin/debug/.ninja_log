@@ -1,7 +1,0 @@
-# ninja log v6
-562	2835	7581221437060224	CMakeFiles/fnf.dir/src/main.cpp.obj	83dac5a93d693965
-3	504	7581221431470263	CMakeFiles/fnf.dir/src/main.cpp.obj.ddi	c03c04200d373e77
-506	561	7581221436491760	CMakeFiles/fnf.dir/CXX.dd	e696da3b3ebf2bf
-506	561	7581221436491760	CMakeFiles/fnf.dir/src/main.cpp.obj.modmap	e696da3b3ebf2bf
-2835	3249	7581221459789429	fnf.exe	754b1651c0e1c39
-506	561	7581221436491760	C:/Users/a.goi/fight-night-finale/bin/debug/CMakeFiles/fnf.dir/CXXModules.json	e696da3b3ebf2bf
