@@ -1,0 +1,3 @@
+<component name="DependencyValidationManager">
+  <scope name="Project" pattern="file[fnf]:src//*||file[fnf]:inc/sigma/engine/src//*||file[fnf]:inc/sigma/dev/src//*" />
+</component>

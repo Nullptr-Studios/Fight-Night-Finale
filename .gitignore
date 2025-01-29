@@ -1,1 +1,10 @@
-/bin
+# Binaries folders
+bin
+*[Bb]uild*
+
+# Ignore bak files because they are annoying (we use git for something)
+*.bak
+
+# I think this is from nvim
+.cache
+compile_commands.json
