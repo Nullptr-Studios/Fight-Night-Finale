@@ -13,7 +13,8 @@ namespace game {
 class InputSystem;
 
 /**
- * @enum PlayerState for the current state the player is in
+ * @enum  PlayerState 
+ * @brief Stores the current state the player is in
  */
 enum PlayerState {
   IDLE, ///< @brief The player is standing still
