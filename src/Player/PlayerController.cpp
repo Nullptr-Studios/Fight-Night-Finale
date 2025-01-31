@@ -18,7 +18,7 @@ void PlayerController::CheckControllers() {
 void PlayerController::Update() {
   CheckControllers();
   m_inputSystem.UpdateInput(m_controllerId);
-  if (m_state != ACTION) {
+  if (m_state == ACTION) return;
     std::string action = m_inputSystem.GetAction();
     //Sets air state if jumping
     if (action == "jump") {
