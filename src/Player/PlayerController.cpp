@@ -64,7 +64,7 @@ void PlayerController::UpdateMovement() {
       if (velocityX != 0.f) {
         if (velocityX > 0.f) {
           velocityX -= acceleration;
-          if (velocityX < 0.f) velocityX = 0.f;  // Clamp to zero if overshooting
+          velocityX = std::min(velocityX, 0.0f);
         } else if (velocityX < 0.f) {
           velocityX += acceleration;
           if (velocityX > 0.f) velocityX = 0.f;  // Clamp to zero if overshooting
