@@ -10,9 +10,7 @@ void Player::Start() {
 }
 
 void Player::Update(double delta) {
-  if (m_controllerComponent != nullptr) {
-    m_controllerComponent->Update();
-  }
+  if (m_controllerComponent) m_controllerComponent->Update();
 }
 
 void Player::Destroy() {
