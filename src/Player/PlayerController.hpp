@@ -43,14 +43,14 @@ public:
   void SetMaxVelocity(float velocity) { maxVelocity = velocity; }
 
 private:
-  float acceleration = 10.0f; ///< @brief player acceleration
-  float inAirAccelerationX = 5.0f; ///< @brief player X acceleration while in AIR
-  float inAirAccelerationY = 9.8f; ///<  @brief player Y acceleration while in AIR
+  float acceleration = 25.0f; ///< @brief player acceleration
+  float inAirAccelerationX = 25.0f; ///< @brief player X acceleration while in AIR
+  float inAirAccelerationY = 50.0f; ///<  @brief player Y acceleration while in AIR
 
-  float jumpHeight = 200.0f; ///< @brief maximum jump height
-  float maxVelocity = 500.0f; ///< @brief maximum velocity
-  float maxAirVelocityX = 250.0f; ///< @brief max X velocity in AIR
-  float maxAirVelocityY = 250.0f; ///< @brief max Y velocity in AIR
+  float jumpHeight = 150.0f; ///< @brief maximum jump height
+  float maxVelocity = 400.0f; ///< @brief maximum velocity
+  float maxAirVelocityX = 400.0f; ///< @brief max X velocity in AIR
+  float maxAirVelocityY = 400.0f; ///< @brief max Y velocity in AIR
 
   //TODO: Possibly deprecate the bool in favor of a parabolic function for the jump
   bool jumpPeaked = false; ///< @brief Checks if Y-Coorinate has reached jumpHeight
