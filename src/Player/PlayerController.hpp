@@ -44,20 +44,21 @@ public:
 
 private:
   float acceleration = 10.0f; ///< @brief player acceleration
-  float inAirAcceleration = 5.0f;
-  float playerGravity = 9.8f;
+  float inAirAccelerationX = 5.0f; ///< @brief player X acceleration while in AIR
+  float inAirAccelerationY = 9.8f; ///<  @brief player Y acceleration while in AIR
 
-  float jumpHeight = 50.0f;
+  float jumpHeight = 200.0f; ///< @brief maximum jump height
+  float maxVelocity = 500.0f; ///< @brief maximum velocity
+  float maxAirVelocityX = 250.0f; ///< @brief max X velocity in AIR
+  float maxAirVelocityY = 250.0f; ///< @brief max Y velocity in AIR
 
-  float maxVelocity = 500.0f;
-  float maxAirVelocity = maxVelocity/2;
-
-  bool jumpPeaked = false;
+  //TODO: Possibly deprecate the bool in favor of a parabolic function for the jump
+  bool jumpPeaked = false; ///< @brief Checks if Y-Coorinate has reached jumpHeight
 
 
   float velocityX = 0; ///< @brief player velocity variable, 0 by default
   float velocityY = 0; ///< @brief player velocity variable, 0 by default
-  float velocityZ = 0;
+  float velocityZ = 0; ///< @brief player velocity variable, 0 by default
 
   /**
    * @brief checks if any gamepad is connected, sets controller id to gamepad id

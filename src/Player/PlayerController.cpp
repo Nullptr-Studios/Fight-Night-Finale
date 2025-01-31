@@ -5,12 +5,6 @@
 
 namespace game {
 
-/*
-TODO:
-  Make this more performant!
-  IK you can just call this at object creation but if you do that you can't hotswap it :( -a
- */
-
 void PlayerController::CheckControllers() {
   for (int i = 0; i<=3; i++) {
     if (AEInputGamepadConnected(i)) {
@@ -21,7 +15,6 @@ void PlayerController::CheckControllers() {
   m_controllerId = -1;
 }
 
-// i guess we will never know what to do -x
 void PlayerController::Update() {
   CheckControllers();
   m_inputSystem.UpdateInput(m_controllerId);
@@ -37,14 +30,13 @@ void PlayerController::Update() {
     UpdateMovement();
     #ifdef _DEBUG
     std::cout << m_character->transform.position.x << ", " << m_character->transform.position.y <<
-      ", " << m_character->transform.position.z << std::endl;
+              ", " << m_character->transform.position.z << std::endl;
+    std::cout << m_state << std::endl;
     #endif
   }
 }
 
 void PlayerController::UpdateMovement() {
-  maxVelocity = 100.0f;
-  maxAirVelocity = maxVelocity/2;
   glm::vec2 movement = m_inputSystem.GetMovement();
 
   // Check for movement input
@@ -55,60 +47,62 @@ void PlayerController::UpdateMovement() {
   }
 
   if (m_state == AIR) {
-    // Acceleration: When the player is moving, increase velocity up to the maximum velocity
+    // X-Movement
     if (isMovingX) {
       // Apply acceleration and clamp velocity
-      velocityX = std::clamp(velocityX + inAirAcceleration * movement.x , -maxAirVelocity, maxAirVelocity);
+      velocityX = std::clamp(velocityX + inAirAccelerationX * movement.x , -maxAirVelocityX, maxAirVelocityX);
     } else {
       // Deceleration: When there's no movement, decrease velocity
       if (velocityX != 0.f) {
-        // Apply deceleration towards zero
         if (velocityX > 0.f) {
-          velocityX -= inAirAcceleration;
+          velocityX -= inAirAccelerationX;
           if (velocityX < 0.f) velocityX = 0.f;  // Clamp to zero if overshooting
         } else if (velocityX < 0.f) {
-          velocityX += inAirAcceleration;
+          velocityX += inAirAccelerationX;
           if (velocityX > 0.f) velocityX = 0.f;  // Clamp to zero if overshooting
         }
       }
     }
 
-    // Actual jumping shit:
+    // Jump Logic: Y Movement
     if (jumpPeaked) {
-        if (m_position.y > m_position.z) {
-          velocityY -= playerGravity;
+        if (m_character->transform.position.y > m_character->transform.position.z) {
+          // Apply deacceleration until Y <= Z
+          velocityY = std::clamp(velocityY - inAirAccelerationY, -maxAirVelocityY, 0.0f);
         } else {
+          // Exit out of jump movement when Y <= Z
           m_character->transform.position.y = m_character->transform.position.z;
           jumpPeaked = false;
           velocityY = 0.f;
-          velocityX = 0.f;
           velocityZ = 0.f;
           m_state = IDLE;
           return;
         }
       } else {
+        // Check if Jump height has been reached
         if (m_character->transform.position.y - m_character->transform.position.z >= jumpHeight ) {
           jumpPeaked = true;
         } else {
-          velocityY = std::clamp(velocityY + inAirAcceleration, 0.0f, maxAirVelocity);
+          // Apply vertical acceleration until Jump height is reached
+          velocityY = std::clamp(velocityY + inAirAccelerationY, 0.0f, maxAirVelocityY);
         }
     }
+      //Update movement
       m_position = {static_cast<float>(velocityX * AEGetFrameTime()),
       static_cast<float>(velocityY * AEGetFrameTime()),
       0.0f};
       m_character->transform.position += m_position;
-      return;
+
+    //TODO: Maybe add jumping animations?
 
   } else {
 
-    // Acceleration: When the player is moving, increase velocity up to the maximum velocity
     if (isMovingX) {
       // Apply acceleration and clamp velocity
       velocityX = std::clamp(velocityX + acceleration * movement.x , -maxVelocity, maxVelocity);
     } else {
       // Deceleration: When there's no movement, decrease velocity
       if (velocityX != 0.f) {
-        // Apply deceleration towards zero
         if (velocityX > 0.f) {
           velocityX -= acceleration;
           if (velocityX < 0.f) velocityX = 0.f;  // Clamp to zero if overshooting
@@ -124,7 +118,6 @@ void PlayerController::UpdateMovement() {
     } else {
       // Deceleration: When there's no movement, decrease velocity
       if (velocityY != 0.f) {
-        // Apply deceleration towards zero
         if (velocityY > 0.f) {
           velocityY -= acceleration;
           if (velocityY < 0.f) velocityY = 0.f;  // Clamp to zero if overshooting
@@ -145,7 +138,7 @@ void PlayerController::UpdateMovement() {
     if (std::abs(velocityX) > 0.1f || std::abs(velocityY) > 0.1f) {
       m_state = MOVING;
 
-      //DEPRECATED ANIMATIONS
+      //TODO: DEPRECATED ANIMATIONS, replace with actual movement animations
       /*m_character->m_animComp->PlayAnim();
 
       if (velocityX > 0.f) {
@@ -171,14 +164,14 @@ void PlayerController::UpdateMovement() {
 void PlayerController::PlayAction(const std::string &action) {
   if (m_state == AIR) {
     m_state = ACTION;
-    // TODO: Do AIR Animation
-    // After animation, return to NEUTRAL
+    // TODO: Do AIR combat animations
+    // After animation, return to AIR
     m_state = AIR;
   } else {
     m_state = ACTION;
     std::cout << "Action: " << action << "\n";
-    // TODO: Do Animation
-    // After animation return to NEURTRAL
+    // TODO: Do combat animations
+    // After animation return to IDLE
 
     velocityX = 0.0f;
     velocityY = 0.0f;
