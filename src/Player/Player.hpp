@@ -8,8 +8,8 @@
 
 #pragma once
 #include <pch.hpp>
-#include "Controller/PlayerController.hpp"
 #include "Objects/Character.hpp"
+#include "PlayerController.hpp"
 
 namespace game {
 
@@ -24,7 +24,7 @@ public:
 
 private:
   /// @brief Holds the Player Controller Component to handle input
-  std::unique_ptr<FNFE::PlayerController> m_controllerComponent = nullptr;
+  PlayerController* m_controllerComponent = nullptr;
 };
 
 } // namespace game
