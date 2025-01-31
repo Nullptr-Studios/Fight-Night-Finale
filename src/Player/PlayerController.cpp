@@ -115,7 +115,7 @@ void PlayerController::UpdateJump() {
     m_facingDirection = glm::vec2(movement.x, movement.y);
   }
 
-  if (m_state == AIR) {
+  if (m_state != AIR) return;
     // X-Movement
     if (isMovingX) {
       // Apply acceleration and clamp velocity
