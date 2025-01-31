@@ -55,7 +55,6 @@ private:
   //TODO: Possibly deprecate the bool in favor of a parabolic function for the jump
   bool jumpPeaked = false; ///< @brief Checks if Y-Coorinate has reached jumpHeight
 
-
   float velocityX = 0; ///< @brief player velocity variable, 0 by default
   float velocityY = 0; ///< @brief player velocity variable, 0 by default
   float velocityZ = 0; ///< @brief player velocity variable, 0 by default
@@ -67,9 +66,13 @@ private:
   void CheckControllers();
   /**
    * @brief helper function to update movement
-   * @param movement_action specified movement action
    */
   void UpdateMovement();
+  /**
+   * @brief helper function to update jump movement
+   *
+   */
+  void UpdateJump();
   // TODO: have a combo buffer to keep track of current combo
   /**
    * @brief plays specifed action
