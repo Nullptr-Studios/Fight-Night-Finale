@@ -6,7 +6,7 @@ void Player::Init() {
 }
 
 void Player::Start() {
-  m_controllerComponent = new PlayerController(this);
+  m_controllerComponent = std::make_unique<PlayerController>(this);
 }
 
 void Player::Update(double delta) {
