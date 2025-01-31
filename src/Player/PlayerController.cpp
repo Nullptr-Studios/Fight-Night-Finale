@@ -94,7 +94,7 @@ void PlayerController::UpdateMovement() {
     m_character->transform.position += m_position;
 
     // Transition to MOVING state if velocity is above a small threshold
-    if (std::abs(velocityX) > 0.1f || std::abs(velocityY) > 0.1f) {
+    if (std::fabs(velocityX) > 0.1f || std::fabs(velocityY) > 0.1f) {
       m_state = MOVING;
 
       //TODO: ADD WALKING ANIMATIONS
