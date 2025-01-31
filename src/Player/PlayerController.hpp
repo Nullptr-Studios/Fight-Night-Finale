@@ -44,21 +44,20 @@ public:
   void SetMaxVelocity(float velocity) { maxVelocity = velocity; }
 
 private:
-  float acceleration = 25.0f; ///< @brief player acceleration
-  float inAirAccelerationX = 25.0f; ///< @brief player X acceleration while in AIR
-  float inAirAccelerationY = 50.0f; ///<  @brief player Y acceleration while in AIR
+  float m_acceleration = 25.0f; ///< @brief player acceleration
+  // Consider making this a vec2 (will need some updates in code)
+  glm::vec2 m_airAccel = {25.0f, 50.0f};
 
-  float jumpHeight = 150.0f; ///< @brief maximum jump height
-  float maxVelocity = 400.0f; ///< @brief maximum velocity
-  float maxAirVelocityX = 400.0f; ///< @brief max X velocity in AIR
-  float maxAirVelocityY = 400.0f; ///< @brief max Y velocity in AIR
+  float m_jumpHeight = 150.0f; ///< @brief maximum jump height
+  float m_maxVelocity = 400.0f; ///< @brief maximum velocity
+  // Consider making this a vec2 (will need some updates in code)
+  glm::vec2 m_airMaxVelocity = glm::vec2(400.0f);
 
-  //TODO: Possibly deprecate the bool in favor of a parabolic function for the jump
-  bool jumpPeaked = false; ///< @brief Checks if Y-Coorinate has reached jumpHeight
+  // TODO: Possibly deprecate the bool in favor of a parabolic function for the jump
+  bool m_jumpPeaked = false; ///< @brief Checks if Y-Coorinate has reached jumpHeight
 
-  float velocityX = 0; ///< @brief player velocity variable, 0 by default
-  float velocityY = 0; ///< @brief player velocity variable, 0 by default
-  float velocityZ = 0; ///< @brief player velocity variable, 0 by default
+  // consider making this a vec3 (will need some updates in code)
+  glm::vec3 m_velocity = glm::vec2(0);
 
   /**
    * @brief checks if any gamepad is connected, sets controller id to gamepad id
