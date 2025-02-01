@@ -13,16 +13,16 @@
 
 namespace game {
 
-class Player : public sigma::Character {
+class Player : public Sigma::Character {
 public:
-  explicit Player(const sigma::id_t id) : Character(id) {}
+  explicit Player(const Sigma::id_t id) : Character(id) {}
 
   void Init() override;
   void Start() override;
   void Update(double delta) override;
   void Destroy() override;
 
-  bool OnCollision(sigma::Collision::CollisionEvent& e) override;
+  bool OnCollision(Sigma::Collision::CollisionEvent& e) override;
 
 private:
   /// @brief Holds the Player Controller Component to handle input

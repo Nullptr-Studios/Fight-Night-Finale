@@ -11,9 +11,9 @@
 
 namespace game {
 
-class TestCollision : public sigma::Actor {
+class TestCollision : public Sigma::Actor {
 public:
-  explicit TestCollision(const sigma::id_t id) : Actor(id) {}
+  explicit TestCollision(const Sigma::id_t id) : Actor(id) {}
 
   void Init() override {}
   void Start() override;

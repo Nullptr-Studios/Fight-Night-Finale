@@ -9,7 +9,7 @@
 #include "PrototypeScene.hpp"
 
 int main() {
-  std::unique_ptr<sigma::GameManager> gameManager = std::make_unique<sigma::GameManager>("Game", 800, 600);
+  std::unique_ptr<Sigma::GameManager> gameManager = std::make_unique<Sigma::GameManager>("Game", 800, 600);
 
   auto scene = new game::PrototypeScene("PrototypeScene", 1);
   gameManager->LoadScene(scene);

@@ -26,9 +26,9 @@ enum PlayerState {
  * @class PlayerController
  * @brief Manages per player input and actions
  */
-class PlayerController : public sigma::ControllerComponent {
+class PlayerController : public Sigma::ControllerComponent {
 public:
-  explicit PlayerController(sigma::Character *character) :
+  explicit PlayerController(Sigma::Character *character) :
       ControllerComponent(character), m_inputSystem("assets/core/keybinds.json") {}
   ~PlayerController() override = default;
   void Update() override; ///< @brief Call this every frame to update the player position
@@ -86,10 +86,10 @@ private:
   void EndAction(const std::string &action);
 
   int m_controllerId = -1; ///< @brief ID of the controller being used
-  sigma::InputSystem m_inputSystem; ///< @brief Input System that manages input
+  Sigma::InputSystem m_inputSystem; ///< @brief Input System that manages input
   PlayerState m_state = IDLE; ///< @brief Stores current player state
 
   glm::vec2 m_facingDirection = glm::vec2(1.0f, 0.0f); ///< @brief Direction the player last moved
 };
 
-} // namespace sigma
+} // namespace Sigma

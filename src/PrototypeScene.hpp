@@ -11,7 +11,7 @@
 
 namespace game {
 
-class PrototypeScene : public sigma::Scene {
+class PrototypeScene : public Sigma::Scene {
 public:
   PrototypeScene(const char *name, unsigned index) : Scene(name, index) {}
 
