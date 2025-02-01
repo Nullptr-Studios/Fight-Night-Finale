@@ -1,12 +1,13 @@
 #include "PrototypeScene.hpp"
+#include "Core.hpp"
 #include "Factory.hpp"
-#include "Objects/Character.hpp"
 #include "Player/Player.hpp"
-#include "core.hpp"
+#include "TestCollision.hpp"
 
 void game::PrototypeScene::Load() {
   Scene::Load();
-  FNFE_FACTORY->CreateObject<Player>("Player");
+  GET_FACTORY->CreateObject<Player>("Player");
+  // GET_FACTORY->CreateObject<TestCollision>("Test Collision");
 }
 
 void game::PrototypeScene::Update(double delta) {

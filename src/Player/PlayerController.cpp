@@ -39,9 +39,6 @@ void PlayerController::Update() {
         break;
     }
     #ifdef _DEBUG
-    std::cout << m_character->transform.position.x << ", " << m_character->transform.position.y <<
-              ", " << m_character->transform.position.z << std::endl;
-    std::cout << m_state << std::endl;
     #endif
   }
 }
@@ -187,4 +184,4 @@ void PlayerController::PlayAction(const std::string &action) {
 
 void PlayerController::EndAction(const std::string &action) { m_state = IDLE; }
 
-} // namespace FNFE
+} // namespace sigma
