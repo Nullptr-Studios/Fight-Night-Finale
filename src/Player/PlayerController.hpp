@@ -41,7 +41,7 @@ public:
   [[nodiscard]] glm::vec2 GetFacingDirection() const { return m_facingDirection; }
   [[nodiscard]] float GetMaxVelocity() const { return m_maxVelocity; }
   void SetMaxVelocity(float velocity) { m_maxVelocity = velocity; }
-  void GetControllerID() {m_inputSystem.CheckControllers();}
+  void GetControllerID() {m_controllerId = m_inputSystem.CheckControllers();}
 
 private:
   float m_acceleration = 25.0f; ///< @brief player acceleration
@@ -84,7 +84,7 @@ private:
    */
   void EndAction(const std::string &action);
 
-  int m_controllerId = -1; ///< @brief ID of the controller being used
+  int m_controllerId; ///< @brief ID of the controller being used
   FNFE::InputSystem m_inputSystem; ///< @brief Input System that manages input
   PlayerState m_state = IDLE; ///< @brief Stores current player state
 

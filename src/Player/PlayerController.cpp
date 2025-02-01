@@ -30,7 +30,7 @@ void PlayerController::Update() {
   #ifdef _DEBUG
   std::cout << m_character->transform.position.x << ", " << m_character->transform.position.y <<
             ", " << m_character->transform.position.z << std::endl;
-  std::cout << m_state << std::endl;
+  std::cout << m_state << ", " << m_controllerId << std::endl;
   #endif
 }
 
