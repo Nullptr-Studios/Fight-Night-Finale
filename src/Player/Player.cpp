@@ -15,6 +15,5 @@ void Player::Update(double delta) {
 }
 
 void Player::Destroy() {
-  m_controllerComponent.reset();
 }
 } // namespace game
