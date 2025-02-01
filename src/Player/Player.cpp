@@ -2,8 +2,7 @@
 
 namespace game {
 
-void Player::Init() {
-}
+void Player::Init() {}
 
 void Player::Start() {
   m_controllerComponent = std::make_unique<PlayerController>(this);
@@ -14,6 +13,6 @@ void Player::Update(double delta) {
   if (m_controllerComponent) m_controllerComponent->Update();
 }
 
-void Player::Destroy() {
-}
+void Player::Destroy() {}
+
 } // namespace game

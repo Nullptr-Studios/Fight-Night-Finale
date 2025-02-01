@@ -10,29 +10,29 @@ void PlayerController::Update() {
   if (m_state == ACTION) return;
     std::string action = m_inputSystem.GetAction();
     //Sets air state if jumping
-    if (action == "jump") {
+  if (action == "jump") {
       m_state = AIR;
-    }
-    //Plays action if in an action
-    if (!action.empty()) {
-      PlayAction(action);
-      return;
-    }
-    //Movement
-    switch (m_state) {
-      case AIR:
-        UpdateJump();
-        break;
-      default:
-        UpdateMovement();
-        break;
-    }
-    #ifdef _DEBUG
-    std::cout << m_character->transform.position.x << ", " << m_character->transform.position.y <<
-              ", " << m_character->transform.position.z << std::endl;
-    std::cout << m_state << std::endl;
-    #endif
   }
+  //Plays action if in an action
+  if (!action.empty()) {
+    PlayAction(action);
+    return;
+  }
+  //Movement
+  switch (m_state) {
+    case AIR:
+      UpdateJump();
+      break;
+    default:
+      UpdateMovement();
+      break;
+  }
+  #ifdef _DEBUG
+  std::cout << m_character->transform.position.x << ", " << m_character->transform.position.y <<
+            ", " << m_character->transform.position.z << std::endl;
+  std::cout << m_state << std::endl;
+  #endif
+}
 
 
 void PlayerController::UpdateMovement() {
@@ -44,27 +44,27 @@ void PlayerController::UpdateMovement() {
   }
 
   // X-Movement
-    UpdateCoordinate(movement.x, m_velocity.x, m_acceleration, m_maxVelocity);
+  UpdateCoordinate(movement.x, m_velocity.x, m_acceleration, m_maxVelocity);
 
-   // Y-Movement
-    UpdateCoordinate(movement.y, m_velocity.y, m_acceleration, m_maxVelocity);
+  // Y-Movement
+  UpdateCoordinate(movement.y, m_velocity.y, m_acceleration, m_maxVelocity);
 
-    // Update position based on movement direction and velocity
-    m_position = {static_cast<float>(m_velocity.x * AEGetFrameTime()),
-      static_cast<float>(m_velocity.y * AEGetFrameTime()),
-      static_cast<float>(m_velocity.y * AEGetFrameTime())};
-    m_character->transform.position += m_position;
+  // Update position based on movement direction and velocity
+  m_position = {static_cast<float>(m_velocity.x * AEGetFrameTime()),
+                  static_cast<float>(m_velocity.y * AEGetFrameTime()),
+                  static_cast<float>(m_velocity.y * AEGetFrameTime())};
+  m_character->transform.position += m_position;
 
-    // Transition to MOVING state if velocity is above a small threshold
-    if (std::fabs(m_velocity.x) > 0.1f || std::fabs(m_velocity.y) > 0.1f) {
-      m_state = MOVING;
-    if (m_velocity.x > 0.f || m_velocity.y > 0.f) {}
-    } else {
+  // Transition to MOVING state if velocity is above a small threshold
+  if (std::fabs(m_velocity.x) > 0.1f || std::fabs(m_velocity.y) > 0.1f) {
+    m_state = MOVING;
+  }
+  else if (m_velocity.x <=  0.f && m_velocity.y <= 0.f) {
       m_state = IDLE; // Transition to IDLE when velocity is 0
-    }
+  }
   // TODO: Movement Animations
 
-  }
+}
 
 void PlayerController::UpdateJump() {
   glm::vec2 movement = m_inputSystem.GetMovement();
@@ -76,7 +76,7 @@ void PlayerController::UpdateJump() {
     // Jump Logic: Y Movement
     if (m_jumpPeaked) {
       if (m_character->transform.position.y > m_character->transform.position.z) {
-        // Apply dem_acceleration until Y <= Z
+        // Apply deceleration until Y <= Z
         m_velocity.y = std::clamp(m_velocity.y - m_airAccel.y, -m_airMaxVelocity.y, 0.0f);
       } else {
         // Exit out of jump movement when Y <= Z
@@ -92,7 +92,7 @@ void PlayerController::UpdateJump() {
       if (m_character->transform.position.y - m_character->transform.position.z >= m_jumpHeight ) {
         m_jumpPeaked = true;
       } else {
-        // Apply vertical m_acceleration until Jump height is reached
+        // Apply vertical acceleration until Jump height is reached
         m_velocity.y = std::clamp(m_velocity.y + m_airAccel.y, 0.0f, m_airMaxVelocity.y);
       }
     }
@@ -103,14 +103,14 @@ void PlayerController::UpdateJump() {
     m_character->transform.position += m_position;
     // TODO: jump animations
 
-  }
+}
 
 void PlayerController::UpdateCoordinate (const float & coordinate, float& velocity,
                                         const float & acceleration, const float& maxVelocity) {
    if (coordinate!=0.f) {
-      // Apply m_acceleration and clamp velocity
+     // Apply acceleration and clamp velocity
      velocity = std::clamp(velocity + acceleration * coordinate , -maxVelocity, maxVelocity);
-    } else {
+   } else {
       // Deceleration: When there's no movement, decrease velocity
       if (velocity != 0.f) {
         if (velocity > 0.01f) {
@@ -122,7 +122,6 @@ void PlayerController::UpdateCoordinate (const float & coordinate, float& veloci
         }
       }
     }
-
 }
 
 void PlayerController::PlayAction(const std::string &action) {
@@ -141,8 +140,8 @@ void PlayerController::PlayAction(const std::string &action) {
     m_velocity.y = 0.0f;
     EndAction(action);
   }
-
 }
 
 void PlayerController::EndAction(const std::string &action) { m_state = IDLE; }
-} // namespace FNFE
+
+} // namespace game
