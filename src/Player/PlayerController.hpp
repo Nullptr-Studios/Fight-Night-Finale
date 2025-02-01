@@ -71,7 +71,7 @@ private:
    * @param acceleration acceleration
    * @param maxVelocity maximum velocity
    */
-  static static void UpdateCoordinate(const float& coordinate, float& velocity, const float& acceleration, const float& maxVelocity);
+  void UpdateCoordinate(const float& coordinate, float& velocity, const float& acceleration, const float& maxVelocity);
   // TODO: have a combo buffer to keep track of current combo
   /**
    * @brief plays specifed action
