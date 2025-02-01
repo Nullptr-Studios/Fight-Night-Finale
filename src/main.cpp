@@ -8,7 +8,7 @@
 #include "GameManager.hpp"
 
 int main() {
-  std::unique_ptr<FNFE::GameManager> gameManager = std::make_unique<FNFE::GameManager>("Game", 800, 600);
+  std::unique_ptr<sigma::GameManager> gameManager = std::make_unique<sigma::GameManager>("Game", 800, 600);
 
   while (AESysWindowExists()) {
     gameManager->Run();

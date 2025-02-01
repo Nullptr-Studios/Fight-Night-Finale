@@ -1,0 +1,21 @@
+{
+  "keyboard": {
+    "movement": {
+      "up": "W",
+      "left": "A",
+      "down": "S",
+      "right": "D"
+    },
+    "actions": {
+      "roll": " "
+    }
+  },
+  "gamepad": {
+    "sticks": {
+      "movement": "left"
+    },
+    "action": {
+      "roll": "A"
+    }
+  }
+}

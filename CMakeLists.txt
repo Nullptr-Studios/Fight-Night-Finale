@@ -29,10 +29,10 @@ add_custom_command(TARGET game POST_BUILD
 # Copy FMOD dlls to build directory
 add_custom_command(TARGET game POST_BUILD
         COMMAND ${CMAKE_COMMAND} -E copy_if_different
-        ${CMAKE_SOURCE_DIR}/inc/sigma/engine/lib/fmodL.dll $<TARGET_FILE_DIR:${PROJECT_NAME}>/)
+        ${CMAKE_SOURCE_DIR}/inc/sigma/engine/lib/fmodL.dll ${CMAKE_BINARY_DIR})
 add_custom_command(TARGET game POST_BUILD
         COMMAND ${CMAKE_COMMAND} -E copy_if_different
-        ${CMAKE_SOURCE_DIR}/inc/sigma/engine/lib/fmodstudioL.dll $<TARGET_FILE_DIR:${PROJECT_NAME}>/)
+        ${CMAKE_SOURCE_DIR}/inc/sigma/engine/lib/fmodstudioL.dll ${CMAKE_BINARY_DIR})
 
 # Compile commands .json
 add_custom_command(TARGET game POST_BUILD
