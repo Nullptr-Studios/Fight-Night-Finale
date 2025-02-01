@@ -38,32 +38,23 @@ public:
    * This is like the direction the player is moving, but it never returns a zero value
    * @return The direction the player last moved
    */
-  glm::vec2 GetFacingDirection() const { return m_facingDirection; }
-
-  float GetMaxVelocity() const { return maxVelocity; }
-  void SetMaxVelocity(float velocity) { maxVelocity = velocity; }
+  [[nodiscard]] glm::vec2 GetFacingDirection() const { return m_facingDirection; }
+  [[nodiscard]] float GetMaxVelocity() const { return m_maxVelocity; }
+  void SetMaxVelocity(float velocity) { m_maxVelocity = velocity; }
+  void GetControllerID() {m_inputSystem.CheckControllers();}
 
 private:
   float m_acceleration = 25.0f; ///< @brief player acceleration
-  // Consider making this a vec2 (will need some updates in code)
-  glm::vec2 m_airAccel = {25.0f, 50.0f};
+  glm::vec2 m_airAccel = {25.0f, 50.0f}; ///< @brief player air acceleration
 
-  float m_jumpHeight = 150.0f; ///< @brief maximum jump height
-  float m_maxVelocity = 400.0f; ///< @brief maximum velocity
-  // Consider making this a vec2 (will need some updates in code)
-  glm::vec2 m_airMaxVelocity = glm::vec2(400.0f);
+  float m_jumpHeight = 150.0f; ///< @brief player max jump height
+  float m_maxVelocity = 400.0f; ///< @brief player max velocity
+  glm::vec2 m_airMaxVelocity = glm::vec2(400.0f); ///> @brief player max air velocity
+  glm::vec3 m_velocity = glm::vec3(0.f); ///>@brief player velocity
 
   // TODO: Possibly deprecate the bool in favor of a parabolic function for the jump
-  bool m_jumpPeaked = false; ///< @brief Checks if Y-Coorinate has reached jumpHeight
+  bool m_jumpPeaked = false; ///< @brief Checks if Y-Coordinate has reached jumpHeight
 
-  // consider making this a vec3 (will need some updates in code)
-  glm::vec3 m_velocity = glm::vec2(0);
-
-  /**
-   * @brief checks if any gamepad is connected, sets controller id to gamepad id
-   */
-  // TODO: make this work with multiple controllers
-  void CheckControllers();
   /**
    * @brief helper function to update movement
    */
@@ -73,6 +64,14 @@ private:
    *
    */
   void UpdateJump();
+  /**
+   * @brief handles movement for a coordinate
+   * @param coordinate vec2 movement.coordinate
+   * @param velocity vec3.coordinate velocity for player movement
+   * @param acceleration acceleration
+   * @param maxVelocity maximum velocity
+   */
+  static static void UpdateCoordinate(const float& coordinate, float& velocity, const float& acceleration, const float& maxVelocity);
   // TODO: have a combo buffer to keep track of current combo
   /**
    * @brief plays specifed action

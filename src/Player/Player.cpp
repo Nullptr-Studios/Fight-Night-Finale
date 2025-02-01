@@ -7,6 +7,7 @@ void Player::Init() {
 
 void Player::Start() {
   m_controllerComponent = std::make_unique<PlayerController>(this);
+  m_controllerComponent->GetControllerID();
 }
 
 void Player::Update(double delta) {
@@ -14,7 +15,6 @@ void Player::Update(double delta) {
 }
 
 void Player::Destroy() {
-  delete m_controllerComponent;
+  m_controllerComponent.reset();
 }
-
 } // namespace game
