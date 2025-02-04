@@ -16,9 +16,9 @@ class InputSystem;
  * @class PlayerController
  * @brief Manages per player input and actions
  */
-class PlayerController : public FNFE::ControllerComponent {
+class PlayerController : public Sigma::ControllerComponent {
 public:
-  explicit PlayerController(FNFE::Character *character) :
+  explicit PlayerController(Sigma::Character *character) :
       ControllerComponent(character), m_inputSystem("assets/core/keybinds.json") {}
   ~PlayerController() override = default;
   void Update() override; ///< @brief Call this every frame to update the player position
@@ -56,7 +56,7 @@ private:
   void EndAction(const std::string &action);
 
   int m_controllerId; ///< @brief ID of the controller being used
-  FNFE::InputSystem m_inputSystem; ///< @brief Input System that manages input
+  Sigma::InputSystem m_inputSystem; ///< @brief Input System that manages input
 
 };
 

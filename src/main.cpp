@@ -13,9 +13,6 @@ int main() {
   auto scene = new game::PrototypeScene("Scene", 1);
   gameManager->LoadScene(scene);
 
-  auto scene = new game::PrototypeScene("PrototypeScene", 1);
-  gameManager->LoadScene(scene);
-
   while (AESysWindowExists()) {
     gameManager->Run();
   }

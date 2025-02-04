@@ -13,9 +13,9 @@
 
 namespace game {
 
-class Player : public FNFE::Character {
+class Player : public Sigma::Character {
 public:
-  explicit Player(const FNFE::id_t id) : Character(id) {}
+  explicit Player(const Sigma::id_t id) : Character(id) {}
 
   void Init() override {};
   void Start() override;
