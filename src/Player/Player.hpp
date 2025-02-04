@@ -26,7 +26,7 @@ public:
 
 private:
   /// @brief Holds the Player Controller Component to handle input
-  PlayerController* m_controllerComponent = nullptr;
+  std::unique_ptr<PlayerController> m_controllerComponent = nullptr;
 };
 
 } // namespace game
