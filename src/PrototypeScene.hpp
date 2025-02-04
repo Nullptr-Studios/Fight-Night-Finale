@@ -11,13 +11,13 @@
 
 namespace game {
 
-class PrototypeScene : public FNFE::Scene {
+class PrototypeScene : public Sigma::Scene {
 public:
   PrototypeScene(const char *name, unsigned index) : Scene(name, index) {}
 
   void Load() override;
-  void Update(double delta) override;
-  void Draw() override;
+  void Update(double delta) override {}
+  void Draw() override {}
 };
 
 } // namespace game

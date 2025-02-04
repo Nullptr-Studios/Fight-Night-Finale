@@ -1,18 +1,18 @@
 #include "PrototypeScene.hpp"
+#include "Core.hpp"
 #include "Factory.hpp"
-#include "Objects/Character.hpp"
-#include "Player/Player.hpp"
-#include "core.hpp"
+#include "Objects/Actor.hpp"
 
-void game::PrototypeScene::Load() {
-  Scene::Load();
-  FNFE_FACTORY->CreateObject<Player>("Player");
+namespace game {
+
+void PrototypeScene::Load() {
+  std::cout << "PrototypeScene::Load()" << std::endl;
+  auto* floor = GET_FACTORY->CreateObject<Sigma::Actor>();
+  floor->SetTexture("assets/prototype-scene/T_Floors.png");
+  floor->transform.scale = {700.0f, 572.0f};
+  auto* walls = GET_FACTORY->CreateObject<Sigma::Actor>();
+  walls->SetTexture("assets/prototype-scene/T_Walls.png");
+  walls->transform.scale = {700.0f, 572.0f};
 }
 
-void game::PrototypeScene::Update(double delta) {
-  Scene::Update(delta);
-}
-
-void game::PrototypeScene::Draw() {
-  Scene::Draw();
 }
