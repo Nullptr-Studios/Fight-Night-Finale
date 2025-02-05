@@ -15,7 +15,7 @@
       "movement": "left"
     },
     "action": {
-      "roll": "A"
+      "jump": "A"
     }
   }
 }

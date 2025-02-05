@@ -13,6 +13,7 @@ void PlayerController::Update() {
   if (action == "jump") {
     m_character->Jump();
   }
+  //std::cout << m_inputSystem.GetMovement().x << ", " << m_inputSystem.GetMovement().y << std::endl;
   // #ifdef _DEBUG
   // std::cout << m_character->transform.position.x << ", " << m_character->transform.position.y <<
   //           ", " << m_character->transform.position.z << std::endl;

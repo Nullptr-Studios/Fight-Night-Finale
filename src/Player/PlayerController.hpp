@@ -26,24 +26,7 @@ public:
   void GetControllerID() {m_controllerId = m_inputSystem.CheckControllers();}
 
 private:
-  /**
-   * @brief helper function to update movement
-   */
-  void UpdateMovement();
-  /**
-   * @brief helper function to update jump movement
-   *
-   */
-  void UpdateJump();
-  /**
-   * @brief handles movement for a coordinate
-   * @param coordinate vec2 movement.coordinate
-   * @param velocity vec3.coordinate velocity for player movement
-   * @param acceleration acceleration
-   * @param maxVelocity maximum velocity
-   */
-  void UpdateCoordinate(const float& coordinate, float& velocity, const float& acceleration, const float& maxVelocity);
-  // TODO: have a combo buffer to keep track of current combo
+
   /**
    * @brief plays specifed action
    * @param action specifed action
