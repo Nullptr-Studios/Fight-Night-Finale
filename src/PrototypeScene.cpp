@@ -20,6 +20,7 @@ void PrototypeScene::Load() {
   
   auto p = GET_FACTORY->CreateObject<game::Player>();
   p->SetTexture("assets/prototype-scene/T_Walls.png");
+  p->SetJsonPath("assets/characters/dummy.json");
   
 
 }
