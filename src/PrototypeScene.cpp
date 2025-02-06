@@ -19,7 +19,7 @@ void PrototypeScene::Load() {
   walls->transform.scale = {700.0f, 572.0f};
   
   auto p = GET_FACTORY->CreateObject<game::Player>();
-  p->SetTexture("assets/prototype-scene/T_Walls.png");
+  //p->SetTexture("assets/prototype-scene/T_Walls.png");
   
 
 }
