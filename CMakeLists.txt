@@ -24,7 +24,7 @@ target_link_libraries(game PRIVATE sigma)
 # Copy res folder to build directory
 add_custom_command(TARGET game POST_BUILD
         COMMAND ${CMAKE_COMMAND} -E copy_directory
-        ${CMAKE_SOURCE_DIR}/assets ${CMAKE_BINARY_DIR}/assets)
+        ${CMAKE_SOURCE_DIR}/assets ${CMAKE_BINARY_DIR}/Debug/assets)
 
 # Copy FMOD dlls to build directory
 add_custom_command(TARGET game POST_BUILD
