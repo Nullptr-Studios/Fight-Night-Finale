@@ -60,4 +60,4 @@ private:
 
 };
 
-} // namespace FNFE
+} // namespace Sigma

@@ -22,6 +22,8 @@ public:
   void Update(double delta) override;
   void Destroy() override;
 
+  bool OnCollision(Sigma::Collision::CollisionEvent& e) override;
+
 private:
   /// @brief Holds the Player Controller Component to handle input
   std::unique_ptr<PlayerController> m_controllerComponent = nullptr;
