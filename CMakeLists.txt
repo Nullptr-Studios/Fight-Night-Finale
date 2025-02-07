@@ -18,6 +18,8 @@ file(GLOB_RECURSE SRC CONFIGURE_DEPENDS
 
 add_executable(game src/main.cpp ${SRC})
 
+target_include_directories(game PUBLIC src)
+
 # Adds sigma engine static library
 target_link_libraries(game PRIVATE sigma)
 
