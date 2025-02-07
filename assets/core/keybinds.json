@@ -7,7 +7,9 @@
       "right": "D"
     },
     "actions": {
-      "roll": " "
+      "roll": " ",
+      "basic": "J",
+      "super": "K"
     }
   },
   "gamepad": {
@@ -15,7 +17,9 @@
       "movement": "left"
     },
     "action": {
-      "roll": "A"
+      "roll": "A",
+      "basic": "X",
+      "super": "B"
     }
   }
 }
