@@ -109,10 +109,10 @@ void PlayerController::UpdateCoordinate (const float & coordinate, float& veloci
       if (velocity != 0.f) {
         if (velocity > 0.01f) {
           velocity -= acceleration;
-          velocity = std::min(velocity, 0.0f);
+          velocity = min(velocity, 0.0f);
         } else if (velocity < -0.01f) {
           velocity += acceleration;
-          velocity = std::max(velocity, 0.0f);
+          velocity = max(velocity, 0.0f);
         }
       }
     }
@@ -126,7 +126,6 @@ void PlayerController::PlayAction(const std::string &action) {
     m_state = AIR;
   } else {
     m_state = ACTION;
-    std::cout << "Action: " << action << "\n";
     // TODO: Do combat animations
     // After animation return to IDLE
 

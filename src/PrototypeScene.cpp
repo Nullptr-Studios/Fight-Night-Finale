@@ -6,7 +6,9 @@
 
 void game::PrototypeScene::Load() {
   Scene::Load();
-  GET_FACTORY->CreateObject<Player>("Player");
+  auto player = GET_FACTORY->CreateObject<Player>("Player");
+
+  GET_FACTORY->CreateObject<TestCollision>("Square");
   // GET_FACTORY->CreateObject<TestCollision>("Test Collision");
 }
 

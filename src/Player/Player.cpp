@@ -20,9 +20,9 @@ void Player::Update(double delta) {
 
 void Player::Destroy() {}
 
-bool Player::OnCollision(Sigma::Collision::CollisionEvent& e) {
-  std::cout << "Collision with " << e.GetOther()->GetName() << "\n";
-  return true;
+void Player::OnDamage(Sigma::Damage::DamageEvent& e) {
+  std::cout << "Damage with " << e.GetOther()->GetName() << "\n";
+  std::cout << GetHealth() << "\n";
 }
 
 } // namespace game
