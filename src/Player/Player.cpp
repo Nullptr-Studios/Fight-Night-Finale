@@ -31,11 +31,6 @@ void Player::Update(double delta) {
     m_animComp->SetCurrentAnim("Idle");
   }
 
-  if (velocity.x < 0) {
-    transform.relativeScale.x = -3;
-  } else {
-    transform.relativeScale.x = 3;
-  }
 }
 
 void Player::Destroy() {}

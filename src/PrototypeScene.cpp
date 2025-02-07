@@ -7,6 +7,7 @@
 namespace game {
 
 void PrototypeScene::Load() {
+  GameScene::Load();
   std::cout << "PrototypeScene::Load()" << std::endl;
 
   
@@ -14,9 +15,12 @@ void PrototypeScene::Load() {
   auto* floor = GET_FACTORY->CreateObject<Sigma::Actor>();
   floor->SetTexture("assets/prototype-scene/T_Floors.png");
   floor->transform.scale = {700.0f, 572.0f};
+  floor->transform.position.z = -1000;
+  
   auto* walls = GET_FACTORY->CreateObject<Sigma::Actor>();
   walls->SetTexture("assets/prototype-scene/T_Walls.png");
   walls->transform.scale = {700.0f, 572.0f};
+  walls->transform.position.z = -1000;
   
   auto p = GET_FACTORY->CreateObject<game::Player>();
   //p->SetTexture("assets/prototype-scene/T_Walls.png");

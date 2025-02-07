@@ -5,20 +5,26 @@
 
 namespace game {
 
-void PlayerController::Update() {
+void PlayerController::Update()
+{
   m_inputSystem.UpdateInput(m_controllerId);
-    std::string action = m_inputSystem.GetAction();
-    //Sets air state if jumping
+  std::string action = m_inputSystem.GetAction();
+  
+
   m_character->Move(m_inputSystem.GetMovement());
   if (action == "jump") {
     m_character->Jump();
   }
-  //std::cout << m_inputSystem.GetMovement().x << ", " << m_inputSystem.GetMovement().y << std::endl;
-  // #ifdef _DEBUG
-  // std::cout << m_character->transform.position.x << ", " << m_character->transform.position.y <<
-  //           ", " << m_character->transform.position.z << std::endl;
-  // std::cout << m_state << ", " << m_controllerId << std::endl;
-  // #endif
+
+  // Sprite flip
+  if (m_inputSystem.GetLastMovement().x > 0) {
+    m_character->transform.relativeScale.x = 3;
+  }
+  else
+  {
+    m_character->transform.relativeScale.x = -3;
+  }
+
 }
 
 
