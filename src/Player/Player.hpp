@@ -17,7 +17,7 @@ class Player : public Sigma::Character {
 public:
   explicit Player(const Sigma::id_t id) : Character(id) {}
 
-  void Init() override {};
+  void Init() override;
   void Start() override;
   void Update(double delta) override;
   void Destroy() override;

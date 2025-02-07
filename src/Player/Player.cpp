@@ -4,6 +4,10 @@
 
 namespace game {
 
+void Player::Init() {
+  Character::Init();
+}
+
 void Player::Start() {
   Character::Start();
   m_controllerComponent = std::make_unique<PlayerController>(this);
