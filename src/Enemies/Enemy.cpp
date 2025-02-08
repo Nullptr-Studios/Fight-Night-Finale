@@ -1,5 +1,6 @@
 #include "Enemy.hpp"
 #include "Player/Player.hpp"
+#include "core.hpp"
 #include "glm/geometric.hpp"
 
 namespace game {
@@ -11,6 +12,7 @@ void Enemy::Serialize() {
 
 void Enemy::Start() {
   m_state = FOLLOW;
+  m_player = GET_FACTORY->FindObject("Player");
 }
 
 bool Enemy::OnCollision(Sigma::Collision::CollisionEvent& e) {
@@ -31,8 +33,7 @@ void Enemy::OnFollow(double delta) {
   glm::vec3 targetPosition = m_player->transform.position - transform.position;
   targetPosition.y = targetPosition.z; // Removes player jump -x
 
-  if (glm::vec2(targetPosition.x, targetPosition.y).length() < m_distanceToAttack)
-    m_state = ATTACK;
+  if (glm::length(targetPosition) < m_distanceToAttack) m_state = ATTACK;
 
   targetPosition = glm::normalize(targetPosition);
   Move( {targetPosition.x, targetPosition.y} );
