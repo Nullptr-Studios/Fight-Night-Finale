@@ -1,18 +1,21 @@
 #include "Enemy.hpp"
+#include "Factory.hpp"
 #include "Player/Player.hpp"
 #include "core.hpp"
 #include "glm/geometric.hpp"
 
 namespace game {
-
 void Enemy::Serialize() {
   Character::Serialize();
   m_distanceToAttack = j["distanceToAttack"];
 }
 
+void Enemy::Init() { Character::Init(); }
+
 void Enemy::Start() {
+  Character::Start();
   m_state = FOLLOW;
-  m_player = GET_FACTORY->FindObject("Player");
+  m_player = GET_FACTORY->FindObject<Player>("Player");
 }
 
 bool Enemy::OnCollision(Sigma::Collision::CollisionEvent& e) {
@@ -21,6 +24,9 @@ bool Enemy::OnCollision(Sigma::Collision::CollisionEvent& e) {
 }
 
 void Enemy::Update(double delta) {
+  Character::Update(delta);
+  m_distance = m_player->transform.GetDepthPosition() - transform.position;
+
   switch (m_state) {
     default: m_state = FOLLOW;
     case FOLLOW: OnFollow(delta); break;
@@ -30,20 +36,21 @@ void Enemy::Update(double delta) {
 }
 
 void Enemy::OnFollow(double delta) {
-  glm::vec3 targetPosition = m_player->transform.position - transform.position;
-  targetPosition.y = targetPosition.z; // Removes player jump -x
+  auto direction = glm::normalize(m_distance);
+  // We use the .z instead of the .y to ignore if the player is jumping -x
+  Move( {direction.x, direction.y} );
 
-  if (glm::length(targetPosition) < m_distanceToAttack) m_state = ATTACK;
-
-  targetPosition = glm::normalize(targetPosition);
-  Move( {targetPosition.x, targetPosition.y} );
+  if (glm::length(m_distance) < m_distanceToAttack) m_state = ATTACK;
 }
 
 void Enemy::OnAttack(double delta) {
   BasicAttack();
+
+  if (glm::length(m_distance) > m_distanceToAttack) m_state = FOLLOW;
 }
 
 void Enemy::OnDead(double delta) { }
 
-}
+void Enemy::Destroy() { Character::Destroy(); }
 
+}
