@@ -17,7 +17,7 @@ void Player::Start() {
   m_animComp->PlayAnim();
   
   m_controllerComponent = std::make_unique<PlayerController>(this);
-  m_controllerComponent->GetControllerID();
+  m_controllerComponent->SetControllerID(m_controllerId);
 }
 
 void Player::Update(double delta) {
@@ -33,6 +33,6 @@ void Player::Update(double delta) {
 
 }
 
-void Player::Destroy() {}
+void Player::Destroy() { Character::Destroy(); }
 
 } // namespace game

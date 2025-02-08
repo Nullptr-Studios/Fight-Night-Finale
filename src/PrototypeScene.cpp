@@ -2,6 +2,8 @@
 #include "Core.hpp"
 #include "Factory.hpp"
 #include "Objects/Actor.hpp"
+
+#include "Objects/Debug/PunchingBag.hpp"
 #include "Player/Player.hpp"
 
 namespace game {
@@ -22,8 +24,12 @@ void PrototypeScene::Load() {
   walls->transform.scale = {700.0f, 572.0f};
   walls->transform.position.z = -1000;
   
-  auto p = GET_FACTORY->CreateObject<game::Player>();
+  auto p = GET_FACTORY->CreateObject<game::Player>("Player", -1);
+
+  auto b = GET_FACTORY->CreateObject<game::PunchingBag>();
+  
   //p->SetTexture("assets/prototype-scene/T_Walls.png");
+  //b->m_animComp->AddCallback("test", []() { std::cout << "Callback\n"; });
   
 
 }

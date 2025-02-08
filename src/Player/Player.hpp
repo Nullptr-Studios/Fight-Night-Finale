@@ -15,7 +15,14 @@ namespace game {
 
 class Player : public Sigma::Character {
 public:
-  explicit Player(const Sigma::id_t id) : Character(id) {}
+  
+  /**
+   * @brief Construct a Player object
+   *
+   * @param id
+   * @param controllerId
+   */
+  explicit Player(const Sigma::id_t id, int controllerId) : Character(id), m_controllerId(controllerId) {}
 
   void Init() override;
   void Start() override;
@@ -25,6 +32,8 @@ public:
 private:
   /// @brief Holds the Player Controller Component to handle input
   std::unique_ptr<PlayerController> m_controllerComponent = nullptr;
+
+  int m_controllerId = -1;
 };
 
 } // namespace game

@@ -21,9 +21,15 @@ public:
   explicit PlayerController(Sigma::Character *character) :
       ControllerComponent(character), m_inputSystem("assets/core/keybinds.json") {}
   ~PlayerController() override = default;
-  void Update() override; ///< @brief Call this every frame to update the player position
+  void Update() override;
 
-  void GetControllerID() {m_controllerId = m_inputSystem.CheckControllers();}
+  //void GetControllerID() {m_controllerId = m_inputSystem.CheckControllers();}
+
+  /**
+   * @brief Set the Controller ID
+   * @param id the ID to set
+   */
+  void SetControllerID(int id) {m_controllerId = id;}
 
 private:
 

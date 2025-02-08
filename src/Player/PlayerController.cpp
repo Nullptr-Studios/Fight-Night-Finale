@@ -10,8 +10,8 @@ void PlayerController::Update()
   m_inputSystem.UpdateInput(m_controllerId);
   std::string action = m_inputSystem.GetAction();
   
-
   m_character->Move(m_inputSystem.GetMovement());
+  
   if (action == "jump") {
     m_character->Jump();
   }
