@@ -109,10 +109,10 @@ void PlayerController::UpdateCoordinate (const float & coordinate, float& veloci
       if (velocity != 0.f) {
         if (velocity > 0.01f) {
           velocity -= acceleration;
-          velocity = min(velocity, 0.0f);
+          velocity = std::min(velocity, 0.0f);
         } else if (velocity < -0.01f) {
           velocity += acceleration;
-          velocity = max(velocity, 0.0f);
+          velocity = std::max(velocity, 0.0f);
         }
       }
     }
