@@ -21,6 +21,7 @@ void Player::Update(double delta) {
 void Player::Destroy() {}
 
 void Player::OnDamage(Sigma::Damage::DamageEvent& e) {
+  Character::OnDamage(e);
   std::cout << "Damage with " << e.GetOther()->GetName() << "\n";
   std::cout << GetHealth() << "\n";
 }
