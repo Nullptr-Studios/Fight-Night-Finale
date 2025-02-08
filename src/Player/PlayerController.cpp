@@ -18,11 +18,11 @@ void PlayerController::Update()
 
   // Sprite flip
   if (m_inputSystem.GetLastMovement().x > 0) {
-    m_character->transform.relativeScale.x = 3;
+    m_character->transform.relativeScale.x = 2;
   }
   else
   {
-    m_character->transform.relativeScale.x = -3;
+    m_character->transform.relativeScale.x = -2;
   }
 
 }

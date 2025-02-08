@@ -4,16 +4,16 @@ namespace game {
 void Player::Init() {
   Character::Init();
   
-  transform.relativeScale = glm::vec2(3);
+  transform.relativeScale = glm::vec2(2);
 }
 
 void Player::Start() {
   Character::Start();
   
-  auto anim = GET_ANIMATION->LoadTextureAtlas("assets/TestAnimPlayer.json");
+  auto anim = GET_ANIMATION->LoadTextureAtlas("assets/Test.json");
   m_animComp->SetTextureAtlas(anim);
   m_animComp->SetCurrentAnim("Idle");
-  SetTexture("assets/TestAnimPlayer.png");
+  SetTexture(anim->textureStr.c_str());
   m_animComp->PlayAnim();
   
   m_controllerComponent = std::make_unique<PlayerController>(this);
