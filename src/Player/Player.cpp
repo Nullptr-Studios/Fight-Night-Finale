@@ -12,6 +12,7 @@ void Player::Start() {
 
   m_collider = std::make_unique<Sigma::Collision::BoxCollider>(Sigma::Collision::PLAYER, Sigma::Collision::COLLISION);
   m_collider->box.Set(50, 50, 50, 50);
+  m_collider->damage = 1.0f;
 }
 
 void Player::Update(double delta) {
