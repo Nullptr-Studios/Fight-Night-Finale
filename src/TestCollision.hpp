@@ -7,17 +7,19 @@
  */
 #pragma once
 #include <pch.hpp>
-#include <Objects/Actor.hpp>
+#include "Objects/Character.hpp"
 
 namespace game {
 
-class TestCollision : public Sigma::Actor {
+class TestCollision : public Sigma::Character {
 public:
-  explicit TestCollision(const Sigma::id_t id) : Actor(id) {}
+  explicit TestCollision(const Sigma::id_t id) : Character(id) {}
 
   void Init() override {}
   void Start() override;
   void Update(double delta) override {}
   void Destroy() override {}
+
+  void OnDamage(Sigma::Damage::DamageEvent& e) override;
 };
 }

@@ -25,6 +25,15 @@ void PlayerController::Update() {
 
 
 void PlayerController::PlayAction(const std::string &action) {
+  if (m_state == AIR) {
+    m_state = ACTION;
+    // TODO: Do AIR combat animations
+    // After animation, return to AIR
+    m_state = AIR;
+  } else {
+    m_state = ACTION;
+    // TODO: Do combat animations
+    // After animation return to IDLE
 
     EndAction(action);
 }

@@ -15,6 +15,7 @@ void Player::Start() {
 
   m_collider = std::make_unique<Sigma::Collision::BoxCollider>(Sigma::Collision::PLAYER, Sigma::Collision::COLLISION);
   m_collider->box.Set(transform.scale);
+  m_collider->damage = 1.0f;
 }
 
 void Player::Update(double delta) {
@@ -24,9 +25,10 @@ void Player::Update(double delta) {
 
 void Player::Destroy() {}
 
-bool Player::OnCollision(Sigma::Collision::CollisionEvent& e) {
-  std::cout << "Collision with " << e.GetOther()->GetName() << "\n";
-  return true;
+void Player::OnDamage(Sigma::Damage::DamageEvent& e) {
+  Character::OnDamage(e);
+  std::cout << "Damage with " << e.GetOther()->GetName() << "\n";
+  std::cout << GetHealth() << "\n";
 }
 
 } // namespace game
