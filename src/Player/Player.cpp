@@ -4,9 +4,12 @@
 
 namespace game {
 
-void Player::Init() {}
+void Player::Init() {
+  Character::Init();
+}
 
 void Player::Start() {
+  Character::Start();
   m_controllerComponent = std::make_unique<PlayerController>(this);
   m_controllerComponent->GetControllerID();
 
@@ -16,6 +19,7 @@ void Player::Start() {
 }
 
 void Player::Update(double delta) {
+  Character::Update(delta);
   if (m_controllerComponent) m_controllerComponent->Update();
 }
 

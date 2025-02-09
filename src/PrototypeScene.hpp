@@ -16,8 +16,8 @@ public:
   PrototypeScene(const char *name, unsigned index) : Scene(name, index) {}
 
   void Load() override;
-  void Update(double delta) override;
-  void Draw() override;
+  void Update(double delta) override {}
+  void Draw() override {}
 };
 
 } // namespace game

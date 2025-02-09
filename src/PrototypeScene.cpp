@@ -1,21 +1,25 @@
 #include "PrototypeScene.hpp"
 #include "Core.hpp"
 #include "Factory.hpp"
+#include "Objects/Actor.hpp"
 #include "Player/Player.hpp"
-#include "TestCollision.hpp"
 
-void game::PrototypeScene::Load() {
-  Scene::Load();
-  auto player = GET_FACTORY->CreateObject<Player>("Player");
+namespace game {
 
-  GET_FACTORY->CreateObject<TestCollision>("Square");
-  // GET_FACTORY->CreateObject<TestCollision>("Test Collision");
+void PrototypeScene::Load() {
+  std::cout << "PrototypeScene::Load()" << std::endl;
+
+  auto* floor = GET_FACTORY->CreateObject<Sigma::Actor>();
+  floor->SetTexture("assets/prototype-scene/T_Floors.png");
+  floor->transform.scale = {700.0f, 572.0f};
+  auto* walls = GET_FACTORY->CreateObject<Sigma::Actor>();
+  walls->SetTexture("assets/prototype-scene/T_Walls.png");
+  walls->transform.scale = {700.0f, 572.0f};
+
+  auto p = GET_FACTORY->CreateObject<game::Player>();
+  p->SetTexture("assets/prototype-scene/T_Walls.png");
+  p->SetJsonPath("assets/characters/dummy.json");
+
 }
 
-void game::PrototypeScene::Update(double delta) {
-  Scene::Update(delta);
-}
-
-void game::PrototypeScene::Draw() {
-  Scene::Draw();
 }
