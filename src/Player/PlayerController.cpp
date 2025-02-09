@@ -23,21 +23,4 @@ void PlayerController::Update() {
   // #endif
 }
 
-
-void PlayerController::PlayAction(const std::string &action) {
-  if (m_state == AIR) {
-    m_state = ACTION;
-    // TODO: Do AIR combat animations
-    // After animation, return to AIR
-    m_state = AIR;
-  } else {
-    m_state = ACTION;
-    // TODO: Do combat animations
-    // After animation return to IDLE
-
-    EndAction(action);
-}
-
-void PlayerController::EndAction(const std::string &action) {  }
-
 } // namespace game

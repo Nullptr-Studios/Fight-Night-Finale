@@ -1,4 +1,5 @@
 #include "Enemy.hpp"
+#include "DamageSystem/DamageEvent.hpp"
 #include "Factory.hpp"
 #include "Player/Player.hpp"
 #include "core.hpp"
@@ -21,6 +22,12 @@ void Enemy::Start() {
 bool Enemy::OnCollision(Sigma::Collision::CollisionEvent& e) {
   Character::OnCollision(e);
   return false;
+}
+
+void Enemy::OnDamage(Sigma::Damage::DamageEvent& e) {
+  Character::OnDamage(e);
+
+  if (!GetAlive()) m_state = DEAD;
 }
 
 void Enemy::Update(double delta) {

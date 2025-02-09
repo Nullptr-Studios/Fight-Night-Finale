@@ -1,6 +1,5 @@
 #include "Player.hpp"
 #include "Collision/Collider.hpp"
-#include "Collision/CollisionEvent.hpp"
 
 namespace game {
 
@@ -20,7 +19,7 @@ void Player::Start() {
 
 void Player::Update(double delta) {
   Character::Update(delta);
-  if (m_controllerComponent) m_controllerComponent->Update();
+  if (m_controllerComponent && GetAlive()) m_controllerComponent->Update();
 }
 
 void Player::Destroy() {}

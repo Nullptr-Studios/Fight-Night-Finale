@@ -31,7 +31,7 @@ public:
   void Serialize() override;
 
   bool OnCollision(Sigma::Collision::CollisionEvent& e) override;
-  // bool OnDamage(Sigma::Damage::DamageEvent& e) override;
+  void OnDamage(Sigma::Damage::DamageEvent& e) override;
 
   void SetPlayer(Player* player) { m_player = player; }
 

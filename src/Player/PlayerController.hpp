@@ -43,17 +43,6 @@ private:
    * @param maxVelocity maximum velocity
    */
   void UpdateCoordinate(const float& coordinate, float& velocity, const float& acceleration, const float& maxVelocity);
-  // TODO: have a combo buffer to keep track of current combo
-  /**
-   * @brief plays specifed action
-   * @param action specifed action
-   */
-  void PlayAction(const std::string &action);
-  /**
-   * @brief function played when action is ended
-   * @param action the action that ended
-   */
-  void EndAction(const std::string &action);
 
   int m_controllerId; ///< @brief ID of the controller being used
   Sigma::InputSystem m_inputSystem; ///< @brief Input System that manages input
