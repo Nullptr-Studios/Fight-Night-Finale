@@ -1,10 +1,18 @@
 #include "Player.hpp"
 
+#include "Audio/AudioEngine.hpp"
+
+
 namespace game {
 void Player::Init() {
   Character::Init();
   
   transform.relativeScale = glm::vec2(2);
+  GET_AUDIO->LoadBank("assets/banks/Master.bank");
+  GET_AUDIO->LoadBank("assets/banks/Master.strings.bank");
+  GET_AUDIO->LoadBank("assets/banks/Music.bank");
+
+
 }
 
 void Player::Start() {

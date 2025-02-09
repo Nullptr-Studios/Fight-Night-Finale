@@ -1,5 +1,5 @@
 #include "PlayerController.hpp"
-#include "Controller/InputSystem.hpp"
+#include "Controller/InputComponent.hpp"
 #include "Objects/Character.hpp"
 #include "Objects/Object.hpp"
 

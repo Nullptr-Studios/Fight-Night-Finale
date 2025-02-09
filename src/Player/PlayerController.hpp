@@ -7,7 +7,7 @@
  */
 #pragma once
 #include "Controller/ControllerComponent.hpp"
-#include "Controller/InputSystem.hpp"
+#include "Controller/InputComponent.hpp"
 
 namespace game {
 class InputSystem;
@@ -45,7 +45,7 @@ private:
   void EndAction(const std::string &action);
 
   int m_controllerId; ///< @brief ID of the controller being used
-  Sigma::InputSystem m_inputSystem; ///< @brief Input System that manages input
+  Sigma::InputComponent m_inputSystem; ///< @brief Input System that manages input
 
 };
 
