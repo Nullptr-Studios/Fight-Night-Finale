@@ -22,7 +22,7 @@ public:
   void Update(double delta) override;
   void Destroy() override;
 
-  bool OnCollision(Sigma::Collision::CollisionEvent& e) override;
+  void OnDamage(Sigma::Damage::DamageEvent& e) override;
 
 private:
   /// @brief Holds the Player Controller Component to handle input

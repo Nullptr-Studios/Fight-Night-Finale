@@ -20,7 +20,6 @@ void PrototypeScene::Load() {
   p->SetTexture("assets/prototype-scene/T_Walls.png");
   p->SetJsonPath("assets/characters/dummy.json");
 
-
 }
 
 }
