@@ -36,9 +36,15 @@ void Enemy::Update(double delta) {
 
   switch (m_state) {
     default: m_state = FOLLOW;
-    case FOLLOW: OnFollow(delta); break;
-    case ATTACK: OnAttack(delta); break;
-    case DEAD: OnDead(delta); break;
+    case FOLLOW:
+      OnFollow(delta);
+    break;
+    case ATTACK:
+      OnAttack(delta);
+    break;
+    case DEAD:
+      OnDead(delta);
+    break;
   }
 }
 
