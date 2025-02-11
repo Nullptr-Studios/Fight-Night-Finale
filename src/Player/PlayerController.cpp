@@ -11,10 +11,18 @@ void PlayerController::Update()
   std::string action = m_inputSystem.GetAction();
   
   m_character->Move(m_inputSystem.GetMovement());
+
+  // Action callback
+  if      (action == "roll")  m_character->Jump();
+  else if (action == "basic") m_character->BasicAttack();
+  else if (action == "super") m_character->SuperAttack();
+
+  // #ifdef _DEBUG
+  // std::cout << m_character->transform.position.x << ", " << m_character->transform.position.y <<
+  //           ", " << m_character->transform.position.z << std::endl;
+  // std::cout << m_state << ", " << m_controllerId << std::endl;
+  // #endif
   
-  if (action == "jump") {
-    m_character->Jump();
-  }
 
   // Sprite flip
   if (m_inputSystem.GetLastMovement().x > 0) {
@@ -29,7 +37,16 @@ void PlayerController::Update()
 
 
 void PlayerController::PlayAction(const std::string &action) {
- 
+  if (m_state == AIR) {
+    m_state = ACTION;
+    // TODO: Do AIR combat animations
+    // After animation, return to AIR
+    m_state = AIR;
+  } else {
+    m_state = ACTION;
+    // TODO: Do combat animations
+    // After animation return to IDLE
+
     EndAction(action);
 }
 
