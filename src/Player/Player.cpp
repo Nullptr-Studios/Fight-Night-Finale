@@ -1,8 +1,11 @@
 #include "Player.hpp"
+
 #include "Collision/Collider.hpp"
 #include "Collision/CollisionEvent.hpp"
+#include "Factory.hpp"
 
 #include "Audio/AudioEngine.hpp"
+#include "core.hpp"
 
 
 namespace game {
@@ -32,6 +35,9 @@ void Player::Start() {
   m_collider = std::make_unique<Sigma::Collision::BoxCollider>(Sigma::Collision::PLAYER, Sigma::Collision::COLLISION);
   m_collider->box.Set(50, 50, 50, 50);
   m_collider->damage = 1.0f;
+
+
+  m_debugAttack = GET_FACTORY->CreateObject<Sigma::Actor>("Debug Attack");
 }
 
 void Player::Update(double delta) {
@@ -45,7 +51,7 @@ void Player::Update(double delta) {
     m_animComp->SetCurrentAnim("Idle");
   }
 
-  m_attackCollider->DebugDraw(this, AE_COLORS_RED);
+  m_attackCollider->DebugDraw(m_debugAttack, this);
 
 }
 
