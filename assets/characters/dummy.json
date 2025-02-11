@@ -13,9 +13,9 @@
         "y" : 0.0
       },
       "colliderSize" : {
-        "x" : 0.0,
-        "y" : 0.0,
-        "z" : 0.0
+        "x" : 200.0,
+        "y" : 200.0,
+        "z" : 50.0
       },
       "animationName" : "hit_default_0"
     },
@@ -28,9 +28,9 @@
         "y" : 0.0
       },
       "colliderSize" : {
-        "x" : 0.0,
-        "y" : 0.0,
-        "z" : 0.0
+        "x" : 200.0,
+        "y" : 200.0,
+        "z" : 50.0
       },
       "animationName" : "hit_default_0"
     },
@@ -43,9 +43,9 @@
         "y" : 0.0
       },
       "colliderSize" : {
-        "x" : 0.0,
-        "y" : 0.0,
-        "z" : 0.0
+        "x" : 200.0,
+        "y" : 200.0,
+        "z" : 50.0
       },
       "animationName" : "hit_default_1"
     }

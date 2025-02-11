@@ -10,7 +10,7 @@ void TestCollision::Start() {
   transform.position = {200, 0, 0};
 }
 
-void TestCollision::OnDamage(Sigma::Damage::DamageEvent &e) {
+void TestCollision::OnDamage(const Sigma::Damage::DamageEvent &e) {
   Character::OnDamage(e);
   std::cout << "Object \"" << GetName() << "\" was damaged by \"" << e.GetOther()->GetName() << "\"\n";
   std::cout << "Current health: " << GetHealth() << "\n";

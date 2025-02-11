@@ -10,7 +10,7 @@
 
 int main() {
   std::unique_ptr<Sigma::GameManager> gameManager = std::make_unique<Sigma::GameManager>("Game", 800, 600);
-  auto scene = new game::PrototypeScene("Scene", 1);
+  auto scene = new game::PrototypeScene("Scene", 1, "assets/prototype-scene/ProtoScene.json");
   gameManager->LoadScene(scene);
 
   while (AESysWindowExists()) {

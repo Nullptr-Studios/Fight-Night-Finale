@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.29)
 project(sigma LANGUAGES CXX)
-set(CMAKE_CXX_STANDARD 26)
+set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 # Add engine cmake projects
@@ -24,7 +24,7 @@ target_link_libraries(game PRIVATE sigma)
 # Copy res folder to build directory
 add_custom_command(TARGET game POST_BUILD
         COMMAND ${CMAKE_COMMAND} -E copy_directory
-        ${CMAKE_SOURCE_DIR}/assets ${CMAKE_BINARY_DIR}/assets)
+        ${CMAKE_SOURCE_DIR}/assets ${CMAKE_BINARY_DIR}/Debug/assets)
 
 # Copy FMOD dlls to build directory
 add_custom_command(TARGET game POST_BUILD
@@ -35,6 +35,6 @@ add_custom_command(TARGET game POST_BUILD
         ${CMAKE_SOURCE_DIR}/inc/sigma/engine/lib/fmodstudioL.dll ${CMAKE_BINARY_DIR}/)
 
 # Compile commands .json
-add_custom_command(TARGET game POST_BUILD
-        COMMAND ${CMAKE_COMMAND} -E copy_if_different
-        ${CMAKE_BINARY_DIR}/compile_commands.json ${CMAKE_SOURCE_DIR})
+#add_custom_command(TARGET game POST_BUILD
+#        COMMAND ${CMAKE_COMMAND} -E copy_if_different
+#        ${CMAKE_BINARY_DIR}/compile_commands.json ${CMAKE_SOURCE_DIR})
