@@ -15,7 +15,7 @@ void PunchingBag::Init() {
   m_animComp->SetCurrentAnim("Hit");
   m_animComp->PlayAnim();
   SetTexture(m_animComp->GetTextureAtlas()->textureStr.c_str());
-  transform.relativeScale = glm::vec2(2);
+  transform.relativeScale = glm::vec2(1);
 }
 void PunchingBag::Update(double delta) {
   Damageable::Update(delta);

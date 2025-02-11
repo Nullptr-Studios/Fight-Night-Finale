@@ -26,30 +26,15 @@ void PlayerController::Update()
 
   // Sprite flip
   if (m_inputSystem.GetLastMovement().x > 0) {
-    m_character->transform.relativeScale.x = 2;
+    m_character->transform.relativeScale.x = 1;
   }
   else
   {
-    m_character->transform.relativeScale.x = -2;
+    m_character->transform.relativeScale.x = -1;
   }
 
 }
 
 
-void PlayerController::PlayAction(const std::string &action) {
-  if (m_state == AIR) {
-    m_state = ACTION;
-    // TODO: Do AIR combat animations
-    // After animation, return to AIR
-    m_state = AIR;
-  } else {
-    m_state = ACTION;
-    // TODO: Do combat animations
-    // After animation return to IDLE
-
-    EndAction(action);
-}
-
-void PlayerController::EndAction(const std::string &action) {  }
 
 } // namespace game

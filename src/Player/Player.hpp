@@ -22,14 +22,14 @@ public:
    * @param id
    * @param controllerId
    */
-  explicit Player(const Sigma::id_t id, int controllerId) : Character(id), m_controllerId(controllerId) {}
+  explicit Player(const Sigma::id_t id, int controllerId, std::string jsonPath) : Character(id, std::move(jsonPath)), m_controllerId(controllerId) {}
 
   void Init() override;
   void Start() override;
   void Update(double delta) override;
   void Destroy() override;
 
-  void OnDamage(Sigma::Damage::DamageEvent& e) override;
+  void OnDamage(const Sigma::Damage::DamageEvent &e) override;;
 
 private:
   /// @brief Holds the Player Controller Component to handle input

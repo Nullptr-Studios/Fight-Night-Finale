@@ -9,7 +9,7 @@ namespace game {
 void Player::Init() {
   Character::Init();
   
-  transform.relativeScale = glm::vec2(2);
+  transform.relativeScale = glm::vec2(1);
   GET_AUDIO->LoadBank("assets/banks/Master.bank");
   GET_AUDIO->LoadBank("assets/banks/Master.strings.bank");
   GET_AUDIO->LoadBank("assets/banks/Music.bank");
@@ -45,12 +45,15 @@ void Player::Update(double delta) {
     m_animComp->SetCurrentAnim("Idle");
   }
 
+  m_attackCollider->DebugDraw(this, AE_COLORS_RED);
+
 }
 
 void Player::Destroy() { Character::Destroy(); }
 
-void Player::OnDamage(Sigma::Damage::DamageEvent& e) {
-  Character::OnDamage(e);
+void Player::OnDamage(const Sigma::Damage::DamageEvent &e)
+{
+  Damageable::OnDamage(e);
   std::cout << "Damage with " << e.GetOther()->GetName() << "\n";
   std::cout << GetHealth() << "\n";
 }

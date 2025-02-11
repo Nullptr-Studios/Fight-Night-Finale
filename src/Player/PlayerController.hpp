@@ -33,17 +33,6 @@ public:
 
 private:
 
-  /**
-   * @brief plays specifed action
-   * @param action specifed action
-   */
-  void PlayAction(const std::string &action);
-  /**
-   * @brief function played when action is ended
-   * @param action the action that ended
-   */
-  void EndAction(const std::string &action);
-
   int m_controllerId; ///< @brief ID of the controller being used
   Sigma::InputComponent m_inputSystem; ///< @brief Input System that manages input
 
