@@ -15,21 +15,24 @@ void PrototypeScene::Load() {
   std::cout << "PrototypeScene::Load()" << std::endl;
 
   GET_CAMERA->SetCurrentCamera(GET_FACTORY->CreateObject<Sigma::Camera>("Main Camera"));
+  GET_CAMERA->GetCurrentCamera()->size = 2;
 
   auto* floor = GET_FACTORY->CreateObject<Sigma::Actor>();
-  floor->SetTexture("assets/prototype-scene/T_Floors.png");
-  floor->transform.scale = {700.0f, 572.0f};
+  floor->SetTexture("assets/prototype-scene-2/t-floor.png");
+  floor->transform.scale = {1061.0f, 346.0f};
   floor->transform.position.z = -5000;
   
   auto* walls = GET_FACTORY->CreateObject<Sigma::Actor>();
-  walls->SetTexture("assets/prototype-scene/T_Walls.png");
-  walls->transform.scale = {700.0f, 572.0f};
+  walls->SetTexture("assets/prototype-scene-2/t-walls.png");
+  walls->transform.scale = {1061.0f, 346.0f};
   walls->transform.position.z = -5000;
 
   auto p = GET_FACTORY->CreateObject<game::Player>("Player", -1, "assets/characters/dummy.json");
-  p->SetTexture("assets/prototype-scene/T_Walls.png");
+  p->transform.position.y = -128;
 
   auto s = GET_FACTORY->CreateObject<game::PunchingBag>("PunchingBag");
+  s->transform.position.y = -128;
+  s->transform.position.z = 128;
 
 }
 
