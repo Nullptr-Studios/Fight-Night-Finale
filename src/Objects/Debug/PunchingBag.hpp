@@ -16,6 +16,8 @@ public:
   void Init() override;
   void Update(double delta) override;
 
+  void OnDamage(const Sigma::Damage::DamageEvent &e) override;
+
   glm::mat3 *GetTextureTransform() override;
 };
 }

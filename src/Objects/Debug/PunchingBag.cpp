@@ -13,14 +13,21 @@ void PunchingBag::Init() {
   auto anim = GET_ANIMATION->LoadTextureAtlas("assets/PunchingBag.json");
   m_animComp->SetTextureAtlas(anim);
   m_animComp->SetCurrentAnim("Hit");
-  m_animComp->PlayAnim();
+  m_animComp->PlayAndStop();
   SetTexture(m_animComp->GetTextureAtlas()->textureStr.c_str());
   transform.relativeScale = glm::vec2(1);
+
+  m_collider = std::make_unique<Sigma::Collision::BoxCollider>(Sigma::Collision::ENEMY, Sigma::Collision::COLLISION);
 }
 void PunchingBag::Update(double delta) {
   Damageable::Update(delta);
-  
+
   m_animComp->Update(delta);
+}
+void PunchingBag::OnDamage(const Sigma::Damage::DamageEvent &e) {
+  Damageable::OnDamage(e);
+  std::cout << "Punching Bag was damaged by " << e.GetOther()->GetName() << "\n";
+  m_animComp->PlayAndStop();
 }
 
 glm::mat3 *PunchingBag::GetTextureTransform()
