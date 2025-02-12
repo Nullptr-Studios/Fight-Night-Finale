@@ -16,6 +16,8 @@ public:
   PrototypeScene(const char *name, unsigned ID, const char *jsonPath) : GameScene(name, ID, jsonPath) {}
 
   void Load() override;
+
+  void Update(double delta) override;
 };
 
 } // namespace game

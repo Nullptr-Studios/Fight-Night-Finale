@@ -1,7 +1,7 @@
 {
-  "maxSpeed" : 400.0,
-  "accelerationRate" : 25.0,
-  "jumpVel" : 2500.0,
+  "maxSpeed" : 125.0,
+  "accelerationRate" : 1.0,
+  "jumpVel" : 1500.0,
 
   "basicCombo" : [
 
@@ -9,45 +9,45 @@
       "type" : "dmg",
       "damage" : 1.0,
       "colliderOffset" : {
-        "x" : 0.0,
-        "y" : 0.0
+        "x" : 50,
+        "y" : 50
       },
       "colliderSize" : {
-        "x" : 200.0,
-        "y" : 200.0,
-        "z" : 50.0
+        "x" : 35,
+        "y" : 35,
+        "z" : 50
       },
-      "animationName" : "hit_default_0"
+      "animationName" : "Punch1"
     },
 
     {
       "type" : "dmg",
       "damage" : 2.0,
       "colliderOffset" : {
-        "x" : 0.0,
-        "y" : 0.0
+        "x" : 50,
+        "y" : 50
       },
       "colliderSize" : {
-        "x" : 200.0,
-        "y" : 200.0,
+        "x" : 35,
+        "y" : 35,
         "z" : 50.0
       },
-      "animationName" : "hit_default_0"
+      "animationName" : "Punch2"
     },
 
     {
       "type" : "thr",
       "damage" : 4.0,
       "colliderOffset" : {
-        "x" : 0.0,
-        "y" : 0.0
+        "x" : 50,
+        "y" : 50
       },
       "colliderSize" : {
-        "x" : 200.0,
-        "y" : 200.0,
+        "x" : 35,
+        "y" : 35,
         "z" : 50.0
       },
-      "animationName" : "hit_default_1"
+      "animationName" : "Punch3"
     }
 
   ],

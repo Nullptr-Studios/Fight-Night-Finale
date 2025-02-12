@@ -37,7 +37,7 @@ private:
 
   int m_controllerId = -1;
 
-  Sigma::Actor* m_debugAttack = nullptr;
+  Sigma::Actor* m_debugPlayerCol = nullptr;
 };
 
 } // namespace game

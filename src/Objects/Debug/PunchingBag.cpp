@@ -4,6 +4,8 @@
 
 #include "PunchingBag.hpp"
 
+#include "Factory.hpp"
+
 namespace game {
 void PunchingBag::Init() {
   Damageable::Init();
@@ -15,14 +17,19 @@ void PunchingBag::Init() {
   m_animComp->SetCurrentAnim("Hit");
   m_animComp->PlayAndStop();
   SetTexture(m_animComp->GetTextureAtlas()->textureStr.c_str());
-  transform.relativeScale = glm::vec2(1);
+  transform.relativeScale = glm::vec2(.75f);
 
-  m_collider = std::make_unique<Sigma::Collision::BoxCollider>(Sigma::Collision::ENEMY, Sigma::Collision::COLLISION);
+  m_collider->box.Set(50,50,50,50,50, transform.offset);
+  m_collider->SetColliderFlags(Sigma::Collision::ColliderFlag::ENEMY);
+
+  m_debugCol = GET_FACTORY->CreateObject<Sigma::Actor>("Debug Col Punching Bag");
+
 }
 void PunchingBag::Update(double delta) {
   Damageable::Update(delta);
 
   m_animComp->Update(delta);
+  m_collider->DebugDraw(m_debugCol, this, "assets/core/debug_red.png");
 }
 void PunchingBag::OnDamage(const Sigma::Damage::DamageEvent &e) {
   Damageable::OnDamage(e);

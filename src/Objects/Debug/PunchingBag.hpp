@@ -19,6 +19,8 @@ public:
   void OnDamage(const Sigma::Damage::DamageEvent &e) override;
 
   glm::mat3 *GetTextureTransform() override;
+private:
+  Actor* m_debugCol;
 };
 }
 
