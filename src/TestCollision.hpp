@@ -20,6 +20,6 @@ public:
   void Update(double delta) override {}
   void Destroy() override {}
 
-  void OnDamage(Sigma::Damage::DamageEvent& e) override;
+  void OnDamage(const Sigma::Damage::DamageEvent &e) override;
 };
 }

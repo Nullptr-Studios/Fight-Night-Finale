@@ -15,18 +15,29 @@ namespace game {
 
 class Player : public Sigma::Character {
 public:
-  explicit Player(const Sigma::id_t id) : Character(id) {}
+  
+  /**
+   * @brief Construct a Player object
+   *
+   * @param id
+   * @param controllerId
+   */
+  explicit Player(const Sigma::id_t id, int controllerId, std::string jsonPath) : Character(id, std::move(jsonPath)), m_controllerId(controllerId) {}
 
   void Init() override;
   void Start() override;
   void Update(double delta) override;
   void Destroy() override;
 
-  void OnDamage(Sigma::Damage::DamageEvent& e) override;
+  void OnDamage(const Sigma::Damage::DamageEvent &e) override;;
 
 private:
   /// @brief Holds the Player Controller Component to handle input
   std::unique_ptr<PlayerController> m_controllerComponent = nullptr;
+
+  int m_controllerId = -1;
+
+  Sigma::Actor* m_debugPlayerCol = nullptr;
 };
 
 } // namespace game

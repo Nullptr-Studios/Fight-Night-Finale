@@ -4,34 +4,58 @@
 #include "Enemies/Enemy.hpp"
 #include "Factory.hpp"
 #include "Objects/Actor.hpp"
-#include "Objects/Camera.hpp"
+#include "Objects/CameraFollow.hpp"
+
+#include "Objects/Debug/PunchingBag.hpp"
 #include "Player/Player.hpp"
 
 namespace game {
 
 void PrototypeScene::Load() {
+  GameScene::Load();
   std::cout << "PrototypeScene::Load()" << std::endl;
 
-  auto camera = GET_FACTORY->CreateObject<Sigma::Camera>("Camera");
-  camera->size = 2;
-  GET_CAMERA->SetCurrentCamera(camera);
+  GET_CAMERA->SetCurrentCamera(GET_FACTORY->CreateObject<Sigma::CameraFollow>("Main Camera"));
+  GET_CAMERA->GetCurrentCamera()->size = 2;
 
-  auto* floor = GET_FACTORY->CreateObject<Sigma::Actor>("Floor");
+  auto *floor = GET_FACTORY->CreateObject<Sigma::Actor>();
   floor->SetTexture("assets/prototype-scene-2/t-floor.png");
   floor->transform.scale = {1061.0f, 346.0f};
-  auto* walls = GET_FACTORY->CreateObject<Sigma::Actor>("Walls");
+  floor->transform.position.z = -5000;
+
+  auto *walls = GET_FACTORY->CreateObject<Sigma::Actor>();
   walls->SetTexture("assets/prototype-scene-2/t-walls.png");
   walls->transform.scale = {1061.0f, 346.0f};
+  walls->transform.position.z = -5000;
 
-  auto p = GET_FACTORY->CreateObject<game::Player>("Player");
-  p->SetTexture("assets/prototype-scene/T_Walls.png");
-  p->SetJsonPath("assets/characters/dummy.json");
-  p->transform.scale = {32.0f, 64.0f};
+  auto p = GET_FACTORY->CreateObject<game::Player>("Player", -1, "assets/characters/dummy.json");
+  p->transform.position.y = -128;
 
-  auto e = GET_FACTORY->CreateObject<game::Enemy>("Enemy");
-  e->transform.position = { 400.0f, 0.0f, 0.0f };
+  auto s = GET_FACTORY->CreateObject<game::PunchingBag>("PunchingBag");
+  s->transform.position.y = -128;
+  s->transform.position.z = 128;
+
+    auto e = GET_FACTORY->CreateObject<game::Enemy>("Enemy");
+  e->transform.position = {400.0f, 0.0f, 0.0f};
   e->SetJsonPath("assets/characters/dummy.json");
   e->transform.scale = {32.0f, 64.0f};
+
+  
+  dynamic_cast<Sigma::CameraFollow*>(GET_CAMERA->GetCurrentCamera())->m_targetP1 = p;
 }
+void PrototypeScene::Update(double delta) {
+  GameScene::Update(delta);
+
+  // If pressed key 2 create 2nd player
+  if (AEInputKeyTriggered('2')) {
+    auto p2 = GET_FACTORY->CreateObject<game::Player>("Player2", 0, "assets/characters/dummy.json");
+    p2->transform.position.y = -128;
+    dynamic_cast<Sigma::CameraFollow*>(GET_CAMERA->GetCurrentCamera())->m_targetP2 = p2;
+  }
 
 }
+
+  
+}
+
+} // namespace game

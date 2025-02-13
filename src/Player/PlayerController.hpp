@@ -7,7 +7,7 @@
  */
 #pragma once
 #include "Controller/ControllerComponent.hpp"
-#include "Controller/InputSystem.hpp"
+#include "Controller/InputComponent.hpp"
 
 namespace game {
 class InputSystem;
@@ -21,31 +21,20 @@ public:
   explicit PlayerController(Sigma::Character *character) :
       ControllerComponent(character), m_inputSystem("assets/core/keybinds.json") {}
   ~PlayerController() override = default;
-  void Update() override; ///< @brief Call this every frame to update the player position
+  void Update() override;
 
-  void GetControllerID() {m_controllerId = m_inputSystem.CheckControllers();}
+  //void GetControllerID() {m_controllerId = m_inputSystem.CheckControllers();}
+
+  /**
+   * @brief Set the Controller ID
+   * @param id the ID to set
+   */
+  void SetControllerID(int id) {m_controllerId = id;}
 
 private:
-  /**
-   * @brief helper function to update movement
-   */
-  void UpdateMovement();
-  /**
-   * @brief helper function to update jump movement
-   *
-   */
-  void UpdateJump();
-  /**
-   * @brief handles movement for a coordinate
-   * @param coordinate vec2 movement.coordinate
-   * @param velocity vec3.coordinate velocity for player movement
-   * @param acceleration acceleration
-   * @param maxVelocity maximum velocity
-   */
-  void UpdateCoordinate(const float& coordinate, float& velocity, const float& acceleration, const float& maxVelocity);
 
   int m_controllerId; ///< @brief ID of the controller being used
-  Sigma::InputSystem m_inputSystem; ///< @brief Input System that manages input
+  Sigma::InputComponent m_inputSystem; ///< @brief Input System that manages input
 
 };
 
