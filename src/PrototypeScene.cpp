@@ -31,6 +31,8 @@ void PrototypeScene::Load() {
 
   auto s = GET_FACTORY->CreateObject<game::PunchingBag>("PunchingBag");
 
+  //TODO: make box object
+
 }
 
 }
