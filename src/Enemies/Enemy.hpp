@@ -16,12 +16,13 @@ class Player;
 class Enemy : public Sigma::Character {
   enum EnemyState {
     FOLLOW = 0,
+    SEPARATE,
     ATTACK,
     DEAD
   };
 
 public:
-  explicit Enemy(const Sigma::id_t id) : Character(id) {}
+  explicit Enemy(const Sigma::id_t id, const std::string& jsonPath) : Character(id, jsonPath) {}
 
   void Init() override;
   void Start() override;
@@ -31,7 +32,7 @@ public:
   void Serialize() override;
 
   bool OnCollision(Sigma::Collision::CollisionEvent& e) override;
-  void OnDamage(Sigma::Damage::DamageEvent& e) override;
+  void OnDamage(const Sigma::Damage::DamageEvent& e) override;
 
   void SetPlayer(Player* player) { m_player = player; }
 
@@ -41,11 +42,13 @@ protected:
 
 private:
   Player* m_player = nullptr;
+  Actor* m_debugCol = nullptr;
 
   EnemyState m_state = FOLLOW;
-  void OnFollow(double delta);
-  void OnAttack(double delta);
-  void OnDead(double delta);
+  void OnFollow();
+  void OnSeparate();
+  void OnAttack();
+  void OnDead();
 
   float m_distanceToAttack = 0.0f;
   glm::vec3 m_distance = glm::vec3(0.0f);

@@ -35,9 +35,8 @@ void PrototypeScene::Load() {
   s->transform.position.y = -128;
   s->transform.position.z = 128;
 
-    auto e = GET_FACTORY->CreateObject<game::Enemy>("Enemy");
-  e->transform.position = {400.0f, 0.0f, 0.0f};
-  e->SetJsonPath("assets/characters/dummy.json");
+    auto e = GET_FACTORY->CreateObject<game::Enemy>("Enemy", "assets/characters/dummy.json");
+  e->transform.position = {300.0f, -128.0f, 0.0f};
   e->transform.scale = {32.0f, 64.0f};
 
   
@@ -57,5 +56,3 @@ void PrototypeScene::Update(double delta) {
 
   
 }
-
-} // namespace game
