@@ -17,7 +17,7 @@ void Enemy::Init() {
   transform.relativeScale = glm::vec2(1);
 
   // Setup Animation
-  auto anim = GET_ANIMATION->LoadTextureAtlas("assets/ProtoPlayer.json");
+  auto anim = GET_ANIMATION->LoadTextureAtlas("assets/EnemyPrototype.json");
   m_animComp->SetTextureAtlas(anim);
   m_animComp->SetCurrentAnim("Idle");
   SetTexture(anim->textureStr.c_str());
