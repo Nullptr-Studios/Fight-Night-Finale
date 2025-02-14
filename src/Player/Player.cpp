@@ -47,7 +47,7 @@ void Player::Update(double delta) {
   if (m_controllerComponent)
     m_controllerComponent->Update();
   
-  if (!m_inCombo)
+  if (GetIsIdle())
     if (velocity.x != 0 || velocity.y != 0) {
     m_animComp->SetCurrentAnim("Walk");
     }else {
