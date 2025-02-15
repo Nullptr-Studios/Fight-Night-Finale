@@ -12,7 +12,7 @@ void Box::Init() {
   Actor::Init();
   m_collider = std::make_unique<Sigma::Collision::BoxCollider>(Sigma::Collision::PLAYER, Sigma::Collision::COLLISION);
   //TODO: tweak values to match texture
-  m_collider->box.Set({50,50,50});
+  m_collider->box.Set({50,50,150});
   SetMaxHealth(1);
 }
 
@@ -21,7 +21,7 @@ void Box::OnDed() {
   m_collider->enabled = false;
   auto Pi = GET_FACTORY->CreateObject<Pickup>("Medkit");
   Pi->SetTexture("assets/prototype-scene-2/Medkit.png");
-  Pi->transform.scale = {50.0f, 50.0f};
+  Pi->transform.scale = {25.0f, 25.0f};
   Pi->transform.position = transform.position;
 }
 

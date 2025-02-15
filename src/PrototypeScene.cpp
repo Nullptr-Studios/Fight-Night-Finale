@@ -7,6 +7,8 @@
 #include "Objects/CameraFollow.hpp"
 
 #include "Objects/Debug/PunchingBag.hpp"
+#include "Objects/Destrucibles/Box.hpp"
+#include "Objects/Pickups/Pickup.hpp"
 #include "Player/Player.hpp"
 
 namespace game {
@@ -39,7 +41,12 @@ void PrototypeScene::Load() {
   e->transform.position = {300.0f, -128.0f, 0.0f};
   e->transform.scale = {32.0f, 64.0f};
 
-  
+   auto Box = GET_FACTORY->CreateObject<game::Box>("Box1");
+  Box->SetTexture("assets/prototype-scene-2/Prototype_Box_Default.png");
+  Box->transform.scale = {50.0f, 50.0f};
+  Box->transform.position.x = 400;
+  Box->transform.position.y = -100;
+
   dynamic_cast<Sigma::CameraFollow*>(GET_CAMERA->GetCurrentCamera())->m_targetP1 = p;
 }
 void PrototypeScene::Update(double delta) {
@@ -51,10 +58,6 @@ void PrototypeScene::Update(double delta) {
     p2->transform.position.y = -128;
     dynamic_cast<Sigma::CameraFollow*>(GET_CAMERA->GetCurrentCamera())->m_targetP2 = p2;
   }
-
-  //TODO: make box object
-
 }
 
-  
 }
