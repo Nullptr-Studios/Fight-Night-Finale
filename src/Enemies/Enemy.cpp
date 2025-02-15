@@ -67,7 +67,6 @@ void Enemy::Update(double delta) {
 }
 
 void Enemy::OnFollow() {
-  if (!m_isIdle) return;
   auto direction = glm::normalize(m_distance);
   // We use the .z instead of the .y to ignore if the player is jumping -x
   Move( {direction.x, direction.y} );
@@ -89,8 +88,6 @@ void Enemy::OnFollow() {
 }
 
 void Enemy::OnSeparate() {
-  if (!m_isIdle) return;
-
   glm::vec2 position = {transform.GetDepthPosition().x, transform.GetDepthPosition().y};
 
   std::random_device rd;
@@ -117,14 +114,15 @@ void Enemy::OnSeparate() {
 }
 
 void Enemy::OnAttack() {
-  if (!m_isIdle) return;
-  BasicAttack();
-
-  if (fabs(m_distance.x) < (m_distanceToAttack - 20.0f)) {
-    m_state = SEPARATE;
-  } else if (fabs(m_distance.x) > m_distanceToAttack || fabs(m_distance.y) > 5.0f) {
-    m_state = FOLLOW;
+  if (m_isIdle) {
+    if (fabs(m_distance.x) < (m_distanceToAttack - 20.0f)) {
+      m_state = SEPARATE;
+    } else if (fabs(m_distance.x) > m_distanceToAttack || fabs(m_distance.y) > 5.0f) {
+      m_state = FOLLOW;
+    }
   }
+
+  BasicAttack();
 }
 
 void Enemy::OnDead() { }
