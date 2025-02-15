@@ -10,6 +10,8 @@
 
 
 namespace game {
+
+AEGfxFont* font;
 void Player::Init() {
   Character::Init();
   
@@ -32,6 +34,7 @@ void Player::Init() {
   m_collider->SetColliderType(Sigma::Collision::COLLISION);
   m_collider->damage = 1.0f;
   m_collider->SetOwner(this);
+
 
 }
 
@@ -57,9 +60,13 @@ void Player::Update(double delta) {
 
   m_collider->DebugDraw(m_debugPlayerCol, this, "assets/core/debug_blue.png");
 
+
 }
 
-void Player::Destroy() { Character::Destroy(); }
+void Player::Destroy() {
+  Character::Destroy();
+  AEGfxFontFree(font);
+}
 
 void Player::OnDamage(const Sigma::Damage::DamageEvent &e)
 {
