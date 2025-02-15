@@ -19,7 +19,7 @@ public:
     explicit Pickup(Sigma::id_t id) : Actor(id) {}
     ~Pickup() override = default;
 
-    void Start() override;
+    void Init() override;
     bool OnCollision(Sigma::Collision::CollisionEvent &e) override;
 
 protected:

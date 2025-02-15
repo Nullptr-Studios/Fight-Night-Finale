@@ -52,7 +52,10 @@ void Player::Destroy() { Character::Destroy(); }
 void Player::OnDamage(const Sigma::Damage::DamageEvent &e)
 {
   Damageable::OnDamage(e);
-  std::cout << "Damage with " << e.GetOther()->GetName() << "\n";
+
+  //TODO: figure out why this crashes
+  // std::cout << "Damage with " << e.GetOther()->GetName() << "\n";
+
   std::cout << GetHealth() << "\n";
 }
 
