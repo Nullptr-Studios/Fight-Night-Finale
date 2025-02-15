@@ -4,7 +4,9 @@
 
 #include "DamageSystem/DamageEvent.hpp"
 #include "Factory.hpp"
+#include "GameManager.hpp"
 #include "Player/Player.hpp"
+#include "Scene.hpp"
 #include "core.hpp"
 #include "glm/geometric.hpp"
 
@@ -67,6 +69,8 @@ void Enemy::Update(double delta) {
 }
 
 void Enemy::OnFollow() {
+  if (!m_isIdle) return;
+
   auto direction = glm::normalize(m_distance);
   // We use the .z instead of the .y to ignore if the player is jumping -x
   Move( {direction.x, direction.y} );
@@ -88,17 +92,21 @@ void Enemy::OnFollow() {
 }
 
 void Enemy::OnSeparate() {
+  if (!m_isIdle) return;
+
   glm::vec2 position = {transform.GetDepthPosition().x, transform.GetDepthPosition().y};
 
-  std::random_device rd;
-  std::mt19937 gen(rd());
-  std::uniform_int_distribution<> distrib_x( 0, 10);
-  std::uniform_int_distribution<> distrib_y(-5,  5);
+  if (m_separateDirection.x == 0 && m_separateDirection.y == 0) {
+    std::random_device rd;
+    std::mt19937 gen(rd());
+    std::uniform_int_distribution<> distrib_x( 0, 30);
+    std::uniform_int_distribution<> distrib_y(-15,  15);
 
-  m_separateDirection.x = (m_player->transform.GetDepthPosition().x);
-  if (m_separateDirection.x - position.x >= 0) m_separateDirection.x -= m_distanceToAttack;
-  else m_separateDirection.x += m_distanceToAttack;
-  m_separateDirection.y = (m_player->transform.GetDepthPosition().y);
+    m_separateDirection.x = (m_player->transform.GetDepthPosition().x + distrib_x(gen));
+    if (m_separateDirection.x - position.x >= 0) m_separateDirection.x -= m_distanceToAttack;
+    else m_separateDirection.x += m_distanceToAttack;
+    m_separateDirection.y = (m_player->transform.GetDepthPosition().y + distrib_y(gen));
+  }
 
   Move(glm::normalize(m_separateDirection - position));
   if (glm::distance(position, m_separateDirection) < 1.0f) {
