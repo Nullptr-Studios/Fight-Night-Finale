@@ -28,8 +28,6 @@ void Enemy::Init() {
   m_collider->SetColliderType(Sigma::Collision::COLLISION);
   m_collider->damage = 1.0f;
   m_collider->SetOwner(this);
-
-  
 }
 
 void Enemy::Start() {
@@ -52,14 +50,14 @@ void Enemy::OnDamage(const Sigma::Damage::DamageEvent& e) {
 
 void Enemy::Update(double delta) {
   Character::Update(delta);
-  m_distance = m_player->transform.GetDepthPosition() - transform.position;
+  m_distance = m_player->transform.GetDepthPosition() - transform.GetDepthPosition();
 
   m_collider->DebugDraw(m_debugCol, this, "assets/core/debug_blue.png");
 
   switch (m_state) {
     default: m_state = FOLLOW;
     case FOLLOW: OnFollow(); break;
-    // case SEPARATE: OnSeparate(); break;
+    case SEPARATE: OnSeparate(); break;
     case ATTACK: OnAttack(); break;
     case DEAD: OnDead(); break;
   }
@@ -70,8 +68,10 @@ void Enemy::OnFollow() {
   // We use the .z instead of the .y to ignore if the player is jumping -x
   Move( {direction.x, direction.y} );
 
-  if (glm::length(m_distance) < m_distanceToAttack) {
-    if (m_distance.y >= 5.0f){
+  std::cout << "Distance: " << m_distance.x << ", Distance to attack: " << m_distanceToAttack << std::endl;
+
+  if (fabs(m_distance.x) < m_distanceToAttack) {
+    if (fabs(m_distance.y) > 5.0f){
       Move( {0.0f, direction.y});
     } else {
       m_state = ATTACK;
@@ -85,24 +85,34 @@ void Enemy::OnFollow() {
 }
 
 void Enemy::OnSeparate() {
+  if (m_distance.x >= 0) Move({-1.0f, 0.0f});
+  else Move({1.0f, 0.0f});
+
   auto direction = glm::normalize(m_distance) * -1.0f;
-  // We use the .z instead of the .y to ignore if the player is jumping -x
-  Move( {direction.x, direction.y} );
-
-  if (glm::length(m_distance) > m_distanceToAttack) m_state = FOLLOW;
-
+  // // We use the .z instead of the .y to ignore if the player is jumping -x
+  // Move( {direction.x, direction.y} );
+  //
+  // if (fabs(m_distance.x) > m_distanceToAttack) m_state = FOLLOW;
+  //
   // Swaps the sprite if not facing the same way -x
-  if ((direction.x >= 0) != (transform.relativeScale.x >= 0)) {
+  if ((direction.x <= 0) != (transform.relativeScale.x <= 0)) {
     transform.relativeScale.x *= -1;
   }
 }
 
 void Enemy::OnAttack() {
+  if (m_isIdle) {
+    if (fabs(m_distance.x) < (m_distanceToAttack - 15.0f)) {
+      m_state = SEPARATE;
+      return;
+    } else if (fabs(m_distance.x) > m_distanceToAttack || fabs(m_distance.y) > 5.0f) {
+      m_state = FOLLOW;
+      return;
+    }
+  }
+
   BasicAttack();
 
-  if (glm::length(m_distance) > m_distanceToAttack) m_state = FOLLOW;
-  // Ignore separate logic for now
-  // if (glm::length(m_distance) < m_distanceToAttack - 15.0f) m_state = SEPARATE;
 }
 
 void Enemy::OnDead() { }
