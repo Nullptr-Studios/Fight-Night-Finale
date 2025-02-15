@@ -37,6 +37,8 @@ private:
   std::unique_ptr<PlayerController> m_controllerComponent = nullptr;
 
   int m_controllerId = -1;
+
+  Sigma::Actor* m_debugPlayerCol = nullptr;
 };
 
 } // namespace game

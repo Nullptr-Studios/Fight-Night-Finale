@@ -7,11 +7,10 @@
 #include <aecore/AEEngine.h>
 #include "GameManager.hpp"
 #include "PrototypeScene.hpp"
-#include "PrototypeScene2.hpp"
 
 int main() {
   std::unique_ptr<Sigma::GameManager> gameManager = std::make_unique<Sigma::GameManager>("Game", 800, 600);
-  auto scene = new game::PrototypeScene2("Scene", 2, "assets/prototype-scene/ProtoScene.json");
+  auto scene = new game::PrototypeScene("Scene", 1, "assets/prototype-scene-2/ProtoScene2.json");
   gameManager->LoadScene(scene);
 
   while (AESysWindowExists()) {
