@@ -29,7 +29,8 @@ public:
   void Update(double delta) override;
   void Destroy() override;
 
-  void OnDamage(const Sigma::Damage::DamageEvent &e) override;;
+  void OnDamage(const Sigma::Damage::DamageEvent &e) override;
+  void OnHeal(float health) { SetHealth(m_health + health); }
 
 private:
   /// @brief Holds the Player Controller Component to handle input

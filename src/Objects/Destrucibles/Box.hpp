@@ -15,7 +15,7 @@ class Box: public Sigma::Damageable {
     explicit Box(Sigma::id_t id) : Damageable(id) {}
     ~Box() override = default;
 
-  void Start() override;
+  void Init() override;
   void OnDed() override;
 
 };
