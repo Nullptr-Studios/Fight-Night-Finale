@@ -1,20 +1,22 @@
-//
-// Created by Alexey on 11/02/2025.
-//
+/**
+ * @file Box.hpp
+ * @author Alexey
+ * @date 15/02/2025
+ *
+ * @brief class for a destructible box
+ */
 
 #pragma once
 #include "Objects/Damageable.hpp"
 
 namespace game {
-class Box: Sigma::Damageable {
+class Box: public Sigma::Damageable {
   public:
     explicit Box(Sigma::id_t id) : Damageable(id) {}
     ~Box() override = default;
 
-  //TODO: make OnDed change texture!
+  void Start() override;
   void OnDed() override;
-  //TODO: make OnDamage spawn a Pickup item (Medkit)
-  void OnDamage(const Sigma::Damage::DamageEvent &e) override;
 
 };
 }

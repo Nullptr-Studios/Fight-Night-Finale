@@ -16,10 +16,7 @@ file(GLOB_RECURSE SRC CONFIGURE_DEPENDS
         "src/*.h"
 )
 
-add_executable(game src/main.cpp ${SRC}
-        src/Objects/Destrucibles/Box.hpp
-        src/Objects/Pickups/Medkit.hpp
-        src/Objects/Pickups/Pickup.cpp)
+add_executable(game src/main.cpp ${SRC})
 
 # Adds sigma engine static library
 target_link_libraries(game PRIVATE sigma)
