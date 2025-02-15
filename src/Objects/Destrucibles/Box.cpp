@@ -13,7 +13,7 @@ void Box::Init() {
   m_collider = std::make_unique<Sigma::Collision::BoxCollider>(Sigma::Collision::PLAYER, Sigma::Collision::COLLISION);
   //TODO: tweak values to match texture
   m_collider->box.Set({50,50,50});
-  SetMaxHealth(50);
+  SetMaxHealth(1);
 }
 
 void Box::OnDed() {
