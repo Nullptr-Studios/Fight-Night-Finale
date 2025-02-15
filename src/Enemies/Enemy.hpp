@@ -52,6 +52,7 @@ private:
 
   float m_distanceToAttack = 0.0f;
   glm::vec3 m_distance = glm::vec3(0.0f);
+  glm::vec2 m_separateDirection = glm::vec2(0.0f);
 };
 
 }
