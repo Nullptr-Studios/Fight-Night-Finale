@@ -8,7 +8,7 @@
 #pragma once
 #include "Scene.hpp"
 namespace game {
-class MainMenu : public Sigma::Scene{
+class MainMenu final : public Sigma::Scene{
 public:
   MainMenu(const char *name, unsigned ID) : Scene(name, ID) {}
   void Load() override;

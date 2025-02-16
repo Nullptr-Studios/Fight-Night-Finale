@@ -8,6 +8,7 @@
 #include "GameManager.hpp"
 #include "MainMenu.hpp"
 #include "PrototypeScene.hpp"
+#include "UI/DeadMenu.hpp"
 
 int main() {
   std::unique_ptr<Sigma::GameManager> gameManager = std::make_unique<Sigma::GameManager>("Game", 800, 600);
