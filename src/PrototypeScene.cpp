@@ -1,9 +1,10 @@
 #include "PrototypeScene.hpp"
 #include "Controller/CameraController.hpp"
 #include "Core.hpp"
+#include "Enemies/Enemy.hpp"
 #include "Factory.hpp"
-#include "Objects/Camera.hpp"
 #include "Objects/Actor.hpp"
+#include "Objects/CameraFollow.hpp"
 
 #include "Objects/Debug/PunchingBag.hpp"
 #include "Player/Player.hpp"
@@ -14,23 +15,53 @@ void PrototypeScene::Load() {
   GameScene::Load();
   std::cout << "PrototypeScene::Load()" << std::endl;
 
-  GET_CAMERA->SetCurrentCamera(GET_FACTORY->CreateObject<Sigma::Camera>("Main Camera"));
+  GET_CAMERA->SetCurrentCamera(GET_FACTORY->CreateObject<Sigma::CameraFollow>("Main Camera"));
+  GET_CAMERA->GetCurrentCamera()->size = 2;
 
-  auto* floor = GET_FACTORY->CreateObject<Sigma::Actor>();
-  floor->SetTexture("assets/prototype-scene/T_Floors.png");
-  floor->transform.scale = {700.0f, 572.0f};
+  auto *floor = GET_FACTORY->CreateObject<Sigma::Actor>();
+  floor->SetTexture("assets/prototype-scene-2/t-floor.png");
+  floor->transform.scale = {1061.0f, 346.0f};
   floor->transform.position.z = -5000;
-  
-  auto* walls = GET_FACTORY->CreateObject<Sigma::Actor>();
-  walls->SetTexture("assets/prototype-scene/T_Walls.png");
-  walls->transform.scale = {700.0f, 572.0f};
+
+  auto *walls = GET_FACTORY->CreateObject<Sigma::Actor>();
+  walls->SetTexture("assets/prototype-scene-2/t-walls.png");
+  walls->transform.scale = {1061.0f, 346.0f};
   walls->transform.position.z = -5000;
 
-  auto p = GET_FACTORY->CreateObject<game::Player>("Player", -1, "assets/characters/dummy.json");
-  p->SetTexture("assets/prototype-scene/T_Walls.png");
+  auto p = GET_FACTORY->CreateObject<game::Player>("Player", -1, "assets/characters/Player.json");
+  p->transform.position.x = m_playerStartPos.x;
+  p->transform.position.y = m_playerStartPos.y;
+  p->transform.position.z = 0.0f;
+
 
   auto s = GET_FACTORY->CreateObject<game::PunchingBag>("PunchingBag");
+  s->transform.position.y = -128;
+  s->transform.position.z = 128;
+
+    auto e = GET_FACTORY->CreateObject<game::Enemy>("Enemy", "assets/characters/dummy.json");
+  e->transform.position = {300.0f, -128.0f, 0.0f};
+  e->transform.scale = {32.0f, 64.0f};
+
+
+  m_players.push_back(p);
+
+  
+  dynamic_cast<Sigma::CameraFollow*>(GET_CAMERA->GetCurrentCamera())->m_targetP1 = p;
+}
+void PrototypeScene::Update(double delta) {
+  GameScene::Update(delta);
+
+  // If pressed key 2 create 2nd player
+  if (AEInputGamepadButtonTriggered(0, 0x0010)) {
+    auto p2 = GET_FACTORY->CreateObject<game::Player>("Player2", 0, "assets/characters/Player.json");
+    p2->transform.position.x = m_playerStartPos.x;
+    p2->transform.position.y = m_playerStartPos.y;
+    p2->transform.position.z = 0.0f;
+    dynamic_cast<Sigma::CameraFollow*>(GET_CAMERA->GetCurrentCamera())->m_targetP2 = p2;
+    m_players.push_back(p2);
+  }
 
 }
 
+  
 }

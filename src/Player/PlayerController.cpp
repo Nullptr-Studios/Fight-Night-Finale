@@ -9,11 +9,12 @@ void PlayerController::Update()
 {
   m_inputSystem.UpdateInput(m_controllerId);
   std::string action = m_inputSystem.GetAction();
-  
-  m_character->Move(m_inputSystem.GetMovement());
+
+  if (m_character->GetIsIdle())
+    m_character->Move(m_inputSystem.GetMovement());
 
   // Action callback
-  if      (action == "roll")  m_character->Jump();
+  if      (action == "roll" && m_character->GetIsIdle())  m_character->Jump();
   else if (action == "basic") m_character->BasicAttack();
   else if (action == "super") m_character->SuperAttack();
 
@@ -25,12 +26,11 @@ void PlayerController::Update()
   
 
   // Sprite flip
-  if (m_inputSystem.GetLastMovement().x > 0) {
-    m_character->transform.relativeScale.x = 1;
-  }
-  else
-  {
-    m_character->transform.relativeScale.x = -1;
+  if (m_character->GetIsIdle()) {
+    if (m_inputSystem.GetLastMovement().x > 0)
+      m_character->transform.relativeScale.x = 1;
+    else
+      m_character->transform.relativeScale.x = -1;
   }
 
 }
