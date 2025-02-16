@@ -7,17 +7,25 @@
  */
 
 #pragma once
+#include <list>
+
+
 #include "GameScene.hpp"
 
+namespace Sigma {
+class Object;
+}
 namespace game {
 
-class PrototypeScene : public Sigma::GameScene {
+class PrototypeScene : public game::GameScene {
 public:
   PrototypeScene(const char *name, unsigned ID, const char *jsonPath) : GameScene(name, ID, jsonPath) {}
 
   void Load() override;
 
   void Update(double delta) override;
+
+  std::list<Sigma::Object *> m_players;
 };
 
 } // namespace game
