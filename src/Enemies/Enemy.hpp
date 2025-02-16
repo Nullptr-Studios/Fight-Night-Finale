@@ -52,7 +52,7 @@ private:
   Player* m_player = nullptr;
   Actor* m_debugCol = nullptr;
 
-  EnemyState m_state = FOLLOW;
+  EnemyState m_state = IDLE;
   void OnWait(double delta);
   void OnFollow();
   void OnSeparate();
