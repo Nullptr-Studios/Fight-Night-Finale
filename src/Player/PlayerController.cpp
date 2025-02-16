@@ -9,8 +9,9 @@ void PlayerController::Update()
 {
   m_inputSystem.UpdateInput(m_controllerId);
   std::string action = m_inputSystem.GetAction();
-  
-  m_character->Move(m_inputSystem.GetMovement());
+
+  if (m_character->GetIsIdle())
+    m_character->Move(m_inputSystem.GetMovement());
 
   // Action callback
   if      (action == "roll")  m_character->Jump();
