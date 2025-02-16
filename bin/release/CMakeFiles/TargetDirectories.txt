@@ -1,3 +1,0 @@
-C:/Users/a.goi/fight-night-finale/bin/release/CMakeFiles/fnf.dir
-C:/Users/a.goi/fight-night-finale/bin/release/CMakeFiles/edit_cache.dir
-C:/Users/a.goi/fight-night-finale/bin/release/CMakeFiles/rebuild_cache.dir
