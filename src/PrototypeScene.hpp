@@ -7,8 +7,14 @@
  */
 
 #pragma once
+#include <list>
+
+
 #include "GameScene.hpp"
 
+namespace Sigma {
+class Object;
+}
 namespace game {
 
 class PrototypeScene : public game::GameScene {
@@ -18,6 +24,8 @@ public:
   void Load() override;
 
   void Update(double delta) override;
+
+  std::list<Sigma::Object *> m_players;
 };
 
 } // namespace game

@@ -16,7 +16,7 @@ void PrototypeScene::Load() {
   std::cout << "PrototypeScene::Load()" << std::endl;
 
   GET_CAMERA->SetCurrentCamera(GET_FACTORY->CreateObject<Sigma::CameraFollow>("Main Camera"));
-  GET_CAMERA->GetCurrentCamera()->size = 2;
+  GET_CAMERA->GetCurrentCamera()->size = 1;
 
   auto *floor = GET_FACTORY->CreateObject<Sigma::Actor>();
   floor->SetTexture("assets/prototype-scene-2/t-floor.png");
@@ -42,6 +42,9 @@ void PrototypeScene::Load() {
   e->transform.position = {300.0f, -128.0f, 0.0f};
   e->transform.scale = {32.0f, 64.0f};
 
+
+  m_players.push_back(p);
+
   
   dynamic_cast<Sigma::CameraFollow*>(GET_CAMERA->GetCurrentCamera())->m_targetP1 = p;
 }
@@ -55,6 +58,7 @@ void PrototypeScene::Update(double delta) {
     p2->transform.position.y = m_playerStartPos.y;
     p2->transform.position.z = 0.0f;
     dynamic_cast<Sigma::CameraFollow*>(GET_CAMERA->GetCurrentCamera())->m_targetP2 = p2;
+    m_players.push_back(p2);
   }
 
 }

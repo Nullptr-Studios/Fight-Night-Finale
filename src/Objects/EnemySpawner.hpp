@@ -7,6 +7,9 @@
 #include "glm/vec2.hpp"
 
 namespace game {
+class PrototypeScene;
+}
+namespace game {
 
 struct EnemySpawnData {
   int id;
@@ -26,11 +29,16 @@ public:
   void AddEnemiesData(EnemySpawnData &enemies) { m_spawnData.emplace_back(enemies); }
 
 private:
+
+  bool m_enabled = true;
+  
   int m_activationDistance = 0;
 
   std::vector<EnemySpawnData> m_spawnData;
 
   std::list<Object*> m_players;
+
+  game::PrototypeScene* m_scene; 
 };
 
 }
