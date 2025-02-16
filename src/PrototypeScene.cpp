@@ -7,6 +7,7 @@
 #include "Objects/CameraFollow.hpp"
 
 #include "Objects/Debug/PunchingBag.hpp"
+#include "Objects/Destrucibles/Box.hpp"
 #include "Player/Player.hpp"
 
 namespace game {
@@ -38,14 +39,22 @@ void PrototypeScene::Load() {
   s->transform.position.y = -128;
   s->transform.position.z = 128;
 
-    auto e = GET_FACTORY->CreateObject<game::Enemy>("Enemy", "assets/characters/dummy.json");
+  auto e = GET_FACTORY->CreateObject<game::Enemy>("Enemy", "assets/characters/dummy.json");
   e->transform.position = {300.0f, -128.0f, 0.0f};
   e->transform.scale = {32.0f, 64.0f};
 
+  auto Box = GET_FACTORY->CreateObject<game::Box>("Box1");
+  Box->SetTexture("assets/prototype-scene-2/Prototype_Box_Default.png");
+  Box->transform.scale = {64.0f, 64.0f};
+  Box->transform.position = {400.0f, -96.0f, 32.0f};
+
+  auto Box2 = GET_FACTORY->CreateObject<game::Box>("Box2");
+  Box2->SetTexture("assets/prototype-scene-2/Prototype_Box_Default.png");
+  Box2->transform.scale = {64.0f, 64.0f};
+  Box2->transform.position = {m_playerStartPos.x + 256, 32.0f, 32.0f};
 
   m_players.push_back(p);
 
-  
   dynamic_cast<Sigma::CameraFollow*>(GET_CAMERA->GetCurrentCamera())->m_targetP1 = p;
 }
 void PrototypeScene::Update(double delta) {
