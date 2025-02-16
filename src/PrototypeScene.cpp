@@ -16,7 +16,7 @@ void PrototypeScene::Load() {
   std::cout << "PrototypeScene::Load()" << std::endl;
 
   GET_CAMERA->SetCurrentCamera(GET_FACTORY->CreateObject<Sigma::CameraFollow>("Main Camera"));
-  GET_CAMERA->GetCurrentCamera()->size = 1;
+  GET_CAMERA->GetCurrentCamera()->size = 2;
 
   auto *floor = GET_FACTORY->CreateObject<Sigma::Actor>();
   floor->SetTexture("assets/prototype-scene-2/t-floor.png");
