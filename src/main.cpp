@@ -13,6 +13,7 @@ int main() {
   auto scene = new game::PrototypeScene("Main", 0, "assets/prototype-scene-2/ProtoScene2.json");
   gameManager->LoadScene(scene);
 
+  AEGfxSetFullscreen(true);
   while (AESysWindowExists()) {
     gameManager->Run();
   }

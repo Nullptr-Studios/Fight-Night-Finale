@@ -35,17 +35,12 @@ void PrototypeScene::Load() {
 
 
   auto s = GET_FACTORY->CreateObject<game::PunchingBag>("PunchingBag");
-  s->transform.position.y = -128;
-  s->transform.position.z = 128;
-
-    auto e = GET_FACTORY->CreateObject<game::Enemy>("Enemy", "assets/characters/dummy.json");
-  e->transform.position = {300.0f, -128.0f, 0.0f};
-  e->transform.scale = {32.0f, 64.0f};
-
+  s->transform.position.x = -278;
+  s->transform.position.y = -10;
+  s->transform.position.z = 10;
 
   m_players.push_back(p);
 
-  
   dynamic_cast<Sigma::CameraFollow*>(GET_CAMERA->GetCurrentCamera())->m_targetP1 = p;
 }
 void PrototypeScene::Update(double delta) {

@@ -17,7 +17,7 @@ void PunchingBag::Init() {
   m_animComp->SetCurrentAnim("Hit");
   m_animComp->PlayAndStop();
   SetTexture(m_animComp->GetTextureAtlas()->textureStr.c_str());
-  transform.relativeScale = glm::vec2(.75f);
+  transform.relativeScale = glm::vec2(-.75f, .75f);
 
   m_collider->box.Set(10,10,40,40,10, transform.offset);
   m_collider->SetColliderFlags(Sigma::Collision::ColliderFlag::ENEMY);

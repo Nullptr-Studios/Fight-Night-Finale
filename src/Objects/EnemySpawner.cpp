@@ -28,7 +28,6 @@ void game::EnemySpawner::Update(double deltaTime) {
   
   for (auto player: m_scene->m_players) {
     float distance = glm::distance(player->transform.position, transform.position);
-    std::cout << "Player: " << player->GetName() << " distance: " << distance <<"\n";
     if (distance < m_activationDistance) {
       for (auto &enemy: m_spawnData) {
         auto e = GET_FACTORY->CreateObject<game::Enemy>("Enemy", "assets/characters/dummy.json");

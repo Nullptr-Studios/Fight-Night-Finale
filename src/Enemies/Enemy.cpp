@@ -104,7 +104,7 @@ void Enemy::OnWait(double delta) {
   if (m_timer >= m_timerSeconds) {
     m_state = m_timerNextState;
 
-    m_timerNextState = IDLE;
+    m_timerNextState = FOLLOW;
     m_timerSeconds = 0.0f;
     m_timer = 0.0f;
   }
@@ -215,7 +215,10 @@ void Enemy::OnAttack() {
   BasicAttack();
 }
 
-void Enemy::OnDead() { }
+void Enemy::OnDead() {
+  GET_FACTORY->DestroyObject(m_debugCol->GetId());
+  GET_FACTORY->DestroyObject(GetId());
+}
 
 void Enemy::Destroy() { Character::Destroy(); }
 
