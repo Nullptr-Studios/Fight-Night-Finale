@@ -29,7 +29,10 @@ void PrototypeScene::Load() {
   walls->transform.position.z = -5000;
 
   auto p = GET_FACTORY->CreateObject<game::Player>("Player", -1, "assets/characters/Player.json");
-  p->transform.position.y = -128;
+  p->transform.position.x = m_playerStartPos.x;
+  p->transform.position.y = m_playerStartPos.y;
+  p->transform.position.z = 0.0f;
+
 
   auto s = GET_FACTORY->CreateObject<game::PunchingBag>("PunchingBag");
   s->transform.position.y = -128;
@@ -46,9 +49,11 @@ void PrototypeScene::Update(double delta) {
   GameScene::Update(delta);
 
   // If pressed key 2 create 2nd player
-  if (AEInputKeyTriggered('2')) {
+  if (AEInputGamepadButtonTriggered(0, 0x0010)) {
     auto p2 = GET_FACTORY->CreateObject<game::Player>("Player2", 0, "assets/characters/Player.json");
-    p2->transform.position.y = -128;
+    p2->transform.position.x = m_playerStartPos.x;
+    p2->transform.position.y = m_playerStartPos.y;
+    p2->transform.position.z = 0.0f;
     dynamic_cast<Sigma::CameraFollow*>(GET_CAMERA->GetCurrentCamera())->m_targetP2 = p2;
   }
 
