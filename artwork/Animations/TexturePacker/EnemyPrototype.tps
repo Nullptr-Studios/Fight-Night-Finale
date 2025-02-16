@@ -179,7 +179,7 @@
             <key>heuristicMask</key>
             <false/>
             <key>defaultPivotPoint</key>
-            <point_f>0.5,0.5</point_f>
+            <point_f>0.5,1</point_f>
             <key>writePivotPoints</key>
             <true/>
         </struct>
@@ -260,26 +260,12 @@
                 <false/>
             </struct>
             <key type="filename">../Frames/PrototypeEnemy/Punch1/Punch1_0001.png</key>
-            <struct type="IndividualSpriteSettings">
-                <key>pivotPoint</key>
-                <point_f>0.295082,1</point_f>
-                <key>spriteScale</key>
-                <double>1</double>
-                <key>scale9Enabled</key>
-                <false/>
-                <key>scale9Borders</key>
-                <rect>15,22,31,45</rect>
-                <key>scale9Paddings</key>
-                <rect>15,22,31,45</rect>
-                <key>scale9FromFile</key>
-                <false/>
-            </struct>
             <key type="filename">../Frames/PrototypeEnemy/Punch1/Punch1_0003.png</key>
             <key type="filename">../Frames/PrototypeEnemy/Punch1/Punch1_0005.png</key>
-            <key type="filename">../Frames/PrototypeEnemy/Punch1/Punch1_0021.png</key>
+            <key type="filename">../Frames/PrototypeEnemy/Punch1/Punch1_0027.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
-                <point_f>0.286885,1</point_f>
+                <point_f>0.5,1</point_f>
                 <key>spriteScale</key>
                 <double>1</double>
                 <key>scale9Enabled</key>
@@ -292,10 +278,11 @@
                 <false/>
             </struct>
             <key type="filename">../Frames/PrototypeEnemy/Punch1/Punch1_0007.png</key>
-            <key type="filename">../Frames/PrototypeEnemy/Punch1/Punch1_0019.png</key>
+            <key type="filename">../Frames/PrototypeEnemy/Punch1/Punch1_0023.png</key>
+            <key type="filename">../Frames/PrototypeEnemy/Punch1/Punch1_0025.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
-                <point_f>0.270492,1</point_f>
+                <point_f>0.491803,1</point_f>
                 <key>spriteScale</key>
                 <double>1</double>
                 <key>scale9Enabled</key>
@@ -309,9 +296,11 @@
             </struct>
             <key type="filename">../Frames/PrototypeEnemy/Punch1/Punch1_0009.png</key>
             <key type="filename">../Frames/PrototypeEnemy/Punch1/Punch1_0017.png</key>
+            <key type="filename">../Frames/PrototypeEnemy/Punch1/Punch1_0019.png</key>
+            <key type="filename">../Frames/PrototypeEnemy/Punch1/Punch1_0021.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
-                <point_f>0.254098,1</point_f>
+                <point_f>0.47541,1</point_f>
                 <key>spriteScale</key>
                 <double>1</double>
                 <key>scale9Enabled</key>
@@ -328,7 +317,7 @@
             <key type="filename">../Frames/PrototypeEnemy/Punch1/Punch1_0015.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
-                <point_f>0.237705,1</point_f>
+                <point_f>0.459016,1</point_f>
                 <key>spriteScale</key>
                 <double>1</double>
                 <key>scale9Enabled</key>
@@ -340,27 +329,40 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">../Frames/PrototypeEnemy/Punch1/Punch1_0023.png</key>
-            <key type="filename">../Frames/PrototypeEnemy/Punch1/Punch1_0025.png</key>
-            <key type="filename">../Frames/PrototypeEnemy/Punch1/Punch1_0027.png</key>
+            <key type="filename">../../../../../../../tmp/EnemyHit/Hit1_0001.png</key>
+            <key type="filename">../../../../../../../tmp/EnemyHit/Hit1_0003.png</key>
+            <key type="filename">../../../../../../../tmp/EnemyHit/Hit1_0005.png</key>
+            <key type="filename">../../../../../../../tmp/EnemyHit/Hit1_0007.png</key>
+            <key type="filename">../../../../../../../tmp/EnemyHit/Hit1_0009.png</key>
+            <key type="filename">../../../../../../../tmp/EnemyHit/Hit1_0011.png</key>
+            <key type="filename">../../../../../../../tmp/EnemyHit/Hit1_0013.png</key>
+            <key type="filename">../../../../../../../tmp/EnemyHit/Hit1_0015.png</key>
+            <key type="filename">../../../../../../../tmp/EnemyHit/Hit1_0017.png</key>
+            <key type="filename">../../../../../../../tmp/EnemyHit/Hit1_0019.png</key>
+            <key type="filename">../../../../../../../tmp/EnemyHit/Hit1_0021.png</key>
+            <key type="filename">../../../../../../../tmp/EnemyHit/Hit1_0023.png</key>
+            <key type="filename">../../../../../../../tmp/EnemyHit/Hit1_0025.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
-                <point_f>0.303279,1</point_f>
+                <point_f>0.5,1</point_f>
                 <key>spriteScale</key>
                 <double>1</double>
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
-                <rect>15,22,31,45</rect>
+                <rect>12,21,23,41</rect>
                 <key>scale9Paddings</key>
-                <rect>15,22,31,45</rect>
+                <rect>12,21,23,41</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
         </map>
         <key>fileList</key>
         <array>
-            <filename>../Frames/PrototypeEnemy</filename>
+            <filename>../../../../../../../tmp/EnemyHit</filename>
+            <filename>../Frames/PrototypeEnemy/Idle</filename>
+            <filename>../Frames/PrototypeEnemy/Punch1</filename>
+            <filename>../Frames/PrototypeEnemy/Walk</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>
