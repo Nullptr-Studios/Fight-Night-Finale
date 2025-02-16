@@ -1,7 +1,8 @@
 {
   "maxSpeed" : 125.0,
-  "accelerationRate" : 1.0,
-  "jumpVel" : 1500.0,
+  "accelerationRate" : 5.0,
+  "jumpVel" : 1.0,
+  "friction" : 500,
   "distanceToAttack" : 60.0,
 
   "basicCombo" : [
