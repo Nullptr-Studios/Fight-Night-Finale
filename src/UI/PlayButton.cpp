@@ -6,7 +6,7 @@ namespace game {
 void PlayButton::OnClick() {
   UIButton::OnClick();
   std::cout << "Changing Scene from MainMenu to Game\n";
-  auto s = new game::PrototypeScene("Game", 1,"assets/prototype-scene/ProtoScene.json");
+  auto s = new game::PrototypeScene("Main", 0, "assets/prototype-scene-2/ProtoScene2.json");
   GET_MANAGER->LoadScene(s);
 }
 void PlayButton::OnHoverStart() {
