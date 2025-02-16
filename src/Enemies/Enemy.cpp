@@ -96,6 +96,14 @@ void Enemy::Update(double delta) {
     case ATTACK: OnAttack(); break;
     case DEAD: OnDead(); break;
   }
+
+  if (m_isIdle) {
+    if (velocity.x != 0 || velocity.y != 0) {
+      m_animComp->SetCurrentAnim("Walk");
+    } else {
+      m_animComp->SetCurrentAnim("Idle");
+    }
+  }
 }
 
 void Enemy::OnWait(double delta) {
