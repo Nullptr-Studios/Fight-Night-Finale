@@ -26,8 +26,8 @@ void game::MainMenu::Load() {
   // auto progress = GET_FACTORY->CreateObject<game::HealthBar>("Progress");
   // progress->m_maxHealth = 100;
   // progress->m_currentHealth = 100;
-  // progress->transform.scale = {400, 10};
   // progress->m_isScreenSpaceUI = false;
+  // progress->m_screenSpaceTransform.scale = {400, 10};
   // progress->m_screenSpaceTransform.position = {0,250,0};
   // progress->m_progress = 1;
 
