@@ -8,24 +8,24 @@
   "basicCombo" : [
     {
       "type" : "dmg",
-      "damage" : 8.0,
+      "damage" : 7.0,
       "colliderOffset" : {
         "x" : 28,
-        "y" : 55
+        "y" : 57
       },
       "colliderSize" : {
-        "x" : 38,
+        "x" : 36,
         "y" : 15,
         "z" : 5
       },
-      "animationName" : "Combo3"
+      "animationName" : "Combo1"
     },
     {
       "type" : "dmg",
       "damage" : 7.0,
       "colliderOffset" : {
         "x" : 28,
-        "y" : 57
+        "y" : 58
       },
       "colliderSize" : {
         "x" : 36,
