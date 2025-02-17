@@ -18,7 +18,7 @@ public:
   void Load() override;
   void Unload() override;
 private:
-  Sigma::UIImage * m_background;
-  Sigma::SceneButton * m_button;
+  Sigma::UIImage * m_background{};
+  Sigma::SceneButton * m_button{};
 };
 }
