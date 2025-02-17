@@ -32,13 +32,52 @@
   ],
   "enemySpawners": [
     {
-      "name": "spawner 1",
+      "name": "Spawner 1",
       "pos": {"x": -100, "y": 64},
       "activationRange": 200,
       "enemies": [
         {
           "id": 1,
           "pos": {"x": -130, "y": 64},
+          "entranceId": 0
+        }
+      ]
+    },
+    {
+      "name": "Spawner 2",
+      "pos": {"x": -20, "y": -50},
+      "activationRange": 150,
+      "enemies": [
+        {
+          "id": 1,
+          "pos": {"x": -130, "y": 64},
+          "entranceId": 0
+        },
+        {
+          "id": 1,
+          "pos": {"x": 30, "y": -40},
+          "entranceId": 0
+        }
+      ]
+    },
+    {
+      "name": "Spawner 3",
+      "pos": {"x": 315, "y": -115},
+      "activationRange": 280,
+      "enemies": [
+        {
+          "id": 1,
+          "pos": {"x": 270, "y": -80},
+          "entranceId": 0
+        },
+        {
+          "id": 1,
+          "pos": {"x": 500, "y": -115},
+          "entranceId": 0
+        },
+        {
+          "id": 1,
+          "pos": {"x": 30, "y": -45},
           "entranceId": 0
         }
       ]

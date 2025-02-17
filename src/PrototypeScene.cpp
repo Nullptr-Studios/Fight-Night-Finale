@@ -9,14 +9,21 @@
 #include "Objects/Debug/PunchingBag.hpp"
 #include "Player/Player.hpp"
 
+// #define DEBUG_CAMERA
+
 namespace game {
 
 void PrototypeScene::Load() {
   GameScene::Load();
   std::cout << "PrototypeScene::Load()" << std::endl;
 
+#ifdef DEBUG_CAMERA
+  GET_CAMERA->SetCurrentCamera(GET_FACTORY->CreateObject<Sigma::Camera>("Debug Camera"));
+  GET_CAMERA->GetCurrentCamera()->size = 1;
+#else
   GET_CAMERA->SetCurrentCamera(GET_FACTORY->CreateObject<Sigma::CameraFollow>("Main Camera"));
   GET_CAMERA->GetCurrentCamera()->size = 2;
+#endif
 
   auto *floor = GET_FACTORY->CreateObject<Sigma::Actor>();
   floor->SetTexture("assets/prototype-scene-2/t-floor.png");
@@ -48,7 +55,9 @@ void PrototypeScene::Load() {
 
   m_players.push_back(p);
 
+#ifndef DEBUG_CAMERA
   dynamic_cast<Sigma::CameraFollow*>(GET_CAMERA->GetCurrentCamera())->m_targetP1 = p;
+#endif
 }
 void PrototypeScene::Update(double delta) {
   GameScene::Update(delta);

@@ -2,8 +2,8 @@
 // Created by Dario on 15/02/2025.
 //
 
+#include "core.hpp"
 #include "EnemySpawner.hpp"
-
 #include "Enemies/Enemy.hpp"
 #include "GameManager.hpp"
 #include "PrototypeScene.hpp"

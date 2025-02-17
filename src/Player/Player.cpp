@@ -34,7 +34,6 @@ void Player::Init() {
   m_collider->damage = 1.0f;
   m_collider->SetOwner(this);
 
-
 }
 
 void Player::Start() {
@@ -44,8 +43,7 @@ void Player::Start() {
   m_healthBar->m_currentHealth = GetHealth();
   
   // this is complete jankyness -d
-  // your so real for that dario -the real d
-  m_debugPlayerCol = GET_FACTORY->CreateObject<Sigma::Actor>("Debug Attack");
+  // m_debugPlayerCol = GET_FACTORY->CreateObject<Sigma::Actor>("Debug Attack");
 }
 
 void Player::Update(double delta) {
@@ -60,9 +58,7 @@ void Player::Update(double delta) {
     m_animComp->SetCurrentAnim("Idle");
     }
 
-
-  m_collider->DebugDraw(m_debugPlayerCol, this, "assets/core/debug_blue.png");
-
+  // m_collider->DebugDraw(m_debugPlayerCol, this, "assets/core/debug_blue.png");
 
 }
 
