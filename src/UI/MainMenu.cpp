@@ -34,6 +34,6 @@ void game::MainMenu::Load() {
 }
 void game::MainMenu::Unload() {
   Scene::Unload();
-  // GET_FACTORY->DestroyObject(m_playButton);
-  // GET_FACTORY->DestroyObject(m_quitButton);
+  GET_FACTORY->DestroyObject(m_playButton);
+  GET_FACTORY->DestroyObject(m_quitButton);
 }
