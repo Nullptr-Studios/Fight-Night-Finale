@@ -8,7 +8,7 @@
 #include "Objects/Debug/PunchingBag.hpp"
 #include "Player/Player.hpp"
 
-#define DEBUG_CAMERA
+// #define DEBUG_CAMERA
 
 namespace game {
 

@@ -39,7 +39,7 @@ void Player::Start() {
   Character::Start();
 
   // this is complete jankyness -d
-  m_debugPlayerCol = GET_FACTORY->CreateObject<Sigma::Actor>("Debug Attack");
+  // m_debugPlayerCol = GET_FACTORY->CreateObject<Sigma::Actor>("Debug Attack");
 }
 
 void Player::Update(double delta) {
@@ -54,7 +54,7 @@ void Player::Update(double delta) {
     m_animComp->SetCurrentAnim("Idle");
     }
 
-  m_collider->DebugDraw(m_debugPlayerCol, this, "assets/core/debug_blue.png");
+  // m_collider->DebugDraw(m_debugPlayerCol, this, "assets/core/debug_blue.png");
 
 }
 

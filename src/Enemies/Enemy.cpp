@@ -37,7 +37,7 @@ void Enemy::Start() {
   Character::Start();
   m_state = FOLLOW;
   m_player = GET_FACTORY->FindObject<Player>("Player");
-  m_debugCol = GET_FACTORY->CreateObject<Sigma::Actor>("Debug Attack");
+  // m_debugCol = GET_FACTORY->CreateObject<Sigma::Actor>("Debug Attack");
 }
 
 bool Enemy::OnCollision(Sigma::Collision::CollisionEvent& e) {
@@ -87,7 +87,7 @@ void Enemy::Update(double delta) {
   Character::Update(delta);
   m_distance = m_player->transform.GetDepthPosition() - transform.GetDepthPosition();
 
-  m_collider->DebugDraw(m_debugCol, this, "assets/core/debug_blue.png");
+  // m_collider->DebugDraw(m_debugCol, this, "assets/core/debug_blue.png");
 
   switch (m_state) {
     case IDLE: break;
@@ -159,10 +159,9 @@ void Enemy::OnSeparate() {
     m_separateDirection.y = (m_player->transform.GetDepthPosition().y + static_cast<float>(distrib_y(gen)));
 
     // Recalculate if point is out of bounds -x
-    // TODO: This is not safe !!! -x
     if (!m_sceneBoundsPoly->IsPointInside(m_separateDirection)) {
       m_separateDirection = {0.0f, 0.0f};
-      OnSeparate();
+      m_state = FOLLOW;
     }
   }
 
@@ -228,7 +227,7 @@ void Enemy::OnAttack() {
 }
 
 void Enemy::OnDead() {
-  GET_FACTORY->DestroyObject(m_debugCol->GetId());
+  // GET_FACTORY->DestroyObject(m_debugCol->GetId());
   GET_FACTORY->DestroyObject(GetId());
 }
 
