@@ -4,7 +4,6 @@
 #include "../../inc/sigma/engine/src/Factory.hpp"
 #include "../../inc/sigma/engine/src/Objects/Camera.hpp"
 #include "../PrototypeScene.hpp"
-#include "HealthBar.hpp"
 #include "UI/SceneButton.hpp"
 
 void game::MainMenu::Load() {

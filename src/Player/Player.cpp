@@ -6,6 +6,7 @@
 
 #include "Audio/AudioEngine.hpp"
 
+#include "UI/HealthBar.hpp"
 #include "core.hpp"
 
 namespace game {
@@ -33,12 +34,17 @@ void Player::Init() {
   m_collider->damage = 1.0f;
   m_collider->SetOwner(this);
 
+
 }
 
 void Player::Start() {
   Character::Start();
 
+  m_healthBar->m_maxHealth = m_maxHealth;
+  m_healthBar->m_currentHealth = GetHealth();
+  
   // this is complete jankyness -d
+  // your so real for that dario -the real d
   m_debugPlayerCol = GET_FACTORY->CreateObject<Sigma::Actor>("Debug Attack");
 }
 
@@ -70,6 +76,9 @@ void Player::OnDamage(const Sigma::Damage::DamageEvent &e)
   Damageable::OnDamage(e);
   std::cout << "Damage with " << e.GetOther()->GetName() << "\n";
   std::cout << GetHealth() << "\n";
+  if (m_isAlive) {
+    m_healthBar->m_currentHealth = GetHealth();
+  }
 }
 
 } // namespace game
