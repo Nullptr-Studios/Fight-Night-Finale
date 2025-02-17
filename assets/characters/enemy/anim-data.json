@@ -787,7 +787,7 @@
 "meta": {
 	"app": "https://www.codeandweb.com/texturepacker",
 	"version": "1.0",
-	"image": "assets/EnemyPrototype.png",
+	"image": "assets/characters/enemy/sprites.png",
 	"format": "RGBA8888",
 	"size": {"w":256,"h":1353},
 	"scale": "1",

@@ -28,7 +28,7 @@ void PrototypeScene::Load() {
   walls->transform.scale = {1061.0f, 346.0f};
   walls->transform.position.z = -5000;
 
-  auto p = GET_FACTORY->CreateObject<game::Player>("Player", -1, "assets/characters/Player.json");
+  auto p = GET_FACTORY->CreateObject<game::Player>("Player", -1, "assets/characters/player/behaviour.json");
   p->transform.position.x = m_playerStartPos.x;
   p->transform.position.y = m_playerStartPos.y;
   p->transform.position.z = 0.0f;
@@ -48,7 +48,10 @@ void PrototypeScene::Update(double delta) {
 
   // If pressed key 2 create 2nd player
   if (AEInputGamepadButtonTriggered(0, 0x0010)) {
-    auto p2 = GET_FACTORY->CreateObject<game::Player>("Player2", 0, "assets/characters/Player.json");
+    // Check to avoid having infinite player 2 objects -x
+    if (m_players.size() >= 2) return;
+
+    auto p2 = GET_FACTORY->CreateObject<game::Player>("Player2", 0, "assets/characters/player/behaviour.json");
     p2->transform.position.x = m_playerStartPos.x;
     p2->transform.position.y = m_playerStartPos.y;
     p2->transform.position.z = 0.0f;

@@ -20,7 +20,7 @@ void Enemy::Init() {
   transform.relativeScale = glm::vec2(1);
 
   // Setup Animation
-  auto anim = GET_ANIMATION->LoadTextureAtlas("assets/EnemyPrototype.json");
+  auto anim = GET_ANIMATION->LoadTextureAtlas("assets/characters/enemy/anim-data.json");
   m_animComp->SetTextureAtlas(anim);
   m_animComp->SetCurrentAnim("Idle");
   SetTexture(anim->textureStr.c_str());
@@ -51,7 +51,10 @@ void Enemy::OnDamage(const Sigma::Damage::DamageEvent& e) {
   if (!GetAlive()) m_state = DEAD;
 }
 
-void Enemy::OnFullComboPerformed() { m_state = RANDOM_SPARCE; }
+void Enemy::OnFullComboPerformed() {
+  // disabled this for prototype since dario did not make animations for the enemies combo -x
+  // m_state = RANDOM_SPARCE;
+}
 
 void Enemy::Enable(std::array<Player *, 2> players) {
   if (!players[0]) {
@@ -155,10 +158,11 @@ void Enemy::OnSeparate() {
     else m_separateDirection.x += m_distanceToAttack - static_cast<float>(distrib_x(gen));
     m_separateDirection.y = (m_player->transform.GetDepthPosition().y + static_cast<float>(distrib_y(gen)));
 
-    // Avoid SEPARATE state if point is out of bounds -x
+    // Recalculate if point is out of bounds -x
+    // TODO: This is not safe !!! -x
     if (!m_sceneBoundsPoly->IsPointInside(m_separateDirection)) {
-      m_state = FOLLOW;
-      return;
+      m_separateDirection = {0.0f, 0.0f};
+      OnSeparate();
     }
   }
 

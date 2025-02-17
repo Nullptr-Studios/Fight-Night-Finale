@@ -30,7 +30,7 @@ void game::EnemySpawner::Update(double deltaTime) {
     float distance = glm::distance(player->transform.position, transform.position);
     if (distance < m_activationDistance) {
       for (auto &enemy: m_spawnData) {
-        auto e = GET_FACTORY->CreateObject<game::Enemy>("Enemy", "assets/characters/dummy.json");
+        auto e = GET_FACTORY->CreateObject<game::Enemy>("Enemy", "assets/characters/enemy/behaviour.json");
         e->transform.position.x = enemy.position.x;
         e->transform.position.y = enemy.position.y;
         e->transform.scale = {32.0f, 64.0f};

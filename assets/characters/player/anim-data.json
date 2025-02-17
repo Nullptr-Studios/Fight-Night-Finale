@@ -5,7 +5,7 @@
 	"frame": {"x":115,"y":88,"w":41,"h":83},
 	"rotated": false,
 	"trimmed": true,
-  "fps": 30,
+    "fps": 40,
 	"spriteSourceSize": {"x":5,"y":6,"w":41,"h":83},
 	"sourceSize": {"w":64,"h":89},
 	"pivot": {"x":0.5,"y":1}
@@ -124,7 +124,7 @@
 	"frame": {"x":288,"y":89,"w":37,"h":82},
 	"rotated": false,
 	"trimmed": true,
-  "fps": 30,
+    "fps": 38,
 	"spriteSourceSize": {"x":4,"y":7,"w":37,"h":82},
 	"sourceSize": {"w":64,"h":89},
 	"pivot": {"x":0.4375,"y":1}
@@ -243,7 +243,7 @@
 	"frame": {"x":1465,"y":1,"w":44,"h":82},
 	"rotated": false,
 	"trimmed": true,
-  "fps": 17,
+    "fps": 26,
 	"spriteSourceSize": {"x":1,"y":7,"w":44,"h":82},
 	"sourceSize": {"w":57,"h":89},
 	"pivot": {"x":0.5,"y":1}
@@ -398,7 +398,7 @@
 	"frame": {"x":1602,"y":1,"w":43,"h":82},
 	"rotated": false,
 	"trimmed": true,
-  "fps": 30,
+    "fps": 30,
 	"spriteSourceSize": {"x":1,"y":1,"w":43,"h":82},
 	"sourceSize": {"w":44,"h":83},
 	"pivot": {"x":0.5,"y":1}
@@ -1171,7 +1171,7 @@
 "meta": {
 	"app": "https://www.codeandweb.com/texturepacker",
 	"version": "1.0",
-	"image": "assets/ProtoPlayer.png",
+	"image": "assets/characters/player/sprites.png",
 	"format": "RGBA8888",
 	"size": {"w":1901,"h":256},
 	"scale": "1",
