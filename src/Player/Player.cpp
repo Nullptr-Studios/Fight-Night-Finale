@@ -54,9 +54,7 @@ void Player::Update(double delta) {
     m_animComp->SetCurrentAnim("Idle");
     }
 
-
   m_collider->DebugDraw(m_debugPlayerCol, this, "assets/core/debug_blue.png");
-
 
 }
 
@@ -67,9 +65,11 @@ void Player::Destroy() {
 
 void Player::OnDamage(const Sigma::Damage::DamageEvent &e)
 {
-  Damageable::OnDamage(e);
-  std::cout << "Damage with " << e.GetOther()->GetName() << "\n";
-  std::cout << GetHealth() << "\n";
+  Character::OnDamage(e);
+
+  if (!m_isAlive) {
+    // TODO: CALL DANTEs UI
+  }
 }
 
 } // namespace game
