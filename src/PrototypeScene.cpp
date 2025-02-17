@@ -28,24 +28,19 @@ void PrototypeScene::Load() {
   walls->transform.scale = {1061.0f, 346.0f};
   walls->transform.position.z = -5000;
 
-  auto p = GET_FACTORY->CreateObject<game::Player>("Player", -1, "assets/characters/Player.json");
+  auto p = GET_FACTORY->CreateObject<game::Player>("Player", -1, "assets/characters/player/behaviour.json");
   p->transform.position.x = m_playerStartPos.x;
   p->transform.position.y = m_playerStartPos.y;
   p->transform.position.z = 0.0f;
 
 
   auto s = GET_FACTORY->CreateObject<game::PunchingBag>("PunchingBag");
-  s->transform.position.y = -128;
-  s->transform.position.z = 128;
-
-    auto e = GET_FACTORY->CreateObject<game::Enemy>("Enemy", "assets/characters/dummy.json");
-  e->transform.position = {300.0f, -128.0f, 0.0f};
-  e->transform.scale = {32.0f, 64.0f};
-
+  s->transform.position.x = -278;
+  s->transform.position.y = -10;
+  s->transform.position.z = 10;
 
   m_players.push_back(p);
 
-  
   dynamic_cast<Sigma::CameraFollow*>(GET_CAMERA->GetCurrentCamera())->m_targetP1 = p;
 }
 void PrototypeScene::Update(double delta) {
@@ -53,7 +48,10 @@ void PrototypeScene::Update(double delta) {
 
   // If pressed key 2 create 2nd player
   if (AEInputGamepadButtonTriggered(0, 0x0010)) {
-    auto p2 = GET_FACTORY->CreateObject<game::Player>("Player2", 0, "assets/characters/Player.json");
+    // Check to avoid having infinite player 2 objects -x
+    if (m_players.size() >= 2) return;
+
+    auto p2 = GET_FACTORY->CreateObject<game::Player>("Player2", 0, "assets/characters/player/behaviour.json");
     p2->transform.position.x = m_playerStartPos.x;
     p2->transform.position.y = m_playerStartPos.y;
     p2->transform.position.z = 0.0f;

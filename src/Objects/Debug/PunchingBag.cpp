@@ -12,12 +12,12 @@ void PunchingBag::Init() {
 
   m_animComp = std::make_unique<Sigma::Animation::AnimationComponent>(this);
 
-  auto anim = GET_ANIMATION->LoadTextureAtlas("assets/PunchingBag.json");
+  auto anim = GET_ANIMATION->LoadTextureAtlas("assets/characters/punch-bag/anim-data.json");
   m_animComp->SetTextureAtlas(anim);
   m_animComp->SetCurrentAnim("Hit");
   m_animComp->PlayAndStop();
   SetTexture(m_animComp->GetTextureAtlas()->textureStr.c_str());
-  transform.relativeScale = glm::vec2(.75f);
+  transform.relativeScale = glm::vec2(-.75f, .75f);
 
   m_collider->box.Set(10,10,40,40,10, transform.offset);
   m_collider->SetColliderFlags(Sigma::Collision::ColliderFlag::ENEMY);

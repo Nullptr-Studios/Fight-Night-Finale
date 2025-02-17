@@ -8,7 +8,6 @@
 
 #include "core.hpp"
 
-
 namespace game {
 
 AEGfxFont* font;
@@ -17,9 +16,8 @@ void Player::Init() {
   
   transform.relativeScale = glm::vec2(1);
 
-
   // Setup Animation
-  auto anim = GET_ANIMATION->LoadTextureAtlas("assets/ProtoPlayer.json");
+  auto anim = GET_ANIMATION->LoadTextureAtlas("assets/characters/player/anim-data.json");
   m_animComp->SetTextureAtlas(anim);
   m_animComp->SetCurrentAnim("Idle");
   SetTexture(anim->textureStr.c_str());
@@ -34,7 +32,6 @@ void Player::Init() {
   m_collider->SetColliderType(Sigma::Collision::COLLISION);
   m_collider->damage = 1.0f;
   m_collider->SetOwner(this);
-
 
 }
 

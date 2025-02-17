@@ -1,19 +1,20 @@
 {
-  "maxSpeed" : 125.0,
-  "accelerationRate" : 1.0,
-  "jumpVel" : 1500.0,
-  "distanceToAttack" : 60.0,
+  "maxHealth" : 75.0,
+  "maxSpeed" : 122.0,
+  "accelerationRate" : 3.0,
+  "jumpVel" : 440,
+  "friction" : 450,
 
   "basicCombo" : [
     {
       "type" : "dmg",
-      "damage" : 1.0,
+      "damage" : 7.0,
       "colliderOffset" : {
         "x" : 28,
-        "y" : 55
+        "y" : 57
       },
       "colliderSize" : {
-        "x" : 38,
+        "x" : 36,
         "y" : 15,
         "z" : 5
       },
@@ -21,13 +22,13 @@
     },
     {
       "type" : "dmg",
-      "damage" : 1.0,
+      "damage" : 7.0,
       "colliderOffset" : {
         "x" : 28,
-        "y" : 55
+        "y" : 58
       },
       "colliderSize" : {
-        "x" : 38,
+        "x" : 36,
         "y" : 15,
         "z" : 5
       },
@@ -35,7 +36,7 @@
     },
     {
       "type" : "dmg",
-      "damage" : 5.0,
+      "damage" : 8.0,
       "colliderOffset" : {
         "x" : 28,
         "y" : 55
@@ -49,7 +50,24 @@
     },
     {
       "type" : "dmg",
-      "damage" : 10.0,
+      "damage" : 12.0,
+      "colliderOffset" : {
+        "x" : 20,
+        "y" : 55
+      },
+      "colliderSize" : {
+        "x" : 20,
+        "y" : 30,
+        "z" : 15
+      },
+      "animationName" : "Combo4"
+    }
+  ],
+
+  "basicAirCombo" : [
+    {
+      "type" : "dmg",
+      "damage" : 8.0,
       "colliderOffset" : {
         "x" : 28,
         "y" : 55
@@ -59,14 +77,25 @@
         "y" : 15,
         "z" : 5
       },
-      "animationName" : "Combo4"
-    }
-  ],
-
-  "basicAirCombo" : [
+      "animationName" : "Punch1"
+    },
     {
       "type" : "dmg",
-      "damage" : 1.0,
+      "damage" : 7.0,
+      "colliderOffset" : {
+        "x" : 28,
+        "y" : 57
+      },
+      "colliderSize" : {
+        "x" : 36,
+        "y" : 15,
+        "z" : 5
+      },
+      "animationName" : "Punch2"
+    },
+    {
+      "type" : "dmg",
+      "damage" : 8.0,
       "colliderOffset" : {
         "x" : 28,
         "y" : 55
@@ -74,9 +103,23 @@
       "colliderSize" : {
         "x" : 38,
         "y" : 15,
-        "z" : 1
+        "z" : 5
       },
       "animationName" : "Punch1"
+    },
+    {
+      "type" : "dmg",
+      "damage" : 12.0,
+      "colliderOffset" : {
+        "x" : 20,
+        "y" : 55
+      },
+      "colliderSize" : {
+        "x" : 20,
+        "y" : 30,
+        "z" : 15
+      },
+      "animationName" : "Punch3"
     }
   ],
 

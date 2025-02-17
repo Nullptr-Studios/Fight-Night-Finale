@@ -15,6 +15,7 @@ int main() {
   auto scene = new game::MainMenu("Main Menu", -1);
   gameManager->LoadScene(scene);
 
+  AEGfxSetFullscreen(true);
   while (AESysWindowExists()) {
     gameManager->Run();
   }
