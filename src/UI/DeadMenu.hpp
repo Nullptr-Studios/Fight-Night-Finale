@@ -7,11 +7,9 @@
  */
 #pragma once
 #include "Scene.hpp"
-namespace game {
-class SceneButton;
-}
 namespace Sigma {
 class UIImage;
+class SceneButton;
 }
 namespace game {
 class DeadMenu final : public Sigma::Scene {
@@ -21,6 +19,6 @@ public:
   void Unload() override;
 private:
   Sigma::UIImage * m_background;
-  game::SceneButton * m_button;
+  Sigma::SceneButton * m_button;
 };
 }

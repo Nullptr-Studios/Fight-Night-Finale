@@ -6,9 +6,9 @@
 
 #include <aecore/AEEngine.h>
 #include "GameManager.hpp"
-#include "MainMenu.hpp"
 #include "PrototypeScene.hpp"
 #include "UI/DeadMenu.hpp"
+#include "UI/MainMenu.hpp"
 
 int main() {
   std::unique_ptr<Sigma::GameManager> gameManager = std::make_unique<Sigma::GameManager>("Game", 800, 600);

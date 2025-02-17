@@ -6,8 +6,8 @@
  * @brief Main Menu
  */
 #pragma once
-#include "Scene.hpp"
-namespace game {
+#include "../../inc/sigma/engine/src/Scene.hpp"
+namespace Sigma {
 class SceneButton;
 }
 namespace game {
@@ -17,7 +17,7 @@ public:
   void Load() override;
   void Unload() override;
 private:
-  SceneButton * m_playButton;
-  SceneButton * m_quitButton;
+  Sigma::SceneButton *m_playButton;
+  Sigma::SceneButton * m_quitButton;
 };
 }
