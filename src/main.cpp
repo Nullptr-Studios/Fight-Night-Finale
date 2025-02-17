@@ -12,7 +12,7 @@
 
 int main() {
   std::unique_ptr<Sigma::GameManager> gameManager = std::make_unique<Sigma::GameManager>("Game", 800, 600);
-  auto scene = new game::MainMenu("Main", 0);
+  auto scene = new game::MainMenu("Main Menu", -1);
   gameManager->LoadScene(scene);
 
   while (AESysWindowExists()) {

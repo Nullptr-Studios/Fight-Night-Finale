@@ -13,10 +13,10 @@ public:
   explicit HealthBar(Sigma::id_t id) : UIProgressBar(id) {}
   void Start() override;
   void Update(double deltaTime) override;
-  int m_maxHealth{};
-  int m_currentHealth{};
+  int m_maxHealth{}; ///<@brief Maximum Health
+  int m_currentHealth{}; ///<@brief Current Health
 
 private:
-  glm::vec2 m_screenPos{};
+  glm::vec2 m_screenPos{}; ///<@brief position of object in relation to the camera
 };
 } // namespace game
