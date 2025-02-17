@@ -8,25 +8,21 @@ Fight Night Finale describes itself as a parody take on the retro-style beat 'em
 
 Our game is inspired by popular classics in the beat 'em up genre; such as the renowned Streets of Rage franchise, the amazing Double Dragon Gaiden and lastly, the nostalgic Teenage Mutant Ninja Turtles: Shredder's Revenge.
 
-In order to deepen our understanding of the genre and our goals within it, we have spent a significant amount of our time playing through these wonderful games and taking notes on how they play, hoping to capture and translate their brilliance into a creation of our own.
-
-To that extent, we have spent countless hours in testing upon testing, trying to get the feel of our most important systems just right in order to make any beat 'em up player feel right at home. We remain committed to making our game feel great and plan to continue our rigorous testing routines until the very end of the development process.
+[ approach to parody ]
 
 ## Mechanics
 
-Starting off the Mechanics, the game features a 2.5D movement style wherein the player is able to move on a plane with both the width and depth directions. The player is also able to perform a jump which moves themself along the height direction, allowing for jump-attacks based on current depth.
+Starting off the Mechanics, the game features a 2.5D movement style where the player is able to move on a plane with both the width and depth directions. The player is also able to perform a jump which moves themself along the height direction, allowing for jump-attacks based on current depth.
 
 The main focus of the game, however,  is the combat itself, where players and enemies can perform a variety of different attacks. Each attack is formed by a different group of moves or "hits" (also commonly known as a combo, but I'm going to call this move sets as attacks to avoid confusion with the XP combo multiplication).
 
-Each move on the attack has a defined length and the player is supposed to learn how to time their moves properly in order to maximize their performance and damage. Each time a player presses the attack button, the character performs the next hit of the queue. However, when the player doesn't hit anyone or doesn't press the attack button within a certain amount of time; the attack is reset and the player would need to start the move set from the beginning again. In short, it is a dynamic combo system moving both players and enemies through certain pre-determined move-sets based on their action and inaction.
+Each move on the attack has a defined length and the player is supposed to learn how to time their moves properly in order to maximize their performance and damage. Each time a player presses the attack button, the character performs the next hit of the queue. However, when the player doesn't hit anyone or doesn't press the attack button within a certain amount of time; the attack is reset and the player would need to start the move set from the beginning again.
 
-To complement this combo system, as mentioned earlier, both the player and certain enemies (such as bosses) will include within them several options in their repertoire for attacks. These include basic attacks, jump attacks and specials/ultimates; all with their own distinct trigger conditions, combos and stats.
+To complement this combo system, as mentioned earlier, both the player and certain enemies (such as bosses) will include within them several options in their repertoire for attacks. These include basic attacks and specials that will change when the player is grounded or on air.
 
-Naturally, the game features a wide array of different enemies and bosses, each with their unique attack patterns and methods of attack; be it ranged or melee. In total, there will be 3 bosses within the game, each with their own quirks.
+The game features a wide array of different enemies and bosses, each with their unique attack patterns and methods of attack; be it ranged or melee. In total, there will be 3 bosses within the game, each with their own quirks.
 
 Additionally, as any good beat 'em up, the game will feature certain healing items that will heal the player on pickup. These will commonly found by chance when destroying a destructible object, such as a box. While enemies are also able to destroy these objects, they are unable to utilize the heal pickup. The healing item also does not respawn as to ensure a fair constant difficulty. 
-
-Speaking of difficulty, each level will have an increasingly difficult battle; with waves of enemies including more and more complex types until eventually reaching the Final Boss. Naturally, each level will feature a unique layout to challenge our players in that way as well.
 
 Lastly, the game will feature weapons that, upon pickup, can be utilized to extend both a player and and enemy's reach and damage. These tools have a limited durability and can be thrown in order to severely damage them in exchange for a decent chunk of damage dealt upon contact.
 
@@ -42,9 +38,9 @@ The Dancer, on the other hand, is a somewhat unique character archetype. She is 
 
 ### Enemies
 
-Regarding enemies, we have selected a small, curated selection of distinct enemies, each with their own special method of attack.
+Regarding enemies, we have selected a small, curated selection of distinct enemies, each with their own special method of attack.These include:
 
-These include a basic melee Light and Medium enemy, each attacking the player with either faster, lighter attacks or heavier, slower attacks respectively. These act as the basic "Goons" of our game, enabling the player to learn their controls and test out their combat system upon first encounters.
+A basic melee Light and Medium enemy, each attacking the player with either faster, lighter attacks or heavier, slower attacks respectively. These act as the basic "Goons" of our game, enabling the player to learn their controls and test out their combat system upon first encounters.
 
 A TNT launcher which launches an AOE dynamite sticks which explodes after a short delay, sending players flying. This enemy serves as a long-range AOE to avoid getting hit by and to focus on eliminating as soon as possible to avoid being overwhelmed.
 
@@ -52,10 +48,11 @@ A Bodyguard which picks players up and launches them flying into walls, stunning
 
 A Heavy enemy jumps near players, stunning and damaging them upon landing their jump attack. This enemy serves as a second AOE attack dealer, albeit this time with a slightly larger radius and being slightly harder to avoid, requiring players to coordinate their move-sets correctly to defeat them without issues.
 
+All this enemies will be very similar design-wise, with a comedic tone to its inividual varitiations (the heavy enemy is fat, the bodyguard wears a suit and sunglasses, the tnt launcher has a very large hat, etc.)
+
 ### Bosses
 
-Regarding Bosses, our game includes 3 Bosses, each per their own sub-scenario.
-These include the Pit Manager, Blake and The Presenter.
+Regarding Bosses, our game includes 3 Bosses, each per third of the level. These include the Pit Manager, Blake and The Presenter.
 
 To start off, the first boss you will face is the Pit Manager. This boss consists of a somewhat sentient Gorilla in a Suit. This boss is almost like a dual-sided coin, with calm and professional basic attacks closely followed by a rage induced AOE special and an even crazier Ultimate, wherein they grab the player and toss them into the ground with unmatched ferocity. This boss is supposed to keep players on their toes being both the first boss in the game and a somewhat unpredictable one.
 
@@ -75,15 +72,13 @@ Every few scenes, one of our three boss fights will take place. This fights will
 
 Set within the intense and unpredictable confines of a high-stakes television show, the protagonist’s singular goal is to emerge victorious and claim a life-changing prize of $50 million. This is in itself the basis of the narrative; a high-stakes game show wherein the only rule is the survival of the fittest.
 
-However, as the layers of the competition unravel, so too does the truth behind the show, making the stakes more personal — and dangerous —  than initially anticipated. For The Presenter and his show are far more sinister in their intensions than initially seemed to be, peeling away layer by layer as the player goes further in into the dark and twisted reality of this so called "show".
+However, as the layers of the competition unravel, so too does the truth behind the show, making the stakes more personal — and dangerous —  than initially anticipated. For The Presenter and his show are far more sinister in their intentions than initially seemed to be, peeling away layer by layer as the player goes further in into the dark and twisted reality of this so called "show".
 
-Recruiting a variety of scum he deems expendable, The Presenter utilizes a carefully crafted mask to create a worthy staging ground, serving as an expansion of his ideals, wherein he crushes the hopes and dreams of many a challenger in the goal of recruiting them under his one true goal. 
-
-Recognizing only those who reach him as equals, he silently grows his vile empire, readying for something truly sinister in the event that the Player fails to stop him. Whatever his plan may be, is a secret only those privy to his respect are ever able to hear. Should his proposal be rejected, may the lord have mercy on his enemies...
+Having uncovered the truth—that the grand prize was nothing more than a lie—the protagonist's final challenge becomes a fight for survival. No longer just a contestant, they tear through the ranks of those who orchestrate the show, cutting down everyone standing in their way. At the heart of it all awaits The Presenter, the mastermind behind the deception. In one last, brutal confrontation, the protagonist must defeat him, escape the facility, and reclaim what was rightfully promised.
 
 ## Art
 
-When it comes to the Art Style of the game, FNFE utilizes a simple yet deliberately nostalgic and imperfect pixel art aesthetic, choosing to opt for a low-pixel look which further immerses players into its otherwise visually striking, 1980's inspired world; blending retro-futurism, realism and bizarre comedic elements in a an almost surreal atmosphere oozing with nostalgia. It engages players though vibrant visuals mixed with an unconventional tone, exploring its aesthetic mainly through environmental storytelling.
+When it comes to the Art Style of the game, FNF utilizes a simple yet deliberately nostalgic and imperfect pixel art aesthetic, choosing to opt for a low-pixel look which further immerses players into its otherwise visually striking, 1980's inspired world; blending retro-futurism, realism and bizarre comedic elements in a an almost surreal atmosphere oozing with nostalgia. It engages players though vibrant visuals mixed with an unconventional tone, exploring its aesthetic mainly through environmental storytelling.
 
 It relies on detailed backdrops and interactive element to convey its narrative, capturing the appeal and charm of retro gaming with a modern twist, drawing players further and further into its quirky, high-stakes world.  The single level is rooted in the high-energy ambiance of a casino merged with the chaos of a TV studio, providing a dynamic and memorable setting that enhances the game’s identity.
 
