@@ -6,6 +6,7 @@
 
 #include "Audio/AudioEngine.hpp"
 
+#include "UI/HealthBar.hpp"
 #include "core.hpp"
 
 namespace game {
@@ -38,6 +39,9 @@ void Player::Init() {
 void Player::Start() {
   Character::Start();
 
+  m_healthBar->m_maxHealth = m_maxHealth;
+  m_healthBar->m_currentHealth = GetHealth();
+  
   // this is complete jankyness -d
   // m_debugPlayerCol = GET_FACTORY->CreateObject<Sigma::Actor>("Debug Attack");
 }
@@ -65,10 +69,11 @@ void Player::Destroy() {
 
 void Player::OnDamage(const Sigma::Damage::DamageEvent &e)
 {
-  Character::OnDamage(e);
-
-  if (!m_isAlive) {
-    // TODO: CALL DANTEs UI
+  Damageable::OnDamage(e);
+  std::cout << "Damage with " << e.GetOther()->GetName() << "\n";
+  std::cout << GetHealth() << "\n";
+  if (m_isAlive) {
+    m_healthBar->m_currentHealth = GetHealth();
   }
 }
 

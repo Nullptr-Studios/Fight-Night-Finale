@@ -5,6 +5,7 @@
 #include "Factory.hpp"
 #include "Objects/Actor.hpp"
 #include "Objects/CameraFollow.hpp"
+#include "UI/HealthBar.hpp"
 #include "Objects/Debug/PunchingBag.hpp"
 #include "Player/Player.hpp"
 
@@ -34,10 +35,17 @@ void PrototypeScene::Load() {
   walls->transform.scale = {1061.0f, 346.0f};
   walls->transform.position.z = -5000;
 
+  auto healthBar = GET_FACTORY->CreateObject<game::HealthBar>("Progress");
+  healthBar->m_screenSpaceTransform.scale = {350, 10};
+  healthBar->m_screenSpaceTransform.position = {0,550,0};
+  healthBar->m_progress = 1;
+  healthBar->SetTexture("assets/core/debug_red.png");
+  
   auto p = GET_FACTORY->CreateObject<game::Player>("Player", -1, "assets/characters/player/behaviour.json");
   p->transform.position.x = m_playerStartPos.x;
   p->transform.position.y = m_playerStartPos.y;
   p->transform.position.z = 0.0f;
+  p->m_healthBar = healthBar;
 
 
   auto s = GET_FACTORY->CreateObject<game::PunchingBag>("PunchingBag");
@@ -59,10 +67,16 @@ void PrototypeScene::Update(double delta) {
     // Check to avoid having infinite player 2 objects -x
     if (m_players.size() >= 2) return;
 
+    auto healthBar2 = GET_FACTORY->CreateObject<game::HealthBar>("Progress");
+    healthBar2->m_screenSpaceTransform.scale = {350, 10};
+    healthBar2->m_screenSpaceTransform.position = {0, 530, 0};
+    healthBar2->m_progress = 1;
+    healthBar2->SetTexture("assets/core/debug_red.png");
     auto p2 = GET_FACTORY->CreateObject<game::Player>("Player2", 0, "assets/characters/player/behaviour.json");
     p2->transform.position.x = m_playerStartPos.x;
     p2->transform.position.y = m_playerStartPos.y;
     p2->transform.position.z = 0.0f;
+    p2->m_healthBar = healthBar2;
     dynamic_cast<Sigma::CameraFollow*>(GET_CAMERA->GetCurrentCamera())->m_targetP2 = p2;
     m_players.push_back(p2);
   }

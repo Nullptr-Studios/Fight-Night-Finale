@@ -12,6 +12,7 @@
 #include "PlayerController.hpp"
 
 namespace game {
+class HealthBar;
 
 class Player : public Sigma::Character {
 public:
@@ -29,7 +30,9 @@ public:
   void Update(double delta) override;
   void Destroy() override;
 
-  void OnDamage(const Sigma::Damage::DamageEvent &e) override;;
+  void OnDamage(const Sigma::Damage::DamageEvent &e) override;
+
+  game::HealthBar *m_healthBar;
 
 private:
   /// @brief Holds the Player Controller Component to handle input
