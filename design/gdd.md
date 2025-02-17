@@ -8,6 +8,10 @@ Fight Night Finale describes itself as a parody take on the retro-style beat 'em
 
 ## Mechanics
 
+The game has a 2.5D movement style where the player is able to move on a plane in the width and depth directions. The player is also able to perform a jump which move them along the height.
+
+The main focus of the game is combat itself, where players and enemies can perform certain attacks. Each attack is formed by a different group of moves or "hits" (also commonly known as a combo, but I'm going to call this move sets as attacks to avoid confusion with the XP combo multiplication). Each move on the attack has a defined length and the player is supposed to learn how to time properly the moves in order to maximize damage. Each time a player presses the attack button, the character performs the next hit of the queue, however, when the player doesn't hit anyone or doesn't press the attack button in a certain time, the attack is reset and the player should start the move set from the beginning again.
+
 ## Characters
 
 ### Players
