@@ -1,0 +1,79 @@
+//
+// Created by dariormt on 07/02/2025.
+//
+
+#include "GameScene.hpp"
+
+#include "Factory.hpp"
+#include "Polygon.hpp"
+#include "Objects/EnemySpawner.hpp"
+#include "pch.hpp"
+
+
+void game::GameScene::Load() {
+  Sigma::Scene::Load();
+  if (m_jsonPath.empty())
+    return;
+
+  std::fstream file(m_jsonPath);
+
+  if (!file.is_open()) {
+    std::cout << "[GameScene] " << GetName() << " failed to open JSON file " << m_jsonPath << '\n';
+    return;
+  }
+
+  std::cout << "[GameScene] " << GetName() << " Loading JSON file: " << m_jsonPath << '\n';
+
+  Sigma::json_t J = Sigma::json_t::parse(file);
+
+  file.close();
+
+  m_playerStartPos = {J["playerStart"]["x"], J["playerStart"]["y"]};
+
+  m_sceneBounds.reserve(J["bounds"].size());
+
+  for (auto &boundCoords: J["bounds"]) {
+    glm::vec2 bound = {boundCoords["x"], boundCoords["y"]};
+    m_sceneBounds.emplace_back(bound);
+
+    if (m_debug) {
+      auto point = GET_FACTORY->CreateObject<Sigma::Actor>("Point");
+      point->transform.position.x = bound.x;
+      point->transform.position.y = bound.y;
+      point->transform.position.z = 1000;
+      point->transform.scale = {10, 10};
+      point->SetModulationColor(AE_COLORS_RED);
+    }
+  }
+
+  m_enemySpawners.reserve(J["enemySpawners"].size());
+
+  for (auto &spawners: J["enemySpawners"]) {
+    auto s = GET_FACTORY->CreateObject<EnemySpawner>(spawners["name"], spawners["activationRange"]);
+    s->transform.position = {spawners["pos"]["x"], spawners["pos"]["y"], -spawners["pos"]["y"].get<int>()};
+
+    for (auto &enemies: spawners["enemies"]) {
+      EnemySpawnData data{};
+      data.id = enemies["id"];
+      data.position = {enemies["pos"]["x"], enemies["pos"]["y"]};
+      data.entranceId = enemies["entranceId"];
+      s->AddEnemiesData(data);
+    }
+
+    m_enemySpawners.push_back(s);
+  }
+
+  std::cout << "[GameScene] " << GetName() << " JSON file loaded\n";
+
+  J.clear();
+
+
+  m_sceneBoundsPoly = new Sigma::Polygon(m_sceneBounds);
+}
+void game::GameScene::Unload() {
+  Scene::Unload();
+  
+  for (auto spawner: m_enemySpawners) {
+    GET_FACTORY->DestroyObject(spawner);
+  }
+}
