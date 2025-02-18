@@ -52,22 +52,28 @@ void game::GameScene::Load() {
     auto s = GET_FACTORY->CreateObject<EnemySpawner>(spawners["name"], spawners["activationRange"]);
     s->transform.position = {spawners["pos"]["x"], spawners["pos"]["y"], -spawners["pos"]["y"].get<int>()};
 
-    for (auto &enemies: spawners["enemies"])
-    {
+    for (auto &enemies: spawners["enemies"]) {
       EnemySpawnData data{};
       data.id = enemies["id"];
       data.position = {enemies["pos"]["x"], enemies["pos"]["y"]};
       data.entranceId = enemies["entranceId"];
       s->AddEnemiesData(data);
     }
-    
+
     m_enemySpawners.push_back(s);
   }
 
   std::cout << "[GameScene] " << GetName() << " JSON file loaded\n";
 
   J.clear();
-  
+
 
   m_sceneBoundsPoly = new Sigma::Polygon(m_sceneBounds);
+}
+void game::GameScene::Unload() {
+  Scene::Unload();
+  
+  for (auto spawner: m_enemySpawners) {
+    GET_FACTORY->DestroyObject(spawner);
+  }
 }

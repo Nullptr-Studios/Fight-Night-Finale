@@ -26,6 +26,8 @@ public:
   void Start() override;
   void Update(double deltaTime) override;
 
+  void Destroy() override;
+
   void AddEnemiesData(EnemySpawnData &enemies) { m_spawnData.emplace_back(enemies); }
 
 private:
@@ -37,6 +39,8 @@ private:
   std::vector<EnemySpawnData> m_spawnData;
 
   std::list<Object*> m_players;
+
+  std::list<Object*> m_enemies;
 
   game::PrototypeScene* m_scene; 
 };

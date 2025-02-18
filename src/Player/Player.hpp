@@ -7,11 +7,15 @@
  */
 
 #pragma once
+#include <UI/DeadMenu.hpp>
 #include <pch.hpp>
+
 #include "Objects/Character.hpp"
 #include "PlayerController.hpp"
 
 namespace game {
+class MainMenu;
+class HealthBar;
 
 class Player : public Sigma::Character {
 public:
@@ -29,7 +33,9 @@ public:
   void Update(double delta) override;
   void Destroy() override;
 
-  void OnDamage(const Sigma::Damage::DamageEvent &e) override;;
+  void OnDamage(const Sigma::Damage::DamageEvent &e) override;
+
+  game::HealthBar *m_healthBar;
 
 private:
   /// @brief Holds the Player Controller Component to handle input
@@ -38,7 +44,9 @@ private:
   int m_controllerId = -1;
 
   Sigma::Actor* m_debugPlayerCol = nullptr;
+  MainMenu *m_deadScene = nullptr;
 
+  bool doFuckingOnce = true;
   
 };
 

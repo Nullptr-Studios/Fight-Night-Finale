@@ -7,12 +7,15 @@
 #include <aecore/AEEngine.h>
 #include "GameManager.hpp"
 #include "PrototypeScene.hpp"
+#include "UI/DeadMenu.hpp"
+#include "UI/MainMenu.hpp"
 
 int main() {
   std::unique_ptr<Sigma::GameManager> gameManager = std::make_unique<Sigma::GameManager>("Game", 800, 600);
-  auto scene = new game::PrototypeScene("Main", 0, "assets/prototype-scene-2/ProtoScene2.json");
+  auto scene = new game::MainMenu("Main Menu", -1);
   gameManager->LoadScene(scene);
 
+  AEGfxSetFullscreen(true);
   while (AESysWindowExists()) {
     gameManager->Run();
   }

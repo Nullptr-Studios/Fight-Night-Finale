@@ -20,7 +20,7 @@ void Enemy::Init() {
   transform.relativeScale = glm::vec2(1);
 
   // Setup Animation
-  auto anim = GET_ANIMATION->LoadTextureAtlas("assets/EnemyPrototype.json");
+  auto anim = GET_ANIMATION->LoadTextureAtlas("assets/characters/enemy/anim-data.json");
   m_animComp->SetTextureAtlas(anim);
   m_animComp->SetCurrentAnim("Idle");
   SetTexture(anim->textureStr.c_str());
@@ -37,7 +37,7 @@ void Enemy::Start() {
   Character::Start();
   m_state = FOLLOW;
   m_player = GET_FACTORY->FindObject<Player>("Player");
-  m_debugCol = GET_FACTORY->CreateObject<Sigma::Actor>("Debug Attack");
+  // m_debugCol = GET_FACTORY->CreateObject<Sigma::Actor>("Debug Attack");
 }
 
 bool Enemy::OnCollision(Sigma::Collision::CollisionEvent& e) {
@@ -46,12 +46,20 @@ bool Enemy::OnCollision(Sigma::Collision::CollisionEvent& e) {
 }
 
 void Enemy::OnDamage(const Sigma::Damage::DamageEvent& e) {
+  if (e.GetOther()->GetName().contains("Enemy"))
+    return;
+  
   Character::OnDamage(e);
+
+  
 
   if (!GetAlive()) m_state = DEAD;
 }
 
-void Enemy::OnFullComboPerformed() { m_state = RANDOM_SPARCE; }
+void Enemy::OnFullComboPerformed() {
+  // disabled this for prototype since dario did not make animations for the enemies combo -x
+  // m_state = RANDOM_SPARCE;
+}
 
 void Enemy::Enable(std::array<Player *, 2> players) {
   if (!players[0]) {
@@ -84,7 +92,7 @@ void Enemy::Update(double delta) {
   Character::Update(delta);
   m_distance = m_player->transform.GetDepthPosition() - transform.GetDepthPosition();
 
-  m_collider->DebugDraw(m_debugCol, this, "assets/core/debug_blue.png");
+  // m_collider->DebugDraw(m_debugCol, this, "assets/core/debug_blue.png");
 
   switch (m_state) {
     case IDLE: break;
@@ -96,6 +104,14 @@ void Enemy::Update(double delta) {
     case ATTACK: OnAttack(); break;
     case DEAD: OnDead(); break;
   }
+
+  if (m_isIdle) {
+    if (velocity.x != 0 || velocity.y != 0) {
+      m_animComp->SetCurrentAnim("Walk");
+    } else {
+      m_animComp->SetCurrentAnim("Idle");
+    }
+  }
 }
 
 void Enemy::OnWait(double delta) {
@@ -104,7 +120,7 @@ void Enemy::OnWait(double delta) {
   if (m_timer >= m_timerSeconds) {
     m_state = m_timerNextState;
 
-    m_timerNextState = IDLE;
+    m_timerNextState = FOLLOW;
     m_timerSeconds = 0.0f;
     m_timer = 0.0f;
   }
@@ -147,10 +163,10 @@ void Enemy::OnSeparate() {
     else m_separateDirection.x += m_distanceToAttack - static_cast<float>(distrib_x(gen));
     m_separateDirection.y = (m_player->transform.GetDepthPosition().y + static_cast<float>(distrib_y(gen)));
 
-    // Avoid SEPARATE state if point is out of bounds -x
+    // Recalculate if point is out of bounds -x
     if (!m_sceneBoundsPoly->IsPointInside(m_separateDirection)) {
+      m_separateDirection = {0.0f, 0.0f};
       m_state = FOLLOW;
-      return;
     }
   }
 
@@ -215,7 +231,10 @@ void Enemy::OnAttack() {
   BasicAttack();
 }
 
-void Enemy::OnDead() { }
+void Enemy::OnDead() {
+  // GET_FACTORY->DestroyObject(m_debugCol->GetId());
+  GET_FACTORY->DestroyObject(GetId());
+}
 
 void Enemy::Destroy() { Character::Destroy(); }
 

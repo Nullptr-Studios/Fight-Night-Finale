@@ -2,8 +2,8 @@
 // Created by Dario on 15/02/2025.
 //
 
+#include "core.hpp"
 #include "EnemySpawner.hpp"
-
 #include "Enemies/Enemy.hpp"
 #include "GameManager.hpp"
 #include "PrototypeScene.hpp"
@@ -25,19 +25,26 @@ void game::EnemySpawner::Update(double deltaTime) {
 
   if (!m_enabled)
     return;
-  
+
   for (auto player: m_scene->m_players) {
     float distance = glm::distance(player->transform.position, transform.position);
-    std::cout << "Player: " << player->GetName() << " distance: " << distance <<"\n";
     if (distance < m_activationDistance) {
       for (auto &enemy: m_spawnData) {
-        auto e = GET_FACTORY->CreateObject<game::Enemy>("Enemy", "assets/characters/dummy.json");
+        auto e = GET_FACTORY->CreateObject<game::Enemy>("Enemy", "assets/characters/enemy/behaviour.json");
         e->transform.position.x = enemy.position.x;
         e->transform.position.y = enemy.position.y;
         e->transform.scale = {32.0f, 64.0f};
+        m_enemies.push_back(e);
       }
       m_enabled = false;
       return;
     }
+  }
+}
+void game::EnemySpawner::Destroy() {
+  Object::Destroy();
+
+  for (auto enemy: m_enemies) {
+    GET_FACTORY->DestroyObject(enemy);
   }
 }

@@ -38,6 +38,8 @@ public:
 
   void Load() override;
 
+  void Unload() override;
+
   /**
    * @brief returns the current scene bounds
    * @return Polygon*
