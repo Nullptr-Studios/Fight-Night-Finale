@@ -14,6 +14,7 @@
 #include "PlayerController.hpp"
 
 namespace game {
+class MainMenu;
 class HealthBar;
 
 class Player : public Sigma::Character {
@@ -43,7 +44,7 @@ private:
   int m_controllerId = -1;
 
   Sigma::Actor* m_debugPlayerCol = nullptr;
-  DeadMenu *m_deadScene = nullptr;
+  MainMenu *m_deadScene = nullptr;
   
 };
 

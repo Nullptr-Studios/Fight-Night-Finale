@@ -10,6 +10,7 @@
 #include "Audio/AudioEngine.hpp"
 
 #include "UI/HealthBar.hpp"
+#include "UI/MainMenu.hpp"
 #include "core.hpp"
 
 namespace game {
@@ -18,7 +19,7 @@ AEGfxFont* font;
 void Player::Init() {
   Character::Init();
 
-  m_deadScene = new DeadMenu("DeadMenu", 1);
+  m_deadScene = new MainMenu("DeadMenu", 0);
   
   transform.relativeScale = glm::vec2(1);
 
@@ -74,7 +75,7 @@ void Player::Destroy() {
 
 void Player::OnDamage(const Sigma::Damage::DamageEvent &e)
 {
-  Damageable::OnDamage(e);
+  Character::OnDamage(e);
 
   std::cout << "Damage with " << e.GetOther()->GetName() << "\n";
   std::cout << GetHealth() << "\n";

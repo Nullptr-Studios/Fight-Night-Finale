@@ -25,7 +25,7 @@ void game::EnemySpawner::Update(double deltaTime) {
 
   if (!m_enabled)
     return;
-  
+
   for (auto player: m_scene->m_players) {
     float distance = glm::distance(player->transform.position, transform.position);
     if (distance < m_activationDistance) {
@@ -34,9 +34,17 @@ void game::EnemySpawner::Update(double deltaTime) {
         e->transform.position.x = enemy.position.x;
         e->transform.position.y = enemy.position.y;
         e->transform.scale = {32.0f, 64.0f};
+        m_enemies.push_back(e);
       }
       m_enabled = false;
       return;
     }
+  }
+}
+void game::EnemySpawner::Destroy() {
+  Object::Destroy();
+
+  for (auto enemy: m_enemies) {
+    GET_FACTORY->DestroyObject(enemy);
   }
 }

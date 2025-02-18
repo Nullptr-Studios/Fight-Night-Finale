@@ -19,7 +19,7 @@ void DeadMenu::Load() {
   menu->SetTexture("assets/UI/Died.png");
 
   auto quitButton = GET_FACTORY->CreateObject<Sigma::SceneButton>("Quit Button", nullptr,GetID());
-  quitButton->transform.scale = {300, 100};
+  quitButton->m_screenSpaceTransform.scale = {300, 100};
   quitButton->transform.position.y -= 200;
   quitButton->SetTexture("assets/UI/ExitButton.png");
 }
