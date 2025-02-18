@@ -22,14 +22,14 @@ void PunchingBag::Init() {
   m_collider->box.Set(10,10,40,40,10, transform.offset);
   m_collider->SetColliderFlags(Sigma::Collision::ColliderFlag::ENEMY);
 
-  m_debugCol = GET_FACTORY->CreateObject<Sigma::Actor>("Debug Col Punching Bag");
+  // m_debugCol = GET_FACTORY->CreateObject<Sigma::Actor>("Debug Col Punching Bag");
 
 }
 void PunchingBag::Update(double delta) {
   Damageable::Update(delta);
 
   m_animComp->Update(delta);
-  m_collider->DebugDraw(m_debugCol, this, "assets/core/debug_blue.png");
+  // m_collider->DebugDraw(m_debugCol, this, "assets/core/debug_blue.png");
 }
 void PunchingBag::OnDamage(const Sigma::Damage::DamageEvent &e) {
   Damageable::OnDamage(e);

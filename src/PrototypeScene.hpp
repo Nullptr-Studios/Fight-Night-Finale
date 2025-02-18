@@ -13,9 +13,13 @@
 #include "GameScene.hpp"
 
 namespace Sigma {
+class Actor;
 class Object;
 }
 namespace game {
+class Player;
+class PunchingBag;
+class HealthBar;
 
 class PrototypeScene : public game::GameScene {
 public:
@@ -24,8 +28,20 @@ public:
   void Load() override;
 
   void Update(double delta) override;
+  void Free() override;
 
   std::list<Sigma::Object *> m_players;
+
+private:
+  Sigma::Actor *floor;
+  Sigma::Actor *walls;
+  HealthBar *healthBar;
+  PunchingBag *s;
+  PunchingBag *s2;
+  PunchingBag *s3;
+  HealthBar *healthBar2;
+  Player *p;
+  Player *p2;
 };
 
 } // namespace game

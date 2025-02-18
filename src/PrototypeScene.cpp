@@ -25,33 +25,50 @@ void PrototypeScene::Load() {
   GET_CAMERA->GetCurrentCamera()->size = 2;
 #endif
 
-  auto *floor = GET_FACTORY->CreateObject<Sigma::Actor>();
+
+  floor = GET_FACTORY->CreateObject<Sigma::Actor>();
   floor->SetTexture("assets/prototype-scene-2/t-floor.png");
   floor->transform.scale = {1061.0f, 346.0f};
   floor->transform.position.z = -5000;
 
-  auto *walls = GET_FACTORY->CreateObject<Sigma::Actor>();
+
+  walls = GET_FACTORY->CreateObject<Sigma::Actor>();
   walls->SetTexture("assets/prototype-scene-2/t-walls.png");
   walls->transform.scale = {1061.0f, 346.0f};
   walls->transform.position.z = -5000;
 
-  auto healthBar = GET_FACTORY->CreateObject<game::HealthBar>("Progress");
-  healthBar->m_screenSpaceTransform.scale = {350, 10};
-  healthBar->m_screenSpaceTransform.position = {0,550,0};
+
+  healthBar = GET_FACTORY->CreateObject<game::HealthBar>("Progress");
+  healthBar->m_screenSpaceTransform.scale = {300, 20};
+  healthBar->m_screenSpaceTransform.position = {0,500,0};
   healthBar->m_progress = 1;
   healthBar->SetTexture("assets/core/debug_red.png");
-  
-  auto p = GET_FACTORY->CreateObject<game::Player>("Player", -1, "assets/characters/player/behaviour.json");
+
+
+  p = GET_FACTORY->CreateObject<game::Player>("Player", -1, "assets/characters/player/behaviour.json");
   p->transform.position.x = m_playerStartPos.x;
   p->transform.position.y = m_playerStartPos.y;
   p->transform.position.z = 0.0f;
   p->m_healthBar = healthBar;
 
 
-  auto s = GET_FACTORY->CreateObject<game::PunchingBag>("PunchingBag");
+
+  s = GET_FACTORY->CreateObject<game::PunchingBag>("PunchingBag");
   s->transform.position.x = -278;
   s->transform.position.y = -10;
   s->transform.position.z = 10;
+
+
+  s2 = GET_FACTORY->CreateObject<game::PunchingBag>("PunchingBag");
+  s2->transform.position.x = 425;
+  s2->transform.position.y = -93;
+  s2->transform.position.z = 93;
+
+
+  s3 = GET_FACTORY->CreateObject<game::PunchingBag>("PunchingBag");
+  s3->transform.position.x = 480;
+  s3->transform.position.y = -155;
+  s3->transform.position.z = 155;
 
   m_players.push_back(p);
 
@@ -65,23 +82,37 @@ void PrototypeScene::Update(double delta) {
   // If pressed key 2 create 2nd player
   if (AEInputGamepadButtonTriggered(0, 0x0010)) {
     // Check to avoid having infinite player 2 objects -x
-    if (m_players.size() >= 2) return;
+    if (m_players.size() >= 2)
+      return;
 
-    auto healthBar2 = GET_FACTORY->CreateObject<game::HealthBar>("Progress");
-    healthBar2->m_screenSpaceTransform.scale = {350, 10};
+
+    healthBar2 = GET_FACTORY->CreateObject<game::HealthBar>("Progress");
+    healthBar2->m_screenSpaceTransform.scale = {300, 20};
     healthBar2->m_screenSpaceTransform.position = {0, 530, 0};
     healthBar2->m_progress = 1;
-    healthBar2->SetTexture("assets/core/debug_red.png");
-    auto p2 = GET_FACTORY->CreateObject<game::Player>("Player2", 0, "assets/characters/player/behaviour.json");
+    healthBar2->SetTexture("assets/core/debug_green.png");
+
+    p2 = GET_FACTORY->CreateObject<game::Player>("Player2", 0, "assets/characters/player/behaviour.json");
     p2->transform.position.x = m_playerStartPos.x;
     p2->transform.position.y = m_playerStartPos.y;
     p2->transform.position.z = 0.0f;
     p2->m_healthBar = healthBar2;
-    dynamic_cast<Sigma::CameraFollow*>(GET_CAMERA->GetCurrentCamera())->m_targetP2 = p2;
+    dynamic_cast<Sigma::CameraFollow *>(GET_CAMERA->GetCurrentCamera())->m_targetP2 = p2;
     m_players.push_back(p2);
   }
-
+}
+void PrototypeScene::Free() {
+  GameScene::Free();
+  GET_FACTORY->DestroyObject(floor->GetId());
+  GET_FACTORY->DestroyObject(walls->GetId());
+  GET_FACTORY->DestroyObject(healthBar->GetId());
+  GET_FACTORY->DestroyObject(s->GetId());
+  GET_FACTORY->DestroyObject(s2->GetId());
+  GET_FACTORY->DestroyObject(s3->GetId());
+  GET_FACTORY->DestroyObject(healthBar2->GetId());
+  GET_FACTORY->DestroyObject(p->GetId());
+  GET_FACTORY->DestroyObject(p2->GetId());
 }
 
-  
-}
+
+} // namespace game

@@ -7,7 +7,9 @@
  */
 
 #pragma once
+#include <UI/DeadMenu.hpp>
 #include <pch.hpp>
+
 #include "Objects/Character.hpp"
 #include "PlayerController.hpp"
 
@@ -41,7 +43,7 @@ private:
   int m_controllerId = -1;
 
   Sigma::Actor* m_debugPlayerCol = nullptr;
-
+  DeadMenu *m_deadScene = nullptr;
   
 };
 

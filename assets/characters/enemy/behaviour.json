@@ -9,7 +9,7 @@
   "basicCombo" : [
     {
       "type" : "dmg",
-      "damage" : 1.0,
+      "damage" : 8.0,
       "colliderOffset" : {
         "x" : 28,
         "y" : 55
@@ -26,7 +26,7 @@
   "basicAirCombo" : [
     {
       "type" : "dmg",
-      "damage" : 1.0,
+      "damage" : 8.0,
       "colliderOffset" : {
         "x" : 28,
         "y" : 55

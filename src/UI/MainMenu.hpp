@@ -6,7 +6,7 @@
  * @brief Main Menu
  */
 #pragma once
-#include "../../inc/sigma/engine/src/Scene.hpp"
+#include "Scene.hpp"
 namespace Sigma {
 class SceneButton;
 }

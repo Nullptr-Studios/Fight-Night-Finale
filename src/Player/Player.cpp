@@ -1,8 +1,11 @@
 #include "Player.hpp"
 
+#include <UI/DeadMenu.hpp>
+
 #include "Collision/Collider.hpp"
 #include "Collision/CollisionEvent.hpp"
 #include "Factory.hpp"
+#include "GameManager.hpp"
 
 #include "Audio/AudioEngine.hpp"
 
@@ -14,6 +17,8 @@ namespace game {
 AEGfxFont* font;
 void Player::Init() {
   Character::Init();
+
+  m_deadScene = new DeadMenu("DeadMenu", 1);
   
   transform.relativeScale = glm::vec2(1);
 
@@ -70,10 +75,14 @@ void Player::Destroy() {
 void Player::OnDamage(const Sigma::Damage::DamageEvent &e)
 {
   Damageable::OnDamage(e);
+
   std::cout << "Damage with " << e.GetOther()->GetName() << "\n";
   std::cout << GetHealth() << "\n";
-  if (m_isAlive) {
-    m_healthBar->m_currentHealth = GetHealth();
+  m_healthBar->m_currentHealth = GetHealth();
+
+  if (!m_isAlive) {
+    GET_MANAGER->LoadScene(m_deadScene);
+    GET_MANAGER->UnloadScene(0u);
   }
 }
 

@@ -5,7 +5,7 @@
 	"frame": {"x":43,"y":164,"w":46,"h":82},
 	"rotated": false,
 	"trimmed": true,
-	"fps": 45,
+	"fps": 35,
 	"spriteSourceSize": {"x":1,"y":0,"w":46,"h":82},
 	"sourceSize": {"w":47,"h":82},
 	"pivot": {"x":0.5,"y":1}
