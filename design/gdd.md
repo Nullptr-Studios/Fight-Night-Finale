@@ -8,7 +8,13 @@ Fight Night Finale describes itself as a parody take on the retro-style beat 'em
 
 Our game is inspired by popular classics in the beat 'em up genre; such as the renowned Streets of Rage franchise, the amazing Double Dragon Gaiden and lastly, the nostalgic Teenage Mutant Ninja Turtles: Shredder's Revenge.
 
-[ approach to parody ]
+To that extent, we have taken several classic mechanics from these games and adapted them into our own. These include, but are not limited to; the combo system, special attacks and even just the health pickups from boxes.
+
+The special attacks in particular, are those that in exchange for offering a more unique and powerful attack; take a chunk of the player's health to activate, with the only way of regaining that health being performing a combo without taking damage or picking up a heal pickup item.
+
+Additionally, utilizing what we have learned from these games, we have been carefully adjusting the feel of both our combat and movement system to match the level of polish felt in some of these beloved classic games.
+
+In short, we have been hard at work learning from our inspirations, implementing ideas we find great and adjusting them according to the level of polish felt within the 3 aforementioned classic beat 'em up games.
 
 ## Mechanics
 
@@ -18,7 +24,7 @@ The main focus of the game, however,  is the combat itself, where players and en
 
 Each move on the attack has a defined length and the player is supposed to learn how to time their moves properly in order to maximize their performance and damage. Each time a player presses the attack button, the character performs the next hit of the queue. However, when the player doesn't hit anyone or doesn't press the attack button within a certain amount of time; the attack is reset and the player would need to start the move set from the beginning again.
 
-To complement this combo system, as mentioned earlier, both the player and certain enemies (such as bosses) will include within them several options in their repertoire for attacks. These include basic attacks and specials that will change when the player is grounded or on air.
+To complement this combo system, as mentioned earlier, both the player and certain enemies (such as bosses) will include within them several options in their repertoire for attacks. These include basic attacks and specials that will change when the player is grounded or on air. It must also be stated that special attacks reduce your health upon usage and while that health is recovered by performing a combo without receiving damage --> staying idle or taking damage results in a net loss.
 
 The game features a wide array of different enemies and bosses, each with their unique attack patterns and methods of attack; be it ranged or melee. In total, there will be 3 bosses within the game, each with their own quirks.
 
