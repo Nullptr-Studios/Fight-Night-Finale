@@ -10,11 +10,7 @@ Our game is inspired by popular classics in the beat 'em up genre; such as the r
 
 To that extent, we have taken several classic mechanics from these games and adapted them into our own. These include, but are not limited to; the combo system, special attacks and even just the health pickups from boxes.
 
-The special attacks in particular, are those that in exchange for offering a more unique and powerful attack; take a chunk of the player's health to activate, with the only way of regaining that health being performing a combo without taking damage or picking up a heal pickup item.
-
 Additionally, utilizing what we have learned from these games, we have been carefully adjusting the feel of both our combat and movement system to match the level of polish felt in some of these beloved classic games.
-
-In short, we have been hard at work learning from our inspirations, implementing ideas we find great and adjusting them according to the level of polish felt within the 3 aforementioned classic beat 'em up games.
 
 ## Mechanics
 
