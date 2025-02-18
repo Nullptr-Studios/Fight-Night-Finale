@@ -58,7 +58,7 @@ void Player::Update(double delta) {
     m_controllerComponent->Update();
   
   if (GetIsIdle())
-    if (velocity.x != 0 || velocity.y != 0) {
+    if (velocity.x > .1f || velocity.x < -.1f || velocity.y > .1f || velocity.y < -.1f) {
     m_animComp->SetCurrentAnim("Walk");
     }else {
     m_animComp->SetCurrentAnim("Idle");
@@ -70,7 +70,7 @@ void Player::Update(double delta) {
 
 void Player::Destroy() {
   Character::Destroy();
-  AEGfxFontFree(font);
+  //AEGfxFontFree(font);
 }
 
 void Player::OnDamage(const Sigma::Damage::DamageEvent &e)
@@ -81,9 +81,10 @@ void Player::OnDamage(const Sigma::Damage::DamageEvent &e)
   std::cout << GetHealth() << "\n";
   m_healthBar->m_currentHealth = GetHealth();
 
-  if (!m_isAlive) {
+  if (!m_isAlive && doFuckingOnce) {
     GET_MANAGER->LoadScene(m_deadScene);
     GET_MANAGER->UnloadScene(0u);
+    doFuckingOnce = false;
   }
 }
 

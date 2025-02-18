@@ -45,6 +45,8 @@ private:
 
   Sigma::Actor* m_debugPlayerCol = nullptr;
   MainMenu *m_deadScene = nullptr;
+
+  bool doFuckingOnce = true;
   
 };
 

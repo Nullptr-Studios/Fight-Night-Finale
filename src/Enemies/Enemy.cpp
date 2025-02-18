@@ -46,7 +46,12 @@ bool Enemy::OnCollision(Sigma::Collision::CollisionEvent& e) {
 }
 
 void Enemy::OnDamage(const Sigma::Damage::DamageEvent& e) {
+  if (e.GetOther()->GetName().contains("Enemy"))
+    return;
+  
   Character::OnDamage(e);
+
+  
 
   if (!GetAlive()) m_state = DEAD;
 }

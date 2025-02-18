@@ -40,7 +40,7 @@ void PrototypeScene::Load() {
 
   healthBar = GET_FACTORY->CreateObject<game::HealthBar>("Progress");
   healthBar->m_screenSpaceTransform.scale = {300, 20};
-  healthBar->m_screenSpaceTransform.position = {0,500,0};
+  healthBar->m_screenSpaceTransform.position = {0,450,0};
   healthBar->m_progress = 1;
   healthBar->SetTexture("assets/core/debug_red.png");
 
@@ -88,7 +88,7 @@ void PrototypeScene::Update(double delta) {
 
     healthBar2 = GET_FACTORY->CreateObject<game::HealthBar>("Progress");
     healthBar2->m_screenSpaceTransform.scale = {300, 20};
-    healthBar2->m_screenSpaceTransform.position = {0, 530, 0};
+    healthBar2->m_screenSpaceTransform.position = {0, 500, 0};
     healthBar2->m_progress = 1;
     healthBar2->SetTexture("assets/core/debug_green.png");
 
