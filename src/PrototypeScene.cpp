@@ -103,15 +103,15 @@ void PrototypeScene::Update(double delta) {
 }
 void PrototypeScene::Free() {
   GameScene::Free();
-  GET_FACTORY->DestroyObject(floor->GetId());
-  GET_FACTORY->DestroyObject(walls->GetId());
-  GET_FACTORY->DestroyObject(healthBar->GetId());
-  GET_FACTORY->DestroyObject(s->GetId());
-  GET_FACTORY->DestroyObject(s2->GetId());
-  GET_FACTORY->DestroyObject(s3->GetId());
-  GET_FACTORY->DestroyObject(healthBar2->GetId());
-  GET_FACTORY->DestroyObject(p->GetId());
-  GET_FACTORY->DestroyObject(p2->GetId());
+  GET_FACTORY->DestroyObject(floor);
+  GET_FACTORY->DestroyObject(walls);
+  GET_FACTORY->DestroyObject(healthBar);
+  GET_FACTORY->DestroyObject(s);
+  GET_FACTORY->DestroyObject(s2);
+  GET_FACTORY->DestroyObject(s3);
+  GET_FACTORY->DestroyObject(healthBar2);
+  GET_FACTORY->DestroyObject(p);
+  GET_FACTORY->DestroyObject(p2);
 }
 
 
