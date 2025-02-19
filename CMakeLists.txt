@@ -3,6 +3,12 @@ project(sigma LANGUAGES CXX)
 set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
+set(CMAKE_BUILD_TYPE Debug)
+
+
+add_link_options(/LTCG)
+
+
 # Add engine cmake projects
 add_subdirectory(inc/sigma)
 
@@ -17,6 +23,24 @@ file(GLOB_RECURSE SRC CONFIGURE_DEPENDS
 )
 
 add_executable(game src/main.cpp ${SRC})
+
+target_compile_definitions(game PRIVATE
+        "_CRT_SECURE_NO_WARNINGS"
+        "GLFW_INCLUDE_NONE"
+
+        PUBLIC
+        $<$<CONFIG:Debug>:OE_DEBUG>
+        $<$<CONFIG:Release>:OE_RELEASE>
+
+        $<$<CONFIG:RelWithDebInfo>:OE_DEBUG>
+        $<$<CONFIG:MinSizeRel>:OE_RELEASE>
+)
+
+if (CMAKE_BUILD_TYPE STREQUAL "Release")
+   add_compile_options() 
+else()
+    
+endif ()
 
 target_include_directories(game PUBLIC src)
 
