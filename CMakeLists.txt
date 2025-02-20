@@ -22,6 +22,7 @@ target_include_directories(game PUBLIC src)
 
 # Adds sigma engine static library
 target_link_libraries(game PRIVATE sigma)
+target_include_directories(game PRIVATE src)
 
 # Copy res folder to build directory
 add_custom_command(TARGET game POST_BUILD

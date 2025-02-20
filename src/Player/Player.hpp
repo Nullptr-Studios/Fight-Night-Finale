@@ -34,7 +34,7 @@ public:
   void Destroy() override;
 
   void OnDamage(const Sigma::Damage::DamageEvent &e) override;
-
+  void OnHeal(float health) { SetHealth(m_health + health); }
   game::HealthBar *m_healthBar;
 
 private:
