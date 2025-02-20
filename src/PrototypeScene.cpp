@@ -25,17 +25,20 @@ void PrototypeScene::Load() {
   GET_CAMERA->GetCurrentCamera()->size = 2;
 #endif
 
+  AddChild(GET_CAMERA->GetCurrentCamera());
+
 
   floor = GET_FACTORY->CreateObject<Sigma::Actor>();
   floor->SetTexture("assets/prototype-scene-2/t-floor.png");
   floor->transform.scale = {1061.0f, 346.0f};
   floor->transform.position.z = -5000;
-
+  AddChild(floor);
 
   walls = GET_FACTORY->CreateObject<Sigma::Actor>();
   walls->SetTexture("assets/prototype-scene-2/t-walls.png");
   walls->transform.scale = {1061.0f, 346.0f};
   walls->transform.position.z = -5000;
+  AddChild(walls);
 
 
   healthBar = GET_FACTORY->CreateObject<game::HealthBar>("Progress");
@@ -43,6 +46,7 @@ void PrototypeScene::Load() {
   healthBar->m_screenSpaceTransform.position = {0,450,0};
   healthBar->m_progress = 1;
   healthBar->SetTexture("assets/core/debug_red.png");
+  AddChild(healthBar);
 
 
   p = GET_FACTORY->CreateObject<game::Player>("Player", -1, "assets/characters/player/behaviour.json");
@@ -50,27 +54,30 @@ void PrototypeScene::Load() {
   p->transform.position.y = m_playerStartPos.y;
   p->transform.position.z = 0.0f;
   p->m_healthBar = healthBar;
-
+  AddChild(p);
 
 
   s = GET_FACTORY->CreateObject<game::PunchingBag>("PunchingBag");
   s->transform.position.x = -278;
   s->transform.position.y = -10;
   s->transform.position.z = 10;
-
+  AddChild(s);
 
   s2 = GET_FACTORY->CreateObject<game::PunchingBag>("PunchingBag");
   s2->transform.position.x = 425;
   s2->transform.position.y = -93;
   s2->transform.position.z = 93;
+  AddChild(s2);
 
 
   s3 = GET_FACTORY->CreateObject<game::PunchingBag>("PunchingBag");
   s3->transform.position.x = 480;
   s3->transform.position.y = -155;
   s3->transform.position.z = 155;
+  AddChild(s3);
 
   m_players.push_back(p);
+  AddChild(p);
 
 #ifndef DEBUG_CAMERA
   dynamic_cast<Sigma::CameraFollow*>(GET_CAMERA->GetCurrentCamera())->m_targetP1 = p;
@@ -99,19 +106,13 @@ void PrototypeScene::Update(double delta) {
     p2->m_healthBar = healthBar2;
     dynamic_cast<Sigma::CameraFollow *>(GET_CAMERA->GetCurrentCamera())->m_targetP2 = p2;
     m_players.push_back(p2);
+    AddChild(p2);
+    AddChild(healthBar2);
   }
 }
 void PrototypeScene::Free() {
   GameScene::Free();
-  GET_FACTORY->DestroyObject(floor);
-  GET_FACTORY->DestroyObject(walls);
-  GET_FACTORY->DestroyObject(healthBar);
-  GET_FACTORY->DestroyObject(s);
-  GET_FACTORY->DestroyObject(s2);
-  GET_FACTORY->DestroyObject(s3);
-  GET_FACTORY->DestroyObject(healthBar2);
-  GET_FACTORY->DestroyObject(p);
-  GET_FACTORY->DestroyObject(p2);
+
 }
 
 
