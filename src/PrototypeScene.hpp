@@ -20,6 +20,7 @@ namespace game {
 class Player;
 class PunchingBag;
 class HealthBar;
+class Box;
 
 class PrototypeScene : public game::GameScene {
 public:
@@ -44,6 +45,7 @@ private:
   HealthBar *healthBar2 = nullptr;
   Player *p;
   Player *p2 = nullptr;
+  Box * b1;
 };
 
 } // namespace game
