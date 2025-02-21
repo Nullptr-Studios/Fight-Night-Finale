@@ -23,28 +23,28 @@ void game::EnemySpawner::Start()
 void game::EnemySpawner::Update(double deltaTime) {
   Object::Update(deltaTime);
 
-  if (!m_enabled)
-    return;
-
-  for (auto player: m_scene->m_players) {
-    float distance = glm::distance(player->transform.position, transform.position);
-    if (distance < m_activationDistance) {
-      for (auto &enemy: m_spawnData) {
-        auto e = GET_FACTORY->CreateObject<game::Enemy>("Enemy", "assets/characters/enemy/behaviour.json");
-        e->transform.position.x = enemy.position.x;
-        e->transform.position.y = enemy.position.y;
-        e->transform.scale = {32.0f, 64.0f};
-        m_enemies.push_back(e);
-      }
-      m_enabled = false;
-      return;
-    }
-  }
+  // if (!m_enabled)
+  //   return;
+  //
+  // for (auto player: m_scene->m_players) {
+  //   float distance = glm::distance(player->transform.position, transform.position);
+  //   if (distance < m_activationDistance) {
+  //     for (auto &enemy: m_spawnData) {
+  //       auto e = GET_FACTORY->CreateObject<game::Enemy>("Enemy", "assets/characters/enemy/behaviour.json");
+  //       e->transform.position.x = enemy.position.x;
+  //       e->transform.position.y = enemy.position.y;
+  //       e->transform.scale = {32.0f, 64.0f};
+  //       m_enemies.push_back(e);
+  //     }
+  //     m_enabled = false;
+  //     return;
+  //   }
+  // }
 }
 void game::EnemySpawner::Destroy() {
   Object::Destroy();
 
-  for (auto enemy: m_enemies) {
-    GET_FACTORY->DestroyObject(enemy);
-  }
+  // for (auto enemy: m_enemies) {
+  //   GET_FACTORY->DestroyObject(enemy);
+  // }
 }

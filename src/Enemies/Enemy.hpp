@@ -6,15 +6,17 @@
  * @brief Contains definition of the base enemy class
  */
 #pragma once
+#include <utility>
+
 #include "Objects/Character.hpp"
 
 namespace game {
 
 class Enemy : public Sigma::Character {
 protected:
-  Enemy(const Sigma::id_t id, std::string& jsonPath) : Character(id, jsonPath) {}
 
 public:
+  explicit Enemy(const Sigma::id_t id, const char* jsonPath) : Character(id, jsonPath) {}
   void Init() override;
   void Start() override;
   void Update(double delta) override;

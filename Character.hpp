@@ -44,7 +44,6 @@ void Character::Init() {
   m_attackCollider->enabled = false;*/
 }
 
-
 void Character::Start() {
   Damageable::Start();
 }
