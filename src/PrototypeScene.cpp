@@ -77,7 +77,6 @@ void PrototypeScene::Load() {
   AddChild(s3);
 
   m_players.push_back(p);
-  AddChild(p);
 
 #ifndef DEBUG_CAMERA
   dynamic_cast<Sigma::CameraFollow*>(GET_CAMERA->GetCurrentCamera())->m_targetP1 = p;
