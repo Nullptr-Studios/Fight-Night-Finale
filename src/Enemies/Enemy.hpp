@@ -6,8 +6,7 @@
  * @brief Contains definition of the base enemy class
  */
 #pragma once
-#include <utility>
-
+#include "Player/Player.hpp"
 #include "Objects/Character.hpp"
 
 namespace game {
@@ -30,10 +29,11 @@ public:
   static constexpr char STATE_IDLE = 0;       ///< @constexpr STATE_IDLE        The enemy does nothing
   static constexpr char STATE_FOLLOW = 1;     ///< @constexpr STATE_FOLLOW      The enemy follows the player
   static constexpr char STATE_WAIT = 2;       ///< @constexpr STATE_WAIT        The enemy waits for a set amount of time
-  static constexpr char STATE_DISPERSE = 3;   ///< @constexpr STATE_DISOERSE    The enemy moves away from the player
-  static constexpr char STATE_AVOID = 4;      ///< @constexpr STATE_AVOID       The enemy moves away from other enemies
-  static constexpr char STATE_REPOSITION = 5; ///< @constexpr STATE_REPOSITION  The enemy repositions after a combo
-  static constexpr char STATE_ATTACK = 6;     ///< @constexpr STATE_ATTACK      The enemy attacks the player
+  static constexpr char STATE_DEAD = 3;       ///< @constexpr STATE_DEAD        The enemy has health of 0 or less and should be destroyed
+  static constexpr char STATE_DISPERSE = 4;   ///< @constexpr STATE_DISOERSE    The enemy moves away from the player
+  static constexpr char STATE_AVOID = 5;      ///< @constexpr STATE_AVOID       The enemy moves away from other enemies
+  static constexpr char STATE_REPOSITION = 6; ///< @constexpr STATE_REPOSITION  The enemy repositions after a combo
+  static constexpr char STATE_ATTACK = 7;     ///< @constexpr STATE_ATTACK      The enemy attacks the player
 
   #pragma endregion
 
@@ -62,12 +62,16 @@ public:
    */
   void WaitSeconds(float time, char nextState);
 
+protected:
+  Player* m_player = nullptr;
+
 private:
   std::map<char, std::function<void()>> m_states = {};
   char m_currentState = 0;
 
   // Placeholder idle state
   void IdleState() { }
+  void DeadState() { }
 
   // Timer methods
   void TimerState();

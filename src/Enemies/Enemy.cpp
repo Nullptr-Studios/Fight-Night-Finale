@@ -6,6 +6,7 @@ namespace game {
 void Enemy::Start() {
   BindState(STATE_IDLE, std::bind(&Enemy::IdleState, this));
   BindState(STATE_WAIT, std::bind(&Enemy::TimerState, this));
+  BindState(STATE_DEAD, std::bind(&Enemy::DeadState, this));
 }
 
 void Enemy::Update(double delta) {
