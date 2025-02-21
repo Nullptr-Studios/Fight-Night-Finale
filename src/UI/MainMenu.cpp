@@ -17,11 +17,17 @@ void game::MainMenu::Load() {
   m_playButton->m_screenSpaceTransform.position.x += 200;
   m_playButton->SetTexture("assets/UI/PlayButton.png");
 
+  AddChild(m_playButton);
+
   m_quitButton = GET_FACTORY->CreateObject<Sigma::SceneButton>("Quit Button", nullptr,GetID());
   m_quitButton->m_screenSpaceTransform.scale = {300, 100};
   m_quitButton->m_screenSpaceTransform.position.x -= 200; 
   m_quitButton->SetTexture("assets/UI/ExitButton.png");
 
+  AddChild(m_quitButton);
+
+  AddChild(GET_CAMERA->GetCurrentCamera());
+  
   // auto progress = GET_FACTORY->CreateObject<game::HealthBar>("Progress");
   // progress->m_maxHealth = 100;
   // progress->m_currentHealth = 100;
@@ -33,6 +39,4 @@ void game::MainMenu::Load() {
 }
 void game::MainMenu::Unload() {
   Scene::Unload();
-  GET_FACTORY->DestroyObject(m_playButton);
-  GET_FACTORY->DestroyObject(m_quitButton);
 }

@@ -72,8 +72,13 @@ void game::GameScene::Load() {
 }
 void game::GameScene::Unload() {
   Scene::Unload();
-  
+
   for (auto spawner: m_enemySpawners) {
     GET_FACTORY->DestroyObject(spawner);
   }
+}
+void game::GameScene::DebugWindow() {
+  Scene::DebugWindow();
+  
+  ImGui::Checkbox("Debug draw", &m_debug);
 }

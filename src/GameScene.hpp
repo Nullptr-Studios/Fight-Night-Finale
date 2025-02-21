@@ -40,6 +40,8 @@ public:
 
   void Unload() override;
 
+  void DebugWindow() override;
+
   /**
    * @brief returns the current scene bounds
    * @return Polygon*
