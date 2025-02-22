@@ -1,6 +1,7 @@
 #include "PrototypeScene.hpp"
 #include "Controller/CameraController.hpp"
 #include "Core.hpp"
+#include "Enemies/DefaultEnemy.hpp"
 #include "Enemies/Enemy.hpp"
 #include "Factory.hpp"
 #include "Objects/Actor.hpp"
@@ -8,6 +9,7 @@
 #include "UI/HealthBar.hpp"
 #include "Objects/Debug/PunchingBag.hpp"
 #include "Player/Player.hpp"
+#include "core.hpp"
 
 // #define DEBUG_CAMERA
 
@@ -51,8 +53,7 @@ void PrototypeScene::Load() {
   p->transform.position.z = 0.0f;
   p->m_healthBar = healthBar;
   p->SetTint({1.0f, 0.0f, 0.0f, 1.0f});
-
-
+  m_players[0] = p;
 
   s = GET_FACTORY->CreateObject<game::PunchingBag>("PunchingBag");
   s->transform.position.x = -278;
@@ -71,7 +72,9 @@ void PrototypeScene::Load() {
   s3->transform.position.y = -155;
   s3->transform.position.z = 155;
 
-  m_players.push_back(p);
+  auto e = GET_FACTORY->CreateObject<game::DefaultEnemy>("Enemy Test", "assets/characters/enemy/behaviour.json");
+  e->transform.position.x = -100;
+  e->Enable(m_players);
 
 #ifndef DEBUG_CAMERA
   dynamic_cast<Sigma::CameraFollow*>(GET_CAMERA->GetCurrentCamera())->m_targetP1 = p;
@@ -83,9 +86,7 @@ void PrototypeScene::Update(double delta) {
   // If pressed key 2 create 2nd player
   if (AEInputGamepadButtonTriggered(0, 0x0010)) {
     // Check to avoid having infinite player 2 objects -x
-    if (m_players.size() >= 2)
-      return;
-
+    if (m_players[1]) return;
 
     healthBar2 = GET_FACTORY->CreateObject<game::HealthBar>("Progress");
     healthBar2->m_screenSpaceTransform.scale = {300, 20};
@@ -99,7 +100,7 @@ void PrototypeScene::Update(double delta) {
     p2->transform.position.z = 0.0f;
     p2->m_healthBar = healthBar2;
     dynamic_cast<Sigma::CameraFollow *>(GET_CAMERA->GetCurrentCamera())->m_targetP2 = p2;
-    m_players.push_back(p2);
+    m_players[1] = p2;
   }
 }
 void PrototypeScene::Free() {

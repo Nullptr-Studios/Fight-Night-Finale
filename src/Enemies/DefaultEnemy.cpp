@@ -6,6 +6,25 @@
 
 namespace game {
 
+void DefaultEnemy::Init() {
+  Enemy::Init();
+
+  // Setup Animation
+  auto anim = GET_ANIMATION->LoadTextureAtlas("assets/characters/enemy/anim-data.json");
+  m_animComp->SetTextureAtlas(anim);
+  m_animComp->SetCurrentAnim("Idle");
+  SetTexture(anim->textureStr.c_str());
+  m_animComp->PlayAnim();
+
+  // Setup player collider
+  m_collider->box.Set(25, 25, 50, 50, 25, transform.offset);
+  m_collider->SetColliderType(Sigma::Collision::COLLISION);
+  m_collider->damage = 1.0f;
+  m_collider->SetOwner(this);
+
+  m_defaultState = STATE_FOLLOW;
+}
+
 void DefaultEnemy::Start() {
   Enemy::Start();
 
@@ -15,6 +34,11 @@ void DefaultEnemy::Start() {
   BindState(STATE_REPOSITION, std::bind(&DefaultEnemy::RepositionState, this));
   BindState(STATE_ATTACK, std::bind(&DefaultEnemy::AttackState, this));
   BindState(STATE_DEAD, std::bind(&DefaultEnemy::DeadState, this));
+}
+
+void DefaultEnemy::OnFullComboPerformed() {
+  // disabled this for prototype since dario did not make animations for the enemies combo -x
+  // m_state = RANDOM_SPARCE;
 }
 
 void DefaultEnemy::FollowState() {
@@ -49,10 +73,10 @@ void DefaultEnemy::DisperseState() {
     std::uniform_int_distribution<> distrib_x( 0, 30);
     std::uniform_int_distribution<> distrib_y(-15,  15);
 
-    m_randomPosition.x = (m_player->transform.GetDepthPosition().x);
+    m_randomPosition.x = (GetNearestPlayer()->transform.GetDepthPosition().x);
     if (m_randomPosition.x - position.x >= 0) m_randomPosition.x -= m_attackDistance + static_cast<float>(distrib_x(gen));
     else m_randomPosition.x += m_attackDistance - static_cast<float>(distrib_x(gen));
-    m_randomPosition.y = (m_player->transform.GetDepthPosition().y + static_cast<float>(distrib_y(gen)));
+    m_randomPosition.y = (GetNearestPlayer()->transform.GetDepthPosition().y + static_cast<float>(distrib_y(gen)));
 
     // Recalculate if point is out of bounds -x
     if (!m_sceneBoundsPoly->IsPointInside(m_randomPosition)) {
@@ -83,8 +107,8 @@ void DefaultEnemy::RepositionState() {
   glm::vec2 position = {transform.GetDepthPosition().x, transform.GetDepthPosition().y};
 
   if (m_randomPosition.x == 0.0f && m_randomPosition.y == 0.0f) {
-    auto playerScale = m_player->transform.scale;
-    auto playerPosition = m_player->transform.position;
+    auto playerScale = GetNearestPlayer()->transform.scale;
+    auto playerPosition = GetNearestPlayer()->transform.position;
 
     std::random_device rd;
     std::mt19937 gen(rd());

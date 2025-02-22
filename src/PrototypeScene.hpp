@@ -7,17 +7,14 @@
  */
 
 #pragma once
-#include <list>
-
-
 #include "GameScene.hpp"
+#include "Player/Player.hpp"
 
 namespace Sigma {
 class Actor;
 class Object;
 }
 namespace game {
-class Player;
 class PunchingBag;
 class HealthBar;
 
@@ -32,7 +29,7 @@ public:
   void Update(double delta) override;
   void Free() override;
 
-  std::list<Sigma::Object *> m_players;
+  std::array<Player*, 2> m_players = {};
 
 private:
   Sigma::Actor *floor;

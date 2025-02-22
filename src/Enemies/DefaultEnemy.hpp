@@ -13,9 +13,11 @@ namespace game {
 class DefaultEnemy : public Enemy {
 public:
   DefaultEnemy(const Sigma::id_t id, const char* jsonPath) : Enemy(id, jsonPath) {}
+  void Init() override;
+  void Start() override;
 
 protected:
-  void Start() override;
+  void OnFullComboPerformed() override;
 
   virtual void FollowState();
   virtual void DisperseState();
@@ -24,13 +26,10 @@ protected:
   virtual void AttackState();
   virtual void DeadState();
 
-  float m_attackDistance = 0.0f;
-
 private:
 // Idk if this should be private or protected yet -x
   glm::vec3 m_distance = glm::vec3(0.0f);
   glm::vec2 m_randomPosition = glm::vec2(0.0f);
-  bool m_isIdle = false;
 };
 
 }

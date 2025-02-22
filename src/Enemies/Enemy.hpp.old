@@ -49,7 +49,7 @@ protected:
   EnemyState GetState() { return m_state; }
 
 private:
-  Player* m_player = nullptr;
+  Player* m_players = nullptr;
   Actor* m_debugCol = nullptr;
 
   EnemyState m_state = IDLE;

@@ -1,37 +1,104 @@
 #include "Enemy.hpp"
 #include "aecore/AEFrameRateController.h"
 
+#define DEBUG_ENEMY
+
 namespace game {
 
+void Enemy::Serialize() {
+  Character::Serialize();
+  m_attackDistance = j["distanceToAttack"];
+}
+
+void Enemy::Init() {
+  Character::Init();
+
+  transform.relativeScale = glm::vec2(1);
+
+}
+
 void Enemy::Start() {
+  Character::Start();
+
   BindState(STATE_IDLE, std::bind(&Enemy::IdleState, this));
   BindState(STATE_WAIT, std::bind(&Enemy::TimerState, this));
   BindState(STATE_DEAD, std::bind(&Enemy::DeadState, this));
+
+  SetState(STATE_IDLE);
+}
+
+void Enemy::OnDamage(const Sigma::Damage::DamageEvent& e) {
+  if (e.GetOther()->GetName().contains("Enemy")) return;
+ 
+  Character::OnDamage(e);
+  if (!GetAlive()) SetState(STATE_DEAD);
+}
+
+void Enemy::Enable(std::array<Player*, 2> players) {
+  SetPlayers(players);
+  if (!m_players[0]) {
+    std::cout << "[Enemy] " << GetName() << ": Tried to enable without valid player reference\n";
+    return;
+  }
+
+  m_enabled = true;
+}
+
+void Enemy::SetPlayers(std::array<Player*, 2> players) { m_players = players; }
+
+Player* Enemy::GetNearestPlayer() {
+  if (!m_players[1]) return m_players[0];
+
+  float distance0 = glm::distance(transform.GetDepthPosition(), m_players[0]->transform.GetDepthPosition());
+  float distance1 = glm::distance(transform.GetDepthPosition(), m_players[1]->transform.GetDepthPosition());
+
+  if (distance0 >= distance1) return m_players[0];
+  else return m_players[1];
 }
 
 void Enemy::Update(double delta) {
+  if (m_currentState == STATE_IDLE && m_enabled) {
+    SetState(STATE_FOLLOW);
+  } else if (!m_enabled && m_currentState != STATE_IDLE) {
+    m_currentState == STATE_IDLE;
+  }
+
+  Character::Update(delta);
+
+  if (!m_states[m_currentState]) {
+    std::cout << "[Enemy] " << GetName() << ": The state you are trying to load is not binded\n";
+    return;
+  }
+
   // Calls the current state function
   m_states[m_currentState]();
 }
 
-void Enemy::SetState(char state) { 
+void Enemy::SetState(int state) { 
   // Sanity check
   if (m_states[state] == nullptr){
-    std::cout << "State " << state << " is not set, perhaps you forgot to bind it?\n";
+    std::cout << "[Enemy] State " << state << " is not set, perhaps you forgot to bind it?\n";
     return;
   }
 
   m_currentState = state;
+  #ifdef DEBUG_ENEMY
+  std::cout << "[Enemy] " << GetName() << ": Set state " << (int)state << " to current\n";
+  #endif
 }
 
-void Enemy::BindState(char state, const std::function<void()>& function) {
+void Enemy::BindState(int state, const std::function<void()>& function) {
   // Sanity check
   if (!function) return;
 
-  m_states[state] = function; 
+  m_states.insert({state, function});
+
+  #ifdef DEBUG_ENEMY
+  std::cout << "[Enemy] " << GetName() << ": Binded state " << (int)state << "\n";
+  #endif
 }
 
-void Enemy::WaitSeconds(float time, char nextState) {
+void Enemy::WaitSeconds(float time, int nextState) {
   m_timerSeconds = time;
   m_timerNextState = nextState;
   SetState(STATE_WAIT);

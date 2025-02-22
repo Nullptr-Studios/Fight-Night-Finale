@@ -36,7 +36,7 @@ void Enemy::Init() {
 void Enemy::Start() {
   Character::Start();
   m_state = FOLLOW;
-  m_player = GET_FACTORY->FindObject<Player>("Player");
+  m_players = GET_FACTORY->FindObject<Player>("Player");
   // m_debugCol = GET_FACTORY->CreateObject<Sigma::Actor>("Debug Attack");
 }
 
@@ -48,10 +48,8 @@ bool Enemy::OnCollision(Sigma::Collision::CollisionEvent& e) {
 void Enemy::OnDamage(const Sigma::Damage::DamageEvent& e) {
   if (e.GetOther()->GetName().contains("Enemy"))
     return;
-  
+ 
   Character::OnDamage(e);
-
-  
 
   if (!GetAlive()) m_state = DEAD;
 }
@@ -71,17 +69,17 @@ void Enemy::Enable(std::array<Player *, 2> players) {
 
     // This is a weird case in which the player 2 exist but not the player 1 -x
     // Maybe player1 died???? -x
-    m_player = players[1];
+    m_players = players[1];
   } else if (!players[1]) {
-    m_player = players[0];
+    m_players = players[0];
   } else {
     float distancePlayer1 = glm::distance(players[0]->transform.position, transform.position);
     float distancePlayer2 = glm::distance(players[1]->transform.position, transform.position);
 
     if (distancePlayer1 < distancePlayer2) {
-      m_player = players[0];
+      m_players = players[0];
     } else {
-      m_player = players[1];
+      m_players = players[1];
     }
   }
 
@@ -188,8 +186,8 @@ void Enemy::OnRandomSparce() {
   glm::vec2 position = {transform.GetDepthPosition().x, transform.GetDepthPosition().y};
 
   if (m_separateDirection.x == 0.0f && m_separateDirection.y == 0.0f) {
-    auto playerScale = m_player->transform.scale;
-    auto playerPosition = m_player->transform.position;
+    auto playerScale = m_players->transform.scale;
+    auto playerPosition = m_players->transform.position;
 
     std::random_device rd;
     std::mt19937 gen(rd());
