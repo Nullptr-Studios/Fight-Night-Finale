@@ -34,9 +34,9 @@ void Enemy::OnDamage(const Sigma::Damage::DamageEvent& e) {
   if (!GetAlive()) SetState(STATE_DEAD);
 }
 
-void Enemy::Enable(std::array<Player*, 2> players) {
+void Enemy::Enable(std::array<Player*, 2>* players) {
   SetPlayers(players);
-  if (!m_players[0]) {
+  if (!m_players->operator[](0)) {
     std::cout << "[Enemy] " << GetName() << ": Tried to enable without valid player reference\n";
     return;
   }
@@ -44,16 +44,24 @@ void Enemy::Enable(std::array<Player*, 2> players) {
   m_enabled = true;
 }
 
-void Enemy::SetPlayers(std::array<Player*, 2> players) { m_players = players; }
+void Enemy::SetPlayers(std::array<Player*, 2>* players) { m_players = players; }
 
 Player* Enemy::GetNearestPlayer() {
-  if (!m_players[1]) return m_players[0];
+  if (!m_players->operator[](0) && !m_players->operator[](1)) return nullptr;
+  if (!m_players->operator[](1)) return m_players->operator[](0);
+  if (!m_players->operator[](0)) return m_players->operator[](1);
 
-  float distance0 = glm::distance(transform.GetDepthPosition(), m_players[0]->transform.GetDepthPosition());
-  float distance1 = glm::distance(transform.GetDepthPosition(), m_players[1]->transform.GetDepthPosition());
+  // TODO: Find an actual way to do this
+  try {
+    float distance0 = glm::distance(transform.GetDepthPosition(), m_players->operator[](0)->transform.GetDepthPosition());
+    float distance1 = glm::distance(transform.GetDepthPosition(), m_players->operator[](1)->transform.GetDepthPosition());
 
-  if (distance0 >= distance1) return m_players[0];
-  else return m_players[1];
+    if (distance0 >= distance1) return m_players->operator[](1);
+    return m_players->operator[](0);
+
+  } catch (const std::exception& e) {
+    return nullptr;
+  }
 }
 
 void Enemy::Update(double delta) {

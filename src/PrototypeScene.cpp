@@ -72,10 +72,6 @@ void PrototypeScene::Load() {
   s3->transform.position.y = -155;
   s3->transform.position.z = 155;
 
-  auto e = GET_FACTORY->CreateObject<game::DefaultEnemy>("Enemy Test", "assets/characters/enemy/behaviour.json");
-  e->transform.position.x = -100;
-  e->Enable(m_players);
-
 #ifndef DEBUG_CAMERA
   dynamic_cast<Sigma::CameraFollow*>(GET_CAMERA->GetCurrentCamera())->m_targetP1 = p;
 #endif

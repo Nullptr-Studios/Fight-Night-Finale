@@ -42,7 +42,7 @@ public:
 
   #pragma endregion
 
-  virtual void Enable(std::array<Player*, 2> players);
+  virtual void Enable(std::array<Player*, 2>* players);
 
   /**
    * @brief Changes the current state variable
@@ -69,11 +69,11 @@ public:
    */
   void WaitSeconds(float time, int nextState);
 
-  void SetPlayers(std::array<Player*, 2> players);
+  void SetPlayers(std::array<Player*, 2>* players);
   Player* GetNearestPlayer();
 
 protected:
-  std::array<Player*, 2> m_players = {};
+  std::array<Player*, 2>* m_players = {};
   float m_attackDistance = 0.0f;
   int m_defaultState = 0;
 

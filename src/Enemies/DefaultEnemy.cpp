@@ -36,7 +36,12 @@ void DefaultEnemy::Start() {
 }
 
 void DefaultEnemy::Update(double delta) {
-  m_distance = GetNearestPlayer()->transform.GetDepthPosition() - transform.GetDepthPosition();
+  Player* nearest = GetNearestPlayer();
+  if (!nearest) {
+    SetState(STATE_IDLE);
+  } else {
+    m_distance = nearest->transform.GetDepthPosition() - transform.GetDepthPosition();
+  }
 
   Enemy::Update(delta);
 }
@@ -79,10 +84,16 @@ void DefaultEnemy::DisperseState() {
     std::uniform_int_distribution<> distrib_x( 0, 30);
     std::uniform_int_distribution<> distrib_y(-15,  15);
 
-    m_randomPosition.x = (GetNearestPlayer()->transform.GetDepthPosition().x);
+    Player* nearest = GetNearestPlayer();
+    if (!nearest) {
+      SetState(STATE_IDLE);
+      return;
+    }
+
+    m_randomPosition.x = (nearest->transform.GetDepthPosition().x);
     if (m_randomPosition.x - position.x >= 0) m_randomPosition.x -= m_attackDistance + static_cast<float>(distrib_x(gen));
     else m_randomPosition.x += m_attackDistance - static_cast<float>(distrib_x(gen));
-    m_randomPosition.y = (GetNearestPlayer()->transform.GetDepthPosition().y + static_cast<float>(distrib_y(gen)));
+    m_randomPosition.y = (nearest->transform.GetDepthPosition().y + static_cast<float>(distrib_y(gen)));
 
     // Recalculate if point is out of bounds -x
     if (!m_sceneBoundsPoly->IsPointInside(m_randomPosition)) {
@@ -114,8 +125,14 @@ void DefaultEnemy::RepositionState() {
   m_animComp->SetCurrentAnim("Walk");
 
   if (m_randomPosition.x == 0.0f && m_randomPosition.y == 0.0f) {
-    auto playerScale = GetNearestPlayer()->transform.scale;
-    auto playerPosition = GetNearestPlayer()->transform.position;
+    Player* nearest = GetNearestPlayer();
+    if (!nearest) {
+      SetState(STATE_IDLE);
+      return;
+    }
+
+    auto playerScale = nearest->transform.scale;
+    auto playerPosition = nearest->transform.position;
 
     std::random_device rd;
     std::mt19937 gen(rd());
