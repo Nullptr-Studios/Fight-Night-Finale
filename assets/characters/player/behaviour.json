@@ -11,6 +11,7 @@
     {
       "type" : "dmg",
       "damage" : 7.0,
+      "knockback" : { "x" : 300.0, "y" : 300.0 },
       "colliderOffset" : {
         "x" : 28,
         "y" : 57
@@ -25,6 +26,7 @@
     {
       "type" : "dmg",
       "damage" : 7.0,
+      "knockback" : { "x" : 300.0, "y" : 300.0 },
       "colliderOffset" : {
         "x" : 28,
         "y" : 58
@@ -39,6 +41,7 @@
     {
       "type" : "dmg",
       "damage" : 8.0,
+      "knockback" : { "x" : 300.0, "y" : 300.0 },
       "colliderOffset" : {
         "x" : 28,
         "y" : 55
@@ -53,6 +56,7 @@
     {
       "type" : "dmg",
       "damage" : 12.0,
+      "knockback" : { "x" : 300.0, "y" : 300.0 },
       "colliderOffset" : {
         "x" : 20,
         "y" : 55
@@ -69,35 +73,8 @@
   "basicAirCombo" : [
     {
       "type" : "dmg",
-      "damage" : 7.0,
-      "colliderOffset" : {
-        "x" : 28,
-        "y" : 57
-      },
-      "colliderSize" : {
-        "x" : 36,
-        "y" : 15,
-        "z" : 5
-      },
-      "animationName" : "Combo1"
-    },
-    {
-      "type" : "dmg",
-      "damage" : 7.0,
-      "colliderOffset" : {
-        "x" : 28,
-        "y" : 58
-      },
-      "colliderSize" : {
-        "x" : 36,
-        "y" : 15,
-        "z" : 5
-      },
-      "animationName" : "Combo1"
-    },
-    {
-      "type" : "dmg",
       "damage" : 8.0,
+      "knockback" : { "x" : 300.0, "y" : 300.0 },
       "colliderOffset" : {
         "x" : 28,
         "y" : 55
@@ -107,11 +84,42 @@
         "y" : 15,
         "z" : 5
       },
-      "animationName" : "Combo3"
+      "animationName" : "Punch1"
+    },
+    {
+      "type" : "dmg",
+      "damage" : 7.0,
+      "knockback" : { "x" : 300.0, "y" : 300.0 },
+      "colliderOffset" : {
+        "x" : 28,
+        "y" : 57
+      },
+      "colliderSize" : {
+        "x" : 36,
+        "y" : 15,
+        "z" : 5
+      },
+      "animationName" : "Punch2"
+    },
+    {
+      "type" : "dmg",
+      "damage" : 8.0,
+      "knockback" : { "x" : 300.0, "y" : 300.0 },
+      "colliderOffset" : {
+        "x" : 28,
+        "y" : 55
+      },
+      "colliderSize" : {
+        "x" : 38,
+        "y" : 15,
+        "z" : 5
+      },
+      "animationName" : "Punch1"
     },
     {
       "type" : "dmg",
       "damage" : 12.0,
+      "knockback" : { "x" : 300.0, "y" : 300.0 },
       "colliderOffset" : {
         "x" : 20,
         "y" : 55
@@ -121,7 +129,7 @@
         "y" : 30,
         "z" : 15
       },
-      "animationName" : "Combo4"
+      "animationName" : "Punch3"
     }
   ],
 
@@ -129,6 +137,7 @@
     {
       "type" : "grb",
       "damage" : 0.0,
+      "knockback" : { "x" : 300.0, "y" : 300.0 },
       "colliderOffset" : {
         "x" : 0.0,
         "y" : 0.0
@@ -143,6 +152,7 @@
     {
       "type" : "thr",
       "damage" : 10.0,
+      "knockback" : { "x" : 300.0, "y" : 300.0 },
       "colliderOffset" : {
         "x" : 0.0,
         "y" : 0.0
@@ -160,6 +170,7 @@
     {
       "type" : "grb",
       "damage" : 0.0,
+      "knockback" : { "x" : 300.0, "y" : 300.0 },
       "colliderOffset" : {
         "x" : 0.0,
         "y" : 0.0
@@ -174,6 +185,7 @@
     {
       "type" : "thr",
       "damage" : 10.0,
+      "knockback" : { "x" : 300.0, "y" : 300.0 },
       "colliderOffset" : {
         "x" : 0.0,
         "y" : 0.0
