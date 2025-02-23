@@ -71,12 +71,15 @@ void PrototypeScene::Load() {
   s3->transform.position.y = -155;
   s3->transform.position.z = 155;
 
+  //TODO: Pickup crashes game :(
+  /*
   b1 = GET_FACTORY->CreateObject<game::Box>("Box");
   b1->SetTexture("assets/prototype-scene-2/Prototype_Box_Default.png");
   b1->transform.position.x = -225;
   b1->transform.position.y = 75;
   b1->transform.position.z = -75;
   b1->transform.scale = {50,50};
+  */
 
   m_players.push_back(p);
 
@@ -120,7 +123,7 @@ void PrototypeScene::Free() {
   GET_FACTORY->DestroyObject(healthBar2);
   GET_FACTORY->DestroyObject(p);
   GET_FACTORY->DestroyObject(p2);
-  GET_FACTORY->DestroyObject(b1);
+  //GET_FACTORY->DestroyObject(b1);
 }
 
 

@@ -29,6 +29,7 @@ public:
   explicit Player(const Sigma::id_t id, int controllerId, std::string jsonPath) : Character(id, std::move(jsonPath)), m_controllerId(controllerId) {}
 
   void Init() override;
+  void Serialize() override;
   void Start() override;
   void Update(double delta) override;
   void Destroy() override;

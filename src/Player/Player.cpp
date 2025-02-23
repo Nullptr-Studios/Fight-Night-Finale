@@ -20,7 +20,7 @@ void Player::Init() {
   Character::Init();
 
   m_deadScene = new MainMenu("DeadMenu", 0);
-  
+
   transform.relativeScale = glm::vec2(1);
 
   // Setup Animation
@@ -39,7 +39,12 @@ void Player::Init() {
   m_collider->SetColliderType(Sigma::Collision::COLLISION);
   m_collider->damage = 1.0f;
   m_collider->SetOwner(this);
-
+}
+void Player::Serialize() {
+  Character::Serialize();
+  dashVel = j["dashVel"];
+  dashTime = j["dashTime"];
+  dashCool  = j["dashCool"];
 }
 
 void Player::Start() {
