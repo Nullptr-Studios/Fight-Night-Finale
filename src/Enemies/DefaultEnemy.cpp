@@ -33,17 +33,22 @@ void DefaultEnemy::Start() {
   BindState(STATE_AVOID, std::bind(&DefaultEnemy::AvoidState, this));
   BindState(STATE_REPOSITION, std::bind(&DefaultEnemy::RepositionState, this));
   BindState(STATE_ATTACK, std::bind(&DefaultEnemy::AttackState, this));
-  BindState(STATE_DEAD, std::bind(&DefaultEnemy::DeadState, this));
+}
+
+void DefaultEnemy::Update(double delta) {
+  m_distance = GetNearestPlayer()->transform.GetDepthPosition() - transform.GetDepthPosition();
+
+  Enemy::Update(delta);
 }
 
 void DefaultEnemy::OnFullComboPerformed() {
-  // disabled this for prototype since dario did not make animations for the enemies combo -x
-  // m_state = RANDOM_SPARCE;
+  SetState(STATE_REPOSITION);
 }
 
 void DefaultEnemy::FollowState() {
   if (!m_isIdle) return;
 
+  m_animComp->SetCurrentAnim("Walk");
   auto direction = glm::normalize(m_distance);
   // We use the .z instead of the .y to ignore if the player is jumping -x
   Move( {direction.x, direction.y} );
@@ -65,6 +70,7 @@ void DefaultEnemy::FollowState() {
 void DefaultEnemy::DisperseState() {
   if (!m_isIdle) return;
   glm::vec2 position = {transform.GetDepthPosition().x, transform.GetDepthPosition().y};
+  m_animComp->SetCurrentAnim("Walk");
 
   // Calculates the point the enemy will go back to -x
   if (m_randomPosition.x == 0 && m_randomPosition.y == 0) {
@@ -105,6 +111,7 @@ void DefaultEnemy::AvoidState() {
 void DefaultEnemy::RepositionState() {
   if (!m_isIdle) return;
   glm::vec2 position = {transform.GetDepthPosition().x, transform.GetDepthPosition().y};
+  m_animComp->SetCurrentAnim("Walk");
 
   if (m_randomPosition.x == 0.0f && m_randomPosition.y == 0.0f) {
     auto playerScale = GetNearestPlayer()->transform.scale;
@@ -153,6 +160,10 @@ void DefaultEnemy::AttackState() {
 void DefaultEnemy::DeadState() {
   // GET_FACTORY->DestroyObject(m_debugCol->GetId());
   GET_FACTORY->DestroyObject(GetId());
+}
+
+void DefaultEnemy::Destroy() {
+  Enemy::Destroy();
 }
 
 }

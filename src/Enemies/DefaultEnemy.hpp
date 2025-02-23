@@ -15,6 +15,8 @@ public:
   DefaultEnemy(const Sigma::id_t id, const char* jsonPath) : Enemy(id, jsonPath) {}
   void Init() override;
   void Start() override;
+  void Update(double delta) override;
+  void Destroy() override;
 
 protected:
   void OnFullComboPerformed() override;
@@ -24,7 +26,7 @@ protected:
   virtual void AvoidState();
   virtual void RepositionState();
   virtual void AttackState();
-  virtual void DeadState();
+  void DeadState() override;
 
 private:
 // Idk if this should be private or protected yet -x

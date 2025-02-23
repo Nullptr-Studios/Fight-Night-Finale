@@ -74,7 +74,7 @@ void Enemy::Update(double delta) {
   m_states[m_currentState]();
 }
 
-void Enemy::SetState(int state) { 
+void Enemy::SetState(int state) {
   // Sanity check
   if (m_states[state] == nullptr){
     std::cout << "[Enemy] State " << state << " is not set, perhaps you forgot to bind it?\n";
@@ -83,7 +83,7 @@ void Enemy::SetState(int state) {
 
   m_currentState = state;
   #ifdef DEBUG_ENEMY
-  std::cout << "[Enemy] " << GetName() << ": Set state " << (int)state << " to current\n";
+  std::cout << "[Enemy] " << GetName() << ": Set current state to " << (int)state << "\n";
   #endif
 }
 
@@ -112,6 +112,7 @@ void Enemy::TimerState() {
     return;
   }
 
+  if (m_animComp) m_animComp->SetCurrentAnim("Idle");
   m_timer += static_cast<float>(AEGetFrameTime());
 
   if (m_timer >= m_timerSeconds) {

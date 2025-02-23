@@ -21,6 +21,7 @@ public:
   void Serialize() override;
   void Start() override;
   void Update(double delta) override;
+  void Destroy() override { Character::Destroy(); }
 
   void OnDamage(const Sigma::Damage::DamageEvent& e) override;
 
@@ -83,7 +84,7 @@ private:
 
   // Placeholder idle state
   void IdleState() { }
-  void DeadState() { }
+  virtual void DeadState() { }
 
   // Timer methods
   void TimerState();
