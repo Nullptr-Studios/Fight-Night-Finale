@@ -13,13 +13,22 @@ void Pickup::Init() {
   m_collider->box.Set({32,32,96});
 }
 
-bool Pickup::OnCollision(Sigma::Collision::CollisionEvent &e){
-  if (const auto player = dynamic_cast<Player*>(e.GetOther())) {
-    player->OnHeal(m_healAmount);
-    GET_FACTORY->DestroyObject(GetId());
-    return true;
+bool Pickup::OnCollision(Sigma::Collision::CollisionEvent &e)
+{
+  // FIXME: WTF?!?!?!?!?!?!?! -d
+  try {
+    if (const auto player = dynamic_cast<Player*>(e.GetOther())) {
+      player->OnHeal(m_healAmount);
+      m_collider->enabled = false;
+      GET_FACTORY->DestroyObject(GetId());
+      return true;
+    }
+    return false;
+  } catch (std::exception &e) {
+    std::cerr << "WTFFFFFFFF!?!?!?!" << e.what() << std::endl;
+    return false;
   }
-  return false;
+  
 }
 
 }
