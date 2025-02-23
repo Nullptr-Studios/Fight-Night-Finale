@@ -51,17 +51,11 @@ Player* Enemy::GetNearestPlayer() {
   if (!m_players->operator[](1)) return m_players->operator[](0);
   if (!m_players->operator[](0)) return m_players->operator[](1);
 
-  // TODO: Find an actual way to do this
-  try {
-    float distance0 = glm::distance(transform.GetDepthPosition(), m_players->operator[](0)->transform.GetDepthPosition());
-    float distance1 = glm::distance(transform.GetDepthPosition(), m_players->operator[](1)->transform.GetDepthPosition());
+  float distance0 = glm::distance(transform.GetDepthPosition(), m_players->operator[](0)->transform.GetDepthPosition());
+  float distance1 = glm::distance(transform.GetDepthPosition(), m_players->operator[](1)->transform.GetDepthPosition());
 
-    if (distance0 >= distance1) return m_players->operator[](1);
-    return m_players->operator[](0);
-
-  } catch (const std::exception& e) {
-    return nullptr;
-  }
+  if (distance0 >= distance1) return m_players->operator[](1);
+  return m_players->operator[](0);
 }
 
 void Enemy::Update(double delta) {

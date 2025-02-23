@@ -4,11 +4,13 @@
 #include "Enemies/DefaultEnemy.hpp"
 #include "Enemies/Enemy.hpp"
 #include "Factory.hpp"
+#include "GameManager.hpp"
 #include "Objects/Actor.hpp"
 #include "Objects/CameraFollow.hpp"
-#include "UI/HealthBar.hpp"
 #include "Objects/Debug/PunchingBag.hpp"
 #include "Player/Player.hpp"
+#include "UI/HealthBar.hpp"
+#include "UI/MainMenu.hpp"
 #include "core.hpp"
 
 // #define DEBUG_CAMERA
@@ -18,6 +20,8 @@ namespace game {
 void PrototypeScene::Load() {
   GameScene::Load();
   std::cout << "PrototypeScene::Load()" << std::endl;
+
+  m_deadScene = new MainMenu("DeadMenu", 0);
 
 #ifdef DEBUG_CAMERA
   GET_CAMERA->SetCurrentCamera(GET_FACTORY->CreateObject<Sigma::Camera>("Debug Camera"));
@@ -97,6 +101,11 @@ void PrototypeScene::Update(double delta) {
     p2->m_healthBar = healthBar2;
     dynamic_cast<Sigma::CameraFollow *>(GET_CAMERA->GetCurrentCamera())->m_targetP2 = p2;
     m_players[1] = p2;
+  }
+
+  if (!m_players[0] && !m_players[1]) {
+    GET_MANAGER->LoadScene(m_deadScene);
+    GET_MANAGER->UnloadScene(0u);
   }
 }
 void PrototypeScene::Free() {

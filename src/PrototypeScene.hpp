@@ -41,6 +41,8 @@ private:
   HealthBar *healthBar2 = nullptr;
   Player *p;
   Player *p2 = nullptr;
+
+  MainMenu* m_deadScene = nullptr;
 };
 
 } // namespace game
