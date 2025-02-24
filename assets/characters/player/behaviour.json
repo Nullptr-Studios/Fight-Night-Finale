@@ -75,21 +75,6 @@
       "knockback" : { "x" : 300.0, "y" : 300.0 },
       "colliderOffset" : {
         "x" : 28,
-        "y" : 55
-      },
-      "colliderSize" : {
-        "x" : 38,
-        "y" : 15,
-        "z" : 5
-      },
-      "animationName" : "Punch1"
-    },
-    {
-      "type" : "dmg",
-      "damage" : 7.0,
-      "knockback" : { "x" : 300.0, "y" : 300.0 },
-      "colliderOffset" : {
-        "x" : 28,
         "y" : 57
       },
       "colliderSize" : {
@@ -97,7 +82,22 @@
         "y" : 15,
         "z" : 5
       },
-      "animationName" : "Punch2"
+      "animationName" : "Combo1"
+    },
+    {
+      "type" : "dmg",
+      "damage" : 7.0,
+      "knockback" : { "x" : 300.0, "y" : 300.0 },
+      "colliderOffset" : {
+        "x" : 28,
+        "y" : 58
+      },
+      "colliderSize" : {
+        "x" : 36,
+        "y" : 15,
+        "z" : 5
+      },
+      "animationName" : "Combo1"
     },
     {
       "type" : "dmg",
@@ -112,7 +112,7 @@
         "y" : 15,
         "z" : 5
       },
-      "animationName" : "Punch1"
+      "animationName" : "Combo3"
     },
     {
       "type" : "dmg",
@@ -127,7 +127,7 @@
         "y" : 30,
         "z" : 15
       },
-      "animationName" : "Punch3"
+      "animationName" : "Combo4"
     }
   ],
 
