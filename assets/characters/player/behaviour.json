@@ -9,6 +9,7 @@
     {
       "type" : "dmg",
       "damage" : 7.0,
+      "knockback" : { "x" : 300.0, "y" : 300.0 },
       "colliderOffset" : {
         "x" : 28,
         "y" : 57
@@ -23,6 +24,7 @@
     {
       "type" : "dmg",
       "damage" : 7.0,
+      "knockback" : { "x" : 300.0, "y" : 300.0 },
       "colliderOffset" : {
         "x" : 28,
         "y" : 58
@@ -37,6 +39,7 @@
     {
       "type" : "dmg",
       "damage" : 8.0,
+      "knockback" : { "x" : 300.0, "y" : 300.0 },
       "colliderOffset" : {
         "x" : 28,
         "y" : 55
@@ -51,6 +54,7 @@
     {
       "type" : "dmg",
       "damage" : 12.0,
+      "knockback" : { "x" : 300.0, "y" : 300.0 },
       "colliderOffset" : {
         "x" : 20,
         "y" : 55
@@ -67,7 +71,8 @@
   "basicAirCombo" : [
     {
       "type" : "dmg",
-      "damage" : 7.0,
+      "damage" : 8.0,
+      "knockback" : { "x" : 300.0, "y" : 300.0 },
       "colliderOffset" : {
         "x" : 28,
         "y" : 57
@@ -82,6 +87,7 @@
     {
       "type" : "dmg",
       "damage" : 7.0,
+      "knockback" : { "x" : 300.0, "y" : 300.0 },
       "colliderOffset" : {
         "x" : 28,
         "y" : 58
@@ -96,6 +102,7 @@
     {
       "type" : "dmg",
       "damage" : 8.0,
+      "knockback" : { "x" : 300.0, "y" : 300.0 },
       "colliderOffset" : {
         "x" : 28,
         "y" : 55
@@ -110,6 +117,7 @@
     {
       "type" : "dmg",
       "damage" : 12.0,
+      "knockback" : { "x" : 300.0, "y" : 300.0 },
       "colliderOffset" : {
         "x" : 20,
         "y" : 55
@@ -127,6 +135,7 @@
     {
       "type" : "grb",
       "damage" : 0.0,
+      "knockback" : { "x" : 300.0, "y" : 300.0 },
       "colliderOffset" : {
         "x" : 0.0,
         "y" : 0.0
@@ -141,6 +150,7 @@
     {
       "type" : "thr",
       "damage" : 10.0,
+      "knockback" : { "x" : 300.0, "y" : 300.0 },
       "colliderOffset" : {
         "x" : 0.0,
         "y" : 0.0
@@ -158,6 +168,7 @@
     {
       "type" : "grb",
       "damage" : 0.0,
+      "knockback" : { "x" : 300.0, "y" : 300.0 },
       "colliderOffset" : {
         "x" : 0.0,
         "y" : 0.0
@@ -172,6 +183,7 @@
     {
       "type" : "thr",
       "damage" : 10.0,
+      "knockback" : { "x" : 300.0, "y" : 300.0 },
       "colliderOffset" : {
         "x" : 0.0,
         "y" : 0.0
