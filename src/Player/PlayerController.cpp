@@ -14,7 +14,7 @@ void PlayerController::Update()
     m_character->Move(m_inputSystem.GetMovement());
 
   // Action callback
-  if      (action == "roll" && m_character->GetIsIdle())  m_character->Jump();
+  if      (action == "roll" && m_character->GetIsIdle())  m_character->Dash();
   else if (action == "basic") m_character->BasicAttack();
   else if (action == "super") m_character->SuperAttack();
 
