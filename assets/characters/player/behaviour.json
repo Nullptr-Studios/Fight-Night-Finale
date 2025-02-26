@@ -9,7 +9,7 @@
     {
       "type" : "dmg",
       "damage" : 7.0,
-      "knockback" : { "x" : 300.0, "y" : 300.0 },
+      "knockback" : { "x" : 150, "y" : 0 },
       "colliderOffset" : {
         "x" : 28,
         "y" : 57
@@ -24,7 +24,7 @@
     {
       "type" : "dmg",
       "damage" : 7.0,
-      "knockback" : { "x" : 300.0, "y" : 300.0 },
+      "knockback" : { "x" : 150, "y" : 0 },
       "colliderOffset" : {
         "x" : 28,
         "y" : 58
@@ -39,7 +39,7 @@
     {
       "type" : "dmg",
       "damage" : 8.0,
-      "knockback" : { "x" : 300.0, "y" : 300.0 },
+      "knockback" : { "x" : 200, "y" : 0 },
       "colliderOffset" : {
         "x" : 28,
         "y" : 55
@@ -54,7 +54,7 @@
     {
       "type" : "dmg",
       "damage" : 12.0,
-      "knockback" : { "x" : 300.0, "y" : 300.0 },
+      "knockback" : { "x" : 500, "y" : 450 },
       "colliderOffset" : {
         "x" : 20,
         "y" : 55
