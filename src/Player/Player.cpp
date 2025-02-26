@@ -6,6 +6,7 @@
 #include "Collision/CollisionEvent.hpp"
 #include "Factory.hpp"
 #include "GameManager.hpp"
+#include "PrototypeScene.hpp"
 
 #include "Audio/AudioEngine.hpp"
 
@@ -18,9 +19,7 @@ namespace game {
 AEGfxFont* font;
 void Player::Init() {
   Character::Init();
-
-  m_deadScene = new MainMenu("DeadMenu", 0);
-
+  
   transform.relativeScale = glm::vec2(1);
 
   // Setup Animation
@@ -87,8 +86,14 @@ void Player::OnDamage(const Sigma::Damage::DamageEvent &e)
   m_healthBar->m_currentHealth = GetHealth();
 
   if (!m_isAlive && doFuckingOnce) {
-    GET_MANAGER->LoadScene(m_deadScene);
-    GET_MANAGER->UnloadScene(0u);
+    auto scene = dynamic_cast<PrototypeScene*>(GET_SCENE(0));
+    if (!scene) return;
+    if (GetId() == scene->m_players[0]->GetId()) scene->m_players[0] = nullptr;
+    else if (GetId() == scene->m_players[1]->GetId()) scene->m_players[1] = nullptr;
+
+    // TODO: We need to check if the two players are dead
+    //GET_MANAGER->LoadScene(m_deadScene);
+    //GET_MANAGER->UnloadScene(0u);
     doFuckingOnce = false;
   }
 }
