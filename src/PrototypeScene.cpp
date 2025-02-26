@@ -1,6 +1,6 @@
 #include "PrototypeScene.hpp"
 #include "Controller/CameraController.hpp"
-#include "Core.hpp"
+
 #include "Enemies/DefaultEnemy.hpp"
 #include "Enemies/Enemy.hpp"
 #include "Factory.hpp"
@@ -11,7 +11,6 @@
 #include "Player/Player.hpp"
 #include "UI/HealthBar.hpp"
 #include "UI/MainMenu.hpp"
-#include "core.hpp"
 
 // #define DEBUG_CAMERA
 

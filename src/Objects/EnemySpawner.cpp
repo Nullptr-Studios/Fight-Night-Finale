@@ -2,7 +2,6 @@
 // Created by Dario on 15/02/2025.
 //
 
-#include "core.hpp"
 #include "EnemySpawner.hpp"
 #include "Enemies/DefaultEnemy.hpp"
 #include "GameManager.hpp"

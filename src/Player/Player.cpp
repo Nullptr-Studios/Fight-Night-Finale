@@ -12,7 +12,6 @@
 
 #include "UI/HealthBar.hpp"
 #include "UI/MainMenu.hpp"
-#include "core.hpp"
 
 namespace game {
 
@@ -61,12 +60,14 @@ void Player::Update(double delta) {
   if (m_controllerComponent)
     m_controllerComponent->Update();
   
-  if (GetIsIdle())
+  if (GetIsIdle()) {
     if (velocity.x > .1f || velocity.x < -.1f || velocity.y > .1f || velocity.y < -.1f) {
-    m_animComp->SetCurrentAnim("Walk");
-    }else {
-    m_animComp->SetCurrentAnim("Idle");
+      m_animComp->SetCurrentAnim("Walk");
     }
+    else {
+      m_animComp->SetCurrentAnim("Idle");
+    }
+  }
 
   // m_collider->DebugDraw(m_debugPlayerCol, this, "assets/core/debug_blue.png");
 
