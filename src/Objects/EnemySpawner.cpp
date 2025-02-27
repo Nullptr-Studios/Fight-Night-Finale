@@ -46,7 +46,7 @@ void game::EnemySpawner::Update(double deltaTime) {
 void game::EnemySpawner::Destroy() {
   Object::Destroy();
 
-  // for (auto enemy: m_enemies) {
-  //   GET_FACTORY->DestroyObject(enemy);
-  // }
+  for (auto enemy: m_enemies) {
+    GET_FACTORY->DestroyObject(enemy);
+  }
 }
