@@ -6,10 +6,6 @@
 
 #include "Scene.hpp"
 
-#include <string>
-
-#include <vector>
-#include "glm/vec2.hpp"
 
 
 namespace Sigma {
