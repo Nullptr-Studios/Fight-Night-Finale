@@ -6,6 +6,7 @@
 
 #include <aecore/AEEngine.h>
 #include "GameManager.hpp"
+#include "Level1_Scene.hpp"
 #include "PrototypeScene.hpp"
 #include "UI/DeadMenu.hpp"
 #include "UI/MainMenu.hpp"
