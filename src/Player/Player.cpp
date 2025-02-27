@@ -12,7 +12,6 @@
 
 #include "UI/HealthBar.hpp"
 #include "UI/MainMenu.hpp"
-#include "core.hpp"
 
 namespace game {
 
@@ -38,7 +37,12 @@ void Player::Init() {
   m_collider->SetColliderType(Sigma::Collision::COLLISION);
   m_collider->damage = 1.0f;
   m_collider->SetOwner(this);
-
+}
+void Player::Serialize() {
+  Character::Serialize();
+  dashVel = j["dashVel"];
+  dashTime = j["dashTime"];
+  dashCool  = j["dashCool"];
 }
 
 void Player::Start() {
@@ -56,12 +60,14 @@ void Player::Update(double delta) {
   if (m_controllerComponent)
     m_controllerComponent->Update();
   
-  if (GetIsIdle())
+  if (GetIsIdle()) {
     if (velocity.x > .1f || velocity.x < -.1f || velocity.y > .1f || velocity.y < -.1f) {
-    m_animComp->SetCurrentAnim("Walk");
-    }else {
-    m_animComp->SetCurrentAnim("Idle");
+      m_animComp->SetCurrentAnim("Walk");
     }
+    else {
+      m_animComp->SetCurrentAnim("Idle");
+    }
+  }
 
   // m_collider->DebugDraw(m_debugPlayerCol, this, "assets/core/debug_blue.png");
 
