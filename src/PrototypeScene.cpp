@@ -59,7 +59,7 @@ void PrototypeScene::Load() {
   p->transform.position.y = m_playerStartPos.y;
   p->transform.position.z = 0.0f;
   p->m_healthBar = healthBar;
-  p->SetTint({1.0f, 0.0f, 0.0f, 1.0f});
+  // p->SetTint({1.0f, 0.0f, 0.0f, 1.0f});
   m_players[0] = p;
   AddChild(p);
 
