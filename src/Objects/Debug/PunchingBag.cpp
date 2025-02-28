@@ -40,7 +40,7 @@ void PunchingBag::OnDamage(const Sigma::Damage::DamageEvent &e) {
 glm::mat3 *PunchingBag::GetTextureTransform()
 {
   auto mtx = m_animComp->GetTextureMatrix();
-  m_tMtx = glm::FromAEX(mtx);
+  m_tMtx = mtx;
   return &m_tMtx;
 }
 } // namespace game

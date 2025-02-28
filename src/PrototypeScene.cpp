@@ -1,6 +1,7 @@
 #include "PrototypeScene.hpp"
 #include "Controller/CameraController.hpp"
-#include "Core.hpp"
+
+#include "Audio/AudioEngine.hpp"
 #include "Enemies/DefaultEnemy.hpp"
 #include "Enemies/Enemy.hpp"
 #include "Factory.hpp"
@@ -11,7 +12,6 @@
 #include "Player/Player.hpp"
 #include "UI/HealthBar.hpp"
 #include "UI/MainMenu.hpp"
-#include "core.hpp"
 
 // #define DEBUG_CAMERA
 
@@ -60,7 +60,7 @@ void PrototypeScene::Load() {
   p->transform.position.y = m_playerStartPos.y;
   p->transform.position.z = 0.0f;
   p->m_healthBar = healthBar;
-  p->SetTint({1.0f, 0.0f, 0.0f, 1.0f});
+  // p->SetTint({1.0f, 0.0f, 0.0f, 1.0f});
   m_players[0] = p;
   AddChild(p);
 
@@ -87,6 +87,15 @@ void PrototypeScene::Load() {
 #ifndef DEBUG_CAMERA
   dynamic_cast<Sigma::CameraFollow*>(GET_CAMERA->GetCurrentCamera())->m_targetP1 = p;
 #endif
+
+
+  GET_AUDIO->LoadBank("assets/banks/Master.bank");
+  GET_AUDIO->LoadBank("assets/banks/Master.strings.bank");
+  GET_AUDIO->LoadBank("assets/banks/Music.bank");
+  GET_AUDIO->LoadEvent("event:/Music/OST_Credits");
+  GET_AUDIO->PlayEvent("event:/Music/OST_Credits");
+
+  
 }
 void PrototypeScene::Update(double delta) {
   GameScene::Update(delta);

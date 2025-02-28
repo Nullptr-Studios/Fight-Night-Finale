@@ -62,7 +62,7 @@ void Enemy::Update(double delta) {
   if (m_currentState == STATE_IDLE && m_enabled) {
     SetState(STATE_FOLLOW);
   } else if (!m_enabled && m_currentState != STATE_IDLE) {
-    m_currentState == STATE_IDLE;
+    m_currentState = STATE_IDLE;
   }
 
   Character::Update(delta);

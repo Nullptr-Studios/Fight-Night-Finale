@@ -5,6 +5,6 @@
 namespace game {
 void HealthBar::Update(double deltaTime) {
   UIProgressBar::Update(deltaTime);
-  m_progress = (float)m_currentHealth/m_maxHealth;
+  m_progress = static_cast<float>(m_currentHealth) /m_maxHealth;
 }
 }
