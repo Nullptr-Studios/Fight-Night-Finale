@@ -1,5 +1,5 @@
 /**
- * @file Level1_Scene.hpp
+ * @file Testing_Scene.hpp
  * @author Alexey
  * @date 29/01/2025
  *
@@ -18,9 +18,9 @@ namespace game {
 class PunchingBag;
 class HealthBar;
 
-class Level1_Scene : public game::GameScene {
+class Testing_Scene : public game::GameScene {
 public:
-  Level1_Scene(const char *name, unsigned ID, const char *jsonPath) :
+  Testing_Scene(const char *name, unsigned ID, const char *jsonPath) :
       GameScene(name, ID, jsonPath), floor(nullptr), walls(nullptr), healthBar(nullptr), p(nullptr) {}
 
   void Load() override;

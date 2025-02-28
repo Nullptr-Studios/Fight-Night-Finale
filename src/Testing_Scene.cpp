@@ -4,11 +4,11 @@
 #include "Enemies/Enemy.hpp"
 #include "Factory.hpp"
 #include "GameManager.hpp"
-#include "Level1_Scene.hpp"
 #include "Objects/Actor.hpp"
 #include "Objects/CameraFollow.hpp"
 #include "Objects/Debug/PunchingBag.hpp"
 #include "Player/Player.hpp"
+#include "Testing_Scene.hpp"
 #include "UI/HealthBar.hpp"
 #include "UI/MainMenu.hpp"
 #include "core.hpp"
@@ -17,7 +17,7 @@
 
 namespace game {
 
-void Level1_Scene::Load() {
+void Testing_Scene::Load() {
   m_debug = true;
   GameScene::Load();
   std::cout << "PrototypeScene::Load()" << std::endl;
@@ -34,14 +34,14 @@ void Level1_Scene::Load() {
   AddChild(GET_CAMERA->GetCurrentCamera());
 
   floor = GET_FACTORY->CreateObject<Sigma::Actor>();
-  floor->SetTexture("assets/level-1/scene-2-floor.png");
-  floor->transform.scale = {1185.0f, 429.0f};
+  floor->SetTexture("assets/level-1/scene-4-floor.png");
+  floor->transform.scale = {933.0f, 273.0f};
   floor->transform.position.z = -5000;
   AddChild(floor);
 
   walls = GET_FACTORY->CreateObject<Sigma::Actor>();
-  walls->SetTexture("assets/level-1/scene-2-walls.png");
-  walls->transform.scale = {1185.0f, 429.0f};
+  walls->SetTexture("assets/level-1/scene-4-walls.png");
+  walls->transform.scale = {933.0f, 273.0f};
   walls->transform.position.z = -5000;
   AddChild(walls);
 
@@ -67,7 +67,7 @@ void Level1_Scene::Load() {
   dynamic_cast<Sigma::CameraFollow*>(GET_CAMERA->GetCurrentCamera())->m_targetP1 = p;
 #endif
 }
-void Level1_Scene::Update(double delta) {
+void Testing_Scene::Update(double delta) {
   GameScene::Update(delta);
 
   // If pressed key 2 create 2nd player
@@ -97,7 +97,7 @@ void Level1_Scene::Update(double delta) {
     GET_MANAGER->UnloadScene(0u);
   }
 }
-void Level1_Scene::Free() {
+void Testing_Scene::Free() {
   GameScene::Free();
 
 }

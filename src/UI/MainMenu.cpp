@@ -1,10 +1,11 @@
 #include "MainMenu.hpp"
+
 #include "../../inc/sigma/engine/src/Controller/CameraController.hpp"
 #include "../../inc/sigma/engine/src/Core.hpp"
 #include "../../inc/sigma/engine/src/Factory.hpp"
 #include "../../inc/sigma/engine/src/Objects/Camera.hpp"
 #include "../PrototypeScene.hpp"
-#include "Level1_Scene.hpp"
+#include "Level1/Scene1.hpp"
 #include "UI/SceneButton.hpp"
 
 void game::MainMenu::Load() {
@@ -12,7 +13,7 @@ void game::MainMenu::Load() {
 
   GET_CAMERA->SetCurrentCamera(GET_FACTORY->CreateObject<Sigma::Camera>("Main Camera"));
 
-  auto s = new game::Level1_Scene("Game Scene", 0, "assets/level-1/scene_2.json");
+  auto s = new game::Scene1("Game Scene", 1, "assets/level-1/scene_1.json");
   m_playButton = GET_FACTORY->CreateObject<Sigma::SceneButton>("Play Button", s,GetID());
   m_playButton->m_screenSpaceTransform.scale = {300, 100};
   m_playButton->m_screenSpaceTransform.position.x += 200;
