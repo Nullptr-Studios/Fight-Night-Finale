@@ -45,7 +45,7 @@ public:
   [[nodiscard]] Sigma::Polygon *GetSceneBoundsPoly() const { return m_sceneBoundsPoly; }
 
 protected:
-  bool m_debug = false;
+  bool m_debug = true;
 
   std::string m_jsonPath;
 

@@ -6,14 +6,11 @@
 
 #include <aecore/AEEngine.h>
 #include "GameManager.hpp"
-#include "Level1_Scene.hpp"
-#include "PrototypeScene.hpp"
-#include "UI/DeadMenu.hpp"
-#include "UI/MainMenu.hpp"
+#include "Level1/Scene4.hpp"
 
 int main() {
   std::unique_ptr<Sigma::GameManager> gameManager = std::make_unique<Sigma::GameManager>("Game", 800, 600);
-  auto scene = new game::MainMenu("Main Menu", -1);
+  auto scene = new game::Scene4("Prototype", 69, "assets/level-1/scene-4.json");
   gameManager->LoadScene(scene);
 
   AEGfxSetFullscreen(false);

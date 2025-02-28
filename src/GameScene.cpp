@@ -42,7 +42,7 @@ void game::GameScene::Load() {
       point->transform.position.y = bound.y;
       point->transform.position.z = 1000;
       point->transform.scale = {10, 10};
-      point->SetTint({1.0f, 0.0f, 0.0f, 0.0f});
+      point->SetTint({0.0f, 1.0f, 1.0f, 1.0f});
     }
   }
 
