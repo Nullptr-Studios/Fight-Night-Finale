@@ -12,7 +12,7 @@ void game::MainMenu::Load() {
 
   GET_CAMERA->SetCurrentCamera(GET_FACTORY->CreateObject<Sigma::Camera>("Main Camera"));
 
-  auto s = new game::Level1_Scene("Game Scene", 0, "assets/level-1/level1.json");
+  auto s = new game::Level1_Scene("Game Scene", 0, "assets/level-1/scene_2.json");
   m_playButton = GET_FACTORY->CreateObject<Sigma::SceneButton>("Play Button", s,GetID());
   m_playButton->m_screenSpaceTransform.scale = {300, 100};
   m_playButton->m_screenSpaceTransform.position.x += 200;
