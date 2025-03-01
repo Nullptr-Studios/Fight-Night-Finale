@@ -1,28 +1,18 @@
 #include "Scene1.hpp"
-#include <sstream>
 #include "Controller/CameraController.hpp"
-#include "Objects/Camera.hpp"
-#include "core.hpp"
+#include "Core.hpp"
 #include "Factory.hpp"
 #include "GameManager.hpp"
 #include "Objects/Actor.hpp"
+#include "Objects/Camera.hpp"
+#include "Objects/CameraFollow.hpp"
 
-#define DEBUG_CAMERA
+// #define DEBUG_CAMERA
 
 namespace game {
 
 void Scene1::Load() {
   GameScene::Load();
-
-#ifdef DEBUG_CAMERA
-  GET_CAMERA->SetCurrentCamera(GET_FACTORY->CreateObject<Sigma::Camera>("Debug Camera"));
-  GET_CAMERA->GetCurrentCamera()->size = 1;
-#else
-  GET_CAMERA->SetCurrentCamera(GET_FACTORY->CreateObject<Sigma::CameraFollow>("Main Camera"));
-  GET_CAMERA->GetCurrentCamera()->size = 2;
-#endif
-
-  AddChild(GET_CAMERA->GetCurrentCamera());
 
   floor = GET_FACTORY->CreateObject<Sigma::Actor>();
   floor->SetTexture("assets/level-1/scene-1-floor.png");
@@ -35,15 +25,6 @@ void Scene1::Load() {
   walls->transform.scale = {761.0f, 281.0f};
   walls->transform.position.z = -5000;
   AddChild(walls);
-
-  std::array<Sigma::Actor*, 15> stupidThings = {};
-  for (int i = 0; i < 15; i++) {
-    std::stringstream ss;
-    ss << "Thing " << i;
-    stupidThings[i] = GET_FACTORY->CreateObject<Sigma::Actor>(ss.str());
-    stupidThings[i]->transform.scale = {10.0f/2, 10.0f/2};
-    stupidThings[i]->SetTint({1.0f, 0.0f, 1.0f, 1.0f});
-  }
 }
 
 void Scene1::Update(double delta) {

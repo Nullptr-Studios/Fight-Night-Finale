@@ -1,8 +1,7 @@
 #include "Scene2.hpp"
-#include <sstream>
 #include "Controller/CameraController.hpp"
 #include "Objects/Camera.hpp"
-#include "core.hpp"
+#include "Core.hpp"
 #include "Factory.hpp"
 #include "GameManager.hpp"
 #include "Objects/Actor.hpp"
@@ -35,15 +34,6 @@ void Scene2::Load() {
   walls->transform.scale = {1185.0f, 429.0f};
   walls->transform.position.z = -5000;
   AddChild(walls);
-
-  std::array<Sigma::Actor*, 15> stupidThings = {};
-  for (int i = 0; i < 15; i++) {
-    std::stringstream ss;
-    ss << "Thing " << i;
-    stupidThings[i] = GET_FACTORY->CreateObject<Sigma::Actor>(ss.str());
-    stupidThings[i]->transform.scale = {10.0f/2, 10.0f/2};
-    stupidThings[i]->SetTint({1.0f, 0.0f, 1.0f, 1.0f});
-  }
 }
 
 void Scene2::Update(double delta) {

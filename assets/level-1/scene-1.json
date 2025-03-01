@@ -9,8 +9,19 @@
     {"x": 320, "y": -80},
     {"x": 0, "y": -80},
     {"x": -60, "y": -20}
+  ],
+  "enemySpawners": [
+  {
+    "name": "Spawner 1",
+    "pos": {"x": 190, "y": -110},
+    "activationRange": 200,
+    "enemies": [
+    {
+      "id": 1,
+      "pos": {"x": 300, "y": -90},
+      "entranceId": 0
+    }
+    ]
+  }
   ]
-
-
-
 }
