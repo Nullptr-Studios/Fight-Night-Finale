@@ -18,7 +18,7 @@
         "y" : 15,
         "z" : 5
       },
-      "animationName" : "Combo1"
+      "animationName" : "BasicCombo"
     },
     {
       "type" : "dmg",
@@ -32,7 +32,7 @@
         "y" : 15,
         "z" : 5
       },
-      "animationName" : "Combo1"
+      "animationName" : "BasicCombo"
     },
     {
       "type" : "dmg",
@@ -46,7 +46,7 @@
         "y" : 15,
         "z" : 5
       },
-      "animationName" : "Combo3"
+      "animationName" : "BasicCombo"
     },
     {
       "type" : "dmg",
@@ -60,7 +60,7 @@
         "y" : 30,
         "z" : 15
       },
-      "animationName" : "Combo4"
+      "animationName" : "BasicCombo"
     }
   ],
 

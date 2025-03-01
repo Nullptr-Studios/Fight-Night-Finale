@@ -5,7 +5,6 @@
 	"frame": {"x":1,"y":351,"w":57,"h":77},
 	"rotated": false,
 	"trimmed": true,
-	"fps": 12,
 	"spriteSourceSize": {"x":41,"y":51,"w":57,"h":77},
 	"sourceSize": {"w":128,"h":128},
 	"pivot": {"x":0.5,"y":1}
@@ -436,9 +435,8 @@
 "meta": {
 	"app": "https://www.codeandweb.com/texturepacker",
 	"version": "1.0",
-	"image": "assets/characters/player/sprites.png",
+	"image": "Kickboxer.png",
 	"format": "RGBA8888",
-	"fps": 12,
 	"size": {"w":126,"h":1403},
 	"scale": "1",
 	"smartupdate": "$TexturePacker:SmartUpdate:b7ceb71c9f6fd8fcb164f13634cb5500:d880b87fa481d7c27f3e18e1d523f7b6:4c611c686c10468ac782f620c2ae0741$"
