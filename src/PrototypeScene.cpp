@@ -84,6 +84,9 @@ void PrototypeScene::Load() {
   s3->transform.position.z = 155;
   AddChild(s3);
 
+  b = GET_FACTORY->CreateObject<game::Box>("Box", "assets/destructibles/default_box.json", "assets/destructibles/default_pickup.json");
+  b->transform.position = {-300, 80, -80};
+
 #ifndef DEBUG_CAMERA
   dynamic_cast<Sigma::CameraFollow*>(GET_CAMERA->GetCurrentCamera())->m_targetP1 = p;
 #endif

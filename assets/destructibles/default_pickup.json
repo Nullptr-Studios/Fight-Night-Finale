@@ -1,0 +1,5 @@
+{
+  "texture": "assets/prototype-scene-2/Medkit.png",
+  "heal" : 50,
+  "size" : {"x": 32, "y": 32, "z": 96}
+}
