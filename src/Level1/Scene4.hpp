@@ -33,8 +33,6 @@ private:
   Sigma::Actor* floor = nullptr;
   Sigma::Actor* walls = nullptr;
 
-protected:
-  bool m_debug = true;
 };
 
 } // namespace game
