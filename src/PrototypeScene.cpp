@@ -47,11 +47,11 @@ void PrototypeScene::Load() {
   AddChild(walls);
 
 
-  healthBar = GET_FACTORY->CreateObject<game::HealthBar>("Progress");
+  healthBar = GET_FACTORY->CreateObject<game::HealthBar>("Progress", 3);
   healthBar->m_screenSpaceTransform.scale = {300, 20};
   healthBar->m_screenSpaceTransform.position = {0,450,0};
   healthBar->m_progress = 1;
-  healthBar->SetTexture("assets/core/debug_red.png");
+  //healthBar->SetTexture("assets/core/debug_red.png");
   AddChild(healthBar);
 
 
@@ -101,11 +101,10 @@ void PrototypeScene::Update(double delta) {
     // Check to avoid having infinite player 2 objects -x
     if (m_players[1]) return;
 
-    healthBar2 = GET_FACTORY->CreateObject<game::HealthBar>("Progress");
+    healthBar2 = GET_FACTORY->CreateObject<game::HealthBar>("Progress", 2);
     healthBar2->m_screenSpaceTransform.scale = {300, 20};
     healthBar2->m_screenSpaceTransform.position = {0, 500, 0};
     healthBar2->m_progress = 1;
-    healthBar2->SetTexture("assets/core/debug_green.png");
 
     p2 = GET_FACTORY->CreateObject<game::Player>("Player2", 0, "assets/characters/player/behaviour.json");
     p2->transform.position.x = m_playerStartPos.x;
