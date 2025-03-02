@@ -25,7 +25,7 @@ int main() {
   auto scene5 = new game::Scene5("Scene5", 5, "assets/level-1/scene-5.json");
   auto scene6 = new game::Scene6("Scene6", 6, "assets/level-1/scene-6.json");
   auto scene7 = new game::Scene7("Scene7", 7, "assets/level-1/scene-7.json");
-  gameManager->LoadScene(scene3);
+  gameManager->LoadScene(scene6);
 
   AEGfxSetFullscreen(false);
   while (AESysWindowExists()) {

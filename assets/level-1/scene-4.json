@@ -15,8 +15,84 @@
     {"x": -172, "y": -76},
     {"x": -196, "y": -52},
     {"x": -420, "y": -52}
+  ],
+  "enemySpawners": [
+    {
+      "name": "Spawner 1",
+      "pos": {"x": -200, "y": 0},
+      "activationRange": 200,
+      "enemies": [
+        {
+          "id": 2,
+          "pos": {"x": -200, "y": 0},
+          "entranceId": 0
+        }
+      ]
+    },
+    {
+      "name": "Spawner 2",
+      "pos": {"x": 245, "y": -75},
+      "activationRange": 220,
+      "enemies": [
+        {
+          "id": 1,
+          "pos": {"x": 270, "y": -15},
+          "entranceId": 1
+        },
+        {
+          "id": 2,
+          "pos": {"x": 355, "y": -55},
+          "entranceId": 2
+        },
+        {
+          "id": 1,
+          "pos": {"x": 360, "y": -45},
+          "entranceId": 2
+        },
+        {
+          "id": 2,
+          "pos": {"x": 95, "y": -10},
+          "entranceId": 3
+        }
+      ]
+    },
+    {
+      "name": "Spawner 3",
+      "requires": "Spawner 2",
+      "pos": {"x": 245, "y": -75},
+      "activationRange": 220,
+      "enemies": [
+        {
+          "id": 1,
+          "pos": {"x": 270, "y": -15},
+          "entranceId": 1
+        },
+        {
+          "id": 1,
+          "pos": {"x": 275, "y": -5},
+          "entranceId": 2
+        },
+        {
+          "id": 2,
+          "pos": {"x": 355, "y": -55},
+          "entranceId": 2
+        },
+        {
+          "id": 1,
+          "pos": {"x": 360, "y": -45},
+          "entranceId": 2
+        },
+        {
+          "id": 1,
+          "pos": {"x": 90, "y": -90},
+          "entranceId": 3
+        },
+        {
+          "id": 2,
+          "pos": {"x": 95, "y": -100},
+          "entranceId": 3
+        }
+      ]
+    }
   ]
-
-
-
 }
