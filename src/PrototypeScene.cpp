@@ -11,6 +11,7 @@
 #include "Player/Player.hpp"
 #include "UI/HealthBar.hpp"
 #include "UI/MainMenu.hpp"
+#include "UI/UIText.hpp"
 
 // #define DEBUG_CAMERA
 
@@ -82,6 +83,11 @@ void PrototypeScene::Load() {
   s3->transform.position.y = -155;
   s3->transform.position.z = 155;
   AddChild(s3);
+
+  auto a = GET_FACTORY->CreateObject<Sigma::UIText>("Text");
+  a->transform.position = {0, 0, 0};
+  a->SetText("Prototype Scene");
+  AddChild(a);
 
 #ifndef DEBUG_CAMERA
   dynamic_cast<Sigma::CameraFollow*>(GET_CAMERA->GetCurrentCamera())->m_targetP1 = p;
