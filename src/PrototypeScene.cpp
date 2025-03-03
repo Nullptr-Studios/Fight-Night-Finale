@@ -1,13 +1,17 @@
 #include "PrototypeScene.hpp"
 #include "Controller/CameraController.hpp"
-#include "Core.hpp"
+
+#include "Audio/AudioEngine.hpp"
+#include "Enemies/DefaultEnemy.hpp"
 #include "Enemies/Enemy.hpp"
 #include "Factory.hpp"
+#include "GameManager.hpp"
 #include "Objects/Actor.hpp"
 #include "Objects/CameraFollow.hpp"
-#include "UI/HealthBar.hpp"
 #include "Objects/Debug/PunchingBag.hpp"
 #include "Player/Player.hpp"
+#include "UI/HealthBar.hpp"
+#include "UI/MainMenu.hpp"
 
 // #define DEBUG_CAMERA
 
@@ -16,6 +20,8 @@ namespace game {
 void PrototypeScene::Load() {
   GameScene::Load();
   std::cout << "PrototypeScene::Load()" << std::endl;
+
+  m_deadScene = new MainMenu("DeadMenu", 0);
 
 #ifdef DEBUG_CAMERA
   GET_CAMERA->SetCurrentCamera(GET_FACTORY->CreateObject<Sigma::Camera>("Debug Camera"));
@@ -54,6 +60,8 @@ void PrototypeScene::Load() {
   p->transform.position.y = m_playerStartPos.y;
   p->transform.position.z = 0.0f;
   p->m_healthBar = healthBar;
+  // p->SetTint({1.0f, 0.0f, 0.0f, 1.0f});
+  m_players[0] = p;
   AddChild(p);
 
 
@@ -76,11 +84,18 @@ void PrototypeScene::Load() {
   s3->transform.position.z = 155;
   AddChild(s3);
 
-  m_players.push_back(p);
-
 #ifndef DEBUG_CAMERA
   dynamic_cast<Sigma::CameraFollow*>(GET_CAMERA->GetCurrentCamera())->m_targetP1 = p;
 #endif
+
+
+  GET_AUDIO->LoadBank("assets/banks/Master.bank");
+  GET_AUDIO->LoadBank("assets/banks/Master.strings.bank");
+  GET_AUDIO->LoadBank("assets/banks/Music.bank");
+  GET_AUDIO->LoadEvent("event:/Music/OST_Credits");
+  GET_AUDIO->PlayEvent("event:/Music/OST_Credits");
+
+  
 }
 void PrototypeScene::Update(double delta) {
   GameScene::Update(delta);
@@ -88,9 +103,7 @@ void PrototypeScene::Update(double delta) {
   // If pressed key 2 create 2nd player
   if (AEInputGamepadButtonTriggered(0, 0x0010)) {
     // Check to avoid having infinite player 2 objects -x
-    if (m_players.size() >= 2)
-      return;
-
+    if (m_players[1]) return;
 
     healthBar2 = GET_FACTORY->CreateObject<game::HealthBar>("Progress");
     healthBar2->m_screenSpaceTransform.scale = {300, 20};
@@ -104,9 +117,14 @@ void PrototypeScene::Update(double delta) {
     p2->transform.position.z = 0.0f;
     p2->m_healthBar = healthBar2;
     dynamic_cast<Sigma::CameraFollow *>(GET_CAMERA->GetCurrentCamera())->m_targetP2 = p2;
-    m_players.push_back(p2);
+    m_players[1] = p2;
     AddChild(p2);
     AddChild(healthBar2);
+  }
+
+  if (!m_players[0] && !m_players[1]) {
+    GET_MANAGER->LoadScene(m_deadScene);
+    GET_MANAGER->UnloadScene(0u);
   }
 }
 void PrototypeScene::Free() {
