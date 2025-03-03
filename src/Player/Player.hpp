@@ -15,7 +15,7 @@
 
 namespace game {
 class MainMenu;
-class HealthBar;
+class HUD;
 
 class Player : public Sigma::Character {
 public:
@@ -36,7 +36,7 @@ public:
 
   void OnDamage(const Sigma::Damage::DamageEvent &e) override;
   void OnHeal(float health) { SetHealth(m_health + health); }
-  game::HealthBar *m_healthBar;
+  game::HUD* healthBar;
 
 private:
   /// @brief Holds the Player Controller Component to handle input

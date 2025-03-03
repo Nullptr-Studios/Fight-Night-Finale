@@ -1,6 +1,7 @@
 #include "PrototypeScene.hpp"
 #include "Controller/CameraController.hpp"
 
+#include "Core.hpp"
 #include "Audio/AudioEngine.hpp"
 #include "Enemies/DefaultEnemy.hpp"
 #include "Enemies/Enemy.hpp"
@@ -12,6 +13,9 @@
 #include "Player/Player.hpp"
 #include "UI/HealthBar.hpp"
 #include "UI/MainMenu.hpp"
+#include "UI/UIImage.hpp"
+#include "UI/UIText.hpp"
+#include "UI/HUD.hpp"
 
 // #define DEBUG_CAMERA
 
@@ -47,11 +51,11 @@ void PrototypeScene::Load() {
   AddChild(walls);
 
 
-  healthBar = GET_FACTORY->CreateObject<game::HealthBar>("Progress");
+  healthBar = GET_FACTORY->CreateObject<game::HealthBar>("UIHealthbarBlue", "HealthbarBlue");
   healthBar->m_screenSpaceTransform.scale = {300, 20};
   healthBar->m_screenSpaceTransform.position = {0,450,0};
   healthBar->m_progress = 1;
-  healthBar->SetTexture("assets/core/debug_red.png");
+  //healthBar->SetTexture("assets/core/debug_red.png");
   AddChild(healthBar);
 
 
@@ -59,7 +63,7 @@ void PrototypeScene::Load() {
   p->transform.position.x = m_playerStartPos.x;
   p->transform.position.y = m_playerStartPos.y;
   p->transform.position.z = 0.0f;
-  p->m_healthBar = healthBar;
+  //p->m_healthBar = healthBar;
   // p->SetTint({1.0f, 0.0f, 0.0f, 1.0f});
   m_players[0] = p;
   AddChild(p);
@@ -84,6 +88,13 @@ void PrototypeScene::Load() {
   s3->transform.position.z = 155;
   AddChild(s3);
 
+  auto a = GET_FACTORY->CreateObject<Sigma::UIText>("Text");
+  a->transform.position = {0, 0, 0};
+  a->SetText("Prototype Scene");
+  AddChild(a);
+
+  auto ui = GET_FACTORY->CreateObject<HUD>("Hud");
+
 #ifndef DEBUG_CAMERA
   dynamic_cast<Sigma::CameraFollow*>(GET_CAMERA->GetCurrentCamera())->m_targetP1 = p;
 #endif
@@ -105,17 +116,16 @@ void PrototypeScene::Update(double delta) {
     // Check to avoid having infinite player 2 objects -x
     if (m_players[1]) return;
 
-    healthBar2 = GET_FACTORY->CreateObject<game::HealthBar>("Progress");
+    healthBar2 = GET_FACTORY->CreateObject<game::HealthBar>("Progress", "HealthbarRed");
     healthBar2->m_screenSpaceTransform.scale = {300, 20};
     healthBar2->m_screenSpaceTransform.position = {0, 500, 0};
     healthBar2->m_progress = 1;
-    healthBar2->SetTexture("assets/core/debug_green.png");
 
     p2 = GET_FACTORY->CreateObject<game::Player>("Player2", 0, "assets/characters/player/behaviour.json");
     p2->transform.position.x = m_playerStartPos.x;
     p2->transform.position.y = m_playerStartPos.y;
     p2->transform.position.z = 0.0f;
-    p2->m_healthBar = healthBar2;
+    //p2->m_healthBar = healthBar2;
     dynamic_cast<Sigma::CameraFollow *>(GET_CAMERA->GetCurrentCamera())->m_targetP2 = p2;
     m_players[1] = p2;
     AddChild(p2);
