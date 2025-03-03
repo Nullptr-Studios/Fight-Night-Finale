@@ -37,6 +37,12 @@ add_custom_command(TARGET game POST_BUILD
         COMMAND ${CMAKE_COMMAND} -E copy_if_different
         ${CMAKE_SOURCE_DIR}/inc/sigma/engine/lib/fmodstudioL.dll ${CMAKE_BINARY_DIR}/)
 
+# Discord Game SDK
+add_custom_command(TARGET game POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E copy_if_different
+        "${CMAKE_SOURCE_DIR}/inc/sigma/engine/lib/discord/discord_game_sdk.dll"
+        ${CMAKE_BINARY_DIR}/)
+
 # Compile commands .json
 #add_custom_command(TARGET game POST_BUILD
 #        COMMAND ${CMAKE_COMMAND} -E copy_if_different
