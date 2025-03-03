@@ -91,7 +91,7 @@ void PrototypeScene::Load() {
   a->SetText("Prototype Scene");
   AddChild(a);
 
-  auto ui = GET_FACTORY->CreateObject<Sigma::UIImage>("assets/UI/UI_Atlas.json", "HealthbarBackground");
+  auto ui = GET_FACTORY->CreateObject<Sigma::UIImage>("UIImage", "assets/UI/UI_Atlas.json","HealthbarBackground");
 
 #ifndef DEBUG_CAMERA
   dynamic_cast<Sigma::CameraFollow*>(GET_CAMERA->GetCurrentCamera())->m_targetP1 = p;
