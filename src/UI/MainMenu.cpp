@@ -1,19 +1,19 @@
 #include "MainMenu.hpp"
 
-#include "../../inc/sigma/engine/src/Controller/CameraController.hpp"
-#include "../../inc/sigma/engine/src/Core.hpp"
-#include "../../inc/sigma/engine/src/Factory.hpp"
-#include "../../inc/sigma/engine/src/Objects/Camera.hpp"
-#include "../PrototypeScene.hpp"
+
+#include "Controller/CameraController.hpp"
 #include "Level1/Scene1.hpp"
+#include "Level1/Scene2.hpp"
+#include "Objects/Camera.hpp"
+#include "Objects/Manager/GameplayManager.hpp"
 #include "UI/SceneButton.hpp"
 
 void game::MainMenu::Load() {
   Scene::Load();
 
   GET_CAMERA->SetCurrentCamera(GET_FACTORY->CreateObject<Sigma::Camera>("Main Camera"));
-
-  auto s = new game::Scene1("Game Scene", 1, "assets/level-1/scene_1.json");
+  
+  auto s = new game::Scene1("Game Scene1", 1, "assets/level-1/scene-1.json");
   m_playButton = GET_FACTORY->CreateObject<Sigma::SceneButton>("Play Button", s,GetID());
   m_playButton->m_screenSpaceTransform.scale = {300, 100};
   m_playButton->m_screenSpaceTransform.position.x += 200;
@@ -41,4 +41,5 @@ void game::MainMenu::Load() {
 }
 void game::MainMenu::Unload() {
   Scene::Unload();
+  GET_FACTORY->CreateObject<game::GameplayManager>("Gameplay Manager");
 }

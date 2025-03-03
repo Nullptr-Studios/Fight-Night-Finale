@@ -1,4 +1,6 @@
 #include "Enemy.hpp"
+
+#include "Objects/Manager/GameplayManager.hpp"
 #include "aecore/AEFrameRateController.h"
 
 #define DEBUG_ENEMY
@@ -34,28 +36,28 @@ void Enemy::OnDamage(const Sigma::Damage::DamageEvent& e) {
   if (!GetAlive()) SetState(STATE_DEAD);
 }
 
-void Enemy::Enable(std::array<Player*, 2>* players) {
+void Enemy::Enable(std::array<PlayerStruct, 2>* players) {
   SetPlayers(players);
-  if (!m_players->operator[](0)) {
+  /*if (!m_players[0].player && !m_players[1].player) {
     std::cout << "[Enemy] " << GetName() << ": Tried to enable without valid player reference\n";
     return;
-  }
+  }*/
 
   m_enabled = true;
 }
 
-void Enemy::SetPlayers(std::array<Player*, 2>* players) { m_players = players; }
+void Enemy::SetPlayers(std::array<PlayerStruct, 2>* players) { m_players = players; }
 
 Player* Enemy::GetNearestPlayer() {
-  if (!m_players->operator[](0) && !m_players->operator[](1)) return nullptr;
-  if (!m_players->operator[](1)) return m_players->operator[](0);
-  if (!m_players->operator[](0)) return m_players->operator[](1);
+  if (!m_players->operator[](0).player && !m_players->operator[](1).player) return nullptr;
+  if (!m_players->operator[](1).player) return m_players->operator[](0).player;
+  if (!m_players->operator[](0).player) return m_players->operator[](1).player;
 
-  float distance0 = glm::distance(transform.GetDepthPosition(), m_players->operator[](0)->transform.GetDepthPosition());
-  float distance1 = glm::distance(transform.GetDepthPosition(), m_players->operator[](1)->transform.GetDepthPosition());
+  float distance0 = glm::distance(transform.GetDepthPosition(), m_players->operator[](0).player->transform.GetDepthPosition());
+  float distance1 = glm::distance(transform.GetDepthPosition(), m_players->operator[](1).player->transform.GetDepthPosition());
 
-  if (distance0 >= distance1) return m_players->operator[](1);
-  return m_players->operator[](0);
+  if (distance0 >= distance1) return m_players->operator[](1).player;
+  return m_players->operator[](0).player;
 }
 
 void Enemy::Update(double delta) {

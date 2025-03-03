@@ -26,9 +26,7 @@ public:
 
   void Update(double delta) override;
   void Free() override;
-
-  std::array<Player*, 2> m_players = {};
-
+  
 private:
   Sigma::Actor* floor = nullptr;
   Sigma::Actor* walls = nullptr;

@@ -6,6 +6,7 @@
 #include "Objects/Actor.hpp"
 #include "Objects/Camera.hpp"
 #include "Objects/CameraFollow.hpp"
+#include "Scene2.hpp"
 
 // #define DEBUG_CAMERA
 
@@ -25,6 +26,8 @@ void Scene1::Load() {
   walls->transform.scale = {761.0f, 281.0f};
   walls->transform.position.z = -5000;
   AddChild(walls);
+
+  SetNextScene(new Scene2("Game Scene 2", 2, "assets/level-1/scene-2.json"));
 }
 
 void Scene1::Update(double delta) {

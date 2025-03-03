@@ -1,10 +1,11 @@
 #include "Scene5.hpp"
 #include "Controller/CameraController.hpp"
-#include "Objects/Camera.hpp"
 #include "Core.hpp"
 #include "Factory.hpp"
 #include "GameManager.hpp"
 #include "Objects/Actor.hpp"
+#include "Objects/Camera.hpp"
+#include "Scene6.hpp"
 
 #define DEBUG_CAMERA
 
@@ -12,16 +13,6 @@ namespace game {
 
 void Scene5::Load() {
   GameScene::Load();
-
-#ifdef DEBUG_CAMERA
-  GET_CAMERA->SetCurrentCamera(GET_FACTORY->CreateObject<Sigma::Camera>("Debug Camera"));
-  GET_CAMERA->GetCurrentCamera()->size = 1;
-#else
-  GET_CAMERA->SetCurrentCamera(GET_FACTORY->CreateObject<Sigma::CameraFollow>("Main Camera"));
-  GET_CAMERA->GetCurrentCamera()->size = 2;
-#endif
-
-  AddChild(GET_CAMERA->GetCurrentCamera());
 
   floor = GET_FACTORY->CreateObject<Sigma::Actor>();
   floor->SetTexture("assets/level-1/scene-5-floor.png");
@@ -34,6 +25,8 @@ void Scene5::Load() {
   walls->transform.scale = {1485.0f, 333.0f};
   walls->transform.position.z = -5000;
   AddChild(walls);
+
+  SetNextScene(new Scene6("Game Scene 6", 6, "assets/level-1/scene-6.json"));
 }
 
 void Scene5::Update(double delta) {

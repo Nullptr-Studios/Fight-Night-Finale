@@ -71,16 +71,7 @@ void game::GameScene::Load() {
   J.clear();
 
   m_sceneBoundsPoly = new Sigma::Polygon(m_sceneBounds);
-
-  #ifdef DEBUG_CAMERA
-    GET_CAMERA->SetCurrentCamera(GET_FACTORY->CreateObject<Sigma::Camera>("Debug Camera"));
-    GET_CAMERA->GetCurrentCamera()->size = 1;
-  #else
-    GET_CAMERA->SetCurrentCamera(GET_FACTORY->CreateObject<Sigma::CameraFollow>("Main Camera"));
-    GET_CAMERA->GetCurrentCamera()->size = 2;
-  #endif
-
-  AddChild(GET_CAMERA->GetCurrentCamera());
+  
 }
 void game::GameScene::Unload() {
   Scene::Unload();
@@ -88,6 +79,8 @@ void game::GameScene::Unload() {
   for (auto spawner: m_enemySpawners) {
     GET_FACTORY->DestroyObject(spawner);
   }
+
+  delete m_sceneBoundsPoly;
 }
 void game::GameScene::DebugWindow() {
   Scene::DebugWindow();
