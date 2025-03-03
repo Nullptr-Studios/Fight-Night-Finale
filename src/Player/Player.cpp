@@ -47,9 +47,6 @@ void Player::Serialize() {
 
 void Player::Start() {
   Character::Start();
-
-  m_healthBar->m_maxHealth = m_maxHealth;
-  m_healthBar->m_currentHealth = GetHealth();
   
   // this is complete jankyness -d
   // m_debugPlayerCol = GET_FACTORY->CreateObject<Sigma::Actor>("Debug Attack");
@@ -84,7 +81,7 @@ void Player::OnDamage(const Sigma::Damage::DamageEvent &e)
 
   std::cout << "Damage with " << e.GetOther()->GetName() << "\n";
   std::cout << GetHealth() << "\n";
-  m_healthBar->m_currentHealth = GetHealth();
+  healthBar->SetPlayer1Health(GetHealth());
 
   if (!m_isAlive && doFuckingOnce) {
     auto scene = dynamic_cast<PrototypeScene*>(GET_SCENE(0));

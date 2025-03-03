@@ -14,6 +14,7 @@
 #include "UI/MainMenu.hpp"
 #include "UI/UIImage.hpp"
 #include "UI/UIText.hpp"
+#include "UI/HUD.hpp"
 
 // #define DEBUG_CAMERA
 
@@ -91,7 +92,7 @@ void PrototypeScene::Load() {
   a->SetText("Prototype Scene");
   AddChild(a);
 
-  auto ui = GET_FACTORY->CreateObject<Sigma::UIImage>("UIImage", "HealthbarBackground");
+  auto ui = GET_FACTORY->CreateObject<HUD>("Hud");
 
 #ifndef DEBUG_CAMERA
   dynamic_cast<Sigma::CameraFollow*>(GET_CAMERA->GetCurrentCamera())->m_targetP1 = p;

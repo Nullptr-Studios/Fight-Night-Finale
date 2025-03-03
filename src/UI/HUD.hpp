@@ -7,9 +7,27 @@
  */
 #pragma once
 #include "Core.hpp"
+#include "UI/UIImage.hpp"
+#include "UI/UINumber.hpp"
+#include "UI/UIText.hpp"
 #include "Objects/Object.hpp"
 
 namespace game {
+
+class Player;
+
+struct UIHealthBar {
+  Sigma::UIImage* background = nullptr;
+  Sigma::UIImage* blue = nullptr;
+  Sigma::UIImage* health = nullptr;
+  Sigma::UIImage* border = nullptr;
+
+  Sigma::UIImage* frame = nullptr;
+ 
+  std::array<Sigma::UINumber*, 2> currentHealth = {};
+  std::array<Sigma::UINumber*, 2> maxHealth = {};
+  Sigma::UIText* slash = nullptr;
+};
 
 class HUD : public Sigma::Object {
 public:
@@ -18,9 +36,15 @@ public:
   void Init() override;
   void Start() override;
   void Update(double delta) override;
+  void SetPlayer1Health(int health);
+
+  void SetPlayers(std::array<Player*, 2> players) { m_players = players; }
 
 private:
-  
+  void SetNumbers(std::array<Sigma::UINumber*, 2> numbers, int value);
+  UIHealthBar player1 = {};
+
+  std::array<Player*, 2> m_players;
 };
 
 }
