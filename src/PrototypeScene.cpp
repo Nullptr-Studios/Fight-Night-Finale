@@ -63,7 +63,7 @@ void PrototypeScene::Load() {
   p->transform.position.x = m_playerStartPos.x;
   p->transform.position.y = m_playerStartPos.y;
   p->transform.position.z = 0.0f;
-  p->m_healthBar = healthBar;
+  //p->m_healthBar = healthBar;
   // p->SetTint({1.0f, 0.0f, 0.0f, 1.0f});
   m_players[0] = p;
   AddChild(p);
@@ -125,7 +125,7 @@ void PrototypeScene::Update(double delta) {
     p2->transform.position.x = m_playerStartPos.x;
     p2->transform.position.y = m_playerStartPos.y;
     p2->transform.position.z = 0.0f;
-    p2->m_healthBar = healthBar2;
+    //p2->m_healthBar = healthBar2;
     dynamic_cast<Sigma::CameraFollow *>(GET_CAMERA->GetCurrentCamera())->m_targetP2 = p2;
     m_players[1] = p2;
     AddChild(p2);

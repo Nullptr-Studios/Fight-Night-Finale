@@ -57,9 +57,10 @@ void HUD::Init() {
 }
 
 void HUD::Start() {
-  m_players[0]->healthBar = this;
+  // FIXME
+  /*m_players[0]->healthBar = this;
   SetNumbers(player1.maxHealth, std::floor(m_players[0]->GetMaxHealth()));
-  SetNumbers(player1.currentHealth, std::floor(m_players[0]->GetHealth()));
+  SetNumbers(player1.currentHealth, std::floor(m_players[0]->GetHealth()));*/
 }
 
 void HUD::Update(double delta) {
@@ -74,7 +75,8 @@ void HUD::SetNumbers(std::array<Sigma::UINumber*, 2> numbers, int value) {
 }
 
 void HUD::SetPlayer1Health(int health) {
-  SetNumbers(player1.currentHealth, health);
+  // FIXME
+  //SetNumbers(player1.currentHealth, health);
 }
 
 }
