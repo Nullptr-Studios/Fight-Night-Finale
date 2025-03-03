@@ -4,7 +4,7 @@
   "accelerationRate" : 5.0,
   "jumpVel" : 0.0,
   "friction" : 1000,
-  "distanceToAttack" : 60.0,
+  "distanceToAttack" : 35.0,
 
   "basicCombo" : [
     {

@@ -72,6 +72,7 @@ public:
   void SetPlayers(std::array<Player*, 2>* players);
   Player* GetNearestPlayer();
 
+  void DebugWindow() override;
 protected:
   std::array<Player*, 2>* m_players = {};
   float m_attackDistance = 0.0f;

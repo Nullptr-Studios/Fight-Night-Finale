@@ -1,5 +1,7 @@
 #include "Enemy.hpp"
+#include "Objects/Character.hpp"
 #include "aecore/AEFrameRateController.h"
+#include "aecore/imgui/imgui.h"
 
 #define DEBUG_ENEMY
 
@@ -122,6 +124,23 @@ void Enemy::TimerState() {
     m_timerNextState = STATE_IDLE;
     m_timerSeconds = -1.0f;
     m_timer = 0.0f;
+  }
+}
+
+void Enemy::DebugWindow() {
+  Character::DebugWindow();
+  if (ImGui::CollapsingHeader("Enemy")) {
+    const char *shakeTypeNames[] = {"idle","follow","wait","dead","dispearse","avoid","reposition","attack"};
+    int selection = m_currentState;
+    if (ImGui::Combo("Current State", &selection, shakeTypeNames, 8)) {
+      m_currentState = selection;
+    }
+    selection = m_defaultState;
+    if (ImGui::Combo("Default State", &selection, shakeTypeNames, 8)) {
+      m_defaultState = selection;
+    }
+    ImGui::DragFloat("Attack Range", &m_attackDistance);
+    ImGui::Checkbox("Enabled", &m_enabled);
   }
 }
 

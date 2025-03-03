@@ -1,10 +1,23 @@
 #include "DefaultEnemy.hpp"
+#include <ostream>
 #include <random>
 #include "Polygon.hpp"
 
 #include "Factory.hpp"
+#include "aecore/AEFrameRateController.h"
+#include "aecore/imgui/imgui.h"
 
 namespace game {
+
+// void DefaultEnemy::DebugWindow() {
+//   Enemy::DebugWindow();
+//   if (ImGui::CollapsingHeader("Default Enemy")) {
+//     ImGui::DragFloat2("Distance", &m_distance.x);
+//     ImGui::DragFloat2("Random Pos", &m_randomPosition.x);
+//
+//   }
+// }
+
 
 void DefaultEnemy::Init() {
   Enemy::Init();
@@ -58,11 +71,15 @@ void DefaultEnemy::FollowState() {
   // We use the .z instead of the .y to ignore if the player is jumping -x
   Move( {direction.x, direction.y} );
 
-  if (fabs(m_distance.x) < m_attackDistance) {
-    if (fabs(m_distance.y) > 5.0f){
+
+  if (fabs(m_distance.x) < m_attackDistance){ // FIXME:
+    if (fabs(m_distance.y) > 8.0f){
       Move( {0.0f, direction.y});
-    } else {
+    } else if (fabs(m_distance.x) > m_attackDistance - 15){
+      std::cout << m_distance.x << '<' << m_attackDistance << '\n';
       SetState(STATE_ATTACK);
+    } else {
+      SetState(STATE_DISPERSE);
     }
   };
 

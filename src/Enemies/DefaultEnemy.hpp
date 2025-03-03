@@ -4,6 +4,7 @@
  * @date 21/02/25
  *
  * @brief [Brief description of the file's purpose]
+ * TODO: follow states need to attack at better distance
  */
 #pragma once
 #include "Enemies/Enemy.hpp"
@@ -18,6 +19,7 @@ public:
   void Update(double delta) override;
   void Destroy() override;
 
+
 protected:
   void OnFullComboPerformed() override;
 
@@ -27,6 +29,9 @@ protected:
   virtual void RepositionState();
   virtual void AttackState();
   void DeadState() override;
+
+  // bool OnCollision(Sigma::Collision::CollisionEvent &e) override;
+  void DebugWindow() override;
 
 private:
 // Idk if this should be private or protected yet -x
