@@ -9,7 +9,7 @@
 	"sourceSize": {"w":26,"h":22}
 },
 {
-	"filename": "Combo_0.png",
+	"filename": "ComboOff_0.png",
 	"frame": {"x":57,"y":43,"w":20,"h":4},
 	"rotated": false,
 	"trimmed": false,
@@ -17,7 +17,7 @@
 	"sourceSize": {"w":20,"h":4}
 },
 {
-	"filename": "Combo_1.png",
+	"filename": "ComboOn_0.png",
 	"frame": {"x":57,"y":49,"w":20,"h":4},
 	"rotated": false,
 	"trimmed": false,
@@ -25,7 +25,7 @@
 	"sourceSize": {"w":20,"h":4}
 },
 {
-	"filename": "Healthbar_0.png",
+	"filename": "HealthbarBackground_0.png",
 	"frame": {"x":1,"y":13,"w":105,"h":8},
 	"rotated": false,
 	"trimmed": false,
@@ -33,15 +33,7 @@
 	"sourceSize": {"w":105,"h":8}
 },
 {
-	"filename": "Healthbar_1.png",
-	"frame": {"x":1,"y":1,"w":107,"h":10},
-	"rotated": false,
-	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":107,"h":10},
-	"sourceSize": {"w":107,"h":10}
-},
-{
-	"filename": "Healthbar_2.png",
+	"filename": "HealthbarBlue_0.png",
 	"frame": {"x":1,"y":23,"w":105,"h":8},
 	"rotated": false,
 	"trimmed": false,
@@ -49,12 +41,20 @@
 	"sourceSize": {"w":105,"h":8}
 },
 {
-	"filename": "Healthbar_3.png",
+	"filename": "HealthbarRed_0.png",
 	"frame": {"x":1,"y":33,"w":105,"h":8},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":105,"h":8},
 	"sourceSize": {"w":105,"h":8}
+},
+{
+	"filename": "HealthbarRim_0.png",
+	"frame": {"x":1,"y":1,"w":107,"h":10},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":107,"h":10},
+	"sourceSize": {"w":107,"h":10}
 },
 {
 	"filename": "Numbers_0.png",
@@ -155,10 +155,10 @@
 "meta": {
 	"app": "https://www.codeandweb.com/texturepacker",
 	"version": "1.0",
-	"image": "UI_Atlas.png",
+	"image": "assets/UI/UI_Atlas.png",
 	"format": "RGBA8888",
 	"size": {"w":119,"h":70},
 	"scale": "1",
-	"smartupdate": "$TexturePacker:SmartUpdate:ee885bdfba35ce2d828e258cf7f0aa58:40eb70428b3b912cb28507ddad3685dd:8dc9898344fe8a12488cb7c64d7f6a17$"
+	"smartupdate": "$TexturePacker:SmartUpdate:60c17a0ca52b34ab8cc7ef12b91f767c:5e73381fdce582ff66e6fe6b3b572b0a:8dc9898344fe8a12488cb7c64d7f6a17$"
 }
 }
