@@ -1,6 +1,7 @@
 #include "PrototypeScene.hpp"
 #include "Controller/CameraController.hpp"
 
+#include "Core.hpp"
 #include "Enemies/DefaultEnemy.hpp"
 #include "Enemies/Enemy.hpp"
 #include "Factory.hpp"
@@ -11,6 +12,7 @@
 #include "Player/Player.hpp"
 #include "UI/HealthBar.hpp"
 #include "UI/MainMenu.hpp"
+#include "UI/UIImage.hpp"
 #include "UI/UIText.hpp"
 
 // #define DEBUG_CAMERA
@@ -88,6 +90,8 @@ void PrototypeScene::Load() {
   a->transform.position = {0, 0, 0};
   a->SetText("Prototype Scene");
   AddChild(a);
+
+  auto ui = GET_FACTORY->CreateObject<Sigma::UIImage>("assets/UI/UI_Atlas.json", "HealthbarBackground");
 
 #ifndef DEBUG_CAMERA
   dynamic_cast<Sigma::CameraFollow*>(GET_CAMERA->GetCurrentCamera())->m_targetP1 = p;
