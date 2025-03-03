@@ -7,10 +7,8 @@
 #include "Factory.hpp"
 #include "GameManager.hpp"
 #include "PrototypeScene.hpp"
-
 #include "Audio/AudioEngine.hpp"
-
-#include "UI/HealthBar.hpp"
+#include "UI/HUD.hpp"
 #include "UI/MainMenu.hpp"
 
 namespace game {
