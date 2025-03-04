@@ -10,6 +10,7 @@
 #include "UI/UIImage.hpp"
 #include "UI/UINumber.hpp"
 #include "UI/UIText.hpp"
+#include "UI/HealthBar.hpp"
 #include "Objects/Object.hpp"
 
 namespace game {
@@ -18,8 +19,8 @@ class Player;
 
 struct UIHealthBar {
   Sigma::UIImage* background = nullptr;
-  Sigma::UIImage* blue = nullptr;
-  Sigma::UIImage* health = nullptr;
+  HealthBar* blue = nullptr;
+  HealthBar* health = nullptr;
   Sigma::UIImage* border = nullptr;
 
   Sigma::UIImage* frame = nullptr;

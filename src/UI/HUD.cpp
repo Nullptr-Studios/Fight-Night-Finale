@@ -13,11 +13,11 @@ void HUD::Init() {
   player1.background = GET_FACTORY->CreateObject<Sigma::UIImage>("Healthbar Background", "HealthbarBackground");
   player1.background->m_screenSpaceTransform.scale = { 107, 10 };
   player1.background->m_screenSpaceTransform.scale *= 4.0f;
-  player1.blue = GET_FACTORY->CreateObject<Sigma::UIImage>("Healthbar Blue", "HealthbarBlue");
-  player1.blue->m_screenSpaceTransform.scale = { 107, 10 };
+  player1.blue = GET_FACTORY->CreateObject<HealthBar>("Healthbar Blue", "HealthbarBlue");
+  player1.blue->SetScale({107, 10 });
   player1.blue->m_screenSpaceTransform.scale *= 4.0f;
-  player1.health = GET_FACTORY->CreateObject<Sigma::UIImage>("Healthbar Red", "HealthbarRed");
-  player1.health->m_screenSpaceTransform.scale = { 107, 10 };
+  player1.health = GET_FACTORY->CreateObject<HealthBar>("Healthbar Red", "HealthbarRed");
+  player1.health->SetScale({ 107, 10 });
   player1.health->m_screenSpaceTransform.scale *= 4.0f;
   player1.border = GET_FACTORY->CreateObject<Sigma::UIImage>("Healthbar Border", "HealthbarRim");
   player1.border->m_screenSpaceTransform.scale = { 109, 12 };

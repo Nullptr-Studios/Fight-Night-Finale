@@ -31,7 +31,7 @@ void Scene1::Load() {
 
   auto nig = GET_FACTORY->CreateObject<HealthBar>("Demo", "HealthbarRed");
   nig->SetScale({105*4, 8*4});
-  nig->m_currentHealth = 70;
+  nig->m_currentHealth = 80;
   nig->m_maxHealth = 80;
   nig->SetAlignment(Sigma::UIProgressBar::LEFT);
 
