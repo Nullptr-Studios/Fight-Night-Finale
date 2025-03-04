@@ -84,7 +84,10 @@ void PrototypeScene::Load() {
   s3->transform.position.z = 155;
   AddChild(s3);
 
-  b = GET_FACTORY->CreateObject<game::Box>("Box", "assets/destructibles/default_box.json", "assets/destructibles/default_pickup.json");
+  b = GET_FACTORY->CreateObject<game::Box>("Box",
+    "assets/prototype-scene-2/Prototype_Box_Default.png",
+    "assets/prototype-scene-2/Prototype_Box_Broken.png",
+    "assets/prototype-scene-2/Medkit.png");
   b->transform.position = {-300, 80, -80};
 
 #ifndef DEBUG_CAMERA
