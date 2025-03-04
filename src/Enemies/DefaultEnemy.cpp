@@ -9,15 +9,34 @@
 
 namespace game {
 
-// void DefaultEnemy::DebugWindow() {
-//   Enemy::DebugWindow();
-//   if (ImGui::CollapsingHeader("Default Enemy")) {
-//     ImGui::DragFloat2("Distance", &m_distance.x);
-//     ImGui::DragFloat2("Random Pos", &m_randomPosition.x);
-//
-//   }
-// }
+void DefaultEnemy::DebugWindow() {
+  Enemy::DebugWindow();
+  if (ImGui::CollapsingHeader("Default Enemy")) {
+    ImGui::DragFloat2("Distance", &m_distance.x);
+    ImGui::DragFloat2("Random Pos", &m_randomPosition.x);
 
+  }
+}
+
+
+// bool DefaultEnemy::OnCollision(Sigma::Collision::CollisionEvent &e) {
+//   if (rand()%100 >= -1) {
+//     return false;
+//   }
+//   try {
+//     if (e.GetOther()->GetName()[0] == 'E') {
+//       glm::vec3 ePos = e.GetOther()->transform.position;
+//       ePos = this->transform.position - ePos;
+//       velocity.x += ePos.x* AEGetFrameTime();
+//       velocity.y += ePos.y * AEGetFrameTime();
+//       return true;
+//     }
+//   } catch (std::exception & e) {
+//     std::cerr << e.what() << std::endl;
+//   return false;
+//   }
+//   return false;
+// }
 
 void DefaultEnemy::Init() {
   Enemy::Init();
@@ -60,7 +79,7 @@ void DefaultEnemy::Update(double delta) {
 }
 
 void DefaultEnemy::OnFullComboPerformed() {
-  SetState(STATE_REPOSITION);
+  // SetState(STATE_REPOSITION);
 }
 
 void DefaultEnemy::FollowState() {
