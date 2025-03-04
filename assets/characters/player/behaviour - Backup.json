@@ -2,9 +2,7 @@
   "maxHealth" : 75.0,
   "maxSpeed" : 122.0,
   "accelerationRate" : 3.0,
-  "dashVel" : 440,
-  "dashTime" : 0.1,
-  "dashCool" : 0.5,
+  "jumpVel" : 440,
   "friction" :700,
 
   "basicCombo" : [
@@ -39,9 +37,9 @@
       "animationName" : "Combo1"
     },
     {
-      "type" : "grb",
-      "damage" : 0,
-      "knockback" : { "x" : -50, "y" : 0 },
+      "type" : "dmg",
+      "damage" : 8.0,
+      "knockback" : { "x" : 200, "y" : 0 },
       "colliderOffset" : {
         "x" : 28,
         "y" : 55
@@ -54,9 +52,9 @@
       "animationName" : "Combo3"
     },
     {
-      "type" : "thr",
-      "damage" : 3.0,
-      "knockback" : { "x" : 600, "y" : 450 },
+      "type" : "dmg",
+      "damage" : 12.0,
+      "knockback" : { "x" : 500, "y" : 450 },
       "colliderOffset" : {
         "x" : 20,
         "y" : 55

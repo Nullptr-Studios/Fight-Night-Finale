@@ -45,7 +45,7 @@
 	"spriteSourceSize": {"x":5,"y":12,"w":55,"h":77},
 	"sourceSize": {"w":64,"h":89},
 	"pivot": {"x":0.328125,"y":1},
-  "callback": "BasicHit"
+  "callback": "DoHit"
 },
 {
 	"filename": "Combo1_0005.png",
@@ -155,7 +155,7 @@
 	"spriteSourceSize": {"x":3,"y":7,"w":59,"h":82},
 	"sourceSize": {"w":64,"h":89},
 	"pivot": {"x":0.296875,"y":1},
-  "callback": "BasicHit"
+  "callback": "DoHit"
 },
 {
 	"filename": "Combo3_0004.png",
@@ -283,7 +283,7 @@
 	"spriteSourceSize": {"x":3,"y":9,"w":47,"h":80},
 	"sourceSize": {"w":57,"h":89},
 	"pivot": {"x":0.5,"y":1},
-  "callback": "BasicHit"
+  "callback": "DoHit"
 },
 {
 	"filename": "Combo4_0010.png",
