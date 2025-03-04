@@ -9,6 +9,7 @@
 #include "UI/HealthBar.hpp"
 #include "Scene2.hpp"
 #include "UI/UIProgressBar.hpp"
+#include "UI/HUD.hpp"
 
 // #define DEBUG_CAMERA
 
@@ -29,11 +30,7 @@ void Scene1::Load() {
   walls->transform.position.z = -5000;
   AddChild(walls);
 
-  auto nig = GET_FACTORY->CreateObject<HealthBar>("Demo", "HealthbarRed");
-  nig->SetScale({105*4, 8*4});
-  nig->m_currentHealth = 80;
-  nig->m_maxHealth = 80;
-  nig->SetAlignment(Sigma::UIProgressBar::LEFT);
+  auto nig = GET_FACTORY->CreateObject<HUD>("HUD");
 
   SetNextScene(new Scene2("Game Scene 2", 2, "assets/level-1/scene-2.json"));
 }

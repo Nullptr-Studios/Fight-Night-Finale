@@ -11,7 +11,7 @@ void HealthBar::DebugWindow() {
   UIProgressBar::DebugWindow();
 
   if (ImGui::CollapsingHeader("Health Bar")) {
-    ImGui::Value("Progress", m_progress);
+    ImGui::Text("Progress %.2f", m_progress);
     ImGui::DragFloat("Current Health", &m_currentHealth);
     ImGui::DragFloat("Maximum Health", &m_maxHealth);
   }
