@@ -3,10 +3,7 @@
 //
 
 #pragma once
-
 #include "Scene.hpp"
-
-
 
 namespace Sigma {
 class Polygon;
@@ -15,13 +12,11 @@ class Polygon;
 namespace game {
 
 class EnemySpawner;
-/**
- * @brief Game Scene class
- */
-class GameScene : public Sigma::Scene {
+class Player;
 
+class GameScene : public Sigma::Scene {
 public:
-  
+ 
   /**
    * @brief Construct a new Game Scene object
    *
@@ -29,13 +24,10 @@ public:
    * @param ID
    * @param jsonPath
    */
-  GameScene(const char *name, unsigned ID, const char *jsonPath) :
-      Scene(name, ID), m_jsonPath(jsonPath) {};
+  GameScene(const char *name, unsigned ID, const char *jsonPath) : Scene(name, ID), m_jsonPath(jsonPath) {};
 
   void Load() override;
-
   void Unload() override;
-
   void DebugWindow() override;
 
   /**
@@ -44,16 +36,20 @@ public:
    */
   [[nodiscard]] Sigma::Polygon *GetSceneBoundsPoly() const { return m_sceneBoundsPoly; }
 
+  [[nodiscard]] glm::vec2 GetPlayerStartPos() const { return m_playerStartPos; }
+
+  [[nodiscard]] Sigma::Scene *GetNextScene() const { return m_nextScene; }
+
+  void SetNextScene(Sigma::Scene *nextScene) { m_nextScene = nextScene; }
+
 protected:
   bool m_debug = false;
 
-  std::string m_jsonPath;
-
-  glm::vec2 m_playerStartPos;
-
-  std::vector<glm::vec2> m_sceneBounds;
-
-  std::vector<EnemySpawner*> m_enemySpawners;
+  std::string m_jsonPath{};
+  glm::vec2 m_playerStartPos{};
+  std::vector<glm::vec2> m_sceneBounds{};
+  std::vector<EnemySpawner *> m_enemySpawners{};
+  Sigma::Scene * m_nextScene = nullptr;
 };
 
 } // namespace game
