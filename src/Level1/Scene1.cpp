@@ -6,7 +6,9 @@
 #include "Objects/Actor.hpp"
 #include "Objects/Camera.hpp"
 #include "Objects/CameraFollow.hpp"
+#include "UI/HealthBar.hpp"
 #include "Scene2.hpp"
+#include "UI/UIProgressBar.hpp"
 
 // #define DEBUG_CAMERA
 
@@ -26,6 +28,12 @@ void Scene1::Load() {
   walls->transform.scale = {761.0f, 281.0f};
   walls->transform.position.z = -5000;
   AddChild(walls);
+
+  auto nig = GET_FACTORY->CreateObject<HealthBar>("Demo", "HealthbarRed");
+  nig->SetScale({105*4, 8*4});
+  nig->m_currentHealth = 70;
+  nig->m_maxHealth = 80;
+  nig->SetAlignment(Sigma::UIProgressBar::LEFT);
 
   SetNextScene(new Scene2("Game Scene 2", 2, "assets/level-1/scene-2.json"));
 }
