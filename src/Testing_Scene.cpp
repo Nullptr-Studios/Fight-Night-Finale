@@ -45,7 +45,7 @@ void Testing_Scene::Load() {
   walls->transform.position.z = -5000;
   AddChild(walls);
 
-  healthBar = GET_FACTORY->CreateObject<game::HealthBar>("Progress");
+  //healthBar = GET_FACTORY->CreateObject<game::HealthBar>("Progress");
   healthBar->m_screenSpaceTransform.scale = {300, 20};
   healthBar->m_screenSpaceTransform.position = {0,450,0};
   healthBar->m_progress = 1;
@@ -57,7 +57,7 @@ void Testing_Scene::Load() {
   p->transform.position.x = m_playerStartPos.x;
   p->transform.position.y = m_playerStartPos.y;
   p->transform.position.z = 0.0f;
-  p->m_healthBar = healthBar;
+  //p->m_healthBar = healthBar;
   p->SetTint({1.0f, 0.0f, 0.0f, 1.0f});
   m_players[0] = p;
   AddChild(p);
@@ -75,7 +75,7 @@ void Testing_Scene::Update(double delta) {
     // Check to avoid having infinite player 2 objects -x
     if (m_players[1]) return;
 
-    healthBar2 = GET_FACTORY->CreateObject<game::HealthBar>("Progress");
+    //healthBar2 = GET_FACTORY->CreateObject<game::HealthBar>("Progress");
     healthBar2->m_screenSpaceTransform.scale = {300, 20};
     healthBar2->m_screenSpaceTransform.position = {0, 500, 0};
     healthBar2->m_progress = 1;
@@ -85,7 +85,7 @@ void Testing_Scene::Update(double delta) {
     p2->transform.position.x = m_playerStartPos.x;
     p2->transform.position.y = m_playerStartPos.y;
     p2->transform.position.z = 0.0f;
-    p2->m_healthBar = healthBar2;
+    //p2->m_healthBar = healthBar2;
     dynamic_cast<Sigma::CameraFollow *>(GET_CAMERA->GetCurrentCamera())->m_targetP2 = p2;
     m_players[1] = p2;
     AddChild(p2);
