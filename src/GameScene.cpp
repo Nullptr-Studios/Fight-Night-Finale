@@ -10,6 +10,7 @@
 #include "Player/Player.hpp"
 #include "Controller/CameraController.hpp"
 #include "Objects/CameraFollow.hpp"
+#include "Scene.hpp"
 #include "pch.hpp"
 
 
@@ -52,8 +53,15 @@ void game::GameScene::Load() {
   m_enemySpawners.reserve(J["enemySpawners"].size());
 
   for (auto &spawners: J["enemySpawners"]) {
-    auto s = GET_FACTORY->CreateObject<EnemySpawner>(spawners["name"], spawners["activationRange"]);
+
+    game::EnemySpawner* s;
+    if (spawners.contains("required"))
+      s = GET_FACTORY->CreateObject<EnemySpawner>(spawners["name"], spawners["activationRange"], m_enemySpawners[spawners["required"]]);
+    else
+      s = GET_FACTORY->CreateObject<EnemySpawner>(spawners["name"], spawners["activationRange"]);
+
     s->transform.position = {spawners["pos"]["x"], spawners["pos"]["y"], -spawners["pos"]["y"].get<int>()};
+    
 
     for (auto &enemies: spawners["enemies"]) {
       EnemySpawnData data{};
@@ -73,6 +81,26 @@ void game::GameScene::Load() {
   m_sceneBoundsPoly = new Sigma::Polygon(m_sceneBounds);
   
 }
+
+void game::GameScene::Update(double delta){
+  Sigma::Scene::Update(delta);
+  //
+  //
+  //
+  // for(auto enemyspawner : m_enemySpawners) {
+  //   if(enemyspawner->GetFinished())
+  //     continue;
+  //
+  //   if(enemyspawner->GetRequiredId() == -1)
+  //   {
+  //     enemyspawner->SetEnabled(true);
+  //     continue;
+  //   }
+  //
+  //   if(enemyspawner->)
+  // }
+}
+
 void game::GameScene::Unload() {
   Scene::Unload();
 
