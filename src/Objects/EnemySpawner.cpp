@@ -5,12 +5,13 @@
 #include "EnemySpawner.hpp"
 #include "Enemies/DefaultEnemy.hpp"
 #include "GameManager.hpp"
-#include "PrototypeScene.hpp"
+#include "GameScene.hpp"
+#include "Manager/GameplayManager.hpp"
 
 // FIXME: this will only work for the first player and the prototype scene
 void game::EnemySpawner::Init() {
   Object::Init();
-  m_scene = dynamic_cast<game::PrototypeScene*>(GET_SCENE(0));
+  m_gameplayManager = GameplayManager::GetInstance();
 }
 
 void game::EnemySpawner::Start()
@@ -25,17 +26,19 @@ void game::EnemySpawner::Update(double deltaTime) {
   if (!m_enabled)
     return;
 
-  for (auto player: m_scene->m_players) {
-    if (!player) continue;
+  for (auto &ps: *m_gameplayManager->GetPlayers()) {
+    if (!ps.player)
+      continue;
 
-    float distance = glm::distance(player->transform.position, transform.position);
+    float distance = glm::distance(ps.player->transform.position, transform.position);
     if (distance < m_activationDistance) {
       for (auto &enemy: m_spawnData) {
         auto e = GET_FACTORY->CreateObject<game::DefaultEnemy>("Enemy", "assets/characters/enemy/behaviour.json");
         e->transform.position.x = enemy.position.x;
         e->transform.position.y = enemy.position.y;
         e->transform.scale = {32.0f, 64.0f};
-        e->Enable(&m_scene->m_players);
+        e->Enable(m_gameplayManager->GetPlayers());
+        e->SetSceneBoundsPoly(m_gameplayManager->GetSceneBoundsPoly());
         m_enemies.push_back(e);
       }
       m_enabled = false;
@@ -47,6 +50,6 @@ void game::EnemySpawner::Destroy() {
   Object::Destroy();
 
   for (auto enemy: m_enemies) {
-    GET_FACTORY->DestroyObject(enemy);
+     GET_FACTORY->DestroyObject(enemy);
   }
 }

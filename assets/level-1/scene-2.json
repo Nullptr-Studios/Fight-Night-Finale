@@ -1,0 +1,88 @@
+{
+  "playerStart": {"x": -475, "y": 25},
+  "bounds": [
+    {"x": -522, "y": 2},
+    {"x": -42, "y": 2},
+    {"x": -78, "y": 38},
+    {"x": -14, "y": 38},
+    {"x": 236, "y": -214},
+    {"x": 590, "y": -214},
+    {"x": 544, "y": -168},
+    {"x": 352, "y": -168},
+    {"x": 114, "y": 72},
+    {"x": -110, "y": 72},
+    {"x": -124, "y": 84},
+    {"x": -474, "y": 84},
+    {"x": -494, "y":72},
+    {"x": -592, "y": 72}
+  ],
+  "enemySpawners": [
+  {
+    "name": "Spawner 1",
+    "pos": {"x": -275, "y": 45},
+    "activationRange": 175,
+    "enemies": [
+    {
+      "id": 1,
+      "pos": {"x": -425, "y": 80},
+      "entranceId": 0
+    },
+    {
+      "id": 1,
+      "pos": {"x": -165, "y": 80},
+      "entranceId": 1
+    }
+    ]
+  },
+  {
+    "name": "Spawner 2",
+    "required" : "Spawner 1",
+    "pos": {"x": -275, "y": 45},
+    "activationRange": 175,
+    "enemies": [
+    {
+      "id": 1,
+      "pos": {"x": -425, "y": 80},
+      "entranceId": 0
+    },
+    {
+      "id": 1,
+      "pos": {"x": -165, "y": 80},
+      "entranceId": 1
+    },
+    {
+      "id": 1,
+      "pos": {"x": -430, "y": 70},
+      "entranceId": 0
+    },
+    {
+      "id": 1,
+      "pos": {"x": -160, "y": 70},
+      "entranceId": 1
+    }
+    ]
+  },
+  {
+    "name": "Spawner 3",
+    "pos": {"x": 160, "y": -50},
+    "activationRange": 175,
+    "enemies": [
+    {
+      "id": 1,
+      "pos": {"x": 130, "y": 40},
+      "entranceId": 2
+    },
+    {
+      "id": 1,
+      "pos": {"x": 120, "y": 35},
+      "entranceId": 2
+    },
+    {
+      "id": 1,
+      "pos": {"x": 410, "y": -190},
+      "entranceId": 3
+    }
+    ]
+  }
+  ]
+}

@@ -14,6 +14,9 @@
 #include "PlayerController.hpp"
 
 namespace game {
+class GameplayManager;
+}
+namespace game {
 class MainMenu;
 class HUD;
 

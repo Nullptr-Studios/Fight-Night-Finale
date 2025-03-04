@@ -11,12 +11,15 @@
 #include "Objects/Character.hpp"
 
 namespace game {
+struct PlayerStruct;
 
 class Enemy : public Sigma::Character {
 protected:
 
 public:
   explicit Enemy(const Sigma::id_t id, const char* jsonPath) : Character(id, jsonPath) {}
+  
+  
   void Init() override;
   void Serialize() override;
   void Start() override;
@@ -42,7 +45,7 @@ public:
 
   #pragma endregion
 
-  virtual void Enable(std::array<Player*, 2>* players);
+  virtual void Enable(std::array<PlayerStruct, 2>* players);
 
   /**
    * @brief Changes the current state variable
@@ -69,11 +72,11 @@ public:
    */
   void WaitSeconds(float time, int nextState);
 
-  void SetPlayers(std::array<Player*, 2>* players);
+  void SetPlayers(std::array<PlayerStruct, 2>* players);
   Player* GetNearestPlayer();
 
 protected:
-  std::array<Player*, 2>* m_players = {};
+  std::array<PlayerStruct, 2>* m_players = {};
   float m_attackDistance = 0.0f;
   int m_defaultState = 0;
 
