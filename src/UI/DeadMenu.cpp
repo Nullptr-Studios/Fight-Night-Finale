@@ -14,7 +14,7 @@ void DeadMenu::Load() {
   Scene::Load();
   GET_CAMERA->SetCurrentCamera(GET_FACTORY->CreateObject<Sigma::Camera>("Main Camera"));
 
-  auto menu = GET_FACTORY->CreateObject<Sigma::UIImage>();
+  auto menu = GET_FACTORY->CreateObject<Sigma::UIElement>();
   menu->transform.scale = {960, 720};
   menu->SetTexture("assets/UI/Died.png");
 
