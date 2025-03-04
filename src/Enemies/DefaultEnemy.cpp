@@ -2,9 +2,7 @@
 #include <ostream>
 #include <random>
 #include "Polygon.hpp"
-
 #include "Factory.hpp"
-#include "aecore/AEFrameRateController.h"
 #include "aecore/imgui/imgui.h"
 
 namespace game {
