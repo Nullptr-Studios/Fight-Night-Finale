@@ -42,6 +42,10 @@ public:
   static constexpr int STATE_AVOID = 5;      ///< @constexpr STATE_AVOID       The enemy moves away from other enemies
   static constexpr int STATE_REPOSITION = 6; ///< @constexpr STATE_REPOSITION  The enemy repositions after a combo
   static constexpr int STATE_ATTACK = 7;     ///< @constexpr STATE_ATTACK      The enemy attacks the player
+  static constexpr int STATE_WANDER = 8;     ///< @constexpr STATE_ATTACK      The enemy wanders around
+  static constexpr int STATE_PAUSED = 9;     ///< @constexpr STATE_ATTACK      The enemy pauses for a while and switches states
+  static constexpr int STATE_WALK = 10;     ///< @constexpr STATE_ATTACK      The enemy Walks for a bit
+  static constexpr int STATE_GOTO = 11;     ///< @constexpr STATE_ATTACK      The enemy GOTO's point
 
   #pragma endregion
 

@@ -63,7 +63,7 @@ Player* Enemy::GetNearestPlayer() {
 
 void Enemy::Update(double delta) {
   if (m_currentState == STATE_IDLE && m_enabled) {
-    SetState(STATE_FOLLOW);
+    SetState(m_defaultState);
   } else if (!m_enabled && m_currentState != STATE_IDLE) {
     m_currentState = STATE_IDLE;
   }
@@ -131,13 +131,13 @@ void Enemy::TimerState() {
 void Enemy::DebugWindow() {
   Character::DebugWindow();
   if (ImGui::CollapsingHeader("Enemy")) {
-    const char *shakeTypeNames[] = {"idle","follow","wait","dead","dispearse","avoid","reposition","attack"};
+    const char *states[] = {"idle","follow","wait","dead","dispearse","avoid","reposition","attack","wander", "paused","walk","goto"};
     int selection = m_currentState;
-    if (ImGui::Combo("Current State", &selection, shakeTypeNames, 8)) {
+    if (ImGui::Combo("Current State", &selection, states, 12)) {
       m_currentState = selection;
     }
     selection = m_defaultState;
-    if (ImGui::Combo("Default State", &selection, shakeTypeNames, 8)) {
+    if (ImGui::Combo("Default State", &selection, states, 12)) {
       m_defaultState = selection;
     }
     ImGui::DragFloat("Attack Range", &m_attackDistance);
