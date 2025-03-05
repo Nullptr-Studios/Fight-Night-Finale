@@ -14,8 +14,11 @@
 #include "PlayerController.hpp"
 
 namespace game {
+class GameplayManager;
+}
+namespace game {
 class MainMenu;
-class HealthBar;
+class HUD;
 
 class Player : public Sigma::Character {
 public:
@@ -29,13 +32,14 @@ public:
   explicit Player(const Sigma::id_t id, int controllerId, std::string jsonPath) : Character(id, std::move(jsonPath)), m_controllerId(controllerId) {}
 
   void Init() override;
+  void Serialize() override;
   void Start() override;
   void Update(double delta) override;
   void Destroy() override;
 
   void OnDamage(const Sigma::Damage::DamageEvent &e) override;
-
-  game::HealthBar *m_healthBar;
+  void OnHeal(float health) { SetHealth(m_health + health); }
+  game::HUD* healthBar;
 
 private:
   /// @brief Holds the Player Controller Component to handle input

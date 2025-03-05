@@ -7,9 +7,10 @@
 #include "glm/vec2.hpp"
 
 namespace game {
+class GameplayManager;
+class GameScene;
 class PrototypeScene;
-}
-namespace game {
+
 
 struct EnemySpawnData {
   int id;
@@ -42,7 +43,8 @@ private:
 
   std::list<Object*> m_enemies;
 
-  game::PrototypeScene* m_scene; 
+  GameplayManager* m_gameplayManager = nullptr;
+  
 };
 
 }

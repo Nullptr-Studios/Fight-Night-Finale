@@ -8,3 +8,8 @@ bin
 # I think this is from nvim
 .cache
 compile_commands.json
+
+# QOL
+*/.ignore/*
+*.old
+imgui.ini

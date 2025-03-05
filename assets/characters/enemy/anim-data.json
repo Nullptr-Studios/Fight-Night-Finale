@@ -576,7 +576,7 @@
 	"spriteSourceSize": {"x":1,"y":7,"w":60,"h":82},
 	"sourceSize": {"w":61,"h":89},
 	"pivot": {"x":0.459016,"y":1},
-  "callback": "BasicHit"
+  "callback": "DoHit"
 },
 {
 	"filename": "Punch1_0015.png",

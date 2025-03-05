@@ -10,7 +10,7 @@ namespace game {
 void PunchingBag::Init() {
   Damageable::Init();
 
-  m_animComp = std::make_unique<Sigma::Animation::AnimationComponent>(this);
+  m_animComp = new Sigma::Animation::AnimationComponent(this);
 
   auto anim = GET_ANIMATION->LoadTextureAtlas("assets/characters/punch-bag/anim-data.json");
   m_animComp->SetTextureAtlas(anim);
@@ -40,7 +40,7 @@ void PunchingBag::OnDamage(const Sigma::Damage::DamageEvent &e) {
 glm::mat3 *PunchingBag::GetTextureTransform()
 {
   auto mtx = m_animComp->GetTextureMatrix();
-  m_tMtx = glm::FromAEX(mtx);
+  m_tMtx = mtx;
   return &m_tMtx;
 }
 } // namespace game

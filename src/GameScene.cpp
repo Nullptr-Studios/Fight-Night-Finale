@@ -7,6 +7,9 @@
 #include "Factory.hpp"
 #include "Polygon.hpp"
 #include "Objects/EnemySpawner.hpp"
+#include "Player/Player.hpp"
+#include "Controller/CameraController.hpp"
+#include "Objects/CameraFollow.hpp"
 #include "pch.hpp"
 
 
@@ -42,7 +45,7 @@ void game::GameScene::Load() {
       point->transform.position.y = bound.y;
       point->transform.position.z = 1000;
       point->transform.scale = {10, 10};
-      point->SetModulationColor(AE_COLORS_RED);
+      point->SetTint({0.0f, 1.0f, 1.0f, 1.0f});
     }
   }
 
@@ -67,13 +70,20 @@ void game::GameScene::Load() {
 
   J.clear();
 
-
   m_sceneBoundsPoly = new Sigma::Polygon(m_sceneBounds);
+  
 }
 void game::GameScene::Unload() {
   Scene::Unload();
-  
+
   for (auto spawner: m_enemySpawners) {
     GET_FACTORY->DestroyObject(spawner);
   }
+
+  delete m_sceneBoundsPoly;
+}
+void game::GameScene::DebugWindow() {
+  Scene::DebugWindow();
+  
+  ImGui::Checkbox("Debug draw", &m_debug);
 }
