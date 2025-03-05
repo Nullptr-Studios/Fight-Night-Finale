@@ -167,48 +167,52 @@
             <key>heuristicMask</key>
             <false/>
             <key>defaultPivotPoint</key>
-            <point_f>0.5,0.5</point_f>
+            <point_f>0.5,1</point_f>
             <key>writePivotPoints</key>
             <true/>
         </struct>
         <key>individualSpriteSettings</key>
         <map type="IndividualSpriteSettingsMap">
-            <key type="filename">../Frames/Characters/Kickboxer/BasicCombo/BasicCombo_0060.png</key>
-            <key type="filename">../Frames/Characters/Kickboxer/BasicCombo/BasicCombo_0061.png</key>
-            <key type="filename">../Frames/Characters/Kickboxer/BasicCombo/BasicCombo_0062.png</key>
-            <key type="filename">../Frames/Characters/Kickboxer/BasicCombo/BasicCombo_0063.png</key>
-            <key type="filename">../Frames/Characters/Kickboxer/BasicCombo/BasicCombo_0064.png</key>
-            <key type="filename">../Frames/Characters/Kickboxer/BasicCombo/BasicCombo_0065.png</key>
-            <key type="filename">../Frames/Characters/Kickboxer/BasicCombo/BasicCombo_0066.png</key>
-            <key type="filename">../Frames/Characters/Kickboxer/BasicCombo/BasicCombo_0067.png</key>
-            <key type="filename">../Frames/Characters/Kickboxer/BasicCombo/BasicCombo_0068.png</key>
-            <key type="filename">../Frames/Characters/Kickboxer/BasicCombo/BasicCombo_0069.png</key>
-            <key type="filename">../Frames/Characters/Kickboxer/BasicCombo/BasicCombo_0070.png</key>
-            <key type="filename">../Frames/Characters/Kickboxer/BasicCombo/BasicCombo_0071.png</key>
-            <key type="filename">../Frames/Characters/Kickboxer/BasicCombo/BasicCombo_0072.png</key>
-            <key type="filename">../Frames/Characters/Kickboxer/BasicCombo/BasicCombo_0073.png</key>
+            <key type="filename">../Frames/Characters/Kickboxer/BasicCombo/BasicCombo1_0056.png</key>
+            <key type="filename">../Frames/Characters/Kickboxer/BasicCombo/BasicCombo1_0057.png</key>
+            <key type="filename">../Frames/Characters/Kickboxer/BasicCombo/BasicCombo1_0058.png</key>
+            <key type="filename">../Frames/Characters/Kickboxer/BasicCombo/BasicCombo1_0059.png</key>
+            <key type="filename">../Frames/Characters/Kickboxer/BasicCombo/BasicCombo2_0059.png</key>
+            <key type="filename">../Frames/Characters/Kickboxer/BasicCombo/BasicCombo2_0060.png</key>
+            <key type="filename">../Frames/Characters/Kickboxer/BasicCombo/BasicCombo2_0061.png</key>
+            <key type="filename">../Frames/Characters/Kickboxer/BasicCombo/BasicCombo2_0062.png</key>
+            <key type="filename">../Frames/Characters/Kickboxer/BasicCombo/BasicCombo2_0063.png</key>
+            <key type="filename">../Frames/Characters/Kickboxer/BasicCombo/BasicCombo2_0064.png</key>
+            <key type="filename">../Frames/Characters/Kickboxer/BasicCombo/BasicCombo3_0064.png</key>
+            <key type="filename">../Frames/Characters/Kickboxer/BasicCombo/BasicCombo3_0065.png</key>
+            <key type="filename">../Frames/Characters/Kickboxer/BasicCombo/BasicCombo3_0066.png</key>
+            <key type="filename">../Frames/Characters/Kickboxer/BasicCombo/BasicCombo3_0067.png</key>
+            <key type="filename">../Frames/Characters/Kickboxer/BasicCombo/BasicCombo3_0068.png</key>
+            <key type="filename">../Frames/Characters/Kickboxer/BasicCombo/BasicCombo3_0069.png</key>
+            <key type="filename">../Frames/Characters/Kickboxer/BasicCombo/BasicCombo3_0070.png</key>
+            <key type="filename">../Frames/Characters/Kickboxer/BasicCombo/BasicCombo3_0071.png</key>
+            <key type="filename">../Frames/Characters/Kickboxer/BasicCombo/BasicCombo3_0072.png</key>
+            <key type="filename">../Frames/Characters/Kickboxer/BasicCombo/BasicCombo3_0073.png</key>
+            <key type="filename">../Frames/Characters/Kickboxer/BasicCombo/BasicCombo3_0074.png</key>
+            <key type="filename">../Frames/Characters/Kickboxer/BasicCombo/BasicCombo3_0075.png</key>
             <key type="filename">../Frames/Characters/Kickboxer/Grab/Grab_0076.png</key>
             <key type="filename">../Frames/Characters/Kickboxer/Grab/Grab_0077.png</key>
             <key type="filename">../Frames/Characters/Kickboxer/Grab/Grab_0078.png</key>
             <key type="filename">../Frames/Characters/Kickboxer/Grab/Grab_0079.png</key>
             <key type="filename">../Frames/Characters/Kickboxer/Grab/Grab_0080.png</key>
-            <key type="filename">../Frames/Characters/Kickboxer/Hit/Hit_0.png</key>
+            <key type="filename">../Frames/Characters/Kickboxer/Hit/Hit_0053.png</key>
+            <key type="filename">../Frames/Characters/Kickboxer/Hit/Hit_0054.png</key>
+            <key type="filename">../Frames/Characters/Kickboxer/Hit/Hit_0055.png</key>
+            <key type="filename">../Frames/Characters/Kickboxer/Idle/Idle_0011.png</key>
+            <key type="filename">../Frames/Characters/Kickboxer/Idle/Idle_0012.png</key>
+            <key type="filename">../Frames/Characters/Kickboxer/Idle/Idle_0013.png</key>
+            <key type="filename">../Frames/Characters/Kickboxer/Idle/Idle_0014.png</key>
+            <key type="filename">../Frames/Characters/Kickboxer/Idle/Idle_0015.png</key>
+            <key type="filename">../Frames/Characters/Kickboxer/Idle/Idle_0016.png</key>
             <key type="filename">../Frames/Characters/Kickboxer/Idle/Idle_0017.png</key>
             <key type="filename">../Frames/Characters/Kickboxer/Idle/Idle_0018.png</key>
             <key type="filename">../Frames/Characters/Kickboxer/Idle/Idle_0019.png</key>
             <key type="filename">../Frames/Characters/Kickboxer/Idle/Idle_0020.png</key>
-            <key type="filename">../Frames/Characters/Kickboxer/Idle/Idle_0021.png</key>
-            <key type="filename">../Frames/Characters/Kickboxer/Idle/Idle_0022.png</key>
-            <key type="filename">../Frames/Characters/Kickboxer/Idle/Idle_0023.png</key>
-            <key type="filename">../Frames/Characters/Kickboxer/Idle/Idle_0024.png</key>
-            <key type="filename">../Frames/Characters/Kickboxer/Idle/Idle_0025.png</key>
-            <key type="filename">../Frames/Characters/Kickboxer/Idle/Idle_0026.png</key>
-            <key type="filename">../Frames/Characters/Kickboxer/Idle/Idle_0027.png</key>
-            <key type="filename">../Frames/Characters/Kickboxer/Idle/Idle_0028.png</key>
-            <key type="filename">../Frames/Characters/Kickboxer/Idle/Idle_0029.png</key>
-            <key type="filename">../Frames/Characters/Kickboxer/Idle/Idle_0030.png</key>
-            <key type="filename">../Frames/Characters/Kickboxer/Idle/Idle_0031.png</key>
-            <key type="filename">../Frames/Characters/Kickboxer/Idle/Idle_0032.png</key>
             <key type="filename">../Frames/Characters/Kickboxer/Recover/Recover_0045.png</key>
             <key type="filename">../Frames/Characters/Kickboxer/Recover/Recover_0046.png</key>
             <key type="filename">../Frames/Characters/Kickboxer/Recover/Recover_0047.png</key>
