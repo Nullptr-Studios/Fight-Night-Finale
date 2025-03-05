@@ -21,7 +21,7 @@
         "y" : 15,
         "z" : 5
       },
-      "animationName" : "BasicCombo"
+      "animationName" : "BasicCombo1"
     },
     {
       "type" : "dmg",
@@ -36,10 +36,10 @@
         "y" : 15,
         "z" : 5
       },
-      "animationName" : "BasicCombo"
+      "animationName" : "BasicCombo2"
     },
     {
-      "type" : "grb",
+      "type" : "dmg",
       "damage" : 0,
       "knockback" : { "x" : -50, "y" : 0 },
       "colliderOffset" : {
@@ -51,22 +51,7 @@
         "y" : 15,
         "z" : 5
       },
-      "animationName" : "BasicCombo"
-    },
-    {
-      "type" : "thr",
-      "damage" : 3.0,
-      "knockback" : { "x" : 600, "y" : 450 },
-      "colliderOffset" : {
-        "x" : 20,
-        "y" : 55
-      },
-      "colliderSize" : {
-        "x" : 20,
-        "y" : 30,
-        "z" : 15
-      },
-      "animationName" : "BasicCombo"
+      "animationName" : "BasicCombo3"
     }
   ],
 

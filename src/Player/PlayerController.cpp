@@ -15,8 +15,14 @@ void PlayerController::Update()
 
   // Action callback
   if      (action == "roll" && m_character->GetIsIdle())  m_character->Dash();
-  else if (action == "basic") m_character->BasicAttack();
-  else if (action == "super") m_character->SuperAttack();
+  else if (action == "basic") {
+    if (!m_character->GetIsIdle())
+      m_character->WantsToAttackAgainBasic();
+    
+    m_character->BasicAttack();
+  }
+  else if (action == "super")
+    m_character->SuperAttack();
 
   // #ifdef _DEBUG
   // std::cout << m_character->transform.position.x << ", " << m_character->transform.position.y <<

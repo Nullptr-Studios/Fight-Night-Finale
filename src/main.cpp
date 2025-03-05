@@ -8,13 +8,6 @@
 #include "GameManager.hpp"
 
 //SCENES
-#include "Level1/Scene1.hpp"
-#include "Level1/Scene2.hpp"
-#include "Level1/Scene3.hpp"
-#include "Level1/Scene4.hpp"
-#include "Level1/Scene5.hpp"
-#include "Level1/Scene6.hpp"
-#include "Level1/Scene7.hpp"
 #include "UI/MainMenu.hpp"
 
 int main() {
