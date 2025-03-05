@@ -30,11 +30,11 @@ void game::GameplayManager::Init() {
 
   
 
-  GET_AUDIO->LoadBank("assets/banks/Master.bank");
-  GET_AUDIO->LoadBank("assets/banks/Master.strings.bank");
-  GET_AUDIO->LoadBank("assets/banks/Music.bank");
-  GET_AUDIO->LoadEvent("event:/Music/OST_Credits");
-  GET_AUDIO->PlayEvent("event:/Music/OST_Credits");
+  // GET_AUDIO->LoadBank("assets/banks/Master.bank");
+  // GET_AUDIO->LoadBank("assets/banks/Master.strings.bank");
+  // GET_AUDIO->LoadBank("assets/banks/Music.bank");
+  // GET_AUDIO->LoadEvent("event:/Music/OST_Credits");
+  // GET_AUDIO->PlayEvent("event:/Music/OST_Credits");
 
   
 }
