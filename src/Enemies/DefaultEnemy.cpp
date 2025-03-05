@@ -130,9 +130,6 @@ void DefaultEnemy::FollowState() {
 void DefaultEnemy::AttackState() {
   if (!m_isDoingSomething) return;
   BasicAttack();
-  m_timer = Sigma::Random::Float(.2f, 2);
-  m_nextState = STATE_FOLLOW;
-  SetState(STATE_PAUSED);
 }
 
 void DefaultEnemy::GoToState() {
@@ -216,7 +213,9 @@ void DefaultEnemy::DeadState() {
 }
 
 void DefaultEnemy::OnFullComboPerformed() {
-  // SetState(STATE_REPOSITION);
+  m_timer = Sigma::Random::Float(1.2f,1.6f);
+  m_nextState = STATE_FOLLOW;
+  SetState(STATE_PAUSED);
 }
 
 void DefaultEnemy::Destroy() {
