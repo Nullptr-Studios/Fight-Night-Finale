@@ -78,7 +78,8 @@ void Player::OnDamage(const Sigma::Damage::DamageEvent &e)
 
   std::cout << "Damage with " << e.GetOther()->GetName() << "\n";
   std::cout << GetHealth() << "\n";
-  healthBar->SetPlayer1Health(GetHealth());
+  if (healthBar) 
+    healthBar->SetPlayer1Health(GetHealth<int>());
 
   if (!m_isAlive && doFuckingOnce) {
     auto scene = dynamic_cast<PrototypeScene*>(GET_SCENE(0));

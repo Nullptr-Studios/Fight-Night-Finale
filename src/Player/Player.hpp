@@ -40,9 +40,9 @@ public:
   void OnDamage(const Sigma::Damage::DamageEvent &e) override;
   void OnHeal(float health) { 
     SetHealth(m_health + health); 
-    healthBar->SetPlayer1Health(GetHealth());
+    healthBar->SetPlayer1Health(GetHealth<int>());
   }
-  game::HUD* healthBar;
+  game::HUD* healthBar = nullptr;
 
 private:
   /// @brief Holds the Player Controller Component to handle input
