@@ -36,6 +36,8 @@ public:
   void Start() override;
   void Update(double delta) override;
   void Destroy() override;
+  void SetControllerID(int id);
+  int GetControllerID() const { return m_controllerId; }
 
   void OnDamage(const Sigma::Damage::DamageEvent &e) override;
   void OnHeal(float health) { SetHealth(m_health + health); }
@@ -45,7 +47,7 @@ private:
   /// @brief Holds the Player Controller Component to handle input
   std::unique_ptr<PlayerController> m_controllerComponent = nullptr;
 
-  int m_controllerId = -1;
+  int m_controllerId;
 
   Sigma::Actor* m_debugPlayerCol = nullptr;
   MainMenu *m_deadScene = nullptr;

@@ -40,10 +40,7 @@ void game::GameplayManager::Init() {
 }
 void game::GameplayManager::Start() {
   Object::Start();
-  
   UpdateCurrentGameScene();
-
-  InitPlayer(-1);
 }
 
 void game::GameplayManager::Update(double deltaTime) {
@@ -54,6 +51,11 @@ void game::GameplayManager::Update(double deltaTime) {
     GotoNextSceneAfter();
   }
 
+  if (!m_playerCount && AEInputGamepadButtonPressed(0, AE_GAMEPAD_START)) {
+    InitPlayer(0);
+  } else if (!m_playerCount && AEInputKeyPressed(' ')) {
+     InitPlayer(-1);
+  }
   CheckForCoop();
 
   // Debug pass level
@@ -114,14 +116,15 @@ void game::GameplayManager::InitPlayer(unsigned controllerID)
 
 void game::GameplayManager::CheckForCoop() {
   // If pressed key 2 create 2nd player
-  if (AEInputGamepadButtonTriggered(0, AE_GAMEPAD_START)) {
-    // FIXME: This is a hack, it only supports keyboard and gamepad, not gamepad gamepad
-    if (m_playerCount == 2)
+  if (m_playerCount == 2 || m_playerCount == 0)
       return;
-    
+  if (m_players[0].player->GetControllerID() <= -1 && AEInputGamepadButtonTriggered(0, AE_GAMEPAD_START)) {
     InitPlayer(0);
     RespawnPlayer(m_players[1].player);
-  }
+  } else if (AEInputGamepadButtonTriggered(1, AE_GAMEPAD_START)) {
+    InitPlayer(1);
+    RespawnPlayer(m_players[1].player);
+    }
 }
 
 void game::GameplayManager::UpdateCurrentGameScene() {
