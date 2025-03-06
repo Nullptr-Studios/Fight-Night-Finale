@@ -16,6 +16,7 @@ namespace game {
 class GameScene;
 class Player;
 class HealthBar;
+class HUD;
 
 struct PlayerStruct {
   Player* player = nullptr;
@@ -82,6 +83,8 @@ private:
   //bool m_gameStarted = false;
 
   Sigma::CameraFollow* m_cameraFollow;
+
+  HUD* m_gameHud = nullptr;
 
   /**
    * @brief holds the information required for the players

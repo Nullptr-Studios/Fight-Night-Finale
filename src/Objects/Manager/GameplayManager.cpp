@@ -6,6 +6,7 @@
 
 #include "Audio/AudioEngine.hpp"
 #include "Controller/CameraController.hpp"
+#include "Core.hpp"
 #include "Factory.hpp"
 #include "GameManager.hpp"
 
@@ -28,6 +29,8 @@ void game::GameplayManager::Init() {
   GET_CAMERA->SetCurrentCamera(m_cameraFollow);
 #endif
 
+
+  m_gameHud = GET_FACTORY->CreateObject<game::HUD>("Game HUD");
   
 
   GET_AUDIO->LoadBank("assets/banks/Master.bank");
@@ -36,6 +39,7 @@ void game::GameplayManager::Init() {
   GET_AUDIO->LoadEvent("event:/Music/OST_Credits");
   GET_AUDIO->PlayEvent("event:/Music/OST_Credits");
 
+  
   
 }
 void game::GameplayManager::Start() {
@@ -86,6 +90,8 @@ void game::GameplayManager::InitPlayer(unsigned controllerID)
 
   // Add player to the array
   m_players[m_playerCount] = p;
+
+  m_gameHud->UpdatePlayerHUD();
 
   // Setup Camera
   if (m_playerCount == 0) 

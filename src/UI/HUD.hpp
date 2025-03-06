@@ -31,6 +31,17 @@ struct UIHealthBar {
   Sigma::UIText* slash = nullptr;
 
   glm::vec3 offset = {-280, 190, 0};
+
+  void Update(int healthvalue){
+
+    int value = glm::clamp(healthvalue, 0, 99);
+
+    currentHealth[0]->Change(value/10);
+    currentHealth[1]->Change(value%10);
+
+    blue->m_currentHealth = health->m_currentHealth;
+    health->m_currentHealth = glm::floor(healthvalue); 
+  }
 };
 
 class HUD : public Sigma::Object {
@@ -42,9 +53,13 @@ public:
   void Update(double delta) override;
   void SetPlayer1Health(int health);
 
-private:
+  void UpdatePlayerHUD();
+
   void SetNumbers(std::array<Sigma::UINumber*, 2> numbers, int value);
+private:
+
   UIHealthBar player1 = {};
+  UIHealthBar player2 = {};
 
   std::array<PlayerStruct, 2>* m_players;
 };

@@ -30,7 +30,8 @@ void Scene1::Load() {
   walls->transform.position.z = -5000;
   AddChild(walls);
 
-  auto nig = GET_FACTORY->CreateObject<HUD>("HUD");
+  // xd
+  // auto nig = GET_FACTORY->CreateObject<HUD>("HUD");
 
   SetNextScene(new Scene2("Game Scene 2", 2, "assets/level-1/scene-2.json"));
 }
