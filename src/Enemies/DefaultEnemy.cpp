@@ -1,6 +1,7 @@
 #include "DefaultEnemy.hpp"
 #include <ostream>
 #include <random>
+#include "FMOD/fmod_dsp_effects.h"
 #include "Polygon.hpp"
 #include "Factory.hpp"
 #include "Random.hpp"
@@ -48,8 +49,9 @@ void DefaultEnemy::Start() {
   BindState(STATE_ATTACK, std::bind(&DefaultEnemy::AttackState, this));
   BindState(STATE_DISPERSE, std::bind(&DefaultEnemy::DisperseState, this));
   BindState(STATE_GOTO, std::bind(&DefaultEnemy::GoToState, this));
+  BindState(STATE_REPOSITION, std::bind(&DefaultEnemy::RepositionState, this));
+  BindState(STATE_REPOSING, std::bind(&DefaultEnemy::RePosing, this));
   // BindState(STATE_AVOID, std::bind(&DefaultEnemy::AvoidState, this));
-  // BindState(STATE_REPOSITION, std::bind(&DefaultEnemy::RepositionState, this));
 }
 
 void DefaultEnemy::Update(double delta) {
@@ -62,6 +64,10 @@ void DefaultEnemy::Update(double delta) {
     SetState(STATE_IDLE);
   } else {
     m_distance = m_nearest->transform.GetDepthPosition() - transform.GetDepthPosition();
+  }
+  if (m_distance.length() <= detectionRange){
+    SetState(STATE_FOLLOW);
+    m_defaultState = STATE_FOLLOW;
   }
   Enemy::Update(delta);
 }
@@ -121,8 +127,8 @@ void DefaultEnemy::FollowState() {
     m_nextState = STATE_ATTACK;
     SetState(STATE_PAUSED);
   } else if (fabs(m_distance.y) <= 25 && fabs(m_distance.x) <= 60 && fabs(m_distance.x) <= 30) {
+    m_nextState = STATE_FOLLOW;
     SetState(STATE_DISPERSE);
-
   }
 }
 
@@ -148,14 +154,13 @@ void DefaultEnemy::DisperseState() {
   glm::vec2 position = (glm::vec2)transform.GetDepthPosition();
     std::random_device rd;
     std::mt19937 gen(rd());
-    std::uniform_int_distribution<> distrib_x( 15, 30);
+    std::uniform_int_distribution<> distrib_x( 30, 60);
     std::uniform_int_distribution<> distrib_y(-30, 30);
     m_position = m_nearest->transform.GetDepthPosition();
 
     if (m_position.x - position.x >= 0) m_position.x -= 60 + static_cast<float>(distrib_x(gen));
     else                                m_position.x += m_attackDistance - static_cast<float>(distrib_x(gen));
     m_position.y = (m_nearest->transform.GetDepthPosition().y + static_cast<float>(distrib_y(gen)));
-    m_nextState = STATE_FOLLOW;
     SetState(STATE_GOTO);
 }
 
@@ -163,46 +168,47 @@ void DefaultEnemy::AvoidState() {
   // TODO: Implement this
 }
 
+void DefaultEnemy::RePosing() {
+  m_animComp->SetCurrentAnim("Walk");
+
+  glm::vec2 position = {transform.GetDepthPosition().x, transform.GetDepthPosition().y};
+  Move(glm::normalize(m_position - position));
+  if (glm::distance(position, m_position) < 1.0f) {
+    m_position = {0.0f, 0.0f};
+    m_nextState = STATE_FOLLOW;
+    WaitSeconds(0.5f, STATE_DISPERSE);
+  }
+
+  // Swaps the sprite if not facing the same way -x
+  if ((glm::normalize(m_position - position).x >= 0) != (transform.relativeScale.x >= 0)) {
+    transform.relativeScale.x *= -1;
+  }
+}
+
 void DefaultEnemy::RepositionState() {
   if (!m_isDoingSomething) return;
-  // glm::vec2 position = {transform.GetDepthPosition().x, transform.GetDepthPosition().y};
-  // m_animComp->SetCurrentAnim("Walk");
-  //
-  // if (m_randomPosition.x == 0.0f && m_randomPosition.y == 0.0f) {
-  //   Player* nearest = GetNearestPlayer();
-  //   if (!nearest) {
-  //     SetState(STATE_IDLE);
-  //     return;
-  //   }
-  //
-  //   auto playerScale = nearest->transform.scale;
-  //   auto pl enayerPosition = nearest->transform.position;
-  //
-  //   std::random_device rd;
-  //   std::mt19937 gen(rd());
-  //   std::uniform_int_distribution<> distrib_x(-playerScale.x * 2, playerScale.x * 2);
-  //   std::uniform_int_distribution<> distrib_y(-playerScale.y, playerScale.y);
-  //
-  //   m_randomPosition = { playerPosition.x + distrib_x(gen), playerPosition.y + distrib_y(gen) };
-  //
-  //   // Avoid SEPARATE state if point is out of bounds -x
-  //   if (!m_sceneBoundsPoly->IsPointInside(m_randomPosition)) {
-  //     m_randomPosition = {0.0f, 0.0f};
-  //     RepositionState();
-  //     return;
-  //   }
-  // }
-  //
-  // Move(glm::normalize(m_randomPosition - position));
-  // if (glm::distance(position, m_randomPosition) < 1.0f) {
-  //   m_randomPosition = {0.0f, 0.0f};
-  //   WaitSeconds(0.5f, STATE_FOLLOW);
-  // }
-  //
-  // // Swaps the sprite if not facing the same way -x
-  // if ((glm::normalize(m_randomPosition - position).x >= 0) != (transform.relativeScale.x >= 0)) {
-  //   transform.relativeScale.x *= -1;
-  // }
+  glm::vec2 position = {transform.GetDepthPosition().x, transform.GetDepthPosition().y};
+
+  Player* nearest = GetNearestPlayer();
+  if (!nearest) {
+    SetState(STATE_IDLE);
+    return;
+  }
+
+  auto playerScale = nearest->transform.scale;
+  auto playerPosition = nearest->transform.position;
+
+  std::random_device rd;
+  std::mt19937 gen(rd());
+  std::uniform_int_distribution<> distrib_x(-playerScale.x * 2, playerScale.x * 2);
+  std::uniform_int_distribution<> distrib_y(-playerScale.y, playerScale.y);
+
+  m_position = { playerPosition.x + distrib_x(gen), playerPosition.y + distrib_y(gen) };
+
+  if (m_sceneBoundsPoly->IsPointInside(m_position)) {
+    SetState(STATE_REPOSING);
+  }
+
 }
 
 
@@ -213,7 +219,8 @@ void DefaultEnemy::DeadState() {
 
 void DefaultEnemy::OnFullComboPerformed() {
   m_timer = Sigma::Random::Float(1.2f,1.6f);
-  m_nextState = STATE_FOLLOW;
+  m_nextState = STATE_REPOSITION;
+  // m_nextState = STATE_FOLLOW;
   SetState(STATE_PAUSED);
 }
 

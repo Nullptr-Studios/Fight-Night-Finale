@@ -131,13 +131,13 @@ void Enemy::TimerState() {
 void Enemy::DebugWindow() {
   Character::DebugWindow();
   if (ImGui::CollapsingHeader("Enemy")) {
-    const char *states[] = {"idle","follow","wait","dead","dispearse","avoid","reposition","attack","wander", "paused","walk","goto"};
+    const char *states[] = {"idle","follow","wait","dead","dispearse","avoid","reposition","attack","wander", "paused","walk","goto","reposing"};
     int selection = m_currentState;
-    if (ImGui::Combo("Current State", &selection, states, 12)) {
+    if (ImGui::Combo("Current State", &selection, states, 13)) {
       m_currentState = selection;
     }
     selection = m_defaultState;
-    if (ImGui::Combo("Default State", &selection, states, 12)) {
+    if (ImGui::Combo("Default State", &selection, states, 13)) {
       m_defaultState = selection;
     }
     ImGui::DragFloat("Attack Range", &m_attackDistance);
