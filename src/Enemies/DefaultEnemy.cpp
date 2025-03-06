@@ -71,7 +71,6 @@ void DefaultEnemy::WalkState() {
   if (m_timer <= 0) {
     m_position = {};
     m_timer = Sigma::Random::Float(.9f, 1.1f);
-    m_nextState = STATE_WANDER;
     SetState(STATE_PAUSED);
   }
   m_animComp->SetCurrentAnim("Walk");
@@ -81,7 +80,6 @@ void DefaultEnemy::WalkState() {
   }
   if (!m_sceneBoundsPoly->IsPointInside((glm::vec2)transform.position + (m_position * 5.0f))) {
     m_timer = Sigma::Random::Float(.9f, 1.1f);
-    m_nextState = STATE_WANDER;
     SetState(STATE_PAUSED);
   }
 
@@ -102,6 +100,7 @@ void DefaultEnemy::WanderState() {
     m_position = Sigma::Random::Circle();
   }
   m_timer = Sigma::Random::Float(.9f, 1.1f);
+  m_nextState = STATE_WANDER;
   SetState(STATE_WALK);
 }
 
