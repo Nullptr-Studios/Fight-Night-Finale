@@ -1,7 +1,7 @@
 {"frames": [
 
 {
-	"filename": "Hit1_0001.png",
+	"filename": "Hit_0001.png",
 	"frame": {"x":43,"y":164,"w":46,"h":82},
 	"rotated": false,
 	"trimmed": true,
@@ -11,7 +11,7 @@
 	"pivot": {"x":0.5,"y":1}
 },
 {
-	"filename": "Hit1_0003.png",
+	"filename": "Hit_0003.png",
 	"frame": {"x":91,"y":165,"w":46,"h":82},
 	"rotated": false,
 	"trimmed": true,
@@ -20,7 +20,7 @@
 	"pivot": {"x":0.5,"y":1}
 },
 {
-	"filename": "Hit1_0005.png",
+	"filename": "Hit_0005.png",
 	"frame": {"x":45,"y":81,"w":44,"h":81},
 	"rotated": false,
 	"trimmed": true,
@@ -29,7 +29,7 @@
 	"pivot": {"x":0.5,"y":1}
 },
 {
-	"filename": "Hit1_0007.png",
+	"filename": "Hit_0007.png",
 	"frame": {"x":93,"y":1,"w":43,"h":79},
 	"rotated": false,
 	"trimmed": true,
@@ -38,7 +38,7 @@
 	"pivot": {"x":0.5,"y":1}
 },
 {
-	"filename": "Hit1_0009.png",
+	"filename": "Hit_0009.png",
 	"frame": {"x":1,"y":1,"w":44,"h":78},
 	"rotated": false,
 	"trimmed": true,
@@ -47,7 +47,7 @@
 	"pivot": {"x":0.5,"y":1}
 },
 {
-	"filename": "Hit1_0011.png",
+	"filename": "Hit_0011.png",
 	"frame": {"x":47,"y":1,"w":44,"h":78},
 	"rotated": false,
 	"trimmed": true,
@@ -56,7 +56,7 @@
 	"pivot": {"x":0.5,"y":1}
 },
 {
-	"filename": "Hit1_0013.png",
+	"filename": "Hit_0013.png",
 	"frame": {"x":138,"y":1,"w":43,"h":79},
 	"rotated": false,
 	"trimmed": true,
@@ -65,7 +65,7 @@
 	"pivot": {"x":0.5,"y":1}
 },
 {
-	"filename": "Hit1_0015.png",
+	"filename": "Hit_0015.png",
 	"frame": {"x":183,"y":1,"w":42,"h":79},
 	"rotated": false,
 	"trimmed": true,
@@ -74,7 +74,7 @@
 	"pivot": {"x":0.5,"y":1}
 },
 {
-	"filename": "Hit1_0017.png",
+	"filename": "Hit_0017.png",
 	"frame": {"x":1,"y":81,"w":42,"h":80},
 	"rotated": false,
 	"trimmed": true,
@@ -83,7 +83,7 @@
 	"pivot": {"x":0.5,"y":1}
 },
 {
-	"filename": "Hit1_0019.png",
+	"filename": "Hit_0019.png",
 	"frame": {"x":91,"y":82,"w":42,"h":81},
 	"rotated": false,
 	"trimmed": true,
@@ -92,7 +92,7 @@
 	"pivot": {"x":0.5,"y":1}
 },
 {
-	"filename": "Hit1_0021.png",
+	"filename": "Hit_0021.png",
 	"frame": {"x":135,"y":82,"w":44,"h":81},
 	"rotated": false,
 	"trimmed": true,
@@ -101,7 +101,7 @@
 	"pivot": {"x":0.5,"y":1}
 },
 {
-	"filename": "Hit1_0023.png",
+	"filename": "Hit_0023.png",
 	"frame": {"x":139,"y":165,"w":46,"h":82},
 	"rotated": false,
 	"trimmed": true,
@@ -110,7 +110,7 @@
 	"pivot": {"x":0.5,"y":1}
 },
 {
-	"filename": "Hit1_0025.png",
+	"filename": "Hit_0025.png",
 	"frame": {"x":43,"y":248,"w":46,"h":82},
 	"rotated": false,
 	"trimmed": true,

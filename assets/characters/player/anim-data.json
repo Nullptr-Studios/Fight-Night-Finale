@@ -5,7 +5,7 @@
 	"frame": {"x":1,"y":562,"w":39,"h":78},
 	"rotated": false,
 	"trimmed": true,
-  "fps": 12,
+  "fps": 24,
 	"spriteSourceSize": {"x":44,"y":50,"w":39,"h":78},
 	"sourceSize": {"w":128,"h":128},
 	"pivot": {"x":0.5,"y":1}
@@ -26,7 +26,8 @@
 	"trimmed": true,
 	"spriteSourceSize": {"x":41,"y":51,"w":57,"h":77},
 	"sourceSize": {"w":128,"h":128},
-	"pivot": {"x":0.5,"y":1}
+	"pivot": {"x":0.5,"y":1},
+  "callback": "DoHit"
 },
 {
 	"filename": "BasicCombo1_0059.png",
@@ -42,7 +43,7 @@
 	"frame": {"x":148,"y":1,"w":57,"h":77},
 	"rotated": false,
 	"trimmed": true,
-  "fps": 12,
+  "fps": 24,
 	"spriteSourceSize": {"x":41,"y":51,"w":57,"h":77},
 	"sourceSize": {"w":128,"h":128},
 	"pivot": {"x":0.5,"y":1}
@@ -81,7 +82,8 @@
 	"trimmed": true,
 	"spriteSourceSize": {"x":39,"y":50,"w":65,"h":78},
 	"sourceSize": {"w":128,"h":128},
-	"pivot": {"x":0.5,"y":1}
+	"pivot": {"x":0.5,"y":1},
+  "callback": "DoHit"
 },
 {
 	"filename": "BasicCombo2_0064.png",
@@ -97,7 +99,7 @@
 	"frame": {"x":81,"y":1,"w":65,"h":78},
 	"rotated": false,
 	"trimmed": true,
-  "fps": 12,
+  "fps": 24,
 	"spriteSourceSize": {"x":39,"y":50,"w":65,"h":78},
 	"sourceSize": {"w":128,"h":128},
 	"pivot": {"x":0.5,"y":1}
@@ -172,7 +174,8 @@
 	"trimmed": true,
 	"spriteSourceSize": {"x":16,"y":58,"w":78,"h":70},
 	"sourceSize": {"w":128,"h":128},
-	"pivot": {"x":0.5,"y":1}
+	"pivot": {"x":0.5,"y":1},
+  "callback": "DoHit"
 },
 {
 	"filename": "BasicCombo3_0073.png",

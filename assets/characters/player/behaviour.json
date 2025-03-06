@@ -69,7 +69,7 @@
         "y" : 0.0,
         "z" : 0.0
       },
-      "animationName" : "hit_super_0"
+      "animationName" : "Grab"
     },
     {
       "type" : "thr",
@@ -84,7 +84,7 @@
         "y" : 0.0,
         "z" : 0.0
       },
-      "animationName" : "hit_super_1"
+      "animationName" : "Hit"
     }
   ]
 }
