@@ -19,6 +19,7 @@ public:
     ~Pickup() override = default;
 
     void Init() override;
+    void Start() override;
     void SetHeal(float health);
     void SetColSize(glm::vec3 colSize);
     bool OnCollision(Sigma::Collision::CollisionEvent &e) override;
