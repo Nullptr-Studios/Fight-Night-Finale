@@ -86,17 +86,6 @@ void game::GameplayManager::InitPlayer(unsigned controllerID)
   PlayerStruct p {};
   p.player = GET_FACTORY->CreateObject<game::Player>("Player", controllerID, "assets/characters/player/behaviour.json");
 
-  // FIXME: This is hardcoded, there must be a way to get it from the actual UI
-  //p.healthBar = GET_FACTORY->CreateObject<game::HealthBar>("Progress");
-  /*p.player->m_healthBar = p.healthBar;
-
-  /***FIXME**
-  p.healthBar->m_screenSpaceTransform.scale = {300, 20};
-  p.healthBar->m_screenSpaceTransform.position = {0, 500, 0};
-  p.healthBar->m_progress = 1;
-  p.healthBar->SetTexture("assets/core/debug_green.png");
-  /***FIXME***/
-
   // Add player to the array
   m_players[m_playerCount] = p;
 

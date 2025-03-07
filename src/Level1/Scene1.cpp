@@ -6,7 +6,10 @@
 #include "Objects/Actor.hpp"
 #include "Objects/Camera.hpp"
 #include "Objects/CameraFollow.hpp"
+#include "UI/HealthBar.hpp"
 #include "Scene2.hpp"
+#include "UI/UIProgressBar.hpp"
+#include "UI/HUD.hpp"
 
 // #define DEBUG_CAMERA
 
@@ -26,6 +29,8 @@ void Scene1::Load() {
   walls->transform.scale = {761.0f, 281.0f};
   walls->transform.position.z = -5000;
   AddChild(walls);
+
+  auto nig = GET_FACTORY->CreateObject<HUD>("HUD");
 
   SetNextScene(new Scene2("Game Scene 2", 2, "assets/level-1/scene-2.json"));
 }
