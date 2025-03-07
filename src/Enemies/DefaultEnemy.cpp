@@ -17,6 +17,14 @@ void DefaultEnemy::DebugWindow() {
   }
 }
 
+
+bool DefaultEnemy::OnCollision(Sigma::Collision::CollisionEvent &e) {
+  if (e.GetOther()->GetName() == "Enemy") {
+
+  }
+  return true;
+}
+
 void DefaultEnemy::Init() {
   Enemy::Init();
 

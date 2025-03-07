@@ -41,6 +41,8 @@ protected:
   virtual void AttackState();
   void DeadState() override;
 
+  bool OnCollision(Sigma::Collision::CollisionEvent &e) override;
+
   void DebugWindow() override;
 
 private:
