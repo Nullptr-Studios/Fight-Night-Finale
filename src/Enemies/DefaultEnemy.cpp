@@ -81,7 +81,7 @@ bool DefaultEnemy::OnCollision(Sigma::Collision::CollisionEvent &e) {
     }
     isAvoiding = true;
     m_position = Sigma::Random::Circle();
-    m_timer = 1;
+    m_timer = .7;
     m_nextState = STATE_FOLLOW;
     SetState(STATE_WALK);
     return true;
@@ -253,7 +253,7 @@ void DefaultEnemy::DeadState() {
 
 void DefaultEnemy::OnFullComboPerformed() {
   m_timer = Sigma::Random::Float(1.2f,1.6f);
-  m_nextState = STATE_REPOSITION;
+  m_nextState = STATE_FOLLOW; // TODO: change this to reposition
   SetState(STATE_PAUSED);
 }
 
