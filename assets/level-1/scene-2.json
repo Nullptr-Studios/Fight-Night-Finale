@@ -21,6 +21,7 @@
     "name": "Spawner 1",
     "pos": {"x": -275, "y": 45},
     "activationRange": 175,
+    "delayTime": 1.5,
     "enemies": [
     {
       "id": 1,
@@ -43,7 +44,8 @@
     {
       "id": 1,
       "pos": {"x": -425, "y": 80},
-      "entranceId": 0
+      "entranceId": 0,
+      "stepAmmount": 3
     },
     {
       "id": 1,
@@ -53,7 +55,8 @@
     {
       "id": 1,
       "pos": {"x": -430, "y": 70},
-      "entranceId": 0
+      "entranceId": 0,
+      "stepAmmount": 1
     },
     {
       "id": 1,

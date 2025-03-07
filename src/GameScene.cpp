@@ -67,7 +67,19 @@ void game::GameScene::Load() {
       EnemySpawnData data{};
       data.id = enemies["id"];
       data.position = {enemies["pos"]["x"], enemies["pos"]["y"]};
+
+      //TODO: Utilize entrance ID
       data.entranceId = enemies["entranceId"];
+
+      if(enemies.contains("stepAmmount"))
+        data.stepAmmount = enemies["stepAmmount"];
+      else
+        data.stepAmmount = 1;
+
+      if(enemies.contains("delayTime"))
+        data.delayTime = enemies["delayTime"];
+      else
+        data.delayTime = spawners.contains("delayTime") ? spawners["delayTime"].get<float>() : .5f;  ///<< Default wait value
       s->AddEnemiesData(data);
     }
 

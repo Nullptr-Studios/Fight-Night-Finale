@@ -14,10 +14,20 @@ void game::EnemySpawner::Init() {
 
 void game::EnemySpawner::Start() { Object::Start(); }
 
+void game::EnemySpawner::SpawnEnemy() {
+  auto e = GET_FACTORY->CreateObject<game::DefaultEnemy>("Enemy", "assets/characters/enemy/behaviour.json");
+  e->transform.position.x = m_currentEnemyData.position.x;
+  e->transform.position.y = m_currentEnemyData.position.y;
+  e->transform.scale = {32.0f, 64.0f};
+  e->Enable(m_gameplayManager->GetPlayers());
+  e->SetSceneBoundsPoly(m_gameplayManager->GetSceneBoundsPoly());
+  m_enemies.push_back(e);
+}
+
 void game::EnemySpawner::Update(double deltaTime) {
   Object::Update(deltaTime);
 
-  if(m_finished)
+  if (m_finished)
     return;
 
   if (m_requiredSpawner)
@@ -28,7 +38,7 @@ void game::EnemySpawner::Update(double deltaTime) {
   if (!m_enabled)
     return;
 
-  if (!m_spawned) {
+  if (!m_triggered) {
 
     for (auto &ps: *m_gameplayManager->GetPlayers()) {
       if (!ps.player)
@@ -36,20 +46,34 @@ void game::EnemySpawner::Update(double deltaTime) {
 
       float distance = glm::distance(ps.player->transform.position, transform.position);
       if (distance < m_activationDistance) {
-        for (auto &enemy: m_spawnData) {
-          auto e = GET_FACTORY->CreateObject<game::DefaultEnemy>("Enemy", "assets/characters/enemy/behaviour.json");
-          e->transform.position.x = enemy.position.x;
-          e->transform.position.y = enemy.position.y;
-          e->transform.scale = {32.0f, 64.0f};
-          e->Enable(m_gameplayManager->GetPlayers());
-          e->SetSceneBoundsPoly(m_gameplayManager->GetSceneBoundsPoly());
-          m_enemies.push_back(e);
-        }
-        m_spawned = true;
+        m_triggered = true;
+        m_spawnTimer = m_spawnData[m_currentEnemyIndex].delayTime;
         return;
       }
     }
+  } else if (!m_spawned) {
+    m_spawnTimer += deltaTime;
+
+    if (m_currentEnemyIndex >= m_spawnData.size()) {
+      m_spawned = true;
+      return;
+    }
+
+    if (m_spawnTimer >= m_spawnData[m_currentEnemyIndex].delayTime) {
+      m_spawnTimer = 0.0f;
+
+
+      int stepAmount = m_spawnData[m_currentEnemyIndex].stepAmmount;
+
+      for (int i = 0; i < stepAmount && m_currentEnemyIndex < m_spawnData.size(); ++i) {
+        m_currentEnemyData = m_spawnData[m_currentEnemyIndex];
+        SpawnEnemy();
+
+        m_currentEnemyIndex++; 
+      }
+    }
   }
+
 
   if (!m_spawned)
     return;
@@ -63,7 +87,7 @@ void game::EnemySpawner::Update(double deltaTime) {
       }
     }
   }
-  if(deletedAmmount == m_enemies.size()) {
+  if (deletedAmmount == m_enemies.size()) {
     m_finished = true;
     m_enabled = false;
   }

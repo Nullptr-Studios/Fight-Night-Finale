@@ -18,6 +18,8 @@ struct EnemySpawnData {
   int id;
   glm::vec2 position;
   int entranceId;
+  float delayTime;
+  int stepAmmount;
 };
 
 class EnemySpawner : public Sigma::Object {
@@ -40,7 +42,17 @@ public:
 
 private:
 
+  void SpawnEnemy();
+
+  EnemySpawnData m_currentEnemyData;
+
   EnemySpawner* m_requiredSpawner = nullptr;
+
+  unsigned int m_currentEnemyIndex = 0;
+
+  float m_spawnTimer = 0.0f;
+
+  bool m_triggered = false;
 
   bool m_finished = false;
 
