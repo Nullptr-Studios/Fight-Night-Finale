@@ -13,17 +13,11 @@ void DefaultEnemy::DebugWindow() {
     ImGui::DragFloat2("Distance", &m_distance.x);
     ImGui::DragFloat2("Random Pos", &m_position.x);
     ImGui::InputDouble("Timer", &m_timer);
-
+    ImGui::Checkbox("IsAvoiding", &isAvoiding);
   }
 }
 
 
-bool DefaultEnemy::OnCollision(Sigma::Collision::CollisionEvent &e) {
-  if (e.GetOther()->GetName() == "Enemy") {
-
-  }
-  return true;
-}
 
 void DefaultEnemy::Init() {
   Enemy::Init();
@@ -74,6 +68,27 @@ void DefaultEnemy::Update(double delta) {
   Enemy::Update(delta);
 }
 
+bool DefaultEnemy::OnCollision(Sigma::Collision::CollisionEvent &e) {
+  if (m_currentState == STATE_WANDER || m_currentState == STATE_WALK || m_currentState == STATE_PAUSED) {
+    return false;
+  }
+  if (auto enemy = dynamic_cast<DefaultEnemy*>(e.GetOther())) {
+    if (isAvoiding || enemy->isAvoiding) {
+      return false;
+    }
+    if (m_distance.length() > enemy->m_distance.length()) {
+      return false;
+    }
+    isAvoiding = true;
+    m_position = Sigma::Random::Circle();
+    m_timer = 1;
+    m_nextState = STATE_FOLLOW;
+    SetState(STATE_WALK);
+    return true;
+  }
+  return false;
+}
+
 void DefaultEnemy::WalkState() {
   if (!m_isDoingSomething) return;
   if (m_timer <= 0) {
@@ -91,10 +106,6 @@ void DefaultEnemy::WalkState() {
     SetState(STATE_PAUSED);
   }
 
-  if (m_distance.length() <= detectionRange){
-    SetState(STATE_FOLLOW);
-    m_defaultState = STATE_FOLLOW;
-  }
 }
 
 void DefaultEnemy::PausedState() {
@@ -107,18 +118,25 @@ void DefaultEnemy::PausedState() {
 
 void DefaultEnemy::WanderState() {
   if (!m_isDoingSomething) return;
+  isAvoiding = false;
   m_position = Sigma::Random::Circle();
   while (!m_sceneBoundsPoly->IsPointInside((glm::vec2)transform.position + (m_position * 5.0f))) {
     m_position = Sigma::Random::Circle();
   }
+  m_position = Sigma::Random::Circle();
   m_timer = Sigma::Random::Float(.9f, 1.1f);
   m_nextState = STATE_WANDER;
   SetState(STATE_WALK);
 
+  if (m_distance.length() <= detectionRange){
+    SetState(STATE_FOLLOW);
+    m_defaultState = STATE_FOLLOW;
+  }
 }
 
 void DefaultEnemy::FollowState() {
   if (!m_isDoingSomething) return;
+  isAvoiding = false;
   m_animComp->SetCurrentAnim("Walk");
   glm::vec3 targets[2];
   targets[0] = m_nearest->transform.GetDepthPosition()+ glm::vec3(-50,0,0);
@@ -134,13 +152,14 @@ void DefaultEnemy::FollowState() {
     SetState(STATE_DISPERSE);
   } else {
     m_nextState = STATE_FOLLOW;
+    m_timer = 2;
     SetState(STATE_GOTO);
   }
 }
 
 void DefaultEnemy::AttackState() {
   if (!m_isDoingSomething) return;
-
+  isAvoiding = false;
   if ((m_distance.x >= 0) != (transform.relativeScale.x >= 0)) {
     transform.relativeScale.x *= -1;
   }
@@ -154,7 +173,7 @@ void DefaultEnemy::GoToState() {
   if ((direction.x >= 0) != (transform.relativeScale.x >= 0)) {
     transform.relativeScale.x *= -1;
   }
-  if (!m_sceneBoundsPoly->IsPointInside((glm::vec2)transform.position + (direction * 5.0f)) || glm::distance(position, m_position) < 1.0f ) {
+  if (!m_sceneBoundsPoly->IsPointInside((glm::vec2)transform.position + (direction * 5.0f)) || glm::distance(position, m_position) < 1.0f  || m_timer <= 0) {
     m_position = {};
     SetState(m_nextState);
     return;
@@ -174,6 +193,7 @@ void DefaultEnemy::DisperseState() {
     if (m_position.x - position.x >= 0) m_position.x -= 60 + static_cast<float>(distrib_x(gen));
     else                                m_position.x += m_attackDistance - static_cast<float>(distrib_x(gen));
     m_position.y = (m_nearest->transform.GetDepthPosition().y + static_cast<float>(distrib_y(gen)));
+    m_timer = 2;
     SetState(STATE_GOTO);
 }
 
@@ -186,7 +206,7 @@ void DefaultEnemy::RePosing() {
 
   glm::vec2 position = {transform.GetDepthPosition().x, transform.GetDepthPosition().y};
   Move(glm::normalize(m_position - position));
-  if (glm::distance(position, m_position) < 1.0f) {
+  if (glm::distance(position, m_position) < 1.0f || m_timer <= 0) {
     m_position = {0.0f, 0.0f};
     m_nextState = STATE_FOLLOW;
     WaitSeconds(0.5f, STATE_FOLLOW);
@@ -200,8 +220,8 @@ void DefaultEnemy::RePosing() {
 
 void DefaultEnemy::RepositionState() {
   if (!m_isDoingSomething) return;
+  isAvoiding = false;
   glm::vec2 position = {transform.GetDepthPosition().x, transform.GetDepthPosition().y};
-
   Player* nearest = GetNearestPlayer();
   if (!nearest) {
     SetState(STATE_IDLE);
@@ -219,6 +239,7 @@ void DefaultEnemy::RepositionState() {
   m_position = { playerPosition.x + distrib_x(gen), playerPosition.y + distrib_y(gen) };
 
   if (m_sceneBoundsPoly->IsPointInside(m_position)) {
+    m_timer = 2;
     SetState(STATE_REPOSING);
   }
 
@@ -233,7 +254,6 @@ void DefaultEnemy::DeadState() {
 void DefaultEnemy::OnFullComboPerformed() {
   m_timer = Sigma::Random::Float(1.2f,1.6f);
   m_nextState = STATE_REPOSITION;
-  // m_nextState = STATE_FOLLOW;
   SetState(STATE_PAUSED);
 }
 

@@ -80,10 +80,10 @@ protected:
   std::array<PlayerStruct, 2>* m_players = {};
   float m_attackDistance = 0.0f;
   int m_defaultState = 0;
+  int m_currentState = 0;
 
 private:
   std::map<int, std::function<void()>> m_states = {};
-  int m_currentState = 0;
   bool m_enabled;
 
   // Placeholder idle state

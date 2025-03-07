@@ -4,7 +4,7 @@
 #include "aecore/AEFrameRateController.h"
 #include "aecore/imgui/imgui.h"
 
-#define DEBUG_ENEMY
+// #define DEBUG_ENEMY
 
 namespace game {
 
