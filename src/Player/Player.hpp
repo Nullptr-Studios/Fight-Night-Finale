@@ -12,10 +12,13 @@
 
 #include "Objects/Character.hpp"
 #include "PlayerController.hpp"
+#include "UI/HUD.hpp"
 
 namespace game {
+class GameplayManager;
+}
+namespace game {
 class MainMenu;
-class HealthBar;
 
 class Player : public Sigma::Character {
 public:
@@ -35,8 +38,11 @@ public:
   void Destroy() override;
 
   void OnDamage(const Sigma::Damage::DamageEvent &e) override;
-  void OnHeal(float health) { SetHealth(m_health + health); }
-  game::HealthBar *m_healthBar;
+  void OnHeal(float health) { 
+    SetHealth(m_health + health); 
+    healthBar->SetPlayer1Health(GetHealth<int>());
+  }
+  game::HUD* healthBar = nullptr;
 
 private:
   /// @brief Holds the Player Controller Component to handle input

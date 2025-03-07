@@ -8,7 +8,8 @@
     },
     "actions": {
       "roll": " ",
-      "basic": "J"
+      "basic": "J",
+      "super": "K"
     }
   },
   "gamepad": {
@@ -17,7 +18,8 @@
     },
     "action": {
       "roll": "A",
-      "basic": "X"
+      "basic": "X",
+      "super": "Y"
     }
   }
 }

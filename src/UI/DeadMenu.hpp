@@ -8,7 +8,7 @@
 #pragma once
 #include "Scene.hpp"
 namespace Sigma {
-class UIImage;
+class UIElement;
 class SceneButton;
 }
 namespace game {
@@ -18,7 +18,7 @@ public:
   void Load() override;
   void Unload() override;
 private:
-  Sigma::UIImage * m_background{};
+  Sigma::UIElement * m_background{};
   Sigma::SceneButton * m_button{};
 };
 }
