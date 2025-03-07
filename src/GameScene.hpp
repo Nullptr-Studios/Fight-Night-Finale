@@ -28,6 +28,7 @@ public:
 
   void Load() override;
   void Unload() override;
+  void Update(double delta) override;
   void DebugWindow() override;
 
   /**

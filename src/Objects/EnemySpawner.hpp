@@ -4,7 +4,6 @@
 
 #pragma once
 #include "Objects/Object.hpp"
-#include "glm/vec2.hpp"
 
 namespace game {
 class GameplayManager;
@@ -21,7 +20,7 @@ struct EnemySpawnData {
 class EnemySpawner : public Sigma::Object {
 public:
   explicit EnemySpawner(uint32_t id) : Object(id) {}
-  explicit EnemySpawner(uint32_t id, int activationDistance) : Object(id), m_activationDistance(activationDistance) {}
+  explicit EnemySpawner(uint32_t id, int activationDistance, EnemySpawner* requiredSpawner = nullptr) : Object(id), m_activationDistance(activationDistance), m_requiredSpawner(requiredSpawner) {}
 
   void Init() override;
   void Start() override;
@@ -29,11 +28,22 @@ public:
 
   void Destroy() override;
 
+  void SetEnabled(bool enabled) {m_enabled = enabled;} 
+
+  // short GetRequiredId() {return m_requiredId;}
+
+  [[nodiscard]] bool GetFinished() const {return m_finished;}
   void AddEnemiesData(EnemySpawnData &enemies) { m_spawnData.emplace_back(enemies); }
 
 private:
 
-  bool m_enabled = true;
+  EnemySpawner* m_requiredSpawner = nullptr;
+
+  bool m_finished = false;
+
+  bool m_enabled = false;
+
+  bool m_spawned = false;
   
   int m_activationDistance = 0;
 
