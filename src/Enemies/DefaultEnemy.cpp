@@ -1,7 +1,5 @@
 #include "DefaultEnemy.hpp"
-#include <ostream>
 #include <random>
-#include "FMOD/fmod_dsp_effects.h"
 #include "Polygon.hpp"
 #include "Factory.hpp"
 #include "Random.hpp"
@@ -65,10 +63,6 @@ void DefaultEnemy::Update(double delta) {
   } else {
     m_distance = m_nearest->transform.GetDepthPosition() - transform.GetDepthPosition();
   }
-  if (m_distance.length() <= detectionRange){
-    SetState(STATE_FOLLOW);
-    m_defaultState = STATE_FOLLOW;
-  }
   Enemy::Update(delta);
 }
 
@@ -89,6 +83,10 @@ void DefaultEnemy::WalkState() {
     SetState(STATE_PAUSED);
   }
 
+  if (m_distance.length() <= detectionRange){
+    SetState(STATE_FOLLOW);
+    m_defaultState = STATE_FOLLOW;
+  }
 }
 
 void DefaultEnemy::PausedState() {
@@ -108,6 +106,7 @@ void DefaultEnemy::WanderState() {
   m_timer = Sigma::Random::Float(.9f, 1.1f);
   m_nextState = STATE_WANDER;
   SetState(STATE_WALK);
+
 }
 
 void DefaultEnemy::FollowState() {
@@ -116,11 +115,7 @@ void DefaultEnemy::FollowState() {
   glm::vec3 targets[2];
   targets[0] = m_nearest->transform.GetDepthPosition()+ glm::vec3(-50,0,0);
   targets[1] = m_nearest->transform.GetDepthPosition()+ glm::vec3(50,0,0);
-  glm::vec3 direction = ((m_distance.x <= 0)?targets[0]:targets[1]) - transform.GetDepthPosition();
-  Move({direction.x, direction.y });
-  if ((direction.x >= 0) != (transform.relativeScale.x >= 0)) {
-    transform.relativeScale.x *= -1;
-  }
+  m_position = ((m_distance.x >= 0)?targets[0]:targets[1]);
 
   if (fabs(m_distance.y) <= 25 && fabs(m_distance.x) <= 60 && fabs(m_distance.x) >= 30) {
     m_timer = Sigma::Random::Float(.2f, .3f);
@@ -129,11 +124,18 @@ void DefaultEnemy::FollowState() {
   } else if (fabs(m_distance.y) <= 25 && fabs(m_distance.x) <= 60 && fabs(m_distance.x) <= 30) {
     m_nextState = STATE_FOLLOW;
     SetState(STATE_DISPERSE);
+  } else {
+    m_nextState = STATE_FOLLOW;
+    SetState(STATE_GOTO);
   }
 }
 
 void DefaultEnemy::AttackState() {
   if (!m_isDoingSomething) return;
+
+  if ((m_distance.x >= 0) != (transform.relativeScale.x >= 0)) {
+    transform.relativeScale.x *= -1;
+  }
   BasicAttack();
 }
 
@@ -141,6 +143,9 @@ void DefaultEnemy::GoToState() {
   m_animComp->SetCurrentAnim("Walk");
   glm::vec2 position = (glm::vec2)transform.GetDepthPosition();
   glm::vec2 direction = glm::normalize(m_position - position);
+  if ((direction.x >= 0) != (transform.relativeScale.x >= 0)) {
+    transform.relativeScale.x *= -1;
+  }
   if (!m_sceneBoundsPoly->IsPointInside((glm::vec2)transform.position + (direction * 5.0f)) || glm::distance(position, m_position) < 1.0f ) {
     m_position = {};
     SetState(m_nextState);
@@ -176,7 +181,7 @@ void DefaultEnemy::RePosing() {
   if (glm::distance(position, m_position) < 1.0f) {
     m_position = {0.0f, 0.0f};
     m_nextState = STATE_FOLLOW;
-    WaitSeconds(0.5f, STATE_DISPERSE);
+    WaitSeconds(0.5f, STATE_FOLLOW);
   }
 
   // Swaps the sprite if not facing the same way -x
