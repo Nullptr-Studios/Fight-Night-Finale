@@ -7,7 +7,6 @@
 #include "GameScene.hpp"
 #include "Manager/GameplayManager.hpp"
 
-// FIXME: this will only work for the first player and the prototype scene
 void game::EnemySpawner::Init() {
   Object::Init();
   m_gameplayManager = GameplayManager::GetInstance();
@@ -18,8 +17,13 @@ void game::EnemySpawner::Start() { Object::Start(); }
 void game::EnemySpawner::Update(double deltaTime) {
   Object::Update(deltaTime);
 
+  if(m_finished)
+    return;
+
   if (m_requiredSpawner)
     m_enabled = m_requiredSpawner->GetFinished();
+  else
+    m_enabled = true;
 
   if (!m_enabled)
     return;
@@ -51,6 +55,18 @@ void game::EnemySpawner::Update(double deltaTime) {
     return;
 
   // TODO: this must be changed whenever the death state is done
+  short deletedAmmount = 0;
+  for (auto enemy: m_enemies) {
+    if (enemy) {
+      if (enemy->GetHealth() <= 0) {
+        deletedAmmount++;
+      }
+    }
+  }
+  if(deletedAmmount == m_enemies.size()) {
+    m_finished = true;
+    m_enabled = false;
+  }
 }
 void game::EnemySpawner::Destroy() {
   Object::Destroy();

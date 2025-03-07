@@ -36,7 +36,7 @@
   },
   {
     "name": "Spawner 2",
-    "required" : "0",
+    "required" : 0,
     "pos": {"x": -275, "y": 45},
     "activationRange": 175,
     "enemies": [

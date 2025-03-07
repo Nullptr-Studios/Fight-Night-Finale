@@ -6,6 +6,9 @@
 #include "Objects/Object.hpp"
 
 namespace game {
+class Enemy;
+}
+namespace game {
 class GameplayManager;
 class GameScene;
 class PrototypeScene;
@@ -51,7 +54,7 @@ private:
 
   std::list<Object*> m_players;
 
-  std::list<Object*> m_enemies;
+  std::list<Enemy*> m_enemies;
 
   GameplayManager* m_gameplayManager = nullptr;
   
