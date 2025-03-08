@@ -10,7 +10,7 @@ void DefaultEnemy::Init() {
   Enemy::Init();
 
   // Setup Animation
-  auto anim = GET_ANIMATION->LoadTextureAtlas("assets/characters/enemy/anim-data.json");
+  auto anim = GET_ANIMATION->LoadTextureAtlas("assets/characters/BasicEnemy/anim-data.json");
   m_animComp->SetTextureAtlas(anim);
   m_animComp->SetCurrentAnim("Idle");
   SetTexture(anim->textureStr.c_str());
