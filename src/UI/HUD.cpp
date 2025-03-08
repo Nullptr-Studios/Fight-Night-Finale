@@ -10,7 +10,6 @@
 
 namespace game {
 
-// TODO: Player 2 HUD
 void HUD::Init() {
 #pragma region Player1
   player1.offset = {-280, 190, 0};
@@ -141,7 +140,6 @@ void HUD::Init() {
 
 void HUD::Start() {}
 
-// TODO: Player 2 HUD
 void HUD::UpdatePlayerHUD() {
   m_players = GameplayManager::GetInstance()->GetPlayers();
   SetNumbers(player1.maxHealth, std::floor(m_players->operator[](0).player->GetMaxHealth()));
@@ -155,7 +153,6 @@ void HUD::UpdatePlayerHUD() {
 
 
   if (m_players->at(1).player != nullptr) {
-    return;
     SetNumbers(player2.maxHealth, std::floor(m_players->operator[](1).player->GetMaxHealth()));
     SetNumbers(player2.currentHealth, std::floor(m_players->operator[](1).player->GetHealth()));
     player2.health->m_maxHealth = m_players->operator[](1).player->GetMaxHealth();
@@ -163,7 +160,7 @@ void HUD::UpdatePlayerHUD() {
     player2.blue->m_maxHealth = m_players->operator[](1).player->GetMaxHealth();
     player2.blue->m_currentHealth = m_players->operator[](1).player->GetHealth();
 
-    m_players->operator[](2).player->healthBar = &player2;
+    m_players->operator[](1).player->healthBar = &player2;
   }
 }
 

@@ -97,6 +97,7 @@
 	"frame": {"x":89,"y":37,"w":45,"h":72},
 	"rotated": false,
 	"trimmed": true,
+  "fps": 3,
 	"spriteSourceSize": {"x":38,"y":55,"w":45,"h":72},
 	"sourceSize": {"w":128,"h":128},
 	"pivot": {"x":0.5,"y":1}
@@ -133,6 +134,7 @@
 	"frame": {"x":1,"y":1,"w":87,"h":24},
 	"rotated": false,
 	"trimmed": true,
+  "fps": 3,
 	"spriteSourceSize": {"x":27,"y":71,"w":87,"h":24},
 	"sourceSize": {"w":128,"h":128},
 	"pivot": {"x":0.5,"y":1}
