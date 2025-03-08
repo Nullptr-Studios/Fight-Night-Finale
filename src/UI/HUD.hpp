@@ -30,7 +30,7 @@ struct UIHealthBar {
   std::array<Sigma::UINumber*, 2> maxHealth = {};
   Sigma::UIText* slash = nullptr;
 
-  glm::vec3 offset = {-280, 190, 0};
+  glm::vec3 offset;
 };
 
 class HUD : public Sigma::Object {
@@ -44,7 +44,8 @@ public:
 
 private:
   void SetNumbers(std::array<Sigma::UINumber*, 2> numbers, int value);
-  UIHealthBar player1 = {};
+  // UIHealthBar player1 = {};
+  UIHealthBar player2 = {};
 
   std::array<PlayerStruct, 2>* m_players;
 };
