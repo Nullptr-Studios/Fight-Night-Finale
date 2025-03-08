@@ -34,7 +34,8 @@
 	"trimmed": true,
 	"spriteSourceSize": {"x":55,"y":46,"w":55,"h":82},
 	"sourceSize": {"w":128,"h":128},
-	"pivot": {"x":0.5,"y":1}
+	"pivot": {"x":0.5,"y":1},
+  "callback": "DoHit"
 },
 {
 	"filename": "Combo1_0033.png",
@@ -79,7 +80,8 @@
 	"trimmed": true,
 	"spriteSourceSize": {"x":55,"y":47,"w":41,"h":81},
 	"sourceSize": {"w":128,"h":128},
-	"pivot": {"x":0.5,"y":1}
+	"pivot": {"x":0.5,"y":1},
+  "callback": "DoHit"
 },
 {
 	"filename": "Combo2_0038.png",

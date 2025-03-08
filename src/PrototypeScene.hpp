@@ -9,6 +9,7 @@
 #pragma once
 #include "GameScene.hpp"
 #include "Player/Player.hpp"
+#include "Objects/Destructibles/Box.hpp"
 
 namespace Sigma {
 class Actor;
@@ -41,6 +42,7 @@ private:
   HealthBar *healthBar2 = nullptr;
   Player *p;
   Player *p2 = nullptr;
+  Box * b = nullptr;
 
   MainMenu* m_deadScene = nullptr;
 };
