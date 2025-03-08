@@ -58,6 +58,9 @@ public:
   void SetNumbers(std::array<Sigma::UINumber*, 2> numbers, int value);
 private:
 
+  void EnableUIPlayer1(bool enable);
+  void EnableUIPlayer2(bool enable);
+
   UIHealthBar player1 = {};
   UIHealthBar player2 = {};
 

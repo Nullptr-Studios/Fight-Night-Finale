@@ -136,11 +136,42 @@ void HUD::Init() {
   player2.maxHealth[1]->m_screenSpaceTransform.position.x += 100;
   player2.maxHealth[1]->m_screenSpaceTransform.position.y +=  18;
 #pragma endregion
+
+  EnableUIPlayer1(true);
+  EnableUIPlayer2(false);
+
+}
+
+void HUD::EnableUIPlayer1(bool enable) {
+  player1.background->SetActive(enable);
+  player1.blue->SetActive(enable);
+  player1.health->SetActive(enable);
+  player1.border->SetActive(enable);
+  player1.frame->SetActive(enable);
+  player1.currentHealth[0]->SetActive(enable);
+  player1.currentHealth[1]->SetActive(enable);
+  player1.slash->SetActive(enable);
+  player1.maxHealth[0]->SetActive(enable);
+  player1.maxHealth[1]->SetActive(enable);
+}
+
+void HUD::EnableUIPlayer2(bool enable) {
+  player2.background->SetActive(enable);
+  player2.blue->SetActive(enable);
+  player2.health->SetActive(enable);
+  player2.border->SetActive(enable);
+  player2.frame->SetActive(enable);
+  player2.currentHealth[0]->SetActive(enable);
+  player2.currentHealth[1]->SetActive(enable);
+  player2.slash->SetActive(enable);
+  player2.maxHealth[0]->SetActive(enable);
+  player2.maxHealth[1]->SetActive(enable);
 }
 
 void HUD::Start() {}
 
 void HUD::UpdatePlayerHUD() {
+  EnableUIPlayer1(true);
   m_players = GameplayManager::GetInstance()->GetPlayers();
   SetNumbers(player1.maxHealth, std::floor(m_players->operator[](0).player->GetMaxHealth()));
   SetNumbers(player1.currentHealth, std::floor(m_players->operator[](0).player->GetHealth()));
@@ -153,6 +184,7 @@ void HUD::UpdatePlayerHUD() {
 
 
   if (m_players->at(1).player != nullptr) {
+    EnableUIPlayer2(true);
     SetNumbers(player2.maxHealth, std::floor(m_players->operator[](1).player->GetMaxHealth()));
     SetNumbers(player2.currentHealth, std::floor(m_players->operator[](1).player->GetHealth()));
     player2.health->m_maxHealth = m_players->operator[](1).player->GetMaxHealth();
