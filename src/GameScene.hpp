@@ -43,7 +43,7 @@ public:
   void SetNextScene(Sigma::Scene *nextScene) { m_nextScene = nextScene; }
 
 protected:
-  bool m_debug = false;
+  bool m_debug = true;
 
   std::string m_jsonPath{};
   glm::vec2 m_playerStartPos{};
