@@ -17,13 +17,11 @@ void DefaultEnemy::DebugWindow() {
   }
 }
 
-
-
 void DefaultEnemy::Init() {
   Enemy::Init();
 
   // Setup Animation
-  auto anim = GET_ANIMATION->LoadTextureAtlas("assets/characters/enemy/anim-data.json");
+  auto anim = GET_ANIMATION->LoadTextureAtlas("assets/characters/bigEnemy/anim-data.json");
   m_animComp->SetTextureAtlas(anim);
   m_animComp->SetCurrentAnim("Idle");
   SetTexture(anim->textureStr.c_str());
@@ -253,7 +251,7 @@ void DefaultEnemy::DeadState() {
 
 void DefaultEnemy::OnFullComboPerformed() {
   m_timer = Sigma::Random::Float(1.2f,1.6f);
-  m_nextState = STATE_FOLLOW; // TODO: change this to reposition
+  m_nextState = STATE_REPOSITION; // TODO: change this to reposition
   SetState(STATE_PAUSED);
 }
 

@@ -46,14 +46,14 @@ protected:
 
   void DebugWindow() override;
 
-private:
-// Idk if this should be private or protected yet -x
   Player* m_nearest{};
   glm::vec3 m_distance = glm::vec3(0.0f);
   glm::vec2 m_position = glm::vec2(0.0f);
   float detectionRange = 100;
   double m_timer{};
   int m_nextState= 0;
+private:
+// Idk if this should be private or protected yet -x
 };
 
 }
