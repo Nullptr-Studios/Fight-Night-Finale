@@ -13,7 +13,7 @@ void Tnt::Init() {
   m_attackCollider->GetCollider()->enabled = false;
   m_boomBox = {100,100,100};
   m_powBox = {300,300};
-  m_damage = 50;
+  m_damage = 30;
 }
 
 void Tnt::Update(double delta) {
@@ -24,14 +24,20 @@ void Tnt::Update(double delta) {
   if (m_timer >= 8) {
     boom = true;
     m_attackCollider->Do(transform.position, m_boomBox, m_damage, this, Sigma::Damage::DamageType::DAMAGE,m_powBox, true);
-
   }
 
 }
 
 void Tnt::DebugWindow() {
-  if (ImGui::Button("Boom")) {
-    m_attackCollider->Do(transform.position, m_boomBox, m_damage, this, Sigma::Damage::DamageType::DAMAGE,m_powBox, true);
+  Actor::DebugWindow();
+
+  if (ImGui::CollapsingHeader("BOOM")) {
+    if (ImGui::Button("Boom")) {
+      m_attackCollider->Do(transform.position, m_boomBox, m_damage, this, Sigma::Damage::DamageType::DAMAGE,m_powBox, true);
+    }
+    if (ImGui::Button("Launch")) {
+      m_attackCollider->Do(transform.position, m_boomBox, m_damage, this, Sigma::Damage::DamageType::DAMAGE,m_powBox, true);
+    }
   }
 }
 void Tnt::Destroy() {
