@@ -74,26 +74,18 @@ public:
 
   static GameplayManager* GetInstance() { return m_instance; }
 
-  static GameplayManager* m_instance;
-
-  
 private:
-
+  static GameplayManager* m_instance;
   //bool m_gameStarted = false;
-
   Sigma::CameraFollow* m_cameraFollow;
 
   /**
    * @brief holds the information required for the players
    */
   std::array<PlayerStruct, 2> m_players = {};
-
   unsigned char m_playerCount = 0;
-
   game::GameScene* m_currentGameScene = nullptr;
-
   bool m_gameSceneIsDirty = true;
-  
 };
 }
 

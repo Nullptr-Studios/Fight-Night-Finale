@@ -17,6 +17,8 @@ class Object;
 
 namespace game {
 
+class GlowArea;
+
 class Tutorial1 : public game::GameScene {
 public:
   Tutorial1(const char *name, unsigned ID, const char *jsonPath) :
@@ -33,6 +35,8 @@ private:
 
 protected:
   bool m_debug = true;
+  GlowArea* m_glowArea = nullptr;
+
 };
 
 } // namespace game
