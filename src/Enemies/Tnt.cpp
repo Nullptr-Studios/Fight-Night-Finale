@@ -3,6 +3,7 @@
 #include "Collision/OneHitCollider.hpp"
 #include "Factory.hpp"
 #include "Collision/Collider.hpp"
+#include "Polygon.hpp"
 #include "aecore/imgui/imgui.h"
 #include "Collision/OneHitCollider.hpp"
 #include "DamageSystem/DamageEvent.hpp"
@@ -10,39 +11,51 @@
 #include <glm/gtx/compatibility.hpp>
 namespace game {
 
+
 void Tnt::Init() {
-  m_start = transform.position;
-  m_target = {100,0,0};
   m_attackCollider = GET_FACTORY->CreateObject<Sigma::Collision::OneHitCollider>("Attack Collider");
   m_attackCollider->GetCollider()->enabled = false;
   m_boomBox = {100,100,100};
   m_powBox = {300,300};
   m_damage = 30;
+  m_length = 1;
   m_timer = 0;
 }
 
 void Tnt::Update(double delta) {
+  m_timer += (float)delta;
+  if ( m_timer >= m_length + 2) {
+    GET_FACTORY->DestroyObject(this);
+  }
   if (boom) {
     return;
   }
-  if (m_timer >= 8) {
+  if (m_timer >= m_length + 1) {
     boom = true;
     m_attackCollider->Do(transform.position, m_boomBox, m_damage, this, Sigma::Damage::DamageType::DAMAGE,m_powBox, true);
-  } else {
-    m_timer += (float)delta;
+    transform.position = m_target;
   }
-
+  if (m_timer <= m_length) {
+    float t = m_timer / m_length;
+    transform.position = glm::lerp(m_start,m_target,t);
+  }
+  transform.position.z = 0;
 }
 
 void Tnt::DebugWindow() {
   Actor::DebugWindow();
 
   if (ImGui::CollapsingHeader("BOOM")) {
+    ImGui::DragFloat("m_timer", &m_timer);
+    ImGui::DragFloat("m_length", &m_length);
+    ImGui::DragFloat3("m_start", &m_start.x);
+    ImGui::DragFloat3("m_target", &m_target.x);
     if (ImGui::Button("Boom")) {
       m_attackCollider->Do(transform.position, m_boomBox, m_damage, this, Sigma::Damage::DamageType::DAMAGE,m_powBox, true);
     }
     if (ImGui::Button("Launch")) {
       m_timer = 0;
+      boom = false;
       transform.position = m_start;
     }
   }

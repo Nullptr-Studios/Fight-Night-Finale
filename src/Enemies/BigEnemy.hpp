@@ -11,7 +11,7 @@
 namespace game {
 class BigEnemy : public DefaultEnemy {
 private:
-  bool targetLeft;
+  bool targetLeft{};
 public:
   BigEnemy(const Sigma::id_t id, const char* jsonPath) : DefaultEnemy(id, jsonPath) {}
   void Init() override;
