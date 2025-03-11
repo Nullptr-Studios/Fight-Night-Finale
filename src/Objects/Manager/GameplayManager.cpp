@@ -13,7 +13,6 @@
 #include "Objects/CameraFollow.hpp"
 
 #include "Player/Player.hpp"
-#include "UI/HealthBar.hpp"
 
 game::GameplayManager* game::GameplayManager::m_instance = nullptr;
 
@@ -25,7 +24,7 @@ void game::GameplayManager::Init() {
   GET_CAMERA->GetCurrentCamera()->size = 1;
 #else
   m_cameraFollow = GET_FACTORY->CreateObject<Sigma::CameraFollow>("Main Camera Follow");
-  m_cameraFollow->size = 2;
+  m_cameraFollow->size = 3;
   GET_CAMERA->SetCurrentCamera(m_cameraFollow);
 #endif
 
