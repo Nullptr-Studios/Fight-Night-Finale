@@ -29,6 +29,8 @@ public:
 protected:
   void OnFullComboPerformed() override;
 
+  void EndedMove() override;
+
   virtual void WalkState();
 
   virtual void GoToState();
@@ -40,6 +42,7 @@ protected:
   virtual void RepositionState();
   virtual void RePosing();
   virtual void AttackState();
+  
   void DeadState() override;
 
   bool OnCollision(Sigma::Collision::CollisionEvent &e) override;

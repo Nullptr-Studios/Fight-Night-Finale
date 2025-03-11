@@ -255,9 +255,15 @@ void DefaultEnemy::DeadState() {
 }
 
 void DefaultEnemy::OnFullComboPerformed() {
-  m_timer = Sigma::Random::Float(1.2f,1.6f);
+  m_timer = Sigma::Random::Float(1.2f, 1.6f);
   m_nextState = STATE_REPOSITION; // TODO: change this to reposition
   SetState(STATE_PAUSED);
+}
+
+void DefaultEnemy::EndedMove() {
+  if (!m_hasDoneDamage) {
+    OnFullComboPerformed();
+  }
 }
 
 void DefaultEnemy::Destroy() {

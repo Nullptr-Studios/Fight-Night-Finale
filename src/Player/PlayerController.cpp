@@ -19,7 +19,7 @@ void PlayerController::Update()
   if      (action == "roll" && m_character->GetIsIdle())  m_character->Dash();
   else if (action == "basic") {
     if (!m_character->GetIsIdle())
-      m_character->WantsToAttackAgainBasic();
+      m_character->WantsToAttackAgainBasic(m_inputSystem.GetLastMovement().x);
     
     m_character->BasicAttack();
   }

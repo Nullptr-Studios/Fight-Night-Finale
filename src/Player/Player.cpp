@@ -122,4 +122,9 @@ void Player::OnDamage(const Sigma::Damage::DamageEvent &e) {
   // }
 }
 
-} // namespa
+void Player::SetControllerID(int id) {
+  m_controllerId = id;
+  m_controllerComponent->SetControllerID(id);
+}
+
+} // namespace game

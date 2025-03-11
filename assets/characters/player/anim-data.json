@@ -229,7 +229,8 @@
 	"trimmed": true,
 	"spriteSourceSize": {"x":56,"y":49,"w":49,"h":79},
 	"sourceSize": {"w":128,"h":128},
-	"pivot": {"x":0.5,"y":1}
+	"pivot": {"x":0.5,"y":1},
+  "callback": "DoHit"
 },
 {
 	"filename": "Grab_0079.png",
