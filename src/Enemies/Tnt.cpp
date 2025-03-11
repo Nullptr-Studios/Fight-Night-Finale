@@ -15,6 +15,7 @@ namespace game {
 void Tnt::Init() {
   m_attackCollider = GET_FACTORY->CreateObject<Sigma::Collision::OneHitCollider>("Attack Collider");
   m_attackCollider->GetCollider()->enabled = false;
+  transform.scale = {100,10};
   m_boomBox = {100,100,100};
   m_powBox = {300,300};
   m_damage = 30;
