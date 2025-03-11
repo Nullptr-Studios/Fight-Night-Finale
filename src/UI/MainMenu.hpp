@@ -17,7 +17,10 @@ public:
   void Load() override;
   void Unload() override;
 private:
-  Sigma::SceneButton *m_playButton;
-  Sigma::SceneButton * m_quitButton;
+  Sigma::SceneButton *m_playButton = nullptr;
+  Sigma::SceneButton *m_controlsButton = nullptr;
+  Sigma::SceneButton *m_scoreButton = nullptr;
+  Sigma::SceneButton *m_quitButton = nullptr;
+  Sigma::Actor *m_background = nullptr;
 };
 }
