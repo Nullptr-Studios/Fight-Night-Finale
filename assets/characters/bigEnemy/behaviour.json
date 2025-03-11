@@ -1,6 +1,6 @@
 {
-  "maxHealth" : 70.0,
-  "maxSpeed" : 120.0,
+  "maxHealth" : 100.0,
+  "maxSpeed" : 60.0,
   "accelerationRate" : 5.0,
   "jumpVel" : 0.0,
   "friction" : 1000,
@@ -9,8 +9,8 @@
   "basicCombo" : [
     {
       "type" : "dmg",
-      "damage" : 8.0,
-      "knockback" : { "x" : 600.0, "y" : 0 },
+      "damage" : 16.0,
+      "knockback" : { "x" : 150.0, "y" : 0 },
       "colliderOffset" : {
         "x" : 28,
         "y" : 55
@@ -20,29 +20,14 @@
         "y" : 15,
         "z" : 1
       },
-      "animationName" : "Combo1"
-    },
-    {
-      "type" : "dmg",
-      "damage" : 8.0,
-      "knockback" : { "x" : 600.0, "y" : 0 },
-      "colliderOffset" : {
-        "x" : 28,
-        "y" : 55
-      },
-      "colliderSize" : {
-        "x" : 38,
-        "y" : 15,
-        "z" : 1
-      },
-      "animationName" : "Combo2"
+      "animationName" : "Punch1"
     }
   ],
 
   "basicAirCombo" : [
     {
       "type" : "dmg",
-      "damage" : 8.0,
+      "damage" : 16.0,
       "knockback" : { "x" : 300.0, "y" : 300.0 },
       "colliderOffset" : {
         "x" : 28,
@@ -75,7 +60,7 @@
     },
     {
       "type" : "thr",
-      "damage" : 10.0,
+      "damage" : 20.0,
       "knockback" : { "x" : 300.0, "y" : 300.0 },
       "colliderOffset" : {
         "x" : 0.0,
@@ -108,7 +93,7 @@
     },
     {
       "type" : "thr",
-      "damage" : 10.0,
+      "damage" : 20.0,
       "knockback" : { "x" : 300.0, "y" : 300.0 },
       "colliderOffset" : {
         "x" : 0.0,

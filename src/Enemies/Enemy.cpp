@@ -2,8 +2,9 @@
 
 #include "Objects/Manager/GameplayManager.hpp"
 #include "aecore/AEFrameRateController.h"
+#include "aecore/imgui/imgui.h"
 
-#define DEBUG_ENEMY
+// #define DEBUG_ENEMY
 
 namespace game {
 
@@ -81,7 +82,7 @@ void Enemy::Update(double delta) {
 
 
   if (m_currentState == STATE_IDLE && m_enabled) {
-    SetState(STATE_FOLLOW);
+    SetState(m_defaultState);
   } else if (!m_enabled && m_currentState != STATE_IDLE) {
     m_currentState = STATE_IDLE;
   }
@@ -149,4 +150,22 @@ void Enemy::TimerState() {
     m_timer = 0.0f;
   }
 }
+
+void Enemy::DebugWindow() {
+  Character::DebugWindow();
+  if (ImGui::CollapsingHeader("Enemy")) {
+    const char *states[] = {"idle","follow","wait","dead","dispearse","avoid","reposition","attack","wander", "paused","walk","goto","reposing"};
+    int selection = m_currentState;
+    if (ImGui::Combo("Current State", &selection, states, 13)) {
+      m_currentState = selection;
+    }
+    selection = m_defaultState;
+    if (ImGui::Combo("Default State", &selection, states, 13)) {
+      m_defaultState = selection;
+    }
+    ImGui::DragFloat("Attack Range", &m_attackDistance);
+    ImGui::Checkbox("Enabled", &m_enabled);
+  }
+}
+
 }
