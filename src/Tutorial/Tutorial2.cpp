@@ -1,13 +1,6 @@
-#include "Tutorial_2.hpp"
-#include "Controller/CameraController.hpp"
+#include "Tutorial2.hpp"
 #include "Core.hpp"
 #include "Factory.hpp"
-#include "GameManager.hpp"
-#include "Objects/Actor.hpp"
-#include "Objects/Camera.hpp"
-#include "Objects/CameraFollow.hpp"
-
-// #define DEBUG_CAMERA
 
 namespace game {
 

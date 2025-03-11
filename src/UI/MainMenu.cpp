@@ -7,16 +7,16 @@
 #include "Objects/Camera.hpp"
 #include "Objects/Manager/GameplayManager.hpp"
 #include "UI/SceneButton.hpp"
-#include "Tutorial/Tutorial_1.hpp"
-#include "Tutorial/Tutorial_2.hpp"
+#include "Tutorial/Tutorial1.hpp"
+#include "Tutorial/Tutorial2.hpp"
 
 void game::MainMenu::Load() {
   Scene::Load();
 
   GET_CAMERA->SetCurrentCamera(GET_FACTORY->CreateObject<Sigma::Camera>("Main Camera"));
-  
-  auto s = new game::Tutorial2("Game Scene1", 1, "assets/tutorial/tutorial_2.json");
-  m_playButton = GET_FACTORY->CreateObject<Sigma::SceneButton>("Play Button", s,GetID());
+ 
+  auto s = new game::Tutorial2("Game Scene1", 1, "assets/tutorial/tutorial_1.json");
+  m_playButton = GET_FACTORY->CreateObject<Sigma::SceneButton>("Play Button",s ,GetID());
   m_playButton->m_screenSpaceTransform.scale = {300, 100};
   m_playButton->m_screenSpaceTransform.position.x += 200;
   m_playButton->SetTexture("assets/UI/PlayButton.png");
@@ -31,15 +31,7 @@ void game::MainMenu::Load() {
   AddChild(m_quitButton);
 
   AddChild(GET_CAMERA->GetCurrentCamera());
-  
-  // auto progress = GET_FACTORY->CreateObject<game::HealthBar>("Progress");
-  // progress->m_maxHealth = 100;
-  // progress->m_currentHealth = 100;
-  // progress->m_isScreenSpaceUI = false;
-  // progress->m_screenSpaceTransform.scale = {400, 10};
-  // progress->m_screenSpaceTransform.position = {0,250,0};
-  // progress->m_progress = 1;
-
+ 
 }
 void game::MainMenu::Unload() {
   Scene::Unload();

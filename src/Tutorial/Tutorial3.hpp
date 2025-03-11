@@ -1,7 +1,7 @@
 /**
- * @file Tutorial_1.hpp
- * @author Alexey
- * @date 28/02/25
+ * @file Tutorial_3.hpp
+ * @author Xein
+ * @date 10/03/25
  *
  * @brief [TODO: Brief description of the file's purpose]
  */
@@ -17,9 +17,9 @@ class Object;
 
 namespace game {
 
-class Tutorial1 : public game::GameScene {
+class Tutorial3 : public game::GameScene {
 public:
-  Tutorial1(const char *name, unsigned ID, const char *jsonPath) :
+  Tutorial3(const char *name, unsigned ID, const char *jsonPath) :
       GameScene(name, ID, jsonPath) {}
 
   void Load() override;
