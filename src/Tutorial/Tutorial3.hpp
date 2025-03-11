@@ -8,7 +8,8 @@
 #pragma once
 
 #include "GameScene.hpp"
-#include "Player/Player.hpp"
+#include "Objects/Debug/PunchingBag.hpp"
+#include "Tutorial/GlowArea.hpp"
 
 namespace Sigma {
 class Actor;
@@ -29,6 +30,8 @@ public:
 
 private:
   Sigma::Actor* background = nullptr;
+  GlowArea* m_glowArea = nullptr;
+  PunchingBag* m_punchBag = nullptr;
 
 protected:
   bool m_debug = true;

@@ -17,12 +17,6 @@ void GlowArea::Init() {
 }
 
 bool GlowArea::OnCollision(Sigma::Collision::CollisionEvent& e) {
-  // Sanity check
-  if (!m_scene) {
-    std::cout << "[Glow Area] Object does not have a destination\n";
-    return true;
-  }
-
   auto players = GameplayManager::GetInstance()->GetPlayers();
   // FIXME: This might not work on release????
   if (players->operator[](1).player != nullptr) m_playerCount = 2;
@@ -31,8 +25,7 @@ bool GlowArea::OnCollision(Sigma::Collision::CollisionEvent& e) {
   else if (dynamic_cast<Player*>(e.GetOther()) == players->operator[](1).player) m_player2 = true;
 
   if ((m_player1 && m_playerCount == 1) || (m_player1 && m_player2)) {
-    GET_MANAGER->LoadScene(m_scene);
-    GET_MANAGER->UnloadScene(m_current.c_str());
+    GameplayManager::GetInstance()->GotoNextScene();
   }
   return true;
 }

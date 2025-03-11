@@ -2,7 +2,6 @@ cmake_minimum_required(VERSION 3.29)
 project(sigma LANGUAGES CXX)
 set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
-add_compile_options(/W4)
 
 # Add engine cmake projects
 add_subdirectory(inc/sigma)

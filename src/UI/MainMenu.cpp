@@ -2,20 +2,17 @@
 
 
 #include "Controller/CameraController.hpp"
-#include "Level1/Scene1.hpp"
-#include "Level1/Scene2.hpp"
 #include "Objects/Camera.hpp"
 #include "Objects/Manager/GameplayManager.hpp"
 #include "UI/SceneButton.hpp"
-#include "Tutorial/Tutorial1.hpp"
-#include "Tutorial/Tutorial2.hpp"
+#include "Tutorial/Tutorial3.hpp"
 
 void game::MainMenu::Load() {
   Scene::Load();
 
   GET_CAMERA->SetCurrentCamera(GET_FACTORY->CreateObject<Sigma::Camera>("Main Camera"));
  
-  auto s = new game::Tutorial1("Game Scene1", 1, "assets/tutorial/tutorial-1.json");
+  auto s = new game::Tutorial3("Game Scene3", 2, "assets/tutorial/tutorial-3.json");
   m_playButton = GET_FACTORY->CreateObject<Sigma::SceneButton>("Play Button",s ,GetID());
   m_playButton->m_screenSpaceTransform.scale = {300, 100};
   m_playButton->m_screenSpaceTransform.position.x += 200;

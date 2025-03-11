@@ -19,15 +19,10 @@ public:
   void Init() override;
   bool OnCollision(Sigma::Collision::CollisionEvent& e) override;
 
-  void SetNextScene(GameScene* scene) { m_scene = scene; }
-  void SetCurrentScene(const std::string& name) { m_current = name; }
-
 private:
-  GameScene* m_scene = nullptr;
   bool m_player1 = false;
   bool m_player2 = false;
   char m_playerCount = 1;
-  std::string m_current;
 };
 
 }
