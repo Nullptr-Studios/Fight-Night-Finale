@@ -96,21 +96,16 @@ void game::GameScene::Load() {
 
 void game::GameScene::Update(double delta){
   Sigma::Scene::Update(delta);
-  //
-  //
-  //
-  // for(auto enemyspawner : m_enemySpawners) {
-  //   if(enemyspawner->GetFinished())
-  //     continue;
-  //
-  //   if(enemyspawner->GetRequiredId() == -1)
-  //   {
-  //     enemyspawner->SetEnabled(true);
-  //     continue;
-  //   }
-  //
-  //   if(enemyspawner->)
-  // }
+
+  int spawnercount = 0;
+  for(auto enemyspawner : m_enemySpawners) {
+   if(enemyspawner->GetFinished())
+     spawnercount++;
+  }
+
+  if (spawnercount >= m_enemySpawners.size()) {
+    m_isSceneFinished = true;
+  }
 }
 
 void game::GameScene::Unload() {

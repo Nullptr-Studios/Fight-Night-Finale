@@ -65,6 +65,12 @@ void game::GameplayManager::RespawnPlayer(game::Player *player) {
   if (m_currentGameScene)
     player->transform.position = {m_currentGameScene->GetPlayerStartPos().x, m_currentGameScene->GetPlayerStartPos().y,
                                   -m_currentGameScene->GetPlayerStartPos().y};
+  player->SetTint(glm::vec4(1));
+  player->SetAlive(true);
+  player->ResetHealth();
+  player->SetActive(true);
+  player->m_animComp->SetCurrentAnim("Idle");
+  player->m_animComp->PlayAnim();
 }
 
 void game::GameplayManager::TeleportPlayersToNextScene() {

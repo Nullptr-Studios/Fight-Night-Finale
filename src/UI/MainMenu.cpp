@@ -2,13 +2,10 @@
 
 
 #include "Controller/CameraController.hpp"
-#include "Level1/Scene1.hpp"
-#include "Level1/Scene2.hpp"
 #include "Objects/Camera.hpp"
 #include "Objects/Manager/GameplayManager.hpp"
 #include "UI/SceneButton.hpp"
-#include "Tutorial/Tutorial_1.hpp"
-#include "Tutorial/Tutorial_2.hpp"
+#include "Tutorial/Tutorial3.hpp"
 
 void game::MainMenu::Load() {
   Scene::Load();
@@ -33,15 +30,7 @@ void game::MainMenu::Load() {
   AddChild(m_quitButton);
 
   AddChild(GET_CAMERA->GetCurrentCamera());
-  
-  // auto progress = GET_FACTORY->CreateObject<game::HealthBar>("Progress");
-  // progress->m_maxHealth = 100;
-  // progress->m_currentHealth = 100;
-  // progress->m_isScreenSpaceUI = false;
-  // progress->m_screenSpaceTransform.scale = {400, 10};
-  // progress->m_screenSpaceTransform.position = {0,250,0};
-  // progress->m_progress = 1;
-
+ 
 }
 void game::MainMenu::Unload() {
   Scene::Unload();

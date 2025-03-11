@@ -1,7 +1,7 @@
 /**
- * @file Tutorial_1.hpp
+ * @file Tutorial_2.hpp
  * @author Alexey
- * @date 28/02/25
+ * @date 10/03/25
  *
  * @brief [TODO: Brief description of the file's purpose]
  */
@@ -17,9 +17,11 @@ class Object;
 
 namespace game {
 
-class Tutorial1 : public game::GameScene {
+class GlowArea;
+
+class Tutorial2 : public game::GameScene {
 public:
-  Tutorial1(const char *name, unsigned ID, const char *jsonPath) :
+  Tutorial2(const char *name, unsigned ID, const char *jsonPath) :
       GameScene(name, ID, jsonPath) {}
 
   void Load() override;
@@ -29,6 +31,7 @@ public:
 
 private:
   Sigma::Actor* background = nullptr;
+  GlowArea* m_glowArea = nullptr;
 
 protected:
   bool m_debug = true;

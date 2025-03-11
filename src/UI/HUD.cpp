@@ -15,15 +15,15 @@ void HUD::Init() {
   player1.offset = {-600, 420, 0};
 
   player1.background = GET_FACTORY->CreateObject<Sigma::UIImage>("Healthbar Background", "HealthbarBackground");
-  player1.background->m_screenSpaceTransform.scale = { 424, 40 };
+  player1.background->m_screenSpaceTransform.scale = { 424, 34 };
   player1.background->m_screenSpaceTransform.position = player1.offset;
   player1.blue = GET_FACTORY->CreateObject<HealthBar>("Healthbar Blue", "HealthbarBlue");
-  player1.blue->SetScale({424, 40 });
+  player1.blue->SetScale({424, 34 });
   player1.blue->m_screenSpaceTransform.position = player1.offset;
   player1.blue->m_screenSpaceTransform.position.x += -212;
   player1.blue->SetAlignment(Sigma::UIProgressBar::LEFT);
   player1.health = GET_FACTORY->CreateObject<HealthBar>("Healthbar Red", "HealthbarRed");
-  player1.health->SetScale({ 424, 40 });
+  player1.health->SetScale({ 424, 34 });
   player1.health->m_screenSpaceTransform.position = player1.offset;
   player1.health->m_screenSpaceTransform.position.x += -212;
   player1.health->SetAlignment(Sigma::UIProgressBar::LEFT);
@@ -72,15 +72,15 @@ void HUD::Init() {
   player2.offset = {600, 420, 0};
 
   player2.background = GET_FACTORY->CreateObject<Sigma::UIImage>("Healthbar Background", "HealthbarBackground");
-  player2.background->m_screenSpaceTransform.scale = { 424, 40 };
+  player2.background->m_screenSpaceTransform.scale = { 424, 34 };
   player2.background->m_screenSpaceTransform.position = player2.offset;
   player2.blue = GET_FACTORY->CreateObject<HealthBar>("Healthbar Blue", "HealthbarBlue");
-  player2.blue->SetScale({424, 40 });
+  player2.blue->SetScale({424, 34 });
   player2.blue->m_screenSpaceTransform.position = player2.offset;
   player2.blue->m_screenSpaceTransform.position.x += 212;
   player2.blue->SetAlignment(Sigma::UIProgressBar::RIGHT);
   player2.health = GET_FACTORY->CreateObject<HealthBar>("Healthbar Red", "HealthbarRed");
-  player2.health->SetScale({ 424, 40 });
+  player2.health->SetScale({ 424, 34 });
   player2.health->m_screenSpaceTransform.position = player2.offset;
   player2.health->m_screenSpaceTransform.position.x += 212;
   player2.health->SetAlignment(Sigma::UIProgressBar::RIGHT);
@@ -131,8 +131,8 @@ void HUD::Init() {
 
   // Go Indicator
   m_goIndicator = GET_FACTORY->CreateObject<Sigma::UIImage>("Go Indicator", "GO");
-  m_goIndicator->m_screenSpaceTransform.position = {400, 50, 0};
-  m_goIndicator->m_screenSpaceTransform.scale = {64, 32};
+  m_goIndicator->m_screenSpaceTransform.position = {800, 140, 0};
+  m_goIndicator->m_screenSpaceTransform.scale = {256, 128};
   m_goIndicator->SetActive(false);
   
 

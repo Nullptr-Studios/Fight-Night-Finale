@@ -1,14 +1,15 @@
 /**
-* @file Tutorial_2.hpp
- * @author Alexey
- * @date 28/02/25
+ * @file Tutorial_3.hpp
+ * @author Xein
+ * @date 10/03/25
  *
  * @brief [TODO: Brief description of the file's purpose]
  */
 #pragma once
 
 #include "GameScene.hpp"
-#include "Player/Player.hpp"
+#include "Objects/Debug/PunchingBag.hpp"
+#include "Tutorial/GlowArea.hpp"
 
 namespace Sigma {
 class Actor;
@@ -17,9 +18,9 @@ class Object;
 
 namespace game {
 
-class Tutorial2 : public game::GameScene {
+class Tutorial3 : public game::GameScene {
 public:
-  Tutorial2(const char *name, unsigned ID, const char *jsonPath) :
+  Tutorial3(const char *name, unsigned ID, const char *jsonPath) :
       GameScene(name, ID, jsonPath) {}
 
   void Load() override;
@@ -29,6 +30,8 @@ public:
 
 private:
   Sigma::Actor* background = nullptr;
+  GlowArea* m_glowArea = nullptr;
+  PunchingBag* m_punchBag = nullptr;
 
 protected:
   bool m_debug = true;
