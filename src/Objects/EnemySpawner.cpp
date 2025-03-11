@@ -44,6 +44,9 @@ void game::EnemySpawner::Update(double deltaTime) {
       if (!ps.player)
         continue;
 
+      if(!ps.player->GetAlive())
+        continue;
+
       float distance = glm::distance(ps.player->transform.position, transform.position);
       if (distance < m_activationDistance) {
         m_triggered = true;

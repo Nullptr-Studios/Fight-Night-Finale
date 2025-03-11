@@ -140,6 +140,14 @@ void HUD::Init() {
   EnableUIPlayer1(true);
   EnableUIPlayer2(false);
 
+
+  // Go Indicator
+  m_goIndicator = GET_FACTORY->CreateObject<Sigma::UIImage>("Go Indicator", "GO");
+  m_goIndicator->m_screenSpaceTransform.position = {400, 50, 0};
+  m_goIndicator->m_screenSpaceTransform.scale = {64, 32};
+  m_goIndicator->SetActive(false);
+  
+
 }
 
 void HUD::EnableUIPlayer1(bool enable) {
@@ -166,6 +174,10 @@ void HUD::EnableUIPlayer2(bool enable) {
   player2.slash->SetActive(enable);
   player2.maxHealth[0]->SetActive(enable);
   player2.maxHealth[1]->SetActive(enable);
+}
+
+void HUD::EnableGOIndicator() {
+  
 }
 
 void HUD::Start() {}

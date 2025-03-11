@@ -56,7 +56,11 @@ public:
   void UpdatePlayerHUD();
 
   void SetNumbers(std::array<Sigma::UINumber*, 2> numbers, int value);
+
+  void EnableGOIndicator();
 private:
+
+  Sigma::UIImage* m_goIndicator = nullptr;
 
   void EnableUIPlayer1(bool enable);
   void EnableUIPlayer2(bool enable);

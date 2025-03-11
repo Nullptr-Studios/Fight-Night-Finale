@@ -32,14 +32,6 @@ void game::GameplayManager::Init() {
 
   m_gameHud = GET_FACTORY->CreateObject<game::HUD>("Game HUD");
   
-
-  GET_AUDIO->LoadBank("assets/banks/Master.bank");
-  GET_AUDIO->LoadBank("assets/banks/Master.strings.bank");
-  GET_AUDIO->LoadBank("assets/banks/Music.bank");
-  GET_AUDIO->LoadEvent("event:/Music/OST_Credits");
-  GET_AUDIO->PlayEvent("event:/Music/OST_Credits");
-
-  
   
 }
 void game::GameplayManager::Start() {

@@ -2,20 +2,20 @@
 
 #include <UI/DeadMenu.hpp>
 
+#include "Audio/AudioEngine.hpp"
 #include "Collision/Collider.hpp"
 #include "Collision/CollisionEvent.hpp"
 #include "Factory.hpp"
 #include "GameManager.hpp"
 #include "PrototypeScene.hpp"
-#include "Audio/AudioEngine.hpp"
 #include "UI/MainMenu.hpp"
 
 namespace game {
 
-AEGfxFont* font;
+AEGfxFont *font;
 void Player::Init() {
   Character::Init();
-  
+
   transform.relativeScale = glm::vec2(1);
 
   // Setup Animation
@@ -39,12 +39,12 @@ void Player::Serialize() {
   Character::Serialize();
   dashVel = j["dashVel"];
   dashTime = j["dashTime"];
-  dashCool  = j["dashCool"];
+  dashCool = j["dashCool"];
 }
 
 void Player::Start() {
   Character::Start();
-  
+
   // this is complete jankyness -d
   // m_debugPlayerCol = GET_FACTORY->CreateObject<Sigma::Actor>("Debug Attack");
 }
@@ -53,45 +53,55 @@ void Player::Update(double delta) {
   Character::Update(delta);
   if (m_controllerComponent)
     m_controllerComponent->Update();
-  
+
   if (GetIsIdle()) {
     if (velocity.x > .1f || velocity.x < -.1f || velocity.y > .1f || velocity.y < -.1f) {
       m_animComp->SetCurrentAnim("Walk");
-    }
-    else {
+    } else {
       m_animComp->SetCurrentAnim("Idle");
     }
   }
 
   // m_collider->DebugDraw(m_debugPlayerCol, this, "assets/core/debug_blue.png");
-
 }
 
 void Player::Destroy() {
   Character::Destroy();
-  //AEGfxFontFree(font);
+  // AEGfxFontFree(font);
 }
 
-void Player::OnDamage(const Sigma::Damage::DamageEvent &e)
-{
+void Player::OnDamage(const Sigma::Damage::DamageEvent &e) {
   Character::OnDamage(e);
 
-  std::cout << "Damage with " << e.GetOther()->GetName() << "\n";
-  std::cout << GetHealth() << "\n";
-  if (healthBar) 
+  if(m_invincible)
+    return;
+
+  if (healthBar)
     healthBar->Update(GetHealth<int>());
 
-  if (!m_isAlive && doFuckingOnce) {
-    auto scene = dynamic_cast<PrototypeScene*>(GET_SCENE(0));
-    if (!scene) return;
-    if (GetId() == scene->m_players[0]->GetId()) scene->m_players[0] = nullptr;
-    else if (GetId() == scene->m_players[1]->GetId()) scene->m_players[1] = nullptr;
+  if (!GetAlive())
+    return;
 
-    // TODO: We need to check if the two players are dead
-    //GET_MANAGER->LoadScene(m_deadScene);
-    //GET_MANAGER->UnloadScene(0u);
-    doFuckingOnce = false;
+
+  if (e.GetOther() != this) {
+    m_controllerComponent->PlayerDamagedFeedback();
+  } else {
+    m_controllerComponent->PlayerAttackFeedback();
   }
+
+
+
+  // if (!m_isAlive && doFuckingOnce) {
+  //   auto scene = dynamic_cast<PrototypeScene*>(GET_SCENE(0));
+  //   if (!scene) return;
+  //   if (GetId() == scene->m_players[0]->GetId()) scene->m_players[0] = nullptr;
+  //   else if (GetId() == scene->m_players[1]->GetId()) scene->m_players[1] = nullptr;
+  //
+  //   // TODO: We need to check if the two players are dead
+  //   //GET_MANAGER->LoadScene(m_deadScene);
+  //   //GET_MANAGER->UnloadScene(0u);
+  //   doFuckingOnce = false;
+  // }
 }
 
 } // namespace game

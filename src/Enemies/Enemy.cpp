@@ -33,7 +33,16 @@ void Enemy::OnDamage(const Sigma::Damage::DamageEvent& e) {
   if (e.GetOther()->GetName().contains("Enemy")) return;
  
   Character::OnDamage(e);
+
+  if(m_invincible)
+    return;
+
   if (!GetAlive()) SetState(STATE_DEAD);
+}
+
+void Enemy::DeadAnimFinish() {
+  // GET_FACTORY->DestroyObject(m_debugCol->GetId());
+  GET_FACTORY->DestroyObject(GetId());
 }
 
 void Enemy::Enable(std::array<PlayerStruct, 2>* players) {
@@ -56,11 +65,21 @@ Player* Enemy::GetNearestPlayer() {
   float distance0 = glm::distance(transform.GetDepthPosition(), m_players->operator[](0).player->transform.GetDepthPosition());
   float distance1 = glm::distance(transform.GetDepthPosition(), m_players->operator[](1).player->transform.GetDepthPosition());
 
-  if (distance0 >= distance1) return m_players->operator[](1).player;
-  return m_players->operator[](0).player;
+  if (distance0 >= distance1){
+    if(m_players->operator[](1).player->GetAlive())
+      return m_players->operator[](1).player;
+  }
+  if(m_players->operator[](0).player->GetAlive())
+    return m_players->operator[](0).player;
+
+  // if all checks fail return nullptr
+  return nullptr;
 }
 
 void Enemy::Update(double delta) {
+
+
+
   if (m_currentState == STATE_IDLE && m_enabled) {
     SetState(STATE_FOLLOW);
   } else if (!m_enabled && m_currentState != STATE_IDLE) {
@@ -68,6 +87,10 @@ void Enemy::Update(double delta) {
   }
 
   Character::Update(delta);
+
+  // Do not tick enemy logic if its inm air or recovering
+  if(isInAir || m_isRecovering)
+    return;
 
   if (!m_states[m_currentState]) {
     std::cout << "[Enemy] " << GetName() << ": The state you are trying to load is not binded\n";
@@ -126,5 +149,4 @@ void Enemy::TimerState() {
     m_timer = 0.0f;
   }
 }
-
 }

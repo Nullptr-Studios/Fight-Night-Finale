@@ -176,7 +176,9 @@ void DefaultEnemy::AttackState() {
 
 void DefaultEnemy::DeadState() {
   // GET_FACTORY->DestroyObject(m_debugCol->GetId());
-  GET_FACTORY->DestroyObject(GetId());
+  // GET_FACTORY->DestroyObject(GetId());
+  
+  m_enabled = false;
 }
 
 void DefaultEnemy::Destroy() {

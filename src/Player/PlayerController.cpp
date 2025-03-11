@@ -1,7 +1,9 @@
 #include "PlayerController.hpp"
 #include "Controller/InputComponent.hpp"
+#include "Core.hpp"
 #include "Objects/Character.hpp"
 #include "Objects/Object.hpp"
+#include <Controller/CameraController.hpp>
 
 namespace game {
 
@@ -39,6 +41,25 @@ void PlayerController::Update()
       m_character->transform.relativeScale.x = -1;
   }
 
+}
+
+void PlayerController::PlayerDamagedFeedback() {
+
+  // feedback
+  if(m_controllerId == -1)
+    return;
+
+  m_inputSystem.DoGamepadRumble(m_controllerId, 1, .15f);
+
+  // TODO: dante the fucking shake camera its not exposed >:( -d
+ 
+}
+
+void PlayerController::PlayerAttackFeedback(){
+  if(m_controllerId == -1)
+    return;
+
+  m_inputSystem.DoGamepadRumble(m_controllerId, .75f, .05f);
 }
 
 
