@@ -93,6 +93,7 @@ void game::EnemySpawner::Update(double deltaTime) {
   if (deletedAmmount == m_enemies.size()) {
     m_finished = true;
     m_enabled = false;
+    game::GameplayManager::GetInstance()->FinishedAnSpawner();
   }
 }
 void game::EnemySpawner::Destroy() {

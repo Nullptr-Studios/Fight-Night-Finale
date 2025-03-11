@@ -40,15 +40,20 @@ public:
   void OnDamage(const Sigma::Damage::DamageEvent &e) override;
   void OnHeal(float health) { 
     SetHealth(m_health + health); 
-    healthBar->Update(GetHealth<int>());
+    healthBar->Update(GetHealth<int>(), m_healthRecover);
   }
   game::UIHealthBar* healthBar = nullptr;
+
+  void DoSuperAttack() override;
+  void RegainHPCombo() override;
 
 private:
   /// @brief Holds the Player Controller Component to handle input
   std::unique_ptr<PlayerController> m_controllerComponent = nullptr;
 
   int m_controllerId = -1;
+
+  int m_healthRecover = 75;
 
   Sigma::Actor* m_debugPlayerCol = nullptr;
   MainMenu *m_deadScene = nullptr;

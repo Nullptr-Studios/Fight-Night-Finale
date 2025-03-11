@@ -130,3 +130,11 @@ void game::GameplayManager::GotoNextSceneAfter() {
   m_cameraFollow->transform.position.x = m_players[0].player->transform.position.x;
   m_cameraFollow->transform.position.y = m_players[0].player->transform.position.y;
 }
+
+
+void game::GameplayManager::FinishedAnSpawner(){
+  m_gameHud->EnableGOIndicator();
+}
+
+
+

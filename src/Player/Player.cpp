@@ -7,6 +7,7 @@
 #include "Collision/CollisionEvent.hpp"
 #include "Factory.hpp"
 #include "GameManager.hpp"
+#include "Objects/Damageable.hpp"
 #include "PrototypeScene.hpp"
 #include "UI/MainMenu.hpp"
 
@@ -70,14 +71,31 @@ void Player::Destroy() {
   // AEGfxFontFree(font);
 }
 
+void Player::DoSuperAttack(){
+  m_health -= 10;
+
+  if(healthBar)
+    healthBar->Update(GetHealth<int>(), m_healthRecover);
+  
+}
+
+void Player::RegainHPCombo() {
+  // FIXME: IMPORTANT!!!!!!!!! we need to have a way to know if the hit was recived by an enemy!!!!!!!!!!!!!
+  if (m_health < m_healthRecover)
+    m_health += 10;
+}
+
 void Player::OnDamage(const Sigma::Damage::DamageEvent &e) {
   Character::OnDamage(e);
 
   if(m_invincible)
     return;
 
+  if(e.GetOther() != this)
+    m_healthRecover = m_health;
+
   if (healthBar)
-    healthBar->Update(GetHealth<int>());
+    healthBar->Update(GetHealth<int>(), m_healthRecover);
 
   if (!GetAlive())
     return;
@@ -104,4 +122,4 @@ void Player::OnDamage(const Sigma::Damage::DamageEvent &e) {
   // }
 }
 
-} // namespace game
+} // namespa

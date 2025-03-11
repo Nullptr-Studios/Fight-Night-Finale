@@ -69,6 +69,8 @@ public:
 
   void GotoNextSceneAfter();
 
+  void FinishedAnSpawner();
+
   std::array<PlayerStruct, 2> *GetPlayers() { return &m_players; }
 
   Sigma::Polygon* GetSceneBoundsPoly() { return m_currentGameScene->GetSceneBoundsPoly(); }

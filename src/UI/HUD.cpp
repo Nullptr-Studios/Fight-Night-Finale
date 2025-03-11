@@ -177,7 +177,9 @@ void HUD::EnableUIPlayer2(bool enable) {
 }
 
 void HUD::EnableGOIndicator() {
-  
+  m_goActive = true;
+  m_goTimer = 0;
+  m_goTimerFlash = 0;
 }
 
 void HUD::Start() {}
@@ -208,7 +210,22 @@ void HUD::UpdatePlayerHUD() {
   }
 }
 
-void HUD::Update(double delta) {}
+void HUD::Update(double delta) {
+  if(m_goActive){
+    m_goTimer += delta;
+    m_goTimerFlash += delta;
+
+    if(m_goTimerFlash >= m_goTimeFlash){
+      m_goIndicator->SetActive(!m_goIndicator->IsActive());
+      m_goTimerFlash = 0;
+    }
+    if(m_goTimer >= m_goMaxTimer){
+      m_goActive = false;
+      m_goIndicator->SetActive(false);
+    }
+  }
+}
+
 
 void HUD::SetNumbers(std::array<Sigma::UINumber *, 2> numbers, int value) {
   value = glm::clamp(value, 0, 99);
