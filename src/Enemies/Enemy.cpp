@@ -90,7 +90,7 @@ void Enemy::Update(double delta) {
   Character::Update(delta);
 
   // Do not tick enemy logic if its inm air or recovering
-  if(isInAir || m_isRecovering)
+  if(isInAir || m_isRecovering || !m_isDoingSomething)
     return;
 
   if (!m_states[m_currentState]) {

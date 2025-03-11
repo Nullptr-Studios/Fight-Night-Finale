@@ -68,11 +68,11 @@ void DefaultEnemy::Update(double delta) {
 
 bool DefaultEnemy::OnCollision(Sigma::Collision::CollisionEvent &e) {
   if (m_currentState == STATE_WANDER || m_currentState == STATE_WALK || m_currentState == STATE_PAUSED) {
-    return false;
+    return true;
   }
   if (auto enemy = dynamic_cast<DefaultEnemy*>(e.GetOther())) {
     if (isAvoiding || enemy->isAvoiding) {
-      return false;
+      return true;
     }
     if (m_distance.length() > enemy->m_distance.length()) {
       return false;
@@ -84,7 +84,7 @@ bool DefaultEnemy::OnCollision(Sigma::Collision::CollisionEvent &e) {
     SetState(STATE_WALK);
     return true;
   }
-  return false;
+  return true;
 }
 
 void DefaultEnemy::WalkState() {
@@ -134,6 +134,10 @@ void DefaultEnemy::WanderState() {
 
 void DefaultEnemy::FollowState() {
   if (!m_isDoingSomething) return;
+  
+  if (m_nearest == nullptr)
+    return;
+  
   isAvoiding = false;
   m_animComp->SetCurrentAnim("Walk");
   glm::vec3 targets[2];
@@ -165,7 +169,6 @@ void DefaultEnemy::AttackState() {
 }
 
 void DefaultEnemy::GoToState() {
-  m_animComp->SetCurrentAnim("Walk");
   glm::vec2 position = (glm::vec2)transform.GetDepthPosition();
   glm::vec2 direction = glm::normalize(m_position - position);
   if ((direction.x >= 0) != (transform.relativeScale.x >= 0)) {
