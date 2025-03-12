@@ -7,6 +7,9 @@
 #include "Objects/Camera.hpp"
 #include "Objects/Manager/GameplayManager.hpp"
 #include "UI/SceneButton.hpp"
+#include "UI/ControlButton.hpp"
+#include "DeadScene.hpp"
+#include "WinScene.hpp"
 
 void game::MainMenu::Load() {
   Scene::Load();
@@ -19,9 +22,17 @@ void game::MainMenu::Load() {
   m_background->transform.position.z = -5000;
 
   AddChild(m_background);
+
+  m_logo = GET_FACTORY->CreateObject<Sigma::Actor>();
+  m_logo->SetTexture("assets/UI/Sprites/Untitled.png");
+  m_logo->transform.scale = {500, 500.0f};
+  m_logo->transform.position.y += 150;
+
+  AddChild(m_logo);
   
   auto s = new game::Scene1("Game Scene1", 1, "assets/level-1/scene-1.json");
-  m_playButton = GET_FACTORY->CreateObject<Sigma::SceneButton>("Play Button", s, GetID());
+  auto d = new game::WinScene("Game Scene1", 0);
+  m_playButton = GET_FACTORY->CreateObject<Sigma::SceneButton>("Play Button", d, GetID());
   m_playButton->m_screenSpaceTransform.scale = {100, 50};
   m_playButton->m_screenSpaceTransform.position.x -= 360;
   m_playButton->m_screenSpaceTransform.position.y -= 0;
@@ -29,7 +40,7 @@ void game::MainMenu::Load() {
 
   AddChild(m_playButton);
 
-  m_controlsButton = GET_FACTORY->CreateObject<Sigma::SceneButton>("Controls Button", nullptr,GetID());
+  m_controlsButton = GET_FACTORY->CreateObject<Sigma::CtrlButton>("Controls Button");
   m_controlsButton->m_screenSpaceTransform.scale = {175, 50};
   m_controlsButton->m_screenSpaceTransform.position.x -= 360;
   m_controlsButton->m_screenSpaceTransform.position.y -= 50;
@@ -42,6 +53,8 @@ void game::MainMenu::Load() {
   m_scoreButton->m_screenSpaceTransform.position.x -= 360;
   m_scoreButton->m_screenSpaceTransform.position.y -= 100;
   m_scoreButton->SetTexture("assets/UI/Sprites/Score.png");
+  m_scoreButton->SetTint({.5,.5,.5,1});
+  m_scoreButton->DisableUpdate();
 
   AddChild(m_scoreButton);
 
