@@ -218,8 +218,6 @@
             <key type="filename">../Frames/Characters/Kickboxer/Recover/Recover_0047.png</key>
             <key type="filename">../Frames/Characters/Kickboxer/Thrown/Thrown_0.png</key>
             <key type="filename">../Frames/Characters/Kickboxer/Walk/Walk_0000.png</key>
-            <key type="filename">../Frames/Characters/Kickboxer/Walk/Walk_0001.png</key>
-            <key type="filename">../Frames/Characters/Kickboxer/Walk/Walk_0002.png</key>
             <key type="filename">../Frames/Characters/Kickboxer/Walk/Walk_0003.png</key>
             <key type="filename">../Frames/Characters/Kickboxer/Walk/Walk_0004.png</key>
             <key type="filename">../Frames/Characters/Kickboxer/Walk/Walk_0005.png</key>
@@ -228,6 +226,36 @@
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,1</point_f>
+                <key>spriteScale</key>
+                <double>1</double>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>32,32,64,64</rect>
+                <key>scale9Paddings</key>
+                <rect>32,32,64,64</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">../Frames/Characters/Kickboxer/Walk/Walk_0001.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.46875,1</point_f>
+                <key>spriteScale</key>
+                <double>1</double>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>32,32,64,64</rect>
+                <key>scale9Paddings</key>
+                <rect>32,32,64,64</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">../Frames/Characters/Kickboxer/Walk/Walk_0002.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.414063,1</point_f>
                 <key>spriteScale</key>
                 <double>1</double>
                 <key>scale9Enabled</key>

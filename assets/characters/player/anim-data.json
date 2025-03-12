@@ -27,7 +27,7 @@
 	"spriteSourceSize": {"x":41,"y":51,"w":57,"h":77},
 	"sourceSize": {"w":128,"h":128},
 	"pivot": {"x":0.5,"y":1},
-  "callback": "DoHit"
+  	"callback": "DoHit"
 },
 {
 	"filename": "BasicCombo1_0059.png",
@@ -420,7 +420,7 @@
 	"trimmed": true,
 	"spriteSourceSize": {"x":53,"y":43,"w":32,"h":85},
 	"sourceSize": {"w":128,"h":128},
-	"pivot": {"x":0.5,"y":1}
+	"pivot": {"x":0.46875,"y":1}
 },
 {
 	"filename": "Walk_0002.png",
@@ -429,7 +429,7 @@
 	"trimmed": true,
 	"spriteSourceSize": {"x":45,"y":45,"w":52,"h":83},
 	"sourceSize": {"w":128,"h":128},
-	"pivot": {"x":0.5,"y":1}
+	"pivot": {"x":0.414063,"y":1}
 },
 {
 	"filename": "Walk_0003.png",
@@ -484,6 +484,6 @@
 	"format": "RGBA8888",
 	"size": {"w":256,"h":683},
 	"scale": "1",
-	"smartupdate": "$TexturePacker:SmartUpdate:f98374ece155c70ede70e72f2ed41668:f03010cb79a07a6e721ace900cb2f74e:4c611c686c10468ac782f620c2ae0741$"
+	"smartupdate": "$TexturePacker:SmartUpdate:04f24b0afe6fedcb18f9437ad7ab5deb:f03010cb79a07a6e721ace900cb2f74e:4c611c686c10468ac782f620c2ae0741$"
 }
 }

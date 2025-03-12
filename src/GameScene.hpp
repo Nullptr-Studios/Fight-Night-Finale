@@ -50,7 +50,7 @@ public:
   bool IsSceneFinished() { return m_isSceneFinished; }
 
 protected:
-  bool m_debug = false;
+  bool m_debug = true;
 
   bool m_isSceneFinished = false;
 
