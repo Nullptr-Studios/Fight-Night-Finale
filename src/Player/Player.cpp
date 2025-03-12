@@ -81,7 +81,7 @@ void Player::DoSuperAttack(){
 }
 
 void Player::RegainHPCombo() {
-  // FIXME: IMPORTANT!!!!!!!!! we need to have a way to know if the hit was recived by an enemy!!!!!!!!!!!!!
+
   if (m_health < m_healthRecover)
     m_health += 10;
 }

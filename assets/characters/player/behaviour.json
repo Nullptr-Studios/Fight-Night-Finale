@@ -40,7 +40,7 @@
     },
     {
       "type" : "dmg",
-      "damage" : 0,
+      "damage" : 100,
       "knockback" : { "x" : 700, "y" : 600 },
       "colliderOffset" : {
         "x" : 28,
