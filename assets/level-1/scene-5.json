@@ -40,19 +40,20 @@
     },
     {
       "name": "Spawner 2",
+      "required": 0,
       "pos": {"x": -72, "y": -88},
       "activationRange": 170,
       "enemies": [
         {
           "id": 3,
-          "pos": {"x": 45, "y": -60},
+          "pos": {"x": 45, "y": -65},
           "entranceId": 4
         }
       ]
     },
     {
       "name": "Spawner 3",
-      "requires": 1,
+      "required": 1,
       "pos": {"x": 120, "y": -85},
       "activationRange": 150,
       "enemies": [
@@ -80,7 +81,7 @@
     },
     {
       "name": "Spawner 4",
-      "requires": 2,
+      "required": 2,
       "pos": {"x": 145, "y": -140},
       "activationRange": 180,
       "enemies": [

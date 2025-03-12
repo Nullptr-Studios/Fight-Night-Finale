@@ -28,7 +28,7 @@ void DefaultEnemy::Init() {
   m_animComp->PlayAnim();
 
   // Setup player collider
-  m_collider->box.Set(25, 25, 50, 50, 25, transform.offset);
+  m_collider->box.Set(25, 25, 50, 50, 10, transform.offset);
   m_collider->SetColliderType(Sigma::Collision::COLLISION);
   m_collider->SetColliderFlags(Sigma::Collision::ENEMY);
   m_collider->damage = 1.0f;

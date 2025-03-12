@@ -53,6 +53,39 @@
       "entranceId": 2
     }
     ]
+  },
+  {
+    "name": "Spawner 3",
+    "required": 1,
+    "pos": {"x": 160, "y": -50},
+    "activationRange": 175,
+    "enemies": [
+    {
+      "id": 1,
+      "pos": {"x": 0, "y": 15},
+      "entranceId": 2
+    },
+    {
+      "id": 2,
+      "pos": {"x": -10, "y": 20},
+      "entranceId": 2
+    },
+    {
+      "id": 1,
+      "pos": {"x": 10, "y": 10},
+      "entranceId": 2
+    },
+    {
+      "id": 1,
+      "pos": {"x": 480, "y": -115},
+      "entranceId": 2
+    },
+    {
+      "id": 2,
+      "pos": {"x": 470, "y": -120},
+      "entranceId": 3
+    }
+    ]
   }
   ]
 }

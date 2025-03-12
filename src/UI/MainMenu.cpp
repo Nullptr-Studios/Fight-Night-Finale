@@ -14,7 +14,6 @@ void game::MainMenu::Load() {
   Scene::Load();
 
   GET_CAMERA->SetCurrentCamera(GET_FACTORY->CreateObject<Sigma::Camera>("Main Camera"));
-  
 
   //auto s = new game::Scene1("Game Scene1", 1, "assets/level-1/scene-1.json");
   auto s = new game::Tutorial1("Tutorial 1", 1, "assets/tutorial/tutorial-1.json");
