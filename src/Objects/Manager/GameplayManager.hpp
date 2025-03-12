@@ -13,6 +13,7 @@ class CameraFollow;
 }
 
 namespace game {
+class HUD;
 class GameScene;
 class Player;
 class HealthBar;
@@ -36,6 +37,7 @@ public:
 
   void Init() override;
   void Start() override;
+  void FirstUpdate(double deltaTime) override;
   void Update(double deltaTime) override;
   //void DebugWindow() override;
 
@@ -68,32 +70,38 @@ public:
 
   void GotoNextSceneAfter();
 
+  void FinishedAnSpawner();
+
+  void EnableHUD();
+
+  void DisableHUD();
+
+  void UninitializeGame();
+
+  void StartGame();
+
   std::array<PlayerStruct, 2> *GetPlayers() { return &m_players; }
 
   Sigma::Polygon* GetSceneBoundsPoly() { return m_currentGameScene->GetSceneBoundsPoly(); }
 
   static GameplayManager* GetInstance() { return m_instance; }
 
-  static GameplayManager* m_instance;
-
-  
 private:
-
+  static GameplayManager* m_instance;
   //bool m_gameStarted = false;
-
   Sigma::CameraFollow* m_cameraFollow;
+
+  HUD* m_gameHud = nullptr;
+
+  bool m_started = false;
 
   /**
    * @brief holds the information required for the players
    */
   std::array<PlayerStruct, 2> m_players = {};
-
   unsigned char m_playerCount = 0;
-
   game::GameScene* m_currentGameScene = nullptr;
-
   bool m_gameSceneIsDirty = true;
-  
 };
 }
 

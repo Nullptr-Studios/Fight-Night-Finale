@@ -5,6 +5,9 @@
 #pragma once
 #include "Scene.hpp"
 
+namespace game {
+class GlowArea;
+}
 namespace Sigma {
 class Polygon;
 }
@@ -25,9 +28,11 @@ public:
    * @param jsonPath
    */
   GameScene(const char *name, unsigned ID, const char *jsonPath) : Scene(name, ID), m_jsonPath(jsonPath) {};
+  
 
   void Load() override;
   void Unload() override;
+  void Update(double delta) override;
   void DebugWindow() override;
 
   /**
@@ -42,9 +47,15 @@ public:
 
   void SetNextScene(Sigma::Scene *nextScene) { m_nextScene = nextScene; }
 
+  bool IsSceneFinished() { return m_isSceneFinished; }
+
 protected:
   bool m_debug = false;
 
+  bool m_isSceneFinished = false;
+
+  GlowArea* m_exitLocation = nullptr;
+  
   std::string m_jsonPath{};
   glm::vec2 m_playerStartPos{};
   std::vector<glm::vec2> m_sceneBounds{};

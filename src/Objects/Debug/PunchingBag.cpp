@@ -5,6 +5,7 @@
 #include "PunchingBag.hpp"
 
 #include "Factory.hpp"
+#include "Objects/Character.hpp"
 
 namespace game {
 void PunchingBag::Init() {
@@ -35,6 +36,11 @@ void PunchingBag::OnDamage(const Sigma::Damage::DamageEvent &e) {
   Damageable::OnDamage(e);
   std::cout << "Punching Bag was damaged by " << e.GetOther()->GetName() << "\n";
   m_animComp->PlayAndStop();
+
+  auto c = dynamic_cast<Sigma::Character*>(e.GetOther());
+  if (c) {
+    c->OnDoneDamage();
+  }
 }
 
 glm::mat3 *PunchingBag::GetTextureTransform()

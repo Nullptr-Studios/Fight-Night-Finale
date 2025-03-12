@@ -30,10 +30,10 @@ protected:
   //Box
   const char * m_texture; ///>@brief box texture
   const char * m_brokenTexture; ///>@brief box broken texture
-  glm::vec3 m_size = {64,64,192}; ///>@brief box size
+  glm::vec3 m_size = {32,32,64}; ///>@brief box size
   //Pickup
   const char * m_pickupTexture; ///>@brief pickup texture
-  glm::vec3 m_pickupSize = {32, 32, 96}; ///>@brief pickup size
+  glm::vec3 m_pickupSize = {16, 16, 32}; ///>@brief pickup size
   float m_pickupHeal = 50; ///>@brief pickup heal amount
 };
 }

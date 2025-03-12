@@ -1,0 +1,57 @@
+{"frames": [
+
+{
+	"filename": "GlowArea_1.png",
+	"frame": {"x":1,"y":1,"w":122,"h":46},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":122,"h":46},
+	"sourceSize": {"w":122,"h":46},
+	"pivot": {"x":0.5,"y":0.5}
+},
+{
+	"filename": "GlowArea_2.png",
+	"frame": {"x":1,"y":49,"w":122,"h":46},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":122,"h":46},
+	"sourceSize": {"w":122,"h":46},
+	"pivot": {"x":0.5,"y":0.5}
+},
+{
+	"filename": "GlowArea_3.png",
+	"frame": {"x":1,"y":97,"w":122,"h":46},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":122,"h":46},
+	"sourceSize": {"w":122,"h":46},
+	"pivot": {"x":0.5,"y":0.5}
+},
+{
+	"filename": "GlowArea_4.png",
+	"frame": {"x":1,"y":145,"w":122,"h":46},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":122,"h":46},
+	"sourceSize": {"w":122,"h":46},
+	"pivot": {"x":0.5,"y":0.5}
+},
+{
+	"filename": "GlowArea_5.png",
+	"frame": {"x":1,"y":193,"w":122,"h":46},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":122,"h":46},
+	"sourceSize": {"w":122,"h":46},
+	"pivot": {"x":0.5,"y":0.5}
+}],
+"meta": {
+	"app": "https://www.codeandweb.com/texturepacker",
+	"version": "1.0",
+	"image": "GlowArea_Anim.png",
+	"format": "RGBA8888",
+	"size": {"w":124,"h":240},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:74bd9ebe0d88e011e969c409b80fb057:9ddc763569d6b074c9938c864f451ac0:9899f32f3f60ab5c4619ff5ced4d9d4d$"
+}
+}
