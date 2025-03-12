@@ -8,12 +8,24 @@
 namespace game {
 
 void GlowArea::Init() {
-  // TODO: Do glow animation
-  SetTexture("assets/objects/area-static.png");
+
+  m_animComp = new Sigma::Animation::AnimationComponent(this);
+  auto t = GET_ANIMATION->LoadTextureAtlas("assets/objects/GlowArea_Anim.json");
+  m_animComp->SetTextureAtlas(t);
+  SetTexture(t->textureStr.c_str());
+  m_animComp->SetCurrentAnim("GlowArea");
+  m_animComp->PlayAnim();
+
   transform.scale = {122, 46};
 
   m_collider = std::make_unique<Sigma::Collision::BoxCollider>(Sigma::Collision::PLAYER, Sigma::Collision::COLLISION);
-  m_collider->box.Set({122, 46, 5});
+  m_collider->box.Set({6, 6, 5});
+}
+void GlowArea::Update(double deltaTime) {
+  Actor::Update(deltaTime);
+
+  m_animComp->Update(deltaTime);
+
 }
 
 bool GlowArea::OnCollision(Sigma::Collision::CollisionEvent& e) {
@@ -25,7 +37,11 @@ bool GlowArea::OnCollision(Sigma::Collision::CollisionEvent& e) {
   else if (dynamic_cast<Player*>(e.GetOther()) == players->operator[](1).player) m_player2 = true;
 
   if ((m_player1 && m_playerCount == 1) || (m_player1 && m_player2)) {
-    GameplayManager::GetInstance()->GotoNextScene();
+    if (!m_doFuckingOnce) {
+      GameplayManager::GetInstance()->GotoNextScene();
+      m_doFuckingOnce = true;
+      return false;
+    }
   }
   return true;
 }

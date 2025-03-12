@@ -37,6 +37,7 @@ public:
 
   void Init() override;
   void Start() override;
+  void FirstUpdate(double deltaTime) override;
   void Update(double deltaTime) override;
   //void DebugWindow() override;
 

@@ -31,7 +31,7 @@ void Player::Init() {
   m_controllerComponent->SetControllerID(m_controllerId);
 
   // setup player collider
-  m_collider->box.Set(25, 25, 50, 50, 25, transform.offset);
+  m_collider->box.Set(25, 25, 50, 50, 15, transform.offset);
   m_collider->SetColliderType(Sigma::Collision::COLLISION);
   m_collider->damage = 1.0f;
   m_collider->SetOwner(this);

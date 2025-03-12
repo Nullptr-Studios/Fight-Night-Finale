@@ -25,6 +25,7 @@ public:
    * @param jsonPath
    */
   GameScene(const char *name, unsigned ID, const char *jsonPath) : Scene(name, ID), m_jsonPath(jsonPath) {};
+  
 
   void Load() override;
   void Unload() override;

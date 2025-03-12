@@ -17,12 +17,21 @@ public:
   explicit GlowArea(const Sigma::id_t id) : Actor(id) {}
 
   void Init() override;
+  void Update(double deltaTime) override;
   bool OnCollision(Sigma::Collision::CollisionEvent& e) override;
 
+  glm::mat3 *GetTextureTransform() override {
+    m_tMtx = m_animComp->GetTextureMatrix();
+    return &m_tMtx;
+  }
+
 private:
+  
   bool m_player1 = false;
   bool m_player2 = false;
   char m_playerCount = 1;
+
+  bool m_doFuckingOnce = false;
 };
 
 }

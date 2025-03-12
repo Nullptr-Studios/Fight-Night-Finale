@@ -47,6 +47,7 @@ void game::GameScene::Load() {
       point->transform.position.z = 1000;
       point->transform.scale = {10, 10};
       point->SetTint({0.0f, 1.0f, 1.0f, 1.0f});
+      AddChild(point);
     }
   }
 

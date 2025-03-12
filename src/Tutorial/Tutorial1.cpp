@@ -10,7 +10,7 @@ namespace game {
 void Tutorial1::Load() {
   GameScene::Load();
 
-  SetNextScene(new Tutorial2("Tutorial2", 1, "assets/tutorial/tutorial-2.json"));
+  
 
   m_background = GET_FACTORY->CreateObject<Sigma::Actor>();
   m_background->SetTexture("assets/tutorial/tutorial-1.png");
@@ -21,6 +21,8 @@ void Tutorial1::Load() {
   m_glowArea = GET_FACTORY->CreateObject<GlowArea>("Glow area");
   m_glowArea->transform.position = {229, -99, 99};
   AddChild(m_glowArea);
+
+  SetNextScene(new Tutorial2("Tutorial 2", 1, "assets/tutorial/tutorial-2.json"));
 }
 
 void Tutorial1::Update(double delta) {

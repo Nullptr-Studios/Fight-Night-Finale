@@ -37,14 +37,16 @@ void game::GameplayManager::Start() {
   Object::Start();
   UpdateCurrentGameScene();
 }
-
-void game::GameplayManager::Update(double deltaTime) {
-  Object::Update(deltaTime);
-
-  // Update the current game scene, and for now teleport players FIXME: this should be done in another way
+void game::GameplayManager::FirstUpdate(double deltaTime) {
+  Object::FirstUpdate(deltaTime);
+  // Update the current game scene, and for now teleport players
   if (m_gameSceneIsDirty) {
     GotoNextSceneAfter();
   }
+}
+
+void game::GameplayManager::Update(double deltaTime) {
+  Object::Update(deltaTime);
 
   if (!m_playerCount && AEInputGamepadButtonPressed(0, AE_GAMEPAD_START)) {
     InitPlayer(0);
@@ -65,12 +67,12 @@ void game::GameplayManager::RespawnPlayer(game::Player *player) {
   if (m_currentGameScene)
     player->transform.position = {m_currentGameScene->GetPlayerStartPos().x, m_currentGameScene->GetPlayerStartPos().y,
                                   -m_currentGameScene->GetPlayerStartPos().y};
-  player->SetTint(glm::vec4(1));
+  /*player->SetTint(glm::vec4(1));
   player->SetAlive(true);
   player->ResetHealth();
   player->SetActive(true);
   player->m_animComp->SetCurrentAnim("Idle");
-  player->m_animComp->PlayAnim();
+  player->m_animComp->PlayAnim();*/
 }
 
 void game::GameplayManager::TeleportPlayersToNextScene() {

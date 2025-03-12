@@ -1,6 +1,7 @@
 #include "Tutorial3.hpp"
 #include "Core.hpp"
 #include "Factory.hpp"
+#include "Level1/Scene1.hpp"
 #include "Objects/Actor.hpp"
 #include "Objects/Debug/PunchingBag.hpp"
 
@@ -16,10 +17,14 @@ void Tutorial3::Load() {
   AddChild(background);
 
   m_punchBag = GET_FACTORY->CreateObject<PunchingBag>("Punchbag");
+  m_punchBag->transform.position = {0, -75, 75};
   AddChild(m_punchBag);
 
   m_glowArea = GET_FACTORY->CreateObject<GlowArea>("Glow Area");
-  AddChild(m_glowArea); 
+  m_glowArea->transform.position = {145, -65, 65};
+  AddChild(m_glowArea);
+
+  SetNextScene(new Scene1("Level 1", 1, "assets/level-1/scene-1.json"));
 }
 
 void Tutorial3::Update(double delta) {
