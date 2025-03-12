@@ -7,6 +7,7 @@
  */
 #pragma once
 #include "Scene.hpp"
+#include "UI/UIText.hpp"
 namespace Sigma {
 class SceneButton;
 class CtrlButton;
@@ -16,6 +17,7 @@ class MainMenu final : public Sigma::Scene{
 public:
   MainMenu(const char *name, unsigned ID) : Scene(name, ID) {}
   void Load() override;
+  void Update(double delta) override;
   void Unload() override;
 private:
   Sigma::SceneButton *m_playButton = nullptr;
@@ -24,5 +26,6 @@ private:
   Sigma::SceneButton *m_quitButton = nullptr;
   Sigma::Actor *m_background = nullptr;
   Sigma::Actor *m_logo = nullptr;
+  Sigma::Actor* m_studioName = nullptr;
 };
 }

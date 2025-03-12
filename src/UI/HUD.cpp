@@ -12,7 +12,7 @@ namespace game {
 
 void HUD::Init() {
 #pragma region Player1
-  player1.offset = {-600, 420, 0};
+  player1.offset = {-600, 450, 0};
 
   player1.background = GET_FACTORY->CreateObject<Sigma::UIImage>("Healthbar Background", "HealthbarBackground");
   player1.background->m_screenSpaceTransform.scale = { 424, 34 };
@@ -69,7 +69,7 @@ void HUD::Init() {
 #pragma endregion
 
 #pragma region Player2
-  player2.offset = {600, 420, 0};
+  player2.offset = {600, 450, 0};
 
   player2.background = GET_FACTORY->CreateObject<Sigma::UIImage>("Healthbar Background", "HealthbarBackground");
   player2.background->m_screenSpaceTransform.scale = { 424, 34 };
