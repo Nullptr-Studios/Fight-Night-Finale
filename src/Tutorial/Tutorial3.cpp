@@ -24,6 +24,13 @@ void Tutorial3::Load() {
   m_glowArea->transform.position = {145, -65, 65};
   AddChild(m_glowArea);
 
+  auto tut = GET_FACTORY->CreateObject<Sigma::Actor>();
+  tut->SetTexture("assets/tutorial/prompt3.png");
+  tut->transform.scale = {320.0f, 180.0f};
+  tut->transform.position.y = 128;
+
+  AddChild(tut);
+
   SetNextScene(new Scene1("Level 1", 1, "assets/level-1/scene-1.json"));
 }
 

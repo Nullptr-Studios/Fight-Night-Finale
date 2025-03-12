@@ -1,6 +1,6 @@
 {
   "maxHealth" : 70.0,
-  "maxSpeed" : 120.0,
+  "maxSpeed" : 140.0,
   "accelerationRate" : 5.0,
   "jumpVel" : 0.0,
   "friction" : 1000,

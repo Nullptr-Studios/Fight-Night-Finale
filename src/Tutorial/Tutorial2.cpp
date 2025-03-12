@@ -25,6 +25,13 @@ void Tutorial2::Load() {
   box->transform.position = {0, -64, 64};
   AddChild(box);*/
 
+  auto tut = GET_FACTORY->CreateObject<Sigma::Actor>();
+  tut->SetTexture("assets/tutorial/prompt2.png");
+  tut->transform.scale = {320.0f, 180.0f};
+  tut->transform.position.y = 128;
+
+  AddChild(tut);
+
   SetNextScene(new Tutorial3("Tutorial 3", 2, "assets/tutorial/tutorial-3.json"));
 }
 
