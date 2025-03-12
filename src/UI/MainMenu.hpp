@@ -9,6 +9,7 @@
 #include "Scene.hpp"
 namespace Sigma {
 class SceneButton;
+class CtrlButton;
 }
 namespace game {
 class MainMenu final : public Sigma::Scene{
@@ -17,7 +18,11 @@ public:
   void Load() override;
   void Unload() override;
 private:
-  Sigma::SceneButton *m_playButton;
-  Sigma::SceneButton * m_quitButton;
+  Sigma::SceneButton *m_playButton = nullptr;
+  Sigma::CtrlButton *m_controlsButton = nullptr;
+  Sigma::SceneButton *m_scoreButton = nullptr;
+  Sigma::SceneButton *m_quitButton = nullptr;
+  Sigma::Actor *m_background = nullptr;
+  Sigma::Actor *m_logo = nullptr;
 };
 }
