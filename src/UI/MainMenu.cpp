@@ -27,10 +27,18 @@ void game::MainMenu::Load() {
 
   m_logo = GET_FACTORY->CreateObject<Sigma::Actor>();
   m_logo->SetTexture("assets/UI/Sprites/Untitled.png");
-  m_logo->transform.scale = {500, 500.0f};
+  m_logo->transform.scale = {500.0f, 500.0f};
   m_logo->transform.position.y = 60;
 
   AddChild(m_logo);
+
+  auto m_studioLogo = GET_FACTORY->CreateObject<Sigma::Actor>();
+  m_studioLogo->SetTexture("assets/UI/Nullptrlogo.png");
+  m_studioLogo->transform.scale = {958.0f, 288.0f};
+  m_studioLogo->transform.position = {0, 0, 1000};
+  m_studioLogo->transform.relativeScale = glm::vec2(.10f);
+
+  AddChild(m_studioLogo);
   
   auto s = new game::Tutorial1("Tutorial 1 ", 1, "assets/tutorial/tutorial-1.json");
   //auto d = new game::WinScene("Game Scene1", 0);
