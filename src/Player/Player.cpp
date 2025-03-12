@@ -33,6 +33,7 @@ void Player::Init() {
   // setup player collider
   m_collider->box.Set(25, 25, 50, 50, 15, transform.offset);
   m_collider->SetColliderType(Sigma::Collision::COLLISION);
+  m_collider->SetColliderFlags(Sigma::Collision::PLAYER);
   m_collider->damage = 1.0f;
   m_collider->SetOwner(this);
 }

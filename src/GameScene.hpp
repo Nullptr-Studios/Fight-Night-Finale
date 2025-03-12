@@ -5,6 +5,9 @@
 #pragma once
 #include "Scene.hpp"
 
+namespace game {
+class GlowArea;
+}
 namespace Sigma {
 class Polygon;
 }
@@ -50,6 +53,8 @@ protected:
   bool m_debug = false;
 
   bool m_isSceneFinished = false;
+
+  GlowArea* m_exitLocation = nullptr;
   
   std::string m_jsonPath{};
   glm::vec2 m_playerStartPos{};

@@ -14,6 +14,7 @@
 
 #include "Player/Player.hpp"
 
+
 game::GameplayManager* game::GameplayManager::m_instance = nullptr;
 
 void game::GameplayManager::Init() {

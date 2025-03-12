@@ -26,7 +26,7 @@ void Scene6::Load() {
   walls->transform.position.z = -5000;
   AddChild(walls);
 
-  SetNextScene(new Scene7("Game Scene 7", 7, "assets/level-1/scene-7.json"));
+  //SetNextScene(new Scene7("Game Scene 7", 7, "assets/level-1/scene-7.json"));
 }
 
 void Scene6::Update(double delta) {

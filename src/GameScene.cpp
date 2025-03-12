@@ -11,6 +11,7 @@
 #include "Controller/CameraController.hpp"
 #include "Objects/CameraFollow.hpp"
 #include "Scene.hpp"
+#include "Tutorial/GlowArea.hpp"
 #include "pch.hpp"
 
 
@@ -33,6 +34,13 @@ void game::GameScene::Load() {
   file.close();
 
   m_playerStartPos = {J["playerStart"]["x"], J["playerStart"]["y"]};
+
+  if (J.contains("exitLoc")) {
+    m_exitLocation = GET_FACTORY->CreateObject<GlowArea>("Exit");
+    m_exitLocation->transform.position = {J["exitLoc"]["x"], J["exitLoc"]["y"], -J["exitLoc"]["y"].get<int>()};
+    m_exitLocation->SetActive(false);
+    AddChild(m_exitLocation);
+  }
 
   m_sceneBounds.reserve(J["bounds"].size());
 
@@ -104,7 +112,9 @@ void game::GameScene::Update(double delta){
      spawnercount++;
   }
 
-  if (spawnercount >= m_enemySpawners.size()) {
+  if (spawnercount >= m_enemySpawners.size() && !m_isSceneFinished) {
+    if (m_exitLocation)
+      m_exitLocation->SetActive(true);
     m_isSceneFinished = true;
   }
 }
