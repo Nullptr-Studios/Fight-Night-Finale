@@ -13,6 +13,8 @@
 #include "Objects/CameraFollow.hpp"
 
 #include "Player/Player.hpp"
+#include "UI/DeadScene.hpp"
+#include "UI/MainMenu.hpp"
 
 
 game::GameplayManager* game::GameplayManager::m_instance = nullptr;
@@ -25,18 +27,18 @@ void game::GameplayManager::Init() {
   GET_CAMERA->GetCurrentCamera()->size = 1;
 #else
   m_cameraFollow = GET_FACTORY->CreateObject<Sigma::CameraFollow>("Main Camera Follow");
-  m_cameraFollow->size = 1;
+  m_cameraFollow->size = 3;
   GET_CAMERA->SetCurrentCamera(m_cameraFollow);
 #endif
 
 
   m_gameHud = GET_FACTORY->CreateObject<game::HUD>("Game HUD");
   
-  
+
 }
 void game::GameplayManager::Start() {
   Object::Start();
-  UpdateCurrentGameScene();
+  StartGame();
 }
 void game::GameplayManager::FirstUpdate(double deltaTime) {
   Object::FirstUpdate(deltaTime);
@@ -55,6 +57,29 @@ void game::GameplayManager::Update(double deltaTime) {
      InitPlayer(-1);
   }
   CheckForCoop();
+
+  int dedPlayers = 0;
+  for (auto element: m_players) {
+    if (element.player == nullptr)
+      continue;
+    
+    if (!element.player->IsActive()) {
+      dedPlayers++;
+    }
+  }
+  
+  if (dedPlayers >= m_playerCount && m_playerCount != 0) {
+    GET_MANAGER->LoadScene(new DeadScene("Dead Scene", 0));
+    GET_MANAGER->UnloadScene(m_currentGameScene->GetID());
+    UninitializeGame();
+  }
+
+  //return to main menu
+  if (AEInputKeyPressed(27)) {
+    GET_MANAGER->LoadScene(new MainMenu("Main Menu", 0));
+    GET_MANAGER->UnloadScene(m_currentGameScene->GetID());
+    UninitializeGame();
+  }
 
   // Debug pass level
   if (AEInputKeyTriggered('P')) {
@@ -138,14 +163,48 @@ void game::GameplayManager::GotoNextScene() {
 void game::GameplayManager::GotoNextSceneAfter() {
   UpdateCurrentGameScene();
   TeleportPlayersToNextScene();
+  
+  AEDbgAssertFunction(m_players[0].player != nullptr, __FILE__, __LINE__, "m_player[0] is nullptr");
   m_cameraFollow->transform.position.x = m_players[0].player->transform.position.x;
   m_cameraFollow->transform.position.y = m_players[0].player->transform.position.y;
 }
 
 
-void game::GameplayManager::FinishedAnSpawner(){
-  m_gameHud->EnableGOIndicator();
+
+
+void game::GameplayManager::FinishedAnSpawner() { m_gameHud->EnableGOIndicator(); }
+
+void game::GameplayManager::EnableHUD() { m_gameHud->Enable(); }
+void game::GameplayManager::DisableHUD() { m_gameHud->Disable(); }
+
+void game::GameplayManager::UninitializeGame() {
+  DisableHUD();
+  SetActive(false);
+
+  for (auto element: m_players) {
+    if (element.player != nullptr)
+      GET_FACTORY->DestroyObject(element.player);
+  }
+  m_playerCount = 0;
+  m_players = {};
+
+  GET_FACTORY->DestroyObject(m_cameraFollow);
+  m_currentGameScene = nullptr;
+
+  m_started = false;
 }
+
+void game::GameplayManager::StartGame() {
+  if (m_started)
+    return;
+  
+  SetActive(true);
+  UpdateCurrentGameScene();
+  m_cameraFollow = GET_FACTORY->CreateObject<Sigma::CameraFollow>("Main Camera Follow");
+  m_cameraFollow->size = 3;
+  GET_CAMERA->SetCurrentCamera(m_cameraFollow);
+}
+
 
 
 

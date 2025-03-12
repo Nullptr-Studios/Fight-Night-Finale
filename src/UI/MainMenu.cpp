@@ -28,13 +28,13 @@ void game::MainMenu::Load() {
   m_logo = GET_FACTORY->CreateObject<Sigma::Actor>();
   m_logo->SetTexture("assets/UI/Sprites/Untitled.png");
   m_logo->transform.scale = {500, 500.0f};
-  m_logo->transform.position.y += 150;
+  m_logo->transform.position.y = 60;
 
   AddChild(m_logo);
   
-  auto s = new game::Scene1("Game Scene1", 1, "assets/level-1/scene-1.json");
-  auto d = new game::WinScene("Game Scene1", 0);
-  m_playButton = GET_FACTORY->CreateObject<Sigma::SceneButton>("Play Button", d, GetID());
+  auto s = new game::Tutorial1("Tutorial 1 ", 1, "assets/tutorial/tutorial-1.json");
+  //auto d = new game::WinScene("Game Scene1", 0);
+  m_playButton = GET_FACTORY->CreateObject<Sigma::SceneButton>("Play Button", s, GetID());
   m_playButton->m_screenSpaceTransform.scale = {100, 50};
   m_playButton->m_screenSpaceTransform.position.x -= 360;
   m_playButton->m_screenSpaceTransform.position.y -= 0;
@@ -73,5 +73,6 @@ void game::MainMenu::Load() {
 }
 void game::MainMenu::Unload() {
   Scene::Unload();
-  GET_FACTORY->CreateObject<game::GameplayManager>("Gameplay Manager");
+  if (GameplayManager::GetInstance() == nullptr)
+    GET_FACTORY->CreateObject<game::GameplayManager>("Gameplay Manager");
 }

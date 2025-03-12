@@ -8,6 +8,7 @@
 #pragma once
 #include "Core.hpp"
 #include "Objects/Manager/GameplayManager.hpp"
+
 #include "UI/UIImage.hpp"
 #include "UI/UINumber.hpp"
 #include "UI/UIText.hpp"
@@ -52,6 +53,9 @@ public:
   void Start() override;
   void Update(double delta) override;
   void SetPlayer1Health(int health);
+
+  void Enable();
+  void Disable();
 
   void UpdatePlayerHUD();
 

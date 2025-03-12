@@ -13,10 +13,10 @@ class CameraFollow;
 }
 
 namespace game {
+class HUD;
 class GameScene;
 class Player;
 class HealthBar;
-class HUD;
 
 struct PlayerStruct {
   Player* player = nullptr;
@@ -72,6 +72,14 @@ public:
 
   void FinishedAnSpawner();
 
+  void EnableHUD();
+
+  void DisableHUD();
+
+  void UninitializeGame();
+
+  void StartGame();
+
   std::array<PlayerStruct, 2> *GetPlayers() { return &m_players; }
 
   Sigma::Polygon* GetSceneBoundsPoly() { return m_currentGameScene->GetSceneBoundsPoly(); }
@@ -84,6 +92,8 @@ private:
   Sigma::CameraFollow* m_cameraFollow;
 
   HUD* m_gameHud = nullptr;
+
+  bool m_started = false;
 
   /**
    * @brief holds the information required for the players

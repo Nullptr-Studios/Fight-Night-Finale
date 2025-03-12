@@ -23,6 +23,8 @@ void Tutorial1::Load() {
   AddChild(m_glowArea);
 
   SetNextScene(new Tutorial2("Tutorial 2", 1, "assets/tutorial/tutorial-2.json"));
+
+  GameplayManager::GetInstance()->StartGame();
 }
 
 void Tutorial1::Update(double delta) {

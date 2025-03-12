@@ -33,6 +33,8 @@ void game::WinScene::Load() {
 
   AddChild(GET_CAMERA->GetCurrentCamera());
 
+  GameplayManager::GetInstance()->UninitializeGame();
+
 }
 void game::WinScene::Unload() {
   Scene::Unload();

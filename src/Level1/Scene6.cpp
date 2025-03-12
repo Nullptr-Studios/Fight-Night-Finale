@@ -6,6 +6,7 @@
 #include "Objects/Actor.hpp"
 #include "Objects/Camera.hpp"
 #include "Scene7.hpp"
+#include "UI/WinScene.hpp"
 
 #define DEBUG_CAMERA
 
@@ -26,7 +27,7 @@ void Scene6::Load() {
   walls->transform.position.z = -5000;
   AddChild(walls);
 
-  //SetNextScene(new Scene7("Game Scene 7", 7, "assets/level-1/scene-7.json"));
+  SetNextScene(new WinScene("Win Scene", 7));
 }
 
 void Scene6::Update(double delta) {

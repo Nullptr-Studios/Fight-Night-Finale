@@ -125,7 +125,7 @@ void HUD::Init() {
   player2.maxHealth[1]->m_screenSpaceTransform.position.y +=  42;
 #pragma endregion
 
-  EnableUIPlayer1(true);
+  EnableUIPlayer1(false);
   EnableUIPlayer2(false);
 
 
@@ -222,5 +222,18 @@ void HUD::SetNumbers(std::array<Sigma::UINumber *, 2> numbers, int value) {
 }
 
 void HUD::SetPlayer1Health(int health) {}
+
+void HUD::Enable() {
+  if (m_players->at(0).player != nullptr) {
+    EnableUIPlayer1(true);
+  }
+  if (m_players->at(1).player != nullptr) {
+    EnableUIPlayer2(true);
+  }
+}
+void HUD::Disable() {
+  EnableUIPlayer1(false);
+  EnableUIPlayer2(false);
+}
 
 } // namespace game
