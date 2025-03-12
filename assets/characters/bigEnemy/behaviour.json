@@ -9,7 +9,7 @@
   "basicCombo" : [
     {
       "type" : "dmg",
-      "damage" : 16.0,
+      "damage" : 8.0,
       "knockback" : { "x" : 150.0, "y" : 0 },
       "colliderOffset" : {
         "x" : 28,
@@ -20,7 +20,22 @@
         "y" : 15,
         "z" : 1
       },
-      "animationName" : "Punch1"
+      "animationName" : "Combo1"
+    },
+    {
+      "type" : "dmg",
+      "damage" : 32.0,
+      "knockback" : { "x" : 400.0, "y" : 600 },
+      "colliderOffset" : {
+        "x" : 28,
+        "y" : 55
+      },
+      "colliderSize" : {
+        "x" : 38,
+        "y" : 15,
+        "z" : 1
+      },
+      "animationName" : "Combo2"
     }
   ],
 
