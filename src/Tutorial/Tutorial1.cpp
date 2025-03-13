@@ -1,9 +1,10 @@
 #include "Tutorial1.hpp"
 #include "Core.hpp"
 #include "Factory.hpp"
-#include "Tutorial/Tutorial2.hpp"
 #include "Objects/Actor.hpp"
 #include "Tutorial/GlowArea.hpp"
+#include "Tutorial/Tutorial2.hpp"
+#include "UI/UIStaticImage.hpp"
 
 namespace game {
 
@@ -24,12 +25,9 @@ void Tutorial1::Load() {
 
   SetNextScene(new Tutorial2("Tutorial 2", 1, "assets/tutorial/tutorial-2.json"));
 
-  auto tut = GET_FACTORY->CreateObject<Sigma::Actor>();
+  auto tut = GET_FACTORY->CreateObject<Sigma::StaticImage>("StaticImage");
   tut->SetTexture("assets/tutorial/prompt1.png");
   tut->transform.scale = {320.0f, 180.0f};
-  tut->transform.position.y = 128;
-
-  AddChild(tut);
 
   GameplayManager::GetInstance()->StartGame();
 }
