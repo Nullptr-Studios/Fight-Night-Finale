@@ -22,9 +22,9 @@ void Tutorial2::Load() {
   m_glowArea->transform.position = {128, -64, 64};
   AddChild(m_glowArea);
 
-  auto box = GET_FACTORY->CreateObject<game::Box>("Box");
+  /*auto box = GET_FACTORY->CreateObject<game::Box>("Box");
   box->transform.position = {0, -64, 64};
-  AddChild(box);
+  AddChild(box);*/
 
   auto tut = GET_FACTORY->CreateObject<Sigma::StaticImage>("StaticImage");
   tut->SetTexture("assets/tutorial/prompt2.png");

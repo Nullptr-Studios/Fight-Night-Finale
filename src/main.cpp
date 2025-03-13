@@ -17,7 +17,7 @@ int main() {
   gameManager->LoadScene(mainMenu);
 
 
-  AEGfxSetFullscreen(false);
+  AEGfxSetFullscreen(true);
   while (AESysWindowExists()) {
     gameManager->Run();
   }
