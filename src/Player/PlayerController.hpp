@@ -23,6 +23,10 @@ public:
   ~PlayerController() override = default;
   void Update() override;
 
+  void PlayerDamagedFeedback();
+
+  void PlayerAttackFeedback();
+
   //void GetControllerID() {m_controllerId = m_inputSystem.CheckControllers();}
 
   /**

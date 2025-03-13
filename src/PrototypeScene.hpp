@@ -8,16 +8,43 @@
 
 #pragma once
 #include "GameScene.hpp"
+#include "Player/Player.hpp"
+#include "Objects/Destructibles/Box.hpp"
 
+namespace Sigma {
+class Actor;
+class Object;
+}
 namespace game {
+class PunchingBag;
+class HealthBar;
 
-class PrototypeScene : public Sigma::GameScene {
+class PrototypeScene : public game::GameScene {
 public:
-  PrototypeScene(const char *name, unsigned ID, const char *jsonPath) : GameScene(name, ID, jsonPath) {}
+  PrototypeScene(const char *name, unsigned ID, const char *jsonPath) :
+      GameScene(name, ID, jsonPath), floor(nullptr), walls(nullptr), healthBar(nullptr), s(nullptr), s2(nullptr),
+      s3(nullptr), p(nullptr) {}
 
   void Load() override;
 
   void Update(double delta) override;
+  void Free() override;
+
+  std::array<Player*, 2> m_players = {};
+
+private:
+  Sigma::Actor *floor;
+  Sigma::Actor *walls;
+  HealthBar *healthBar;
+  PunchingBag *s;
+  PunchingBag *s2;
+  PunchingBag *s3;
+  HealthBar *healthBar2 = nullptr;
+  Player *p;
+  Player *p2 = nullptr;
+  Box * b = nullptr;
+
+  MainMenu* m_deadScene = nullptr;
 };
 
 } // namespace game

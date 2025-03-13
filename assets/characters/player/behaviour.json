@@ -1,0 +1,55 @@
+{
+  "maxHealth" : 80.0,
+  "maxSpeed" : 137.0,
+  "accelerationRate" : 5.5,
+  "dashVel" : 310,
+  "dashTime" : 0.23,
+  "dashCool" : 0.5,
+  "friction" :750,
+
+  "basicCombo" : [
+    {
+      "type" : "dmg",
+      "damage" : 8.0,
+      "knockback" : { "x" : 170, "y" : 0 },
+      "colliderOffset" : { "x" : 20, "y" : 60 },
+      "colliderSize" : { "x" : 20, "y" : 15, "z" : 5 },
+      "animationName" : "BasicCombo1"
+    },
+    {
+      "type" : "dmg",
+      "damage" : 8.0,
+      "knockback" : { "x" : 200, "y" : 0 },
+      "colliderOffset" : { "x" : 19, "y" : 59 },
+      "colliderSize" : { "x" : 21, "y" : 15, "z" : 6 },
+      "animationName" : "BasicCombo2"
+    },
+    {
+      "type" : "dmg",
+      "damage" : 17,
+      "knockback" : { "x" : 510, "y" : 600 },
+      "colliderOffset" : { "x" : 32, "y" : 35 },
+      "colliderSize" : { "x" : 28, "y" : 50, "z" : 10 },
+      "animationName" : "BasicCombo3"
+    }
+  ],
+
+  "superCombo" : [
+    {
+      "type" : "grb",
+      "damage" : 0.0,
+      "knockback" : { "x" : -50, "y" : 0 },
+      "colliderOffset" : { "x" : 28, "y" : 55 },
+      "colliderSize" : { "x" : 38, "y" : 15, "z" : 5 },
+      "animationName" : "Grab"
+    },
+    {
+      "type" : "thr",
+      "damage" : 30.0,
+      "knockback" : { "x" : 800.0, "y" : 800.0 },
+      "colliderOffset" : { "x" : 0.0, "y" : 0.0 },
+      "colliderSize" : { "x" : 0.0, "y" : 0.0, "z" : 0.0 },
+      "animationName" : "BasicCombo1"
+    }
+  ]
+}
