@@ -4,6 +4,7 @@
 #include "GlowArea.hpp"
 #include "Objects/Destructibles/Box.hpp"
 #include "Tutorial/Tutorial3.hpp"
+#include "UI/UIStaticImage.hpp"
 
 namespace game {
 
@@ -24,6 +25,13 @@ void Tutorial2::Load() {
   /*auto box = GET_FACTORY->CreateObject<game::Box>("Box");
   box->transform.position = {0, -64, 64};
   AddChild(box);*/
+
+  auto tut = GET_FACTORY->CreateObject<Sigma::StaticImage>("StaticImage");
+  tut->SetTexture("assets/tutorial/prompt2.png");
+  tut->transform.scale = {320.0f, 180.0f};
+  tut->transform.relativeScale = glm::vec2(2);
+
+  AddChild(tut);
 
   SetNextScene(new Tutorial3("Tutorial 3", 2, "assets/tutorial/tutorial-3.json"));
 }

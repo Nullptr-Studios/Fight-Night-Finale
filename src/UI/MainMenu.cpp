@@ -2,6 +2,7 @@
 
 
 #include "Controller/CameraController.hpp"
+#include "Core.hpp"
 #include "Level1/Scene1.hpp"
 #include "Objects/Camera.hpp"
 #include "Objects/Manager/GameplayManager.hpp"
@@ -11,6 +12,7 @@
 #include "UI/SceneButton.hpp"
 #include "UI/ControlButton.hpp"
 #include "DeadScene.hpp"
+#include "UI/UIText.hpp"
 #include "WinScene.hpp"
 
 void game::MainMenu::Load() {
@@ -26,59 +28,63 @@ void game::MainMenu::Load() {
   AddChild(m_background);
 
   m_logo = GET_FACTORY->CreateObject<Sigma::Actor>();
-  m_logo->SetTexture("assets/UI/Sprites/Untitled.png");
-  m_logo->transform.scale = {500.0f, 500.0f};
-  m_logo->transform.position.y = 60;
+  m_logo->SetTexture("assets/UI/Sprites/Title.png");
+  m_logo->transform.scale = {222.64f, 163.f};
+  m_logo->transform.position.y = 95;
+  m_logo->transform.position.x = 5;
 
   AddChild(m_logo);
 
-  auto m_studioLogo = GET_FACTORY->CreateObject<Sigma::Actor>();
-  m_studioLogo->SetTexture("assets/UI/Nullptrlogo.png");
-  m_studioLogo->transform.scale = {958.0f, 288.0f};
-  m_studioLogo->transform.position = {0, 0, 1000};
-  m_studioLogo->transform.relativeScale = glm::vec2(.10f);
-
-  AddChild(m_studioLogo);
+  // auto m_studioLogo = GET_FACTORY->CreateObject<Sigma::Actor>();
+  // m_studioLogo->SetTexture("assets/UI/Nullptrlogo.png");
+  // m_studioLogo->transform.scale = {958.0f, 288.0f};
+  // m_studioLogo->transform.position = {0, 0, 1000};
+  // m_studioLogo->transform.relativeScale = glm::vec2(.10f);
+  //
+  // AddChild(m_studioLogo);
   
   auto s = new game::Tutorial1("Tutorial 1 ", 1, "assets/tutorial/tutorial-1.json");
-  //auto d = new game::WinScene("Game Scene1", 0);
+  // auto s = new game::WinScene("Game Scene1", 0);
   m_playButton = GET_FACTORY->CreateObject<Sigma::SceneButton>("Play Button", s, GetID());
-  m_playButton->m_screenSpaceTransform.scale = {100, 50};
-  m_playButton->m_screenSpaceTransform.position.x -= 360;
-  m_playButton->m_screenSpaceTransform.position.y -= 0;
+  m_playButton->m_screenSpaceTransform.scale = {200, 100};
+  m_playButton->m_screenSpaceTransform.position.y -= 140;
   m_playButton->SetTexture("assets/UI/Sprites/Play_Sign.png");
-
   AddChild(m_playButton);
 
   m_controlsButton = GET_FACTORY->CreateObject<Sigma::CtrlButton>("Controls Button");
-  m_controlsButton->m_screenSpaceTransform.scale = {175, 50};
-  m_controlsButton->m_screenSpaceTransform.position.x -= 360;
-  m_controlsButton->m_screenSpaceTransform.position.y -= 50;
+  m_controlsButton->m_screenSpaceTransform.scale = {350, 100};
+  m_controlsButton->m_screenSpaceTransform.position.y -= 240;
   m_controlsButton->SetTexture("assets/UI/Sprites/Controls.png");
-
   AddChild(m_controlsButton);
 
   m_scoreButton = GET_FACTORY->CreateObject<Sigma::SceneButton>("Score Button", nullptr,GetID());
-  m_scoreButton->m_screenSpaceTransform.scale = {100, 50};
-  m_scoreButton->m_screenSpaceTransform.position.x -= 360;
-  m_scoreButton->m_screenSpaceTransform.position.y -= 100;
+  m_scoreButton->m_screenSpaceTransform.scale = {200, 100};
+  m_scoreButton->m_screenSpaceTransform.position.y -= 340;
   m_scoreButton->SetTexture("assets/UI/Sprites/Score.png");
   m_scoreButton->SetTint({.5,.5,.5,1});
   m_scoreButton->DisableUpdate();
-
   AddChild(m_scoreButton);
 
   m_quitButton = GET_FACTORY->CreateObject<Sigma::SceneButton>("Quit Button", nullptr,GetID());
-  m_quitButton->m_screenSpaceTransform.scale = {100, 50};
-  m_quitButton->m_screenSpaceTransform.position.x -= 360;
-  m_quitButton->m_screenSpaceTransform.position.y -= 150;
+  m_quitButton->m_screenSpaceTransform.scale = {200, 100};
+  m_quitButton->m_screenSpaceTransform.position.y -= 440;
   m_quitButton->SetTexture("assets/UI/Sprites/Exit_Sign.png");
-
   AddChild(m_quitButton);
+
+  m_studioName = GET_FACTORY->CreateObject<Sigma::Actor>("Studio name");
+  m_studioName->transform.scale = {112, 16};
+  m_studioName->transform.position.y += 10.0f;
+  m_studioName->SetTexture("assets/UI/Sprites/Studio_Name.png");
+  AddChild(m_studioName);
 
   AddChild(GET_CAMERA->GetCurrentCamera());
  
 }
+
+void game::MainMenu::Update(double delta) {
+  m_studioName->Draw();
+}
+
 void game::MainMenu::Unload() {
   Scene::Unload();
   if (GameplayManager::GetInstance() == nullptr)

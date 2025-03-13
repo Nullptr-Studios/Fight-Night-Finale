@@ -19,14 +19,14 @@ void game::DeadScene::Load() {
 
   m_death = GET_FACTORY->CreateObject<Sigma::Actor>();
   m_death->SetTexture("assets/UI/Sprites/Death.png");
-  m_death->transform.scale = {800.0f, 200.0f};
+  m_death->transform.scale = {400.0f, 100.0f};
 
   AddChild(m_death);
 
   auto m = new game::MainMenu("Game Scene1", 0);
   m_quitButton = GET_FACTORY->CreateObject<Sigma::SceneButton>("Quit Button", m ,GetID());
-  m_quitButton->m_screenSpaceTransform.scale = {100, 50};
-  m_quitButton->m_screenSpaceTransform.position.y -= 180;
+  m_quitButton->m_screenSpaceTransform.scale = {200, 100};
+  m_quitButton->m_screenSpaceTransform.position.y -= 340;
   m_quitButton->SetTexture("assets/UI/Sprites/Exit_Sign.png");
 
   AddChild(m_quitButton);

@@ -28,6 +28,11 @@ void BigEnemy::Init() {
 
 void BigEnemy::FollowState() {
   if (!m_isDoingSomething) return;
+
+  if (m_nearest == nullptr)
+    return;
+
+  
   isAvoiding = false;
   m_animComp->SetCurrentAnim("Walk");
   glm::vec3 targets[2];

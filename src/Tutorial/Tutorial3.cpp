@@ -4,6 +4,7 @@
 #include "Level1/Scene1.hpp"
 #include "Objects/Actor.hpp"
 #include "Objects/Debug/PunchingBag.hpp"
+#include "UI/UIStaticImage.hpp"
 
 namespace game {
 
@@ -23,6 +24,14 @@ void Tutorial3::Load() {
   m_glowArea = GET_FACTORY->CreateObject<GlowArea>("Glow Area");
   m_glowArea->transform.position = {145, -65, 65};
   AddChild(m_glowArea);
+
+  auto tut = GET_FACTORY->CreateObject<Sigma::StaticImage>("StaticImage");
+  tut->SetTexture("assets/tutorial/prompt3.png");
+  tut->transform.scale = {320.0f, 180.0f};
+  tut->transform.relativeScale = glm::vec2(2);
+
+
+  AddChild(tut);
 
   SetNextScene(new Scene1("Level 1", 1, "assets/level-1/scene-1.json"));
 }

@@ -5,6 +5,7 @@
 #include "GameManager.hpp"
 #include "Objects/Actor.hpp"
 #include "Objects/Camera.hpp"
+#include "Objects/Destructibles/Box.hpp"
 #include "Scene5.hpp"
 
 
@@ -24,6 +25,11 @@ void Scene4::Load() {
   walls->transform.scale = {933.0f, 273.0f};
   walls->transform.position.z = -5000;
   AddChild(walls);
+
+  auto b1 = GET_FACTORY->CreateObject<Box>("Machine1");
+  b1->transform.position = {400, -88, 88};
+
+  AddChild(b1);
 
   SetNextScene(new Scene5("Game Scene 5", 5, "assets/level-1/scene-5.json"));
 }

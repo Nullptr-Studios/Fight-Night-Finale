@@ -3,6 +3,7 @@
 //
 
 #include "EnemySpawner.hpp"
+#include "Enemies/BigEnemy.hpp"
 #include "Enemies/DefaultEnemy.hpp"
 #include "GameScene.hpp"
 #include "Manager/GameplayManager.hpp"
@@ -15,7 +16,8 @@ void game::EnemySpawner::Init() {
 void game::EnemySpawner::Start() { Object::Start(); }
 
 void game::EnemySpawner::SpawnEnemy() {
-  auto e = GET_FACTORY->CreateObject<game::DefaultEnemy>("Enemy", "assets/characters/BasicEnemy/behaviour.json");
+  Enemy* e;
+  e = GET_FACTORY->CreateObject<game::DefaultEnemy>("Enemy", "assets/characters/BasicEnemy/behaviour.json");
   e->transform.position.x = m_currentEnemyData.position.x;
   e->transform.position.y = m_currentEnemyData.position.y;
   e->transform.scale = {32.0f, 64.0f};
