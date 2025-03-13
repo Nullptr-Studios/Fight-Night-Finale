@@ -2,14 +2,8 @@
 
 #include <UI/DeadMenu.hpp>
 
-#include "Audio/AudioEngine.hpp"
 #include "Collision/Collider.hpp"
-#include "Collision/CollisionEvent.hpp"
-#include "Factory.hpp"
 #include "GameManager.hpp"
-#include "Objects/Damageable.hpp"
-#include "PrototypeScene.hpp"
-#include "UI/MainMenu.hpp"
 
 namespace game {
 

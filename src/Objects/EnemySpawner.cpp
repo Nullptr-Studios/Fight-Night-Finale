@@ -3,7 +3,6 @@
 //
 
 #include "EnemySpawner.hpp"
-#include "Enemies/BigEnemy.hpp"
 #include "Enemies/DefaultEnemy.hpp"
 #include "GameScene.hpp"
 #include "Manager/GameplayManager.hpp"
@@ -104,4 +103,5 @@ void game::EnemySpawner::Destroy() {
   for (auto enemy: m_enemies) {
     GET_FACTORY->DestroyObject(enemy);
   }
+  m_enemies.clear();
 }

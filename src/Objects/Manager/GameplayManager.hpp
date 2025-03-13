@@ -64,10 +64,19 @@ public:
    */
   void CheckForCoop();
 
+  /**
+   * @brief Update the current game scene pointer
+   */
   void UpdateCurrentGameScene();
 
+  /**
+   * @brief Go to the next scene
+   */
   void GotoNextScene();
 
+  /**
+   * @brief Next scene logic after a frame
+   */
   void GotoNextSceneAfter();
 
   void FinishedAnSpawner();
@@ -88,8 +97,7 @@ public:
 
 private:
   static GameplayManager* m_instance;
-  //bool m_gameStarted = false;
-  Sigma::CameraFollow* m_cameraFollow;
+  Sigma::CameraFollow* m_cameraFollow{};
 
   HUD* m_gameHud = nullptr;
 

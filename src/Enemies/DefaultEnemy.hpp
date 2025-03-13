@@ -24,7 +24,7 @@ public:
   static constexpr int STATE_WALK = 10;     ///< @constexpr STATE_WALK         The enemy Walks for a bit
   static constexpr int STATE_GOTO = 11;     ///< @constexpr STATE_GOTO         The enemy GOTO's point
   static constexpr int STATE_REPOSING= 12;     ///< @constexpr STATE_GOTO         The enemy GOTO's point
-  bool isAvoiding = false;
+
 
 protected:
   void OnFullComboPerformed() override;
