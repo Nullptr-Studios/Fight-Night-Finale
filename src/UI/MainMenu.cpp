@@ -28,9 +28,10 @@ void game::MainMenu::Load() {
   AddChild(m_background);
 
   m_logo = GET_FACTORY->CreateObject<Sigma::Actor>();
-  m_logo->SetTexture("assets/UI/Sprites/Untitled.png");
-  m_logo->transform.scale = {500.0f, 500.0f};
-  m_logo->transform.position.y = 60;
+  m_logo->SetTexture("assets/UI/Sprites/Title.png");
+  m_logo->transform.scale = {222.64f, 163.f};
+  m_logo->transform.position.y = 95;
+  m_logo->transform.position.x = 5;
 
   AddChild(m_logo);
 
