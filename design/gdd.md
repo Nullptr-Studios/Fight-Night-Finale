@@ -1,32 +1,35 @@
 # GDD
 
-Five Night Finale is an Over the top, 1980's themed 2.5D beat 'em up game where players face the ultimate challenge of survival. Set within the intense and unpredictable confines of a high-stakes television show, the protagonist’s singular goal is to emerge victorious and claim a life-changing prize of $50 million. However, as the layers of the competition unravel, so too does the truth behind the show, making the stakes more personal — and dangerous —  than initially anticipated.
+Jackpot Knockout is a 1980's themed, 2.5D beat em up game wherein players will face the ultimate challenge of survival. Set within a high-stakes TV show; with both single player and coop; you play a choice of 2 distinct characters, both sharing the goal of emerging victorious and claiming the life-changing prize of 50 million dollars. However, as the battle progresses, the situation appears to be far more sinister than initially thought...
 
-Fight Night Finale describes itself as a parody take on the retro-style beat 'em up genre providing a comedic element to the action of the genre whilst simultaneously providing players with classic, engaging beat 'em up combat, featuring 2 distinct characters playable both solo and co-op!
+Describing itself as an over the top, parody take on the retro-style beat 'em up genre; JK strives to combine comedic elements alongside unending action to provide players with a unique and memorable experience.
 
 ## Competitive research
 
 Our game is inspired by popular classics in the beat 'em up genre; such as the renowned Streets of Rage franchise, the amazing Double Dragon Gaiden and lastly, the nostalgic Teenage Mutant Ninja Turtles: Shredder's Revenge.
 
-To that extent, we have taken several classic mechanics from these games and adapted them into our own. These include, but are not limited to; the combo system, special attacks and even just the health pickups from boxes.
+To that extent, we have taken several classic mechanics from these games and adapted them into our own. These include, but are not limited to; the combo system, grabs, throw attacks and the healing system.
 
 Additionally, utilizing what we have learned from these games, we have been carefully adjusting the feel of both our combat and movement system to match the level of polish felt in some of these beloved classic games.
 
 ## Mechanics
 
-Starting off the Mechanics, the game features a 2.5D movement style where the player is able to move on a plane with both the width and depth directions. The player is also able to perform a jump which moves themself along the height direction, allowing for jump-attacks based on current depth.
+Starting off the Mechanics, the game features a 2.5D movement style where the player is able to move on a plane with both the width (horizontal axis) and depth (vertical axis) directions. For each movement in the vertical axis, we also update the Z coordinate, utilizing it to create 2.5D effect wherein you are only able to hit enemies with similar depth. The player is also able to perform a dash, a quick movement in any direction which provides the player with invincibility frames and lets them either get close to or away from an enemy.
 
-The main focus of the game, however,  is the combat itself, where players and enemies can perform a variety of different attacks. Each attack is formed by a different group of moves or "hits" (also commonly known as a combo, but I'm going to call this move sets as attacks to avoid confusion with the XP combo multiplication).
+Moving onto the combat, the player is able to perform 2 distinct types of attacks; with one being a standard combo and the other being a "special" grab and throw attack. The standard attack combo works by cycling through several different attack animations. Each time the attack button is pressed, the character performs the next hit of the queue. However, when the player doesn't hit anyone or doesn't press the button after a certain period of time, the attack combo is reset. 
 
-Each move on the attack has a defined length and the player is supposed to learn how to time their moves properly in order to maximize their performance and damage. Each time a player presses the attack button, the character performs the next hit of the queue. However, when the player doesn't hit anyone or doesn't press the attack button within a certain amount of time; the attack is reset and the player would need to start the move set from the beginning again.
+The grab and throw on the other hand, consists of the player grabbing an enemy and being able to throw them within a certain time period, dealing significant damage. However, to offset this powerful move, the grab part of the move takes a certain amount of health away from the player, creating a risk-reward scenario where one cannot simply spam the attack.
 
-To complement this combo system, as mentioned earlier, both the player and certain enemies (such as bosses) will include within them several options in their repertoire for attacks. These include basic attacks and specials that will change when the player is grounded or on air. It must also be stated that special attacks reduce your health upon usage and while that health is recovered by performing a combo without receiving damage --> staying idle or taking damage results in a net loss.
+Since each attack comes with their own attack values and distinct hitboxes, each attack has a defined length and move set. The player is supposed to learn how to time and utilize their moves correctly to maximize their damage and achieve optimal performance.
 
-The game features a wide array of different enemies and bosses, each with their unique attack patterns and methods of attack; be it ranged or melee. In total, there will be 3 bosses within the game, each with their own quirks.
+Similarly to the player, all enemies will contain within them their own unique attack combos. Alongside this, each enemy fits a certain "niche". For example, while the basic enemy is quite self-explanatory, we also have someone like the TNT Thrower which fills the role of a ranged AOE attacker and the Bodyguard is able to pick the player up and throw them.
 
-Additionally, as any good beat 'em up, the game will feature certain healing items that will heal the player on pickup. These will commonly found by chance when destroying a destructible object, such as a box. While enemies are also able to destroy these objects, they are unable to utilize the heal pickup. The healing item also does not respawn as to ensure a fair constant difficulty. 
+The bosses take this a step further however; including alongside their own combos a varied repertoire of "special" moves. 
+An example of this would be the first boss, the Pit Manager's AOE jump attacks which he utilizes mid fight to stun and destroy the player or the last boss, the Presenter, having a special ranged attack wherein he throws casino chips at supersonic speed at the player from a distance.
 
-Lastly, the game will feature weapons that, upon pickup, can be utilized to extend both a player and and enemy's reach and damage. These tools have a limited durability and can be thrown in order to severely damage them in exchange for a decent chunk of damage dealt upon contact.
+Essentially, the game features a wide array of different enemies and bosses, each with their unique attack patterns and methods of attack; be it ranged or melee. In total, there will be 3 bosses within the game, each with their own quirks.
+
+Additionally, as any good beat 'em up, the game will feature certain healing items that will heal the player on pickup. These will be commonly found when destroying a destructible object, such as a slot machine or a storage box. While enemies are also able to destroy these objects, they are unable to utilize the heal pickup. The healing item also does not respawn as to ensure a fair constant difficulty.
 
 ## Characters
 
@@ -56,7 +59,7 @@ All this enemies will be very similar design-wise, with a comedic tone to its in
 
 Regarding Bosses, our game includes 3 Bosses, each per third of the level. These include the Pit Manager, Blake and The Presenter.
 
-To start off, the first boss you will face is the Pit Manager. This boss consists of a somewhat sentient Gorilla in a Suit. This boss is almost like a dual-sided coin, with calm and professional basic attacks closely followed by a rage induced AOE special and an even crazier Ultimate, wherein they grab the player and toss them into the ground with unmatched ferocity. This boss is supposed to keep players on their toes being both the first boss in the game and a somewhat unpredictable one.
+To start off, the first boss you will face is the Pit Manager. This boss consists of a somewhat sentient Gorilla in a Suit. This boss is almost like a dual-sided coin, with a calm and professional basic attack combo closely followed by a rage induced AOE special, wherein he jumps and pounds the ground, and lastly, an even crazier Ultimate, wherein they grab the player and toss them into the ground with unmatched ferocity. This boss is supposed to keep players on their toes being both the first boss in the game and a somewhat unpredictable one.
 
 Secondly, Blake is essentially a schizophrenic Mafia boss who, similarly to the Pit Manager, cycles between different states of Mania within his boss fight. Utilizing a signature bat weapon seen in a previous Nullptr game, Blake utilizes targeted DPS attacks mixed with an occasional AOE special in order to constantly harass the player and make them gauge their every move in a high-octane, high risk fight. Having a second, "pseudo" phase, Blake switches from his signature bat to an Akimbo pistol setup upon reaching less than 75%, leading to an even more intense battle as he now shoots the player from afar, dealing even more damage.
 
@@ -80,7 +83,7 @@ Having uncovered the truth—that the grand prize was nothing more than a lie—
 
 ## Art
 
-When it comes to the Art Style of the game, FNF utilizes a simple yet deliberately nostalgic and imperfect pixel art aesthetic, choosing to opt for a low-pixel look which further immerses players into its otherwise visually striking, 1980's inspired world; blending retro-futurism, realism and bizarre comedic elements in a an almost surreal atmosphere oozing with nostalgia. It engages players though vibrant visuals mixed with an unconventional tone, exploring its aesthetic mainly through environmental storytelling.
+When it comes to the Art Style of the game, Jackpot Knockout utilizes a simple yet deliberately nostalgic and imperfect pixel art aesthetic, choosing to opt for a low-pixel look which further immerses players into its otherwise visually striking, 1980's inspired world; blending retro-futurism, realism and bizarre comedic elements in a an almost surreal atmosphere oozing with nostalgia. It engages players though vibrant visuals mixed with an unconventional tone, exploring its aesthetic mainly through environmental storytelling.
 
 It relies on detailed backdrops and interactive element to convey its narrative, capturing the appeal and charm of retro gaming with a modern twist, drawing players further and further into its quirky, high-stakes world.  The single level is rooted in the high-energy ambiance of a casino merged with the chaos of a TV studio, providing a dynamic and memorable setting that enhances the game’s identity.
 
