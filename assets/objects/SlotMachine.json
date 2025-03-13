@@ -1,0 +1,30 @@
+{"frames": [
+
+{
+	"filename": "SlotMachine_0.png",
+	"frame": {"x":1,"y":1,"w":32,"h":73},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":32,"h":73},
+	"sourceSize": {"w":32,"h":73},
+	"pivot": {"x":0.5,"y":1}
+},
+{
+	"filename": "SlotMachine_1.png",
+	"frame": {"x":1,"y":76,"w":32,"h":73},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":32,"h":73},
+	"sourceSize": {"w":32,"h":73},
+	"pivot": {"x":0.5,"y":1}
+}],
+"meta": {
+	"app": "https://www.codeandweb.com/texturepacker",
+	"version": "1.0",
+	"image": "assets/objects/SlotMachine.png",
+	"format": "RGBA8888",
+	"size": {"w":34,"h":150},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:cff32afcd8d341f32304cbcd2bf6b5d6:22e77053401bcf47f46a6711a679d4d3:cb544f38a5b8871ab63e7076c64b2fb3$"
+}
+}

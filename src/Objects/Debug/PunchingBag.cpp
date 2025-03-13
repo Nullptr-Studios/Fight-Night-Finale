@@ -5,12 +5,13 @@
 #include "PunchingBag.hpp"
 
 #include "Factory.hpp"
+#include "Objects/Character.hpp"
 
 namespace game {
 void PunchingBag::Init() {
   Damageable::Init();
 
-  m_animComp = std::make_unique<Sigma::Animation::AnimationComponent>(this);
+  m_animComp = new Sigma::Animation::AnimationComponent(this);
 
   auto anim = GET_ANIMATION->LoadTextureAtlas("assets/characters/punch-bag/anim-data.json");
   m_animComp->SetTextureAtlas(anim);
@@ -35,12 +36,17 @@ void PunchingBag::OnDamage(const Sigma::Damage::DamageEvent &e) {
   Damageable::OnDamage(e);
   std::cout << "Punching Bag was damaged by " << e.GetOther()->GetName() << "\n";
   m_animComp->PlayAndStop();
+
+  auto c = dynamic_cast<Sigma::Character*>(e.GetOther());
+  if (c) {
+    c->OnDoneDamage();
+  }
 }
 
 glm::mat3 *PunchingBag::GetTextureTransform()
 {
   auto mtx = m_animComp->GetTextureMatrix();
-  m_tMtx = glm::FromAEX(mtx);
+  m_tMtx = mtx;
   return &m_tMtx;
 }
 } // namespace game

@@ -1,0 +1,125 @@
+{
+  "maxHealth" : 100.0,
+  "maxSpeed" : 70.0,
+  "accelerationRate" : 5.0,
+  "jumpVel" : 0.0,
+  "friction" : 1000,
+  "distanceToAttack" : 35.0,
+
+  "basicCombo" : [
+    {
+      "type" : "dmg",
+      "damage" : 8.0,
+      "knockback" : { "x" : 150.0, "y" : 0 },
+      "colliderOffset" : {
+        "x" : 28,
+        "y" : 55
+      },
+      "colliderSize" : {
+        "x" : 38,
+        "y" : 15,
+        "z" : 1
+      },
+      "animationName" : "Combo1"
+    },
+    {
+      "type" : "dmg",
+      "damage" : 32.0,
+      "knockback" : { "x" : 400.0, "y" : 600 },
+      "colliderOffset" : {
+        "x" : 28,
+        "y" : 55
+      },
+      "colliderSize" : {
+        "x" : 38,
+        "y" : 15,
+        "z" : 1
+      },
+      "animationName" : "Combo2"
+    }
+  ],
+
+  "basicAirCombo" : [
+    {
+      "type" : "dmg",
+      "damage" : 16.0,
+      "knockback" : { "x" : 300.0, "y" : 300.0 },
+      "colliderOffset" : {
+        "x" : 28,
+        "y" : 55
+      },
+      "colliderSize" : {
+        "x" : 38,
+        "y" : 15,
+        "z" : 1
+      },
+      "animationName" : "Punch1"
+    }
+  ],
+
+  "superCombo" : [
+    {
+      "type" : "grb",
+      "damage" : 0.0,
+      "knockback" : { "x" : 300.0, "y" : 300.0 },
+      "colliderOffset" : {
+        "x" : 0.0,
+        "y" : 0.0
+      },
+      "colliderSize" : {
+        "x" : 0.0,
+        "y" : 0.0,
+        "z" : 0.0
+      },
+      "animationName" : "hit_super_0"
+    },
+    {
+      "type" : "thr",
+      "damage" : 20.0,
+      "knockback" : { "x" : 300.0, "y" : 300.0 },
+      "colliderOffset" : {
+        "x" : 0.0,
+        "y" : 0.0
+      },
+      "colliderSize" : {
+        "x" : 0.0,
+        "y" : 0.0,
+        "z" : 0.0
+      },
+      "animationName" : "hit_super_1"
+    }
+  ],
+
+  "superAirCombo" : [
+    {
+      "type" : "grb",
+      "damage" : 0.0,
+      "knockback" : { "x" : 300.0, "y" : 300.0 },
+      "colliderOffset" : {
+        "x" : 0.0,
+        "y" : 0.0
+      },
+      "colliderSize" : {
+        "x" : 0.0,
+        "y" : 0.0,
+        "z" : 0.0
+      },
+      "animationName" : "air_super_0"
+    },
+    {
+      "type" : "thr",
+      "damage" : 20.0,
+      "knockback" : { "x" : 300.0, "y" : 300.0 },
+      "colliderOffset" : {
+        "x" : 0.0,
+        "y" : 0.0
+      },
+      "colliderSize" : {
+        "x" : 0.0,
+        "y" : 0.0,
+        "z" : 0.0
+      },
+      "animationName" : "air_super_1"
+    }
+  ]
+}

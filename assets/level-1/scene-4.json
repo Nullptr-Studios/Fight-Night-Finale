@@ -1,0 +1,82 @@
+{
+  "playerStart": {"x": -300, "y": -50},
+  "exitLoc": {"x": 330, "y": -39},
+  "bounds": [
+    {"x": -464, "y": -6},
+    {"x": -276, "y": -6},
+    {"x": -254, "y": 6},
+    {"x": -30, "y": 6},
+    {"x": 6, "y": -30},
+    {"x": 196, "y": -30},
+    {"x": 216, "y": -18},
+    {"x": 346, "y": -18},
+    {"x": 466, "y": -136},
+    {"x": 112, "y": -136},
+    {"x": 74, "y": -100},
+    {"x": -372, "y": -100}
+  ],
+  "enemySpawners": [
+    {
+      "name": "Spawner 1",
+      "pos": {"x": -200, "y": 0},
+      "activationRange": 200,
+      "enemies": [
+        {
+          "id": 2,
+          "pos": {"x": -200, "y": 0},
+          "entranceId": 0
+        }
+      ]
+    },
+    {
+      "name": "Spawner 2",
+      "pos": {"x": 245, "y": -75},
+      "activationRange": 220,
+      "enemies": [
+        {
+          "id": 1,
+          "pos": {"x": 270, "y": -25},
+          "entranceId": 1
+        },
+        {
+          "id": 2,
+          "pos": {"x": 355, "y": -55},
+          "entranceId": 2
+        },
+        {
+          "id": 2,
+          "pos": {"x": 95, "y": -30},
+          "entranceId": 3
+        }
+      ]
+    },
+    {
+      "name": "Spawner 3",
+      "required": 1,
+      "pos": {"x": 245, "y": -75},
+      "activationRange": 220,
+      "enemies": [
+        {
+          "id": 1,
+          "pos": {"x": 270, "y": -25},
+          "entranceId": 1
+        },
+        {
+          "id": 1,
+          "pos": {"x": 275, "y": -20},
+          "entranceId": 2
+        },
+        {
+          "id": 2,
+          "pos": {"x": 355, "y": -55},
+          "entranceId": 2
+        },
+        {
+          "id": 2,
+          "pos": {"x": 95, "y": -100},
+          "entranceId": 3
+        }
+      ]
+    }
+  ]
+}
