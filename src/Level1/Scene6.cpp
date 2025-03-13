@@ -5,6 +5,7 @@
 #include "GameManager.hpp"
 #include "Objects/Actor.hpp"
 #include "Objects/Camera.hpp"
+#include "Objects/Destructibles/Box.hpp"
 #include "Scene7.hpp"
 #include "UI/WinScene.hpp"
 

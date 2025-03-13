@@ -28,6 +28,8 @@ void Tutorial3::Load() {
   auto tut = GET_FACTORY->CreateObject<Sigma::StaticImage>("StaticImage");
   tut->SetTexture("assets/tutorial/prompt3.png");
   tut->transform.scale = {320.0f, 180.0f};
+  tut->transform.relativeScale = glm::vec2(2);
+
 
   AddChild(tut);
 

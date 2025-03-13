@@ -5,6 +5,7 @@
 #include "GameManager.hpp"
 #include "Objects/Actor.hpp"
 #include "Objects/Camera.hpp"
+#include "Objects/Destructibles/Box.hpp"
 #include "Scene6.hpp"
 
 #define DEBUG_CAMERA
@@ -25,6 +26,12 @@ void Scene5::Load() {
   walls->transform.scale = {1485.0f, 333.0f};
   walls->transform.position.z = -5000;
   AddChild(walls);
+
+  auto b1 = GET_FACTORY->CreateObject<Box>("Machine1");
+  b1->transform.position = {276, -67, 67};
+
+  AddChild(b1);
+
 
   SetNextScene(new Scene6("Game Scene 6", 6, "assets/level-1/scene-6.json"));
 }

@@ -28,6 +28,9 @@ void Pickup::SetHeal(float health) {
 }
 
 bool Pickup::OnCollision(Sigma::Collision::CollisionEvent &e) {
+  try {
+    
+ 
   if (const auto player = dynamic_cast<Player*>(e.GetOther())) {
     player->OnHeal(m_healAmount);
     GET_FACTORY->DestroyObject(GetId());
@@ -35,6 +38,10 @@ bool Pickup::OnCollision(Sigma::Collision::CollisionEvent &e) {
   }
 
   return false;
+  } catch (const std::exception& e) {
+    std::cerr << e.what() << std::endl;
+    
+  }
 }
 
 }

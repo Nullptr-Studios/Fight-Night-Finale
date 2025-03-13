@@ -28,6 +28,7 @@ void Tutorial1::Load() {
   auto tut = GET_FACTORY->CreateObject<Sigma::StaticImage>("StaticImage");
   tut->SetTexture("assets/tutorial/prompt1.png");
   tut->transform.scale = {320.0f, 180.0f};
+  tut->transform.relativeScale = glm::vec2(2);
 
   GameplayManager::GetInstance()->StartGame();
 }

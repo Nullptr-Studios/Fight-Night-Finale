@@ -6,10 +6,11 @@
 #include "Objects/Actor.hpp"
 #include "Objects/Camera.hpp"
 #include "Objects/CameraFollow.hpp"
-#include "UI/HealthBar.hpp"
+#include "Objects/Destructibles/Box.hpp"
 #include "Scene2.hpp"
-#include "UI/UIProgressBar.hpp"
 #include "UI/HUD.hpp"
+#include "UI/HealthBar.hpp"
+#include "UI/UIProgressBar.hpp"
 
 // #define DEBUG_CAMERA
 
@@ -32,6 +33,8 @@ void Scene1::Load() {
 
   // xd
   // auto nig = GET_FACTORY->CreateObject<HUD>("HUD");
+
+  
 
   SetNextScene(new Scene2("Game Scene 2", 2, "assets/level-1/scene-2.json"));
 }
