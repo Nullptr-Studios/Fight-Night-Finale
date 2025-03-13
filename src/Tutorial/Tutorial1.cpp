@@ -30,6 +30,13 @@ void Tutorial1::Load() {
   tut->transform.scale = {320.0f, 180.0f};
   tut->transform.relativeScale = glm::vec2(2);
 
+  auto tut2 = GET_FACTORY->CreateObject<Sigma::Actor>();
+  tut2->SetTexture("assets/tutorial/SpawnPrompt.png");
+  tut2->transform.scale = {256.0f, 16.0f};
+  tut2->transform.position.y = -160;
+
+  AddChild(tut2);
+
   GameplayManager::GetInstance()->StartGame();
 }
 
