@@ -22,7 +22,7 @@ class MainMenu;
 
 class Player : public Sigma::Character {
 public:
-  
+
   /**
    * @brief Construct a Player object
    *
