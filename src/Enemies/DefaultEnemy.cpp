@@ -41,15 +41,15 @@ void DefaultEnemy::Init() {
 void DefaultEnemy::Start() {
   Enemy::Start();
 
-  BindState(STATE_WALK, std::bind(&DefaultEnemy::WalkState, this));
-  BindState(STATE_PAUSED, std::bind(&DefaultEnemy::PausedState, this));
-  BindState(STATE_WANDER, std::bind(&DefaultEnemy::WanderState, this));
-  BindState(STATE_FOLLOW, std::bind(&DefaultEnemy::FollowState, this));
-  BindState(STATE_ATTACK, std::bind(&DefaultEnemy::AttackState, this));
-  BindState(STATE_DISPERSE, std::bind(&DefaultEnemy::DisperseState, this));
-  BindState(STATE_GOTO, std::bind(&DefaultEnemy::GoToState, this));
-  BindState(STATE_REPOSITION, std::bind(&DefaultEnemy::RepositionState, this));
-  BindState(STATE_REPOSING, std::bind(&DefaultEnemy::RePosing, this));
+  BindState(STATE_WALK, [this] { WalkState(); });
+  BindState(STATE_PAUSED, [this] { PausedState(); });
+  BindState(STATE_WANDER, [this] { WanderState(); });
+  BindState(STATE_FOLLOW, [this] { FollowState(); });
+  BindState(STATE_ATTACK, [this] { AttackState(); });
+  BindState(STATE_DISPERSE, [this] { DisperseState(); });
+  BindState(STATE_GOTO, [this] { GoToState(); });
+  BindState(STATE_REPOSITION, [this] { RepositionState(); });
+  BindState(STATE_REPOSING, [this] { RePosing(); });
   // BindState(STATE_AVOID, std::bind(&DefaultEnemy::AvoidState, this));
 }
 

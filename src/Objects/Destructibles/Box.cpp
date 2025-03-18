@@ -24,18 +24,13 @@ void Box::Init() {
 
   // transform.scale = {m_size.x, m_size.y};
   m_collider = std::make_unique<Sigma::Collision::BoxCollider>(Sigma::Collision::PLAYER, Sigma::Collision::COLLISION);
-  m_collider->box.Set(m_size, -glm::vec2{transform.offset.x, transform.offset.y});
+  m_collider->box.Set(m_size, glm::vec2{transform.offset.x, transform.offset.y});
 
   SetMaxHealth(1);
 
-  m_debugCollision = GET_FACTORY->CreateObject<Actor>("DebugCollision");
-  m_debugCollision->transform.scale = m_collider->box.GetScale();
-  m_debugCollision->SetTint({0.1f, 0.5f, 0.9f, 0.5f});
 }
 void Box::Update(double deltaTime) {
   Damageable::Update(deltaTime);
-
-  m_debugCollision->transform.position = transform.position - glm::vec3{m_collider->box.GetOffset().x, m_collider->box.GetOffset().y, 0.0f};
 
   if (m_animComp)
     m_animComp->Update(deltaTime);
