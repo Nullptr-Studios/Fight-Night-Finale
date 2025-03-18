@@ -5,6 +5,7 @@
   "jumpVel" : 0.0,
   "friction" : 1000,
   "distanceToAttack" : 30.0,
+  "experience": 5000,
 
   "basicCombo" : [
     {

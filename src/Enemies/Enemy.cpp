@@ -3,6 +3,7 @@
 #include "Objects/Manager/GameplayManager.hpp"
 #include "aecore/AEFrameRateController.h"
 #include "aecore/imgui/imgui.h"
+#include "XPSystem/XPEvent.hpp"
 
 // #define DEBUG_ENEMY
 
@@ -11,6 +12,7 @@ namespace game {
 void Enemy::Serialize() {
   Character::Serialize();
   m_attackDistance = j["distanceToAttack"];
+  m_xp = j["experience"];
 }
 
 void Enemy::Init() {
@@ -34,6 +36,9 @@ void Enemy::OnDamage(const Sigma::Damage::DamageEvent& e) {
   if (e.GetOther()->GetName().contains("Enemy")) return;
  
   Character::OnDamage(e);
+  int money = m_xp/e.GetDamageAmount();
+  Sigma::XPEvent XPE(money);
+  SendEvent(XPE);
 
   if(m_invincible)
     return;
