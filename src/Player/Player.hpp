@@ -64,6 +64,8 @@ public:
   void DoSuperAttack() override;
   void RegainHPCombo() override;
 
+  void OnDoneDamage() override;
+
 private:
   /// @brief Holds the Player Controller Component to handle input
   std::unique_ptr<PlayerController> m_controllerComponent = nullptr;

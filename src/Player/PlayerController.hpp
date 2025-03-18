@@ -22,7 +22,7 @@ public:
   explicit PlayerController(Sigma::Character *character) :
       ControllerComponent(character), m_inputSystem("assets/core/keybinds.json") {}
 
-  ~PlayerController() override = default;
+  ~PlayerController() override;
    
   void Update() override;
 

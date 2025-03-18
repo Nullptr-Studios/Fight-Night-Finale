@@ -101,7 +101,7 @@ void Player::OnDamage(const Sigma::Damage::DamageEvent &e) {
   if (e.GetOther() != this) {
     m_controllerComponent->PlayerDamagedFeedback();
   } else {
-    m_controllerComponent->PlayerAttackFeedback();
+    
   }
 
 
@@ -116,6 +116,11 @@ void Player::OnDamage(const Sigma::Damage::DamageEvent &e) {
   //   //GET_MANAGER->UnloadScene(0u);
   //   doFuckingOnce = false;
   // }
+}
+
+void Player::OnDoneDamage() {
+  Character::OnDoneDamage();
+  m_controllerComponent->PlayerAttackFeedback();
 }
 
 void Player::SetControllerID(int id) {

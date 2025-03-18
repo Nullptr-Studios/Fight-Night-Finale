@@ -9,6 +9,11 @@
 
 namespace game {
 
+PlayerController::~PlayerController(){
+  if(m_controllerId != -1)
+    m_inputSystem.StopGamepadRumble(m_controllerId);
+};
+
 void PlayerController::Update()
 {
   m_inputSystem.UpdateInput(m_controllerId);
