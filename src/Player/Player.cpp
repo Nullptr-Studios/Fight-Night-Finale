@@ -20,6 +20,9 @@ void Player::Init() {
   SetTexture(anim->textureStr.c_str());
   m_animComp->PlayAnim();
 
+  // Setup trail
+  m_animComp->SetupTrailEffect(3, .07f, .5f, glm::vec4(1, 1, 1, .75f), glm::vec4(1, 1, 1, 0));
+
   // Setup Controller
   m_controllerComponent = std::make_unique<PlayerController>(this);
   m_controllerComponent->SetControllerID(m_controllerId);
@@ -66,12 +69,11 @@ void Player::Destroy() {
   // AEGfxFontFree(font);
 }
 
-void Player::DoSuperAttack(){
+void Player::DoSuperAttack() {
   m_health -= 10;
 
-  if(healthBar)
+  if (healthBar)
     healthBar->Update(GetHealth<int>(), m_healthRecover);
-  
 }
 
 void Player::RegainHPCombo() {
@@ -83,10 +85,10 @@ void Player::RegainHPCombo() {
 void Player::OnDamage(const Sigma::Damage::DamageEvent &e) {
   Character::OnDamage(e);
 
-  if(m_invincible)
+  if (m_invincible)
     return;
 
-  if(e.GetOther() != this)
+  if (e.GetOther() != this)
     m_healthRecover = m_health;
 
   if (healthBar)
@@ -101,7 +103,6 @@ void Player::OnDamage(const Sigma::Damage::DamageEvent &e) {
   } else {
     m_controllerComponent->PlayerAttackFeedback();
   }
-
 
 
   // if (!m_isAlive && doFuckingOnce) {
