@@ -20,8 +20,8 @@ void Player::Init() {
   SetTexture(anim->textureStr.c_str());
   m_animComp->PlayAnim();
 
-  // Setup trail
-  m_animComp->SetupTrailEffect(3, .07f, .5f, glm::vec4(1, 1, 1, .75f), glm::vec4(1, 1, 1, 0));
+
+  m_animComp->SetupTrailEffect(4, .07f, .5f, glm::vec4(1, 1, 1, .75f), glm::vec4(1, 1, 1, 0));
 
   // Setup Controller
   m_controllerComponent = std::make_unique<PlayerController>(this);

@@ -4,6 +4,13 @@ set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 # add_compile_options(/W4)
 
+set(CMAKE_EXE_LINKER_FLAGS_RELEASE "/LTCG")
+set(CMAKE_CXX_FLAGS_RELEASE "/O2x /Oi")
+
+message("Generated with config types: ${CMAKE_CONFIGURATION_TYPES}")
+message("${CMAKE_BUILD_TYPE}")
+
+
 if(CMAKE_BUILD_TYPE STREQUAL "Debug")
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fstandalone-debug")
     set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fstandalone-debug")
