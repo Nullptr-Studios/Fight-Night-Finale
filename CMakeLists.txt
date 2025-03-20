@@ -23,7 +23,9 @@ file(GLOB_RECURSE SRC CONFIGURE_DEPENDS
         "src/*.h"
 )
 
-add_executable(game src/main.cpp ${SRC})
+add_executable(game src/main.cpp ${SRC}
+        src/UI/MoneyBar.cpp
+        src/UI/MoneyBar.hpp)
 
 target_include_directories(game PUBLIC src)
 
