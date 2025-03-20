@@ -83,7 +83,7 @@ void DefaultEnemy::WalkState() {
     transform.relativeScale.x *= -1;
   }
   if (!m_sceneBoundsPoly->IsPointInside((glm::vec2) transform.position + (m_position * 5.0f))) {
-    m_timer = Sigma::Random::Float(.9f, 1.1f);
+    m_timer = Sigma::Random::Float(.6f, .9f);
     SetState(STATE_PAUSED);
   }
 }
@@ -106,7 +106,7 @@ void DefaultEnemy::WanderState() {
     m_position = Sigma::Random::Circle();
   }
   m_position = Sigma::Random::Circle();
-  m_timer = Sigma::Random::Float(.9f, 1.1f);
+  m_timer = Sigma::Random::Float(.6f, .9f);
   m_nextState = STATE_WANDER;
   SetState(STATE_WALK);
 
@@ -131,7 +131,7 @@ void DefaultEnemy::FollowState() {
   m_position = ((m_distance.x >= 0) ? targets[0] : targets[1]);
 
   if (fabs(m_distance.y) <= 25 && fabs(m_distance.x) <= 60 && fabs(m_distance.x) >= 30) {
-    m_timer = Sigma::Random::Float(.2f, .3f);
+    m_timer = Sigma::Random::Float(.1f, .2f);
     m_nextState = STATE_ATTACK;
     SetState(STATE_PAUSED);
   } else if (fabs(m_distance.y) <= 25 && fabs(m_distance.x) <= 60 && fabs(m_distance.x) <= 30) {
@@ -245,7 +245,7 @@ void DefaultEnemy::DeadState() {
 }
 
 void DefaultEnemy::OnFullComboPerformed() {
-  m_timer = Sigma::Random::Float(1.2f, 1.6f);
+  m_timer = Sigma::Random::Float(0.6f, 1.0f);
   m_nextState = STATE_REPOSITION; // TODO: change this to reposition
   SetState(STATE_PAUSED);
 }
