@@ -197,6 +197,8 @@ void game::GameplayManager::UninitializeGame() {
 void game::GameplayManager::StartGame() {
   if (m_started)
     return;
+
+  m_experience = 0;
   
   SetActive(true);
   UpdateCurrentGameScene();

@@ -36,14 +36,17 @@ void Enemy::OnDamage(const Sigma::Damage::DamageEvent& e) {
   if (e.GetOther()->GetName().contains("Enemy")) return;
  
   Character::OnDamage(e);
-  int money = m_xp/e.GetDamageAmount();
+  int money = m_xp*(e.GetDamageAmount()/m_maxHealth);
   Sigma::XPEvent XPE(money);
   SendEvent(XPE);
 
   if(m_invincible)
     return;
 
-  if (!GetAlive()) SetState(STATE_DEAD);
+  if (!GetAlive()) {
+    SetState(STATE_DEAD);
+    m_collider->enabled = false;
+  }
 }
 
 void Enemy::DeadAnimFinish() {
