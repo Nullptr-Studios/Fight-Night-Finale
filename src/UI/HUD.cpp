@@ -134,6 +134,8 @@ void HUD::Init() {
   m_goIndicator->m_screenSpaceTransform.position = {800, 140, 0};
   m_goIndicator->m_screenSpaceTransform.scale = {256, 128};
   m_goIndicator->SetActive(false);
+
+  //TODO: ALEXEY this is where you would initialize the xp bar class
   
 
 }
@@ -234,6 +236,10 @@ void HUD::Enable() {
 void HUD::Disable() {
   EnableUIPlayer1(false);
   EnableUIPlayer2(false);
+}
+
+void HUD::UpdateXP(int currentXP) {
+  //TODO: ALEXEY this is where you would update the xp bar class
 }
 
 } // namespace game

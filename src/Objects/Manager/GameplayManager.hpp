@@ -86,7 +86,7 @@ public:
 
   static GameplayManager* GetInstance() { return m_instance; }
 
-  void GiveXP(int xp) { m_experience += xp; }
+  void GiveXP(int xp) 
 
   [[nodiscard]] int GetXP() const { return m_experience; }
 

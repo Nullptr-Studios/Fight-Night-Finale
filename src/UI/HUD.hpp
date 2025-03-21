@@ -57,12 +57,14 @@ public:
   void Enable();
   void Disable();
 
+  void UpdateXP(int currentXP);
+
   void UpdatePlayerHUD();
-
-  void SetNumbers(std::array<Sigma::UINumber*, 2> numbers, int value);
-
+  
   void EnableGOIndicator();
 private:
+
+  void SetNumbers(std::array<Sigma::UINumber*, 2> numbers, int value);
 
   float m_goMaxTimer = 3.0f;
   float m_goTimer = 0.0f;

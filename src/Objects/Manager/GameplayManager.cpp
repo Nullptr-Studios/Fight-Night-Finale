@@ -199,12 +199,17 @@ void game::GameplayManager::StartGame() {
     return;
 
   m_experience = 0;
-  
+
   SetActive(true);
   UpdateCurrentGameScene();
   m_cameraFollow = GET_FACTORY->CreateObject<Sigma::CameraFollow>("Main Camera Follow");
   m_cameraFollow->size = 3;
   GET_CAMERA->SetCurrentCamera(m_cameraFollow);
+}
+
+void game::GameplayManager::GiveXP(int xp) {
+  m_experience += xp;
+  m_gameHud->UpdateXP(m_experience);
 }
 
 
