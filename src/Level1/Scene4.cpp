@@ -1,10 +1,7 @@
 #include "Scene4.hpp"
-#include "Controller/CameraController.hpp"
 #include "Core.hpp"
 #include "Factory.hpp"
-#include "GameManager.hpp"
 #include "Objects/Actor.hpp"
-#include "Objects/Camera.hpp"
 #include "Objects/Destructibles/Box.hpp"
 #include "Scene5.hpp"
 
