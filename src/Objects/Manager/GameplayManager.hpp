@@ -101,15 +101,14 @@ private:
 
   HUD* m_gameHud = nullptr;
 
-  bool m_started = false;
-
   /**
    * @brief holds the information required for the players
    */
   std::array<PlayerStruct, 2> m_players = {};
+  game::GameScene *m_currentGameScene = nullptr;
   unsigned char m_playerCount = 0;
-  game::GameScene* m_currentGameScene = nullptr;
   bool m_gameSceneIsDirty = true;
+  bool m_started = false;
 };
 }
 
