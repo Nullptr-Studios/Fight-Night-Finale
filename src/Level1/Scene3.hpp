@@ -8,7 +8,6 @@
 #pragma once
 
 #include "GameScene.hpp"
-#include "Player/Player.hpp"
 
 namespace Sigma {
 class Actor;

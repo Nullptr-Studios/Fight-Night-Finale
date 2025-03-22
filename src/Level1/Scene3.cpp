@@ -1,10 +1,7 @@
 #include "Scene3.hpp"
-#include "Controller/CameraController.hpp"
 #include "Core.hpp"
 #include "Factory.hpp"
-#include "GameManager.hpp"
 #include "Objects/Actor.hpp"
-#include "Objects/Camera.hpp"
 #include "Objects/Destructibles/Box.hpp"
 #include "Scene4.hpp"
 
@@ -33,12 +30,9 @@ void Scene3::Load() {
   auto b2 = GET_FACTORY->CreateObject<Box>("Machine2");
   b2->transform.position = {200, 10, -10};
   
-  auto b3 = GET_FACTORY->CreateObject<Box>("Machine2");
-  b3->transform.position = {444, -75, 75};
 
   AddChild(b1);
   AddChild(b2);
-  AddChild(b3);
 
   SetNextScene(new Scene4("Game Scene 4", 4, "assets/level-1/scene-4.json"));
 }

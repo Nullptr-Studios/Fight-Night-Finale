@@ -2,14 +2,8 @@
 
 #include <UI/DeadMenu.hpp>
 
-#include "Audio/AudioEngine.hpp"
 #include "Collision/Collider.hpp"
-#include "Collision/CollisionEvent.hpp"
-#include "Factory.hpp"
 #include "GameManager.hpp"
-#include "Objects/Damageable.hpp"
-#include "PrototypeScene.hpp"
-#include "UI/MainMenu.hpp"
 
 namespace game {
 
@@ -25,6 +19,9 @@ void Player::Init() {
   m_animComp->SetCurrentAnim("Idle");
   SetTexture(anim->textureStr.c_str());
   m_animComp->PlayAnim();
+
+
+  m_animComp->SetupTrailEffect(4, .07f, .5f, glm::vec4(1, 1, 1, .75f), glm::vec4(1, 1, 1, 0));
 
   // Setup Controller
   m_controllerComponent = std::make_unique<PlayerController>(this);
@@ -72,12 +69,11 @@ void Player::Destroy() {
   // AEGfxFontFree(font);
 }
 
-void Player::DoSuperAttack(){
+void Player::DoSuperAttack() {
   m_health -= 10;
 
-  if(healthBar)
+  if (healthBar)
     healthBar->Update(GetHealth<int>(), m_healthRecover);
-  
 }
 
 void Player::RegainHPCombo() {
@@ -89,10 +85,10 @@ void Player::RegainHPCombo() {
 void Player::OnDamage(const Sigma::Damage::DamageEvent &e) {
   Character::OnDamage(e);
 
-  if(m_invincible)
+  if (m_invincible)
     return;
 
-  if(e.GetOther() != this)
+  if (e.GetOther() != this)
     m_healthRecover = m_health;
 
   if (healthBar)
@@ -105,9 +101,8 @@ void Player::OnDamage(const Sigma::Damage::DamageEvent &e) {
   if (e.GetOther() != this) {
     m_controllerComponent->PlayerDamagedFeedback();
   } else {
-    m_controllerComponent->PlayerAttackFeedback();
+    
   }
-
 
 
   // if (!m_isAlive && doFuckingOnce) {
@@ -121,6 +116,11 @@ void Player::OnDamage(const Sigma::Damage::DamageEvent &e) {
   //   //GET_MANAGER->UnloadScene(0u);
   //   doFuckingOnce = false;
   // }
+}
+
+void Player::OnDoneDamage() {
+  Character::OnDoneDamage();
+  m_controllerComponent->PlayerAttackFeedback();
 }
 
 void Player::SetControllerID(int id) {

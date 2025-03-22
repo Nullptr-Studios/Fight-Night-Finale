@@ -1,19 +1,21 @@
-//
-// Created by dariormt on 07/02/2025.
-//
+/**
+ * @file GameScene.hpp
+ * @author Missing Textures
+ * @date 13/03/25
+ *
+ * @brief [TODO: Brief description of the file's purpose]
+ */
 
 #pragma once
 #include "Scene.hpp"
 
-namespace game {
-class GlowArea;
-}
 namespace Sigma {
 class Polygon;
 }
 
 namespace game {
 
+class GlowArea;
 class EnemySpawner;
 class Player;
 
@@ -47,7 +49,7 @@ public:
 
   void SetNextScene(Sigma::Scene *nextScene) { m_nextScene = nextScene; }
 
-  bool IsSceneFinished() { return m_isSceneFinished; }
+  [[nodiscard]] bool IsSceneFinished() const { return m_isSceneFinished; }
 
 protected:
   bool m_debug = false;
