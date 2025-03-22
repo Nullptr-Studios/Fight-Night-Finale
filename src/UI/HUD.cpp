@@ -135,9 +135,34 @@ void HUD::Init() {
   m_goIndicator->m_screenSpaceTransform.scale = {256, 128};
   m_goIndicator->SetActive(false);
 
-  //TODO: ALEXEY this is where you would initialize the xp bar class
-  
+#pragma region XPBar
+  money.numbers.resize(money.max_digits);
+  money.left_x = -40.0f * money.max_digits/2.0f;
 
+  for (int i = 0; i<money.max_digits; i++) {
+    money.numbers[i] = GET_FACTORY->CreateObject<Sigma::UINumber>("Money Digit " + std::to_string(i));
+    money.numbers[i]->m_screenSpaceTransform.position = money.offset;
+    money.numbers[i]->m_screenSpaceTransform.scale = money.num_scale;
+    money.numbers[i]->m_screenSpaceTransform.position.x += money.left_x + i*40.0f;
+  }
+
+  money.cash_icon = GET_FACTORY->CreateObject<Sigma::UIElement>("Cash Icon");
+  money.cash_icon->SetTexture("assets/UI/Sprites/Dollar.png");
+  money.cash_icon->m_screenSpaceTransform.position = money.offset;
+  money.cash_icon->m_screenSpaceTransform.scale = money.num_scale;
+  money.cash_icon->m_screenSpaceTransform.position.x -= money.left_x;
+
+  money.max_cash = pow(10,money.max_digits) - 1;
+#pragma endregion
+
+  EnableUIMoney(false);
+}
+
+void HUD::EnableUIMoney(bool enable) {
+  for (int i = 0; i<money.max_digits; i++) {
+    money.numbers[i]->SetActive(enable);
+  }
+  money.cash_icon->SetActive(enable);
 }
 
 void HUD::EnableUIPlayer1(bool enable) {
@@ -175,6 +200,8 @@ void HUD::EnableGOIndicator() {
 void HUD::Start() {}
 
 void HUD::UpdatePlayerHUD() {
+  EnableUIMoney(true);
+
   EnableUIPlayer1(true);
   m_players = GameplayManager::GetInstance()->GetPlayers();
   SetNumbers(player1.maxHealth, std::floor(m_players->operator[](0).player->GetMaxHealth()));
@@ -226,6 +253,7 @@ void HUD::SetNumbers(std::array<Sigma::UINumber *, 2> numbers, int value) {
 void HUD::SetPlayer1Health(int health) {}
 
 void HUD::Enable() {
+  EnableUIMoney(true);
   if (m_players->at(0).player != nullptr) {
     EnableUIPlayer1(true);
   }
@@ -236,10 +264,17 @@ void HUD::Enable() {
 void HUD::Disable() {
   EnableUIPlayer1(false);
   EnableUIPlayer2(false);
+  UpdateXP(0);
+  EnableUIMoney(false);
 }
 
 void HUD::UpdateXP(int currentXP) {
   //TODO: ALEXEY this is where you would update the xp bar class
+  int value = glm::clamp(currentXP, 0, money.max_cash);
+  for (int i = 0; i<money.max_digits; i++) {
+    int currentVal = value % static_cast<int>(pow(10, money.max_digits-i)) / static_cast<int>(pow(10, money.max_digits-i-1));
+    money.numbers[i]->Change(currentVal);
+  }
 }
 
 } // namespace game

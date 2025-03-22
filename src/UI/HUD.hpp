@@ -45,6 +45,19 @@ struct UIHealthBar {
   }
 };
 
+struct UIMoneyBar {
+
+  int max_digits = 7;
+  int max_cash;
+  std::vector<Sigma::UINumber *> numbers = {};
+  Sigma::UIElement* cash_icon = nullptr;
+
+  glm::vec2 num_scale = {36,42};
+  glm::vec3 offset = {0,500,0};
+  float left_x = 0;
+
+};
+
 class HUD : public Sigma::Object {
 public:
   explicit HUD(const Sigma::id_t id) : Object(id) {}
@@ -76,9 +89,11 @@ private:
 
   void EnableUIPlayer1(bool enable);
   void EnableUIPlayer2(bool enable);
+  void EnableUIMoney(bool enable);
 
   UIHealthBar player1 = {};
   UIHealthBar player2 = {};
+  UIMoneyBar money = {};
 
   std::array<PlayerStruct, 2>* m_players;
 };
