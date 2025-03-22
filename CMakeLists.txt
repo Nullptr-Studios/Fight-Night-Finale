@@ -2,13 +2,15 @@ cmake_minimum_required(VERSION 3.29)
 project(sigma LANGUAGES CXX)
 set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+
+
 set(CMAKE_BUILD_TYPE "Debug")
-# add_compile_options(/W4)
 
 message("Generated with config types: ${CMAKE_CONFIGURATION_TYPES}")
 message("${CMAKE_BUILD_TYPE}")
 
-if(CMAKE_BUILD_TYPE STREQUAL "Release")
+if(${CMAKE_BUILD_TYPE} STREQUAL "Release")
+    add_compile_options(/W4)
     set(CMAKE_EXE_LINKER_FLAGS_RELEASE "/LTCG")
     set(CMAKE_CXX_FLAGS_RELEASE "/O2 /Ob3 /Qfast_transcendentals /fp:fast")
     set(GLM_ENABLE_SIMD_AVX2 ON)
@@ -39,7 +41,7 @@ target_link_libraries(game PRIVATE sigma)
 # Copy res folder to build directory
 add_custom_command(TARGET game POST_BUILD
         COMMAND ${CMAKE_COMMAND} -E copy_directory
-        ${CMAKE_SOURCE_DIR}/assets ${CMAKE_BINARY_DIR}/Debug/assets)
+        ${CMAKE_SOURCE_DIR}/assets ${CMAKE_BINARY_DIR}/${CMAKE_BUILD_TYPE}/assets)
 
 # Copy FMOD dlls to build directory
 add_custom_command(TARGET game POST_BUILD
