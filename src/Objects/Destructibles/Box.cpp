@@ -50,8 +50,7 @@ void Box::OnDed() {
 }
 void Box::Destroy() {
   Damageable::Destroy();
-
-  GET_FACTORY->DestroyObject(m_debugCollision);
+  
 
   if (m_pickup)
     GET_FACTORY->DestroyObject(m_pickup);

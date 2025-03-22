@@ -45,6 +45,5 @@ protected:
   glm::vec3 m_pickupSize = {16, 16, 32}; ///>@brief pickup size
   float m_pickupHeal = 50; ///>@brief pickup heal amount
   
-  Actor* m_debugCollision;
 };
 }
