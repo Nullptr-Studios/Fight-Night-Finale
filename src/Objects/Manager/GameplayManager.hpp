@@ -95,7 +95,7 @@ public:
 
   static GameplayManager* GetInstance() { return m_instance; }
 
-  void GiveXP(int xp);
+  void GiveXP(int xp) override;
 
   [[nodiscard]] int GetXP() const { return m_experience; }
 

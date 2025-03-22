@@ -37,7 +37,7 @@ void Enemy::OnDamage(const Sigma::Damage::DamageEvent& e) {
  
   Character::OnDamage(e);
   int money = m_xp*(e.GetDamageAmount()/m_maxHealth);
-  Sigma::XPEvent XPE(money);
+  Sigma::XPEvent XPE(money, GameplayManager::GetInstance());
   SendEvent(XPE);
 
   if(m_invincible)
