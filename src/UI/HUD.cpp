@@ -215,7 +215,7 @@ void HUD::Update(double delta) {
 }
 
 
-void HUD::SetNumbers(std::array<Sigma::UINumber *, 2> numbers, int value) {
+void HUD::SetNumbers(std::array<std::shared_ptr<Sigma::UINumber>, 2> numbers, int value) {
   value = glm::clamp(value, 0, 99);
   numbers[0]->Change(value / 10);
   numbers[1]->Change(value % 10);

@@ -17,7 +17,7 @@ private:
   glm::vec3 m_boomBox{};
   glm::vec2 m_powBox{};
   float m_damage{};
-  Sigma::Collision::OneHitCollider *m_attackCollider{};
+  std::shared_ptr<Sigma::Collision::OneHitCollider> m_attackCollider{};
   glm::vec3 m_start{};
   glm::vec3 m_target{};
 public:

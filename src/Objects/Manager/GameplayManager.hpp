@@ -19,8 +19,8 @@ class Player;
 class HealthBar;
 
 struct PlayerStruct {
-  Player* player = nullptr;
-  HealthBar* healthBar = nullptr;
+  std::shared_ptr<Player> player = nullptr;
+  std::shared_ptr<HealthBar> healthBar = nullptr;
 };
 
 /**
@@ -97,9 +97,9 @@ public:
 
 private:
   static GameplayManager* m_instance;
-  Sigma::CameraFollow* m_cameraFollow{};
+  std::shared_ptr<Sigma::CameraFollow> m_cameraFollow{};
 
-  HUD* m_gameHud = nullptr;
+  std::shared_ptr<HUD> m_gameHud = nullptr;
 
   /**
    * @brief holds the information required for the players

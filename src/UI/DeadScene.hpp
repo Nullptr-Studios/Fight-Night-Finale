@@ -16,8 +16,8 @@ public:
   void Load() override;
   void Unload() override;
 private:
-  Sigma::SceneButton *m_quitButton = nullptr;
-  Sigma::Actor *m_background = nullptr;
-  Sigma::Actor *m_death = nullptr;
+  std::shared_ptr<Sigma::SceneButton> m_quitButton = nullptr;
+  std::shared_ptr<Sigma::Actor> m_background = nullptr;
+  std::shared_ptr<Sigma::Actor> m_death = nullptr;
 };
 }

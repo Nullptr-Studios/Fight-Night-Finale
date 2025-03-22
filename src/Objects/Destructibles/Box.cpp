@@ -49,6 +49,7 @@ void Box::OnDed() {
 }
 void Box::Destroy() {
   Damageable::Destroy();
+  
   if (m_pickup)
     GET_FACTORY->DestroyObject(m_pickup);
 }

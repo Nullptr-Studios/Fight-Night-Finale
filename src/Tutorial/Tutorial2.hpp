@@ -30,8 +30,8 @@ public:
   void Free() override;
 
 private:
-  Sigma::Actor* background = nullptr;
-  GlowArea* m_glowArea = nullptr;
+  std::shared_ptr<Sigma::Actor> background = nullptr;
+  std::shared_ptr<GlowArea> m_glowArea = nullptr;
 
 protected:
   bool m_debug = true;

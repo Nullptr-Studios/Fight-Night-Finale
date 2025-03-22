@@ -55,7 +55,7 @@ void game::GameScene::Load() {
 
   for (auto &spawners: J["enemySpawners"]) {
 
-    game::EnemySpawner* s;
+    std::shared_ptr<EnemySpawner> s;
     if (spawners.contains("required"))
       s = GET_FACTORY->CreateObject<EnemySpawner>(spawners["name"], spawners["activationRange"], m_enemySpawners[spawners["required"]]);
     else

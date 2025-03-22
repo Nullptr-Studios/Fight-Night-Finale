@@ -11,17 +11,18 @@ namespace game {
 void Scene4::Load() {
   GameScene::Load();
 
-  floor = GET_FACTORY->CreateObject<Sigma::Actor>();
+  walls = GET_FACTORY->CreateObject<Sigma::Actor>("walls");
+  walls->SetTexture("assets/level-1/scene-4-walls.png");
+  walls->transform.scale = {933.0f, 273.0f};
+  walls->transform.position.z = -4999;
+  AddChild(walls);
+
+  floor = GET_FACTORY->CreateObject<Sigma::Actor>("floor");
   floor->SetTexture("assets/level-1/scene-4-floor.png");
   floor->transform.scale = {933.0f, 273.0f};
   floor->transform.position.z = -5000;
   AddChild(floor);
 
-  walls = GET_FACTORY->CreateObject<Sigma::Actor>();
-  walls->SetTexture("assets/level-1/scene-4-walls.png");
-  walls->transform.scale = {933.0f, 273.0f};
-  walls->transform.position.z = -5000;
-  AddChild(walls);
 
   auto b1 = GET_FACTORY->CreateObject<Box>("Machine1");
   b1->transform.position = {400, -88, 88};

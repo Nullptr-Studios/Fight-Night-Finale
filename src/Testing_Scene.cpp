@@ -64,7 +64,7 @@ void Testing_Scene::Load() {
 
 
 #ifndef DEBUG_CAMERA
-  dynamic_cast<Sigma::CameraFollow*>(GET_CAMERA->GetCurrentCamera())->m_targetP1 = p;
+  std::dynamic_pointer_cast<Sigma::CameraFollow>(GET_CAMERA->GetCurrentCamera())->m_targetP1 = p.get();
 #endif
 }
 void Testing_Scene::Update(double delta) {
@@ -86,7 +86,7 @@ void Testing_Scene::Update(double delta) {
     p2->transform.position.y = m_playerStartPos.y;
     p2->transform.position.z = 0.0f;
     //p2->m_healthBar = healthBar2;
-    dynamic_cast<Sigma::CameraFollow *>(GET_CAMERA->GetCurrentCamera())->m_targetP2 = p2;
+    std::dynamic_pointer_cast<Sigma::CameraFollow>(GET_CAMERA->GetCurrentCamera())->m_targetP2 = p2.get();
     m_players[1] = p2;
     AddChild(p2);
     AddChild(healthBar2);

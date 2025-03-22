@@ -28,7 +28,7 @@ struct EnemySpawnData {
 class EnemySpawner : public Sigma::Object {
 public:
   explicit EnemySpawner(uint32_t id) : Object(id) {}
-  explicit EnemySpawner(uint32_t id, int activationDistance, EnemySpawner* requiredSpawner = nullptr) : Object(id), m_activationDistance(activationDistance), m_requiredSpawner(requiredSpawner) {}
+  explicit EnemySpawner(uint32_t id, int activationDistance, std::shared_ptr<EnemySpawner> requiredSpawner = nullptr) : Object(id), m_activationDistance(activationDistance), m_requiredSpawner(requiredSpawner) {}
 
   void Init() override;
   void Start() override;
@@ -49,7 +49,7 @@ private:
 
   EnemySpawnData m_currentEnemyData{};
 
-  EnemySpawner* m_requiredSpawner = nullptr;
+  std::shared_ptr<EnemySpawner> m_requiredSpawner = nullptr;
 
   unsigned int m_currentEnemyIndex = 0;
 
@@ -63,7 +63,7 @@ private:
 
   std::list<Object*> m_players;
 
-  std::list<Enemy*> m_enemies;
+  std::list<std::shared_ptr<Enemy>> m_enemies;
 
   GameplayManager* m_gameplayManager = nullptr;
   
