@@ -34,10 +34,10 @@ void game::GameplayManager::Init() {
 
   m_gameHud = GET_FACTORY->CreateObject<game::HUD>("Game HUD");
 
-  /*GET_AUDIO->LoadBank("assets/Sound/Desktop/Master.bank");
+  GET_AUDIO->LoadBank("assets/Sound/Desktop/Master.bank");
   GET_AUDIO->LoadBank("assets/Sound/Desktop/Master.strings.bank");
   GET_AUDIO->LoadBank("assets/Sound/Desktop/Music.bank");
-  GET_AUDIO->LoadEvent("event:/Music/TestMusic");*/
+  GET_AUDIO->LoadEvent("event:/Music/TestMusic");
   
 
 }
@@ -213,7 +213,7 @@ void game::GameplayManager::StartGame() {
   GET_CAMERA->SetCurrentCamera(m_cameraFollow);
 
 
-  //GET_AUDIO->PlayEvent("event:/Music/TestMusic");
+  GET_AUDIO->PlayEvent("event:/Music/TestMusic");
 }
 
 
