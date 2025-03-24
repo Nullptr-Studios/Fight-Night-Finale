@@ -255,7 +255,7 @@ void DefaultEnemy::DeadState() {
   m_enabled = false;
 }
 
-void DefaultEnemy::OnFullComboPerformed() {
+void DefaultEnemy::OnFullComboPerformed(bool super) {
   m_timer = Sigma::Random::Float(1.2f, 1.6f);
   m_nextState = STATE_REPOSITION; // TODO: change this to reposition
   SetState(STATE_PAUSED);
