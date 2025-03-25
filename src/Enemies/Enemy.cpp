@@ -80,7 +80,6 @@ Player* Enemy::GetNearestPlayer() {
 void Enemy::Update(double delta) {
 
 
-
   if (m_currentState == STATE_IDLE && m_enabled) {
     SetState(m_defaultState);
   } else if (!m_enabled && m_currentState != STATE_IDLE) {
@@ -118,7 +117,7 @@ void Enemy::SetState(int state) {
 void Enemy::BindState(int state, const std::function<void()>& function) {
   // Sanity check
   if (!function) return;
-
+  // if (m_states.find(state) != m_states.end()) { m_states[state] = nullptr; }
   m_states.insert({state, function});
 
   #ifdef DEBUG_ENEMY

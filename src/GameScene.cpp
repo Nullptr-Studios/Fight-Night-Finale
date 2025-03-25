@@ -1,18 +1,10 @@
-//
-// Created by dariormt on 07/02/2025.
-//
-
 #include "GameScene.hpp"
 
 #include "Factory.hpp"
 #include "Polygon.hpp"
 #include "Objects/EnemySpawner.hpp"
-#include "Player/Player.hpp"
-#include "Controller/CameraController.hpp"
-#include "Objects/CameraFollow.hpp"
 #include "Scene.hpp"
 #include "Tutorial/GlowArea.hpp"
-#include "pch.hpp"
 
 
 void game::GameScene::Load() {
@@ -128,6 +120,7 @@ void game::GameScene::Unload() {
 
   delete m_sceneBoundsPoly;
 }
+
 void game::GameScene::DebugWindow() {
   Scene::DebugWindow();
   

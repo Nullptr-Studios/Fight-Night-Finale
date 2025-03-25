@@ -19,7 +19,6 @@ protected:
 public:
   explicit Enemy(const Sigma::id_t id, const char* jsonPath) : Character(id, jsonPath) {}
   
-  
   void Init() override;
   void Serialize() override;
   void Start() override;
@@ -84,7 +83,9 @@ protected:
   int m_defaultState = 0;
   int m_currentState = 0;
 
-  bool m_enabled;
+  bool m_enabled{};
+
+  bool isAvoiding = false;
 
 private:
   std::map<int, std::function<void()>> m_states = {};

@@ -33,6 +33,7 @@ bool GlowArea::OnCollision(Sigma::Collision::CollisionEvent& e) {
   // FIXME: This might not work on release????
   if (players->operator[](1).player != nullptr) m_playerCount = 2;
 
+  // FIXME: This is a hacky way to check if the player is player 1 or player 2, also this crashes when the colided object is not a player (machine)
   if (dynamic_cast<Player*>(e.GetOther()) == players->operator[](0).player) m_player1 = true;
   else if (dynamic_cast<Player*>(e.GetOther()) == players->operator[](1).player) m_player2 = true;
 
