@@ -47,14 +47,37 @@ struct UIHealthBar {
 
 struct UIMoneyBar {
 
-  int max_digits = 7;
-  int max_cash;
-  std::vector<Sigma::UINumber *> numbers = {};
-  Sigma::UIElement* cash_icon = nullptr;
+  int maxDigits = 7; ///>@brief Max amount of digits displayable
+  int maxCash; ///>@brief Max amount cash displayable, dependent on maxDigits
+  int startCash = 0; ///>@brief Cash with which linear interpolation starts
+  int endCash = 0; ///>@brief Cash with which linear interpolation ends
+  int displayedCash = 0; ///>@brief Cash currently displayed
 
-  glm::vec2 num_scale = {36,42};
+  bool active = false;
+
+  double timerMax = 0.5f; //Max time on lerp
+  double timer = 0.0f; //Timer for time-based lerp or whatever the fuck idk what I'm doing rn tbh I want to sleep I'm so done.
+
+  std::vector<Sigma::UINumber *> numbers = {};
+  Sigma::UIElement* cashIcon = nullptr;
+
+  glm::vec2 numScale = {36,42};
   glm::vec3 offset = {0,500,0};
-  float left_x = 0;
+  float leftX = 0; ///>@brief Left-most coordinate of the money display
+
+  void DisplayCash(int val) {
+    if (val == displayedCash) {return;}
+    displayedCash = val;
+    for (int i = 0; i<maxDigits; i++) {
+      int currentVal = displayedCash % static_cast<int>(pow(10, maxDigits-i)) / static_cast<int>(pow(10, maxDigits-i-1));
+      numbers[i]->Change(currentVal);
+    }
+  }
+
+  int LerpMoney(double delta) {
+    //Todo: Lerp between Start and End cash here, return lerped value to display it.
+    return 0;
+  }
 
 };
 

@@ -136,33 +136,38 @@ void HUD::Init() {
   m_goIndicator->SetActive(false);
 
 #pragma region XPBar
-  money.numbers.resize(money.max_digits);
-  money.left_x = -40.0f * money.max_digits/2.0f;
+  money.numbers.resize(money.maxDigits);
+  money.leftX = -40.0f * money.maxDigits/2.0f;
 
-  for (int i = 0; i<money.max_digits; i++) {
+  for (int i = 0; i<money.maxDigits; i++) {
     money.numbers[i] = GET_FACTORY->CreateObject<Sigma::UINumber>("Money Digit " + std::to_string(i));
     money.numbers[i]->m_screenSpaceTransform.position = money.offset;
-    money.numbers[i]->m_screenSpaceTransform.scale = money.num_scale;
-    money.numbers[i]->m_screenSpaceTransform.position.x += money.left_x + i*40.0f;
+    money.numbers[i]->m_screenSpaceTransform.scale = money.numScale;
+    money.numbers[i]->m_screenSpaceTransform.position.x += money.leftX + i*40.0f;
   }
 
-  money.cash_icon = GET_FACTORY->CreateObject<Sigma::UIElement>("Cash Icon");
-  money.cash_icon->SetTexture("assets/UI/Sprites/Dollar.png");
-  money.cash_icon->m_screenSpaceTransform.position = money.offset;
-  money.cash_icon->m_screenSpaceTransform.scale = money.num_scale;
-  money.cash_icon->m_screenSpaceTransform.position.x -= money.left_x;
+  money.cashIcon = GET_FACTORY->CreateObject<Sigma::UIElement>("Cash Icon");
+  money.cashIcon->SetTexture("assets/UI/Sprites/Dollar.png");
+  money.cashIcon->m_screenSpaceTransform.position = money.offset;
+  money.cashIcon->m_screenSpaceTransform.scale = money.numScale;
+  money.cashIcon->m_screenSpaceTransform.position.x -= money.leftX;
 
-  money.max_cash = pow(10,money.max_digits) - 1;
+  money.maxCash = pow(10,money.maxDigits) - 1;
 #pragma endregion
 
   EnableUIMoney(false);
 }
 
 void HUD::EnableUIMoney(bool enable) {
-  for (int i = 0; i<money.max_digits; i++) {
+  for (int i = 0; i<money.maxDigits; i++) {
     money.numbers[i]->SetActive(enable);
   }
-  money.cash_icon->SetActive(enable);
+  money.cashIcon->SetActive(enable);
+  money.active = enable;
+  money.startCash = 0;
+  money.endCash = 0;
+  money.displayedCash = 0;
+  money.timer = 0.0f;
 }
 
 void HUD::EnableUIPlayer1(bool enable) {
@@ -241,6 +246,10 @@ void HUD::Update(double delta) {
       m_goIndicator->SetActive(false);
     }
   }
+  if (money.active) {
+    //TODO: Call Lerp function on Money to Lerp, display lerped value here instead of displayed cash.
+    money.DisplayCash(money.displayedCash);
+  }
 }
 
 
@@ -269,12 +278,13 @@ void HUD::Disable() {
 }
 
 void HUD::UpdateXP(int currentXP) {
-  //TODO: ALEXEY this is where you would update the xp bar class
-  int value = glm::clamp(currentXP, 0, money.max_cash);
-  for (int i = 0; i<money.max_digits; i++) {
-    int currentVal = value % static_cast<int>(pow(10, money.max_digits-i)) / static_cast<int>(pow(10, money.max_digits-i-1));
-    money.numbers[i]->Change(currentVal);
-  }
+  money.DisplayCash(glm::clamp(currentXP, 0, money.maxCash));
+  /* TODO: Set money.endCash here instead, the logic will be done in an update function
+   * Essentially, Lerp will be done in the HUD Update using a Lerp function of the UIMoneyBar
+   * I fear there might be some issues arising from constantly changing endcash so maybe use a:
+   * 1. Vector based queue system to lerp between incoming cash values separately
+   * 2. Just fuck it and correct any mistakes in the final value by setting it to end cash directly
+   */
 }
 
 } // namespace game
