@@ -20,12 +20,13 @@ void game::EnemySpawner::Start() { Object::Start(); }
 void game::EnemySpawner::SpawnEnemy() {
   Enemy *e; // HACK:
   //
-  int choice = std::rand() % 4; // Random number between 0 and 3
+  int choice = std::rand() % 3; // Random number between 0 and 3
+  choice = 1;
   switch (choice) {
-    case 0: e = GET_FACTORY->CreateObject<game::DefaultEnemy>("Enemy", "assets/characters/BasicEnemy/behaviour.json"); break;
-    case 1: e = GET_FACTORY->CreateObject<game::BigEnemy>("Enemy", "assets/characters/bigEnemy/behaviour.json"); break;
-    case 2: e = GET_FACTORY->CreateObject<game::GrabEnemy>("Enemy", "assets/characters/grabEnemy/behaviour.json"); break;
-    case 3: e = GET_FACTORY->CreateObject<game::TntEnemy>("Enemy", "assets/characters/tntEnemy/behaviour.json"); break;
+    // case 0: e = GET_FACTORY->CreateObject<game::DefaultEnemy>("Enemy", "assets/characters/BasicEnemy/behaviour.json"); break;
+    case 1: e = GET_FACTORY->CreateObject<game::TntEnemy>("Enemy", "assets/characters/tntEnemy/behaviour.json"); break;
+    // case 2: e = GET_FACTORY->CreateObject<game::GrabEnemy>("Enemy", "assets/characters/grabEnemy/behaviour.json"); break;
+    // case 3: e = GET_FACTORY->CreateObject<game::BigEnemy>("Enemy", "assets/characters/bigEnemy/behaviour.json"); break;
   }
 
   e->transform.position.x = m_currentEnemyData.position.x;
