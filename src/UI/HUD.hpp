@@ -31,6 +31,10 @@ struct UIHealthBar {
   std::array<std::shared_ptr<Sigma::UINumber>, 2> maxHealth = {};
   std::shared_ptr<Sigma::UIText> slash = nullptr;
 
+  std::shared_ptr<Sigma::UIText> comboText = nullptr;
+  std::shared_ptr<Sigma::UIText> comboValue = nullptr;
+  std::shared_ptr<Sigma::UIImage> comboBurningIMG = nullptr;
+
   glm::vec3 offset = {-280, 190, 0};
 
   void Update(int healthvalue, int healthrecover){

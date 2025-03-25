@@ -65,7 +65,7 @@ void game::GameplayManager::Update(double deltaTime) {
   CheckForCoop();
 
   int dedPlayers = 0;
-  for (auto element: m_players) {
+  for (const auto& element: m_players) {
     if (element.player == nullptr)
       continue;
     
