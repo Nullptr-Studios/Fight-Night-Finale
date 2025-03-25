@@ -1,4 +1,5 @@
 #include "GrabEnemy.hpp"
+#include "Random.hpp"
 
 
 namespace game {
@@ -23,6 +24,34 @@ void GrabEnemy::Init() {
   targetLeft = rand() % 2;
 }
 
+void GrabEnemy::FollowState() {
+  if (!m_isDoingSomething)
+    return;
+
+  if (m_nearest == nullptr)
+    return;
+
+  isAvoiding = false;
+  m_animComp->SetCurrentAnim("Walk");
+  glm::vec3 targets[2];
+  targets[0] = m_nearest->transform.GetDepthPosition() + glm::vec3(0, -50, 0);
+  targets[1] = m_nearest->transform.GetDepthPosition() + glm::vec3(0, 50, 0);
+  m_position = ((m_distance.x >= 0) ? targets[0] : targets[1]);
+
+  if (fabs(m_distance.y) <= 25 && fabs(m_distance.x) <= 60 && fabs(m_distance.x) >= 30) {
+    m_timer = Sigma::Random::Float(.1f, .2f);
+    m_nextState = STATE_ATTACK;
+    SetState(STATE_PAUSED);
+  } else if (fabs(m_distance.y) <= 25 && fabs(m_distance.x) <= 60 && fabs(m_distance.x) <= 30) {
+    m_nextState = STATE_FOLLOW;
+    SetState(STATE_DISPERSE);
+  } else {
+    m_nextState = STATE_FOLLOW;
+    m_timer = 2;
+    SetState(STATE_GOTO);
+  }
+}
+
 void GrabEnemy::AttackState() {
   if (!m_isDoingSomething)
     return;
@@ -31,6 +60,5 @@ void GrabEnemy::AttackState() {
     transform.relativeScale.x *= -1;
   }
   BasicAttack();
-  
 }
 } // namespace game
