@@ -20,18 +20,17 @@ void GrabEnemy::Init() {
   m_collider->SetOwner(this);
 
   m_defaultState = STATE_FOLLOW;
-  targetLeft = rand()%2;
+  targetLeft = rand() % 2;
 }
 
 void GrabEnemy::AttackState() {
-  if (!m_isDoingSomething) return;
+  if (!m_isDoingSomething)
+    return;
   isAvoiding = false;
   if ((m_distance.x >= 0) != (transform.relativeScale.x >= 0)) {
     transform.relativeScale.x *= -1;
   }
-  if(rand()%3) {
-    targetLeft = !targetLeft;
-  } 
   BasicAttack();
+  
 }
-}
+} // namespace game
