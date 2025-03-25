@@ -60,18 +60,18 @@ void Enemy::SetPlayers(std::array<PlayerStruct, 2>* players) { m_players = playe
 
 Player* Enemy::GetNearestPlayer() {
   if (!m_players->operator[](0).player && !m_players->operator[](1).player) return nullptr;
-  if (!m_players->operator[](1).player) return m_players->operator[](0).player;
-  if (!m_players->operator[](0).player) return m_players->operator[](1).player;
+  if (!m_players->operator[](1).player) return m_players->operator[](0).player.get();
+  if (!m_players->operator[](0).player) return m_players->operator[](1).player.get();
 
   float distance0 = glm::distance(transform.GetDepthPosition(), m_players->operator[](0).player->transform.GetDepthPosition());
   float distance1 = glm::distance(transform.GetDepthPosition(), m_players->operator[](1).player->transform.GetDepthPosition());
 
   if (distance0 >= distance1){
     if(m_players->operator[](1).player->GetAlive())
-      return m_players->operator[](1).player;
+      return m_players->operator[](1).player.get();
   }
   if(m_players->operator[](0).player->GetAlive())
-    return m_players->operator[](0).player;
+    return m_players->operator[](0).player.get();
 
   // if all checks fail return nullptr
   return nullptr;

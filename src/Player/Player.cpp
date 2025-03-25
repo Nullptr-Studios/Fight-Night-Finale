@@ -53,7 +53,7 @@ void Player::Update(double delta) {
   if (m_controllerComponent)
     m_controllerComponent->Update();
 
-  if (GetIsIdle()) {
+  if (GetIsIdle() && !m_inCombo) {
     if (velocity.x > .1f || velocity.x < -.1f || velocity.y > .1f || velocity.y < -.1f) {
       m_animComp->SetCurrentAnim("Walk");
     } else {
@@ -69,11 +69,17 @@ void Player::Destroy() {
   // AEGfxFontFree(font);
 }
 
-void Player::DoSuperAttack() {
+void Player::SuperAttackEnd() {
   m_health -= 10;
 
   if (healthBar)
     healthBar->Update(GetHealth<int>(), m_healthRecover);
+}
+void Player::DoSuperAttack() {
+  /*m_health -= 10;
+
+  if (healthBar)
+    healthBar->Update(GetHealth<int>(), m_healthRecover);*/
 }
 
 void Player::RegainHPCombo() {

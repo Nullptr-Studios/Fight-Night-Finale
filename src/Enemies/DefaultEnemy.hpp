@@ -26,7 +26,7 @@ public:
 
 
 protected:
-  void OnFullComboPerformed() override;
+  void OnFullComboPerformed(bool super = false) override;
 
   void EndedMove() override;
 

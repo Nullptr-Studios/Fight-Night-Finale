@@ -20,16 +20,16 @@ namespace game {
 class Player;
 
 struct UIHealthBar {
-  Sigma::UIImage* background = nullptr;
-  HealthBar* blue = nullptr;
-  HealthBar* health = nullptr;
-  Sigma::UIImage* border = nullptr;
+  std::shared_ptr<Sigma::UIImage> background = nullptr;
+  std::shared_ptr<HealthBar> blue = nullptr;
+  std::shared_ptr<HealthBar> health = nullptr;
+  std::shared_ptr<Sigma::UIImage> border = nullptr;
 
-  Sigma::UIImage* frame = nullptr;
+  std::shared_ptr<Sigma::UIImage> frame = nullptr;
  
-  std::array<Sigma::UINumber*, 2> currentHealth = {};
-  std::array<Sigma::UINumber*, 2> maxHealth = {};
-  Sigma::UIText* slash = nullptr;
+  std::array<std::shared_ptr<Sigma::UINumber>, 2> currentHealth = {};
+  std::array<std::shared_ptr<Sigma::UINumber>, 2> maxHealth = {};
+  std::shared_ptr<Sigma::UIText> slash = nullptr;
 
   glm::vec3 offset = {-280, 190, 0};
 
@@ -59,7 +59,7 @@ public:
 
   void UpdatePlayerHUD();
 
-  void SetNumbers(std::array<Sigma::UINumber*, 2> numbers, int value);
+  void SetNumbers(std::array<std::shared_ptr<Sigma::UINumber>, 2> numbers, int value);
 
   void EnableGOIndicator();
 private:
@@ -70,7 +70,7 @@ private:
   float m_goTimerFlash = 0.0f;
   bool m_goActive = false;
 
-  Sigma::UIImage* m_goIndicator = nullptr;
+  std::shared_ptr<Sigma::UIImage> m_goIndicator = nullptr;
 
   void EnableUIPlayer1(bool enable);
   void EnableUIPlayer2(bool enable);

@@ -46,7 +46,7 @@
     {
       "type" : "thr",
       "damage" : 30.0,
-      "knockback" : { "x" : 800.0, "y" : 800.0 },
+      "knockback" : { "x" : 700, "y" : 400.0},
       "colliderOffset" : { "x" : 0.0, "y" : 0.0 },
       "colliderSize" : { "x" : 0.0, "y" : 0.0, "z" : 0.0 },
       "animationName" : "BasicCombo1"

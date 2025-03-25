@@ -61,6 +61,7 @@ public:
 
   game::UIHealthBar* healthBar = nullptr;
 
+  void SuperAttackEnd() override;
   void DoSuperAttack() override;
   void RegainHPCombo() override;
 

@@ -33,12 +33,18 @@ void game::GameplayManager::Init() {
 
 
   m_gameHud = GET_FACTORY->CreateObject<game::HUD>("Game HUD");
+
+  GET_AUDIO->LoadBank("assets/Sound/Desktop/Master.bank");
+  GET_AUDIO->LoadBank("assets/Sound/Desktop/Master.strings.bank");
+  GET_AUDIO->LoadBank("assets/Sound/Desktop/Music.bank");
+  GET_AUDIO->LoadEvent("event:/Music/TestMusic");
   
 
 }
 void game::GameplayManager::Start() {
   Object::Start();
   StartGame();
+  
 }
 void game::GameplayManager::FirstUpdate(double deltaTime) {
   Object::FirstUpdate(deltaTime);
@@ -104,7 +110,7 @@ void game::GameplayManager::RespawnPlayer(game::Player *player) {
 void game::GameplayManager::TeleportPlayersToNextScene() {
   for (auto ps: m_players) {
     if (ps.player) {
-      RespawnPlayer(ps.player);
+      RespawnPlayer(ps.player.get());
       ps.player->SetSceneBoundsPoly(m_currentGameScene->GetSceneBoundsPoly());
     }
   }
@@ -122,11 +128,11 @@ void game::GameplayManager::InitPlayer(unsigned controllerID)
 
   // Setup Camera
   if (m_playerCount == 0) 
-    m_cameraFollow->m_targetP1 = p.player;
+    m_cameraFollow->m_targetP1 = p.player.get();
   else
-    m_cameraFollow->m_targetP2 = p.player;
+    m_cameraFollow->m_targetP2 = p.player.get();
 
-  RespawnPlayer(p.player);
+  RespawnPlayer(p.player.get());
   
   p.player->SetSceneBoundsPoly(m_currentGameScene->GetSceneBoundsPoly());
   
@@ -140,10 +146,10 @@ void game::GameplayManager::CheckForCoop() {
       return;
   if (m_players[0].player->GetControllerID() <= -1 && AEInputGamepadButtonTriggered(0, AE_GAMEPAD_START)) {
     InitPlayer(0);
-    RespawnPlayer(m_players[1].player);
+    RespawnPlayer(m_players[1].player.get());
   } else if (AEInputGamepadButtonTriggered(1, AE_GAMEPAD_START)) {
     InitPlayer(1);
-    RespawnPlayer(m_players[1].player);
+    RespawnPlayer(m_players[1].player.get());
     }
 }
 
@@ -192,6 +198,8 @@ void game::GameplayManager::UninitializeGame() {
   m_currentGameScene = nullptr;
 
   m_started = false;
+
+  GET_AUDIO->StopEvent("event:/Music/TestMusic");
 }
 
 void game::GameplayManager::StartGame() {
@@ -203,6 +211,9 @@ void game::GameplayManager::StartGame() {
   m_cameraFollow = GET_FACTORY->CreateObject<Sigma::CameraFollow>("Main Camera Follow");
   m_cameraFollow->size = 3;
   GET_CAMERA->SetCurrentCamera(m_cameraFollow);
+
+
+  GET_AUDIO->PlayEvent("event:/Music/TestMusic");
 }
 
 
