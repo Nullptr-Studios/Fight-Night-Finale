@@ -19,7 +19,6 @@ public:
   void Update(double delta) override;
   void Destroy() override;
 
-  static constexpr int STATE_WANDER = 8;     ///< @constexpr STATE_WANDER      The enemy wanders around
   static constexpr int STATE_PAUSED = 9;     ///< @constexpr STATE_PAUSED      The enemy pauses for a while and switches states
   static constexpr int STATE_WALK = 10;     ///< @constexpr STATE_WALK         The enemy Walks for a bit
   static constexpr int STATE_GOTO = 11;     ///< @constexpr STATE_GOTO         The enemy GOTO's point
@@ -34,7 +33,6 @@ protected:
   virtual void WalkState();
 
   virtual void GoToState();
-  virtual void WanderState();
   virtual void FollowState();
   virtual void PausedState();
   virtual void DisperseState();

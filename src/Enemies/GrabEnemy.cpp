@@ -1,12 +1,12 @@
-#include "BigEnemy.hpp"
-#include "Enemies/Enemy.hpp"
+#include "GrabEnemy.hpp"
+
 
 namespace game {
 
-void BigEnemy::Init() {
+void GrabEnemy::Init() {
   Enemy::Init();
   // Setup Animation
-  auto anim = GET_ANIMATION->LoadTextureAtlas("assets/characters/bigEnemy/anim-data.json");
+  auto anim = GET_ANIMATION->LoadTextureAtlas("assets/characters/grabEnemy/anim-data.json");
   m_animComp->SetTextureAtlas(anim);
   m_animComp->SetCurrentAnim("Idle");
   SetTexture(anim->textureStr.c_str());
@@ -20,19 +20,18 @@ void BigEnemy::Init() {
   m_collider->SetOwner(this);
 
   m_defaultState = STATE_FOLLOW;
-  targetLeft = rand() % 2;
+  targetLeft = rand()%2;
 }
 
-void BigEnemy::AttackState() {
-  if (!m_isDoingSomething)
-    return;
+void GrabEnemy::AttackState() {
+  if (!m_isDoingSomething) return;
   isAvoiding = false;
   if ((m_distance.x >= 0) != (transform.relativeScale.x >= 0)) {
     transform.relativeScale.x *= -1;
   }
-  if (rand() % 3) {
+  if(rand()%3) {
     targetLeft = !targetLeft;
-  }
+  } 
   BasicAttack();
 }
-} // namespace game
+}

@@ -6,7 +6,7 @@
   "dashTime" : 0.23,
   "dashCool" : 0.5,
   "friction" :750,
-
+  "knockbackRes" : 1.0,
   "basicCombo" : [
     {
       "type" : "dmg",

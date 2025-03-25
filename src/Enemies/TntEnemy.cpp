@@ -18,7 +18,6 @@ void TntEnemy::Init() {
   m_collider->damage = 1.0f;
   m_collider->SetOwner(this);
 
-  m_defaultState = STATE_WANDER;
   m_defaultState = STATE_FOLLOW;
 }
 

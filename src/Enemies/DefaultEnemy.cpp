@@ -36,7 +36,6 @@ void DefaultEnemy::Init() {
   m_collider->damage = 1.0f;
   m_collider->SetOwner(this);
 
-  m_defaultState = STATE_WANDER;
   m_defaultState = STATE_FOLLOW;
 }
 
@@ -45,7 +44,6 @@ void DefaultEnemy::Start() {
 
   BindState(STATE_WALK, [this] { WalkState(); });
   BindState(STATE_PAUSED, [this] { PausedState(); });
-  BindState(STATE_WANDER, [this] { WanderState(); });
   BindState(STATE_FOLLOW, [this] { FollowState(); });
   BindState(STATE_ATTACK, [this] { AttackState(); });
   BindState(STATE_DISPERSE, [this] { DisperseState(); });
@@ -95,25 +93,6 @@ void DefaultEnemy::PausedState() {
     SetState(m_nextState);
   }
   m_animComp->SetCurrentAnim("Idle");
-}
-
-void DefaultEnemy::WanderState() {
-  if (!m_isDoingSomething)
-    return;
-  isAvoiding = false;
-  m_position = Sigma::Random::Circle();
-  while (!m_sceneBoundsPoly->IsPointInside((glm::vec2) transform.position + (m_position * 5.0f))) {
-    m_position = Sigma::Random::Circle();
-  }
-  m_position = Sigma::Random::Circle();
-  m_timer = Sigma::Random::Float(.6f, .9f);
-  m_nextState = STATE_WANDER;
-  SetState(STATE_WALK);
-
-  if (m_distance.length() <= detectionRange) {
-    SetState(STATE_FOLLOW);
-    m_defaultState = STATE_FOLLOW;
-  }
 }
 
 void DefaultEnemy::FollowState() {
