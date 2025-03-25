@@ -7,6 +7,7 @@
 #include "aecore/imgui/imgui.h"
 #include "Collision/OneHitCollider.hpp"
 #include "DamageSystem/DamageEvent.hpp"
+#include "glm/ext/quaternion_geometric.hpp"
 #define GLM_ENABLE_EXPERIMENTAL
 #include <glm/gtx/compatibility.hpp>
 namespace game {
@@ -25,13 +26,14 @@ void Tnt::Init() {
 
 void Tnt::Update(double delta) {
   m_timer += (float)delta;
+  m_length = glm::length(m_start - m_target) /200.0f;
   if ( m_timer >= m_length + 2) {
     GET_FACTORY->DestroyObject(this);
   }
   if (boom) {
     return;
   }
-  if (m_timer >= m_length + 1) {
+  if (m_timer >= m_length + .4) {
     boom = true;
     m_attackCollider->Do(transform.position, m_boomBox, m_damage, this, Sigma::Damage::DamageType::DAMAGE,m_powBox, true);
     transform.position = m_target;

@@ -16,6 +16,5 @@ public:
   BigEnemy(const Sigma::id_t id, const char* jsonPath) : DefaultEnemy(id, jsonPath) {}
   void Init() override;
   void AttackState() override;
-
 };
 }

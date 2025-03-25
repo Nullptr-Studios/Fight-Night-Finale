@@ -34,5 +34,6 @@ void BigEnemy::AttackState() {
     targetLeft = !targetLeft;
   }
   BasicAttack();
+  
 }
 } // namespace game

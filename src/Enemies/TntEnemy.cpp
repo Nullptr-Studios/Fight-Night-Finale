@@ -26,11 +26,11 @@ void TntEnemy::FollowState() {
   isAvoiding = false;
   m_animComp->SetCurrentAnim("Walk");
   glm::vec3 targets[2];
-  targets[0] = m_nearest->transform.GetDepthPosition()+ glm::vec3(-150,0,0);
-  targets[1] = m_nearest->transform.GetDepthPosition()+ glm::vec3(150,0,0);
+  targets[0] = m_nearest->transform.GetDepthPosition()+ glm::vec3(-200,0,0);
+  targets[1] = m_nearest->transform.GetDepthPosition()+ glm::vec3(200,0,0);
   m_position = ((m_distance.x >= 0)?targets[0]:targets[1]);
 
-  if (fabs(m_distance.y) <= 200 && fabs(m_distance.x) <= 200 && fabs(m_distance.x) >= 100) {
+  if (fabs(m_distance.y) <= 200 && fabs(m_distance.x) <= 200 && fabs(m_distance.x) >= 150) {
     m_timer = Sigma::Random::Float(.2f, .3f);
     m_nextState = STATE_ATTACK;
     SetState(STATE_PAUSED);
