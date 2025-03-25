@@ -31,7 +31,7 @@ struct UIHealthBar {
   std::array<Sigma::UINumber*, 2> maxHealth = {};
   Sigma::UIText* slash = nullptr;
 
-  glm::vec3 offset = {-280, 190, 0};
+  glm::vec3 offset = {-280, 450, 0};
 
   void Update(int healthvalue, int healthrecover){
 
@@ -61,8 +61,8 @@ struct UIMoneyBar {
   std::vector<Sigma::UINumber *> numbers = {};
   Sigma::UIElement* cashIcon = nullptr;
 
-  glm::vec2 numScale = {36,42};
-  glm::vec3 offset = {0,500,0};
+  glm::vec2 numScale = {54,63};
+  glm::vec3 offset = {0,461,0};
   float leftX = 0; ///>@brief Left-most coordinate of the money display
 
   void DisplayMoney(int val) {

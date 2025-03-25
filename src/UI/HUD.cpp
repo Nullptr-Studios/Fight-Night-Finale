@@ -137,13 +137,13 @@ void HUD::Init() {
 
 #pragma region XPBar
   money.numbers.resize(money.maxDigits);
-  money.leftX = -40.0f * money.maxDigits/2.0f;
+  money.leftX = -60.0f * money.maxDigits/2.0f;
 
   for (int i = 0; i<money.maxDigits; i++) {
     money.numbers[i] = GET_FACTORY->CreateObject<Sigma::UINumber>("Money Digit " + std::to_string(i));
     money.numbers[i]->m_screenSpaceTransform.position = money.offset;
     money.numbers[i]->m_screenSpaceTransform.scale = money.numScale;
-    money.numbers[i]->m_screenSpaceTransform.position.x += money.leftX + i*40.0f;
+    money.numbers[i]->m_screenSpaceTransform.position.x += money.leftX + i*60.0f;
   }
 
   money.cashIcon = GET_FACTORY->CreateObject<Sigma::UIElement>("Cash Icon");
