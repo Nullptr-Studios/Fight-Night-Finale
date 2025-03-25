@@ -167,7 +167,6 @@ void HUD::EnableUIMoney(bool enable) {
   money.active = enable;
   money.startCash = 0;
   money.endCash = 0;
-  money.displayedCash = 0;
   money.timer = 0.0f;
 }
 
@@ -249,6 +248,8 @@ void HUD::Update(double delta) {
   }
   if (money.active) {
     if (money.displayedCash < money.endCash) {
+      money.DisplayMoney(money.LerpMoney(delta));
+    } else if (money.displayedCash > money.endCash) {
       money.DisplayMoney(money.LerpMoney(delta));
     }
   }
