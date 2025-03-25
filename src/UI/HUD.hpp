@@ -65,7 +65,7 @@ struct UIMoneyBar {
   glm::vec3 offset = {0,500,0};
   float leftX = 0; ///>@brief Left-most coordinate of the money display
 
-  void DisplayCash(int val) {
+  void DisplayMoney(int val) {
     if (val == displayedCash) {return;}
     displayedCash = val;
     for (int i = 0; i<maxDigits; i++) {
@@ -74,9 +74,13 @@ struct UIMoneyBar {
     }
   }
 
-  int LerpMoney(double delta) {
-    //Todo: Lerp between Start and End cash here, return lerped value to display it.
-    return 0;
+  int LerpMoney(const double delta) {
+    timer+=delta;
+    if (timer > timerMax) {
+      timer = 0.0f;
+      return endCash;
+    }
+    return round(std::lerp(startCash, endCash, timer*1/timerMax));
   }
 
 };

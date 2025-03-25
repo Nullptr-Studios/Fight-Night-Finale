@@ -159,6 +159,7 @@ void HUD::Init() {
 }
 
 void HUD::EnableUIMoney(bool enable) {
+  money.DisplayMoney(0);
   for (int i = 0; i<money.maxDigits; i++) {
     money.numbers[i]->SetActive(enable);
   }
@@ -247,8 +248,9 @@ void HUD::Update(double delta) {
     }
   }
   if (money.active) {
-    //TODO: Call Lerp function on Money to Lerp, display lerped value here instead of displayed cash.
-    money.DisplayCash(money.displayedCash);
+    if (money.displayedCash < money.endCash) {
+      money.DisplayMoney(money.LerpMoney(delta));
+    }
   }
 }
 
@@ -278,13 +280,9 @@ void HUD::Disable() {
 }
 
 void HUD::UpdateXP(int currentXP) {
-  money.DisplayCash(glm::clamp(currentXP, 0, money.maxCash));
-  /* TODO: Set money.endCash here instead, the logic will be done in an update function
-   * Essentially, Lerp will be done in the HUD Update using a Lerp function of the UIMoneyBar
-   * I fear there might be some issues arising from constantly changing endcash so maybe use a:
-   * 1. Vector based queue system to lerp between incoming cash values separately
-   * 2. Just fuck it and correct any mistakes in the final value by setting it to end cash directly
-   */
+  money.startCash = money.displayedCash;
+  money.endCash = glm::clamp(currentXP, 0, money.maxCash);
+  money.timer = 0.0f;
 }
 
 } // namespace game

@@ -36,12 +36,13 @@ void Enemy::OnDamage(const Sigma::Damage::DamageEvent& e) {
   if (e.GetOther()->GetName().contains("Enemy")) return;
  
   Character::OnDamage(e);
-  int money = m_xp*(e.GetDamageAmount()/m_maxHealth);
-  Sigma::XPEvent XPE(money, GameplayManager::GetInstance());
-  SendEvent(XPE);
 
   if(m_invincible)
     return;
+
+  int money = m_xp*(e.GetDamageAmount()/m_maxHealth);
+  Sigma::XPEvent XPE(money, GameplayManager::GetInstance());
+  SendEvent(XPE);
 
   if (!GetAlive()) {
     SetState(STATE_DEAD);
