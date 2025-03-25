@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.03.00">
+	<object class="AudioFile" id="{cf40ce44-2d48-4bc9-87ab-9b95d87f0bae}">
+		<property name="assetPath">
+			<value>Combat/Swoosh _2025-03-25.wav</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>48</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>0.18583333333333332</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{d77a2619-6e1d-4ebf-9e24-96b134d91537}</destination>
+		</relationship>
+	</object>
+</objects>

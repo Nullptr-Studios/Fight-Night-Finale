@@ -1,0 +1,144 @@
+Playback::frame, 0
+Playback::version, 2, 131846
+#
+# FMOD v2.03.06 command capture
+#   System::setSoftwareChannels(numsoftwarechannels: 64)
+#   System::setDSPBufferSize(bufferlength: 512, numbuffers: 4)
+#   System::setSoftwareFormat(samplerate: 44100, speakermode: 6, numrawspeakers: 6)
+#   System::setAdvancedSettings(settings: {maxMPEGCodecs: 0, maxADPCMCodecs: 0, maxXMACodecs: 0, maxVorbisCodecs: 0, maxAT9Codecs: 0, maxFADPCMCodecs: 0, maxOpusCodecs: 0
+#       ASIONumChannels: 0, vol0virtualvol: 0, defaultDecodeBufferSize: 400, geometryMaxFadeTime: 0,
+#       distanceFilterCenterFreq: 1500, reverb3Dinstance: 0, DSPBufferPoolSize: 8, resamplerMethod: 2, randomSeed: 0})
+#   Studio::System::setAdvancedSettings(settings: {commandqueuesize: 32768, handleinitialsize: 65536, studioupdateperiod: 20, idlesampledatapoolsize: 262144})
+#   Studio::System::initialize(maxchannels: 255, studioflags: 0x00000001, flags: 0x00030000)
+#
+Playback::frame, 0
+# Printing initial instance state
+System::setListenerAttributes, 0, {{0,0,0},{0,0,0},{0,0,1},{0,1,0}}, {0,0,0}, true
+# Finished printing initial instance state
+Playback::frame, 49041
+Playback::frame, 49040
+Playback::frame, 49041
+Playback::frame, 49041
+Playback::frame, 49040
+Playback::frame, 49041
+Playback::frame, 49040
+Playback::frame, 49041
+Playback::frame, 49040
+Playback::frame, 49041
+Playback::frame, 12260
+System::loadBankFile, assets/Sound/Desktop/Master.bank, 0, 2097152
+Playback::frame, 1114
+Playback::loadBankFinished, {f4a0273e-af48-4528-98f3-ca5ea4595899}, 2097152, 0
+Playback::frame, 1115
+System::flushCommands
+System::loadBankFile, assets/Sound/Desktop/Master.strings.bank, 0, 2097408
+Playback::frame, 1115
+Playback::loadBankFinished, {6cbd07ea-de33-096a-1eba-40a055aa5e01}, 2097408, 0
+Playback::frame, 1114
+System::flushCommands
+System::loadBankFile, assets/Sound/Desktop/CombatSFX.bank, 0, 2097664
+Playback::frame, 1115
+Playback::loadBankFinished, {75bc61d3-a441-4b1e-a1fb-f4f921343c88}, 2097664, 0
+Playback::frame, 1114
+System::flushCommands
+Playback::frame, 49041
+Playback::frame, 21176
+System::getEvent, {83cd70a7-bbae-4375-bbb1-004200c7221a}, 2097920
+EventDescription::createInstance, 2097920, 2098176
+Playback::frame, 49041
+Playback::frame, 49040
+Playback::frame, 49041
+Playback::frame, 49041
+Playback::frame, 49040
+Playback::frame, 15604
+EventInstance::start, 2098176
+Playback::frame, 10031
+EventInstance::start, 2098176
+Playback::frame, 27864
+EventInstance::start, 2098176
+Playback::frame, 26749
+EventInstance::start, 2098176
+Playback::frame, 34552
+EventInstance::start, 2098176
+Playback::frame, 8916
+EventInstance::start, 2098176
+Playback::frame, 11146
+EventInstance::start, 2098176
+Playback::frame, 27864
+EventInstance::start, 2098176
+Playback::frame, 7801
+EventInstance::start, 2098176
+Playback::frame, 12261
+EventInstance::start, 2098176
+Playback::frame, 27864
+EventInstance::start, 2098176
+Playback::frame, 8916
+EventInstance::start, 2098176
+Playback::frame, 12260
+EventInstance::start, 2098176
+Playback::frame, 27864
+EventInstance::start, 2098176
+Playback::frame, 7802
+EventInstance::start, 2098176
+Playback::frame, 12260
+EventInstance::start, 2098176
+Playback::frame, 33437
+EventInstance::start, 2098176
+Playback::frame, 8916
+EventInstance::start, 2098176
+Playback::frame, 11146
+EventInstance::start, 2098176
+Playback::frame, 30093
+EventInstance::start, 2098176
+Playback::frame, 7802
+EventInstance::start, 2098176
+Playback::frame, 12260
+EventInstance::start, 2098176
+Playback::frame, 49041
+Playback::frame, 12260
+EventInstance::start, 2098176
+Playback::frame, 30093
+EventInstance::start, 2098176
+Playback::frame, 27864
+EventInstance::start, 2098176
+Playback::frame, 30093
+EventInstance::start, 2098176
+Playback::frame, 28978
+EventInstance::start, 2098176
+Playback::frame, 27864
+EventInstance::start, 2098176
+Playback::frame, 27864
+EventInstance::start, 2098176
+Playback::frame, 27864
+EventInstance::start, 2098176
+Playback::frame, 30093
+EventInstance::start, 2098176
+Playback::frame, 32322
+EventInstance::start, 2098176
+Playback::frame, 7802
+EventInstance::start, 2098176
+Playback::frame, 12260
+EventInstance::start, 2098176
+Playback::frame, 32323
+EventInstance::start, 2098176
+Playback::frame, 7801
+EventInstance::start, 2098176
+Playback::frame, 12261
+EventInstance::start, 2098176
+Playback::frame, 25634
+EventInstance::start, 2098176
+Playback::frame, 10031
+EventInstance::start, 2098176
+Playback::frame, 12261
+EventInstance::start, 2098176
+Playback::frame, 25634
+EventInstance::start, 2098176
+Playback::frame, 8917
+EventInstance::start, 2098176
+Playback::frame, 12260
+EventInstance::start, 2098176
+Playback::frame, 49041
+Playback::frame, 49040
+Playback::frame, 6687
+System::flushCommands
+System::unloadAll

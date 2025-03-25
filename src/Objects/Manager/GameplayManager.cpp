@@ -31,10 +31,12 @@ void game::GameplayManager::Init() {
   GET_CAMERA->SetCurrentCamera(m_cameraFollow);
 #endif
 
-
   m_gameHud = GET_FACTORY->CreateObject<game::HUD>("Game HUD");
-  
 
+  // Audio banks
+  GET_AUDIO->LoadBank("assets/Sound/Desktop/Master.bank");
+  GET_AUDIO->LoadBank("assets/Sound/Desktop/Master.strings.bank");
+  GET_AUDIO->LoadBank("assets/Sound/Desktop/CombatSFX.bank");
 }
 void game::GameplayManager::Start() {
   Object::Start();
