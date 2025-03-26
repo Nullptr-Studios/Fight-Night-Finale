@@ -127,6 +127,10 @@ void Player::OnDamage(const Sigma::Damage::DamageEvent &e) {
 void Player::OnDoneDamage() {
   Character::OnDoneDamage();
   m_controllerComponent->PlayerAttackFeedback();
+
+  // Combo counter
+  
+  healthBar->ComboAdd();
 }
 
 void Player::SetControllerID(int id) {

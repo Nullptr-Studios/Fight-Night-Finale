@@ -37,6 +37,16 @@ struct UIHealthBar {
 
   glm::vec3 offset = {-280, 190, 0};
 
+  short combo = 0;
+
+  float comboDisapear = 15.0f;
+  float m_comboTimer = 0.0f;
+
+  void ComboAdd(){
+    combo++;
+    comboValue->SetText(std::to_string(combo).c_str());
+  }
+
   void Update(int healthvalue, int healthrecover){
 
     int value = glm::clamp(healthvalue, 0, 99);
