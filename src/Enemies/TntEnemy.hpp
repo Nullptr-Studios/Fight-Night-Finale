@@ -10,7 +10,6 @@
 #include "Enemies/DefaultEnemy.hpp"
 namespace game {
 class TntEnemy : public DefaultEnemy {
-private:
 public:
   TntEnemy(const Sigma::id_t id, const char* jsonPath) : DefaultEnemy(id, jsonPath) {}
   void Init() override;

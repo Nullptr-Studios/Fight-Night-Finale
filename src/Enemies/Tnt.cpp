@@ -28,7 +28,7 @@ void Tnt::Update(double delta) {
   m_timer += (float)delta;
   m_length = glm::length(m_start - m_target) /200.0f;
   if ( m_timer >= m_length + 2) {
-    GET_FACTORY->DestroyObject(this);
+    GET_FACTORY->DestroyObject(this->GetId());
   }
   if (boom) {
     return;
