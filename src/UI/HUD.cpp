@@ -152,7 +152,7 @@ void HUD::Init() {
   money.cashIcon->m_screenSpaceTransform.scale = money.numScale;
   money.cashIcon->m_screenSpaceTransform.position.x -= money.leftX;
 
-  money.maxCash = pow(10,money.maxDigits) - 1;
+  money.maxCash = static_cast<int>(pow(10,money.maxDigits)) - 1;
 #pragma endregion
 
   EnableUIMoney(false);
@@ -246,12 +246,8 @@ void HUD::Update(double delta) {
       m_goIndicator->SetActive(false);
     }
   }
-  if (money.active) {
-    if (money.displayedCash < money.endCash) {
-      money.DisplayMoney(money.LerpMoney(delta));
-    } else if (money.displayedCash > money.endCash) {
-      money.DisplayMoney(money.LerpMoney(delta));
-    }
+  if (money.active && (money.displayedCash != money.endCash)) {
+    money.DisplayMoney(money.LerpMoney(delta));
   }
 }
 
@@ -276,7 +272,6 @@ void HUD::Enable() {
 void HUD::Disable() {
   EnableUIPlayer1(false);
   EnableUIPlayer2(false);
-  UpdateXP(0);
   EnableUIMoney(false);
 }
 

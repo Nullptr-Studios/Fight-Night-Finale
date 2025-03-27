@@ -75,11 +75,11 @@ struct UIMoneyBar {
   }
 
   int LerpMoney(const double delta) {
-    timer+=delta;
     if (timer > timerMax) {
       timer = 0.0f;
       return endCash;
     }
+    timer+= delta;
     return round(std::lerp(startCash, endCash, timer*1/timerMax));
   }
 
