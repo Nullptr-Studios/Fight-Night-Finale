@@ -5,6 +5,7 @@ namespace game {
 
 void BigEnemy::Init() {
   Enemy::Init();
+  m_attackCollider = GET_FACTORY->CreateObject<Sigma::Collision::OneHitCollider>("Attack Collider");
   // Setup Animation
   auto anim = GET_ANIMATION->LoadTextureAtlas("assets/characters/bigEnemy/anim-data.json");
   m_animComp->SetTextureAtlas(anim);
@@ -33,7 +34,32 @@ void BigEnemy::AttackState() {
   if (rand() % 3) {
     targetLeft = !targetLeft;
   }
-  BasicAttack();
-  
+
+  TakeKnockback({0, 600});
+  // BasicAttack();
+  m_nextState = STATE_FOLLOW;
+  m_timer = 2;
+  SetState(STATE_PAUSED);
+}
+
+void BigEnemy::LandedOnGround() {
+  transform.position.y = m_movementYFloor;
+  velocity.y = 0;
+  isInAir = false;
+
+  m_invincible = true;
+  m_isRecovering = true;
+  m_attackCollider->Do(transform.position + glm::vec3{0, 40, -40}, {100,100,100}, 1, this, Sigma::Damage::DAMAGE,{},true);
+  if (GetAlive())
+    m_animComp->SetCurrentAnim("Recover");
+  else {
+    m_animComp->SetCurrentAnim("Recover");
+    m_animComp->GotoFrame(0);
+    m_animComp->StopAnim();
+  }
+}
+void BigEnemy::Destroy() {
+  if (m_attackCollider != nullptr)
+    GET_FACTORY->DestroyObject(m_attackCollider);
 }
 } // namespace game

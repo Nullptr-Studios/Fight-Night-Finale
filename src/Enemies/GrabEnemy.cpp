@@ -42,9 +42,22 @@ void GrabEnemy::FollowState() {
   glm::vec3 targets[2];
   targets[0] = m_nearest->transform.GetDepthPosition() + glm::vec3(0, -50, 0);
   targets[1] = m_nearest->transform.GetDepthPosition() + glm::vec3(0, 50, 0);
-  m_position = ((m_distance.x >= 0) ? targets[0] : targets[1]);
+  m_position = ((targetLeft) ? targets[0] : targets[1]);
 
-  if (fabs(m_distance.y) <= 60 && fabs(m_distance.x) <= 10 && fabs(m_distance.x) >= 0) {
+  if (!m_sceneBoundsPoly->IsPointInside((glm::vec2) m_position)) {
+    m_position = ((targetLeft) ? targets[1] : targets[0]);
+  }
+
+  if (!m_sceneBoundsPoly->IsPointInside((glm::vec2) m_position)) {
+    targets[0] = m_nearest->transform.GetDepthPosition() + glm::vec3(0, -25, 0);
+    targets[1] = m_nearest->transform.GetDepthPosition() + glm::vec3(0, 25, 0);
+    m_position = ((targetLeft) ? targets[0] : targets[1]);
+  }
+
+  if (!m_sceneBoundsPoly->IsPointInside((glm::vec2) m_position)) 
+    m_position = ((targetLeft) ? targets[1] : targets[0]);
+
+  if (fabs(m_distance.y) <= 60 && fabs(m_distance.x) <= 10) {
     m_timer = Sigma::Random::Float(.1f, .2f);
     m_nextState = STATE_ATTACK;
     SetState(STATE_PAUSED);
