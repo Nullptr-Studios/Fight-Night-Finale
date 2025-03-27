@@ -78,7 +78,7 @@ void HUD::Init() {
   player1.comboValue = GET_FACTORY->CreateObject<Sigma::UIText>("Combo Value P1");
   player1.comboValue->m_screenSpaceTransform.position = glm::vec3(-777, 320, 0);
   player1.comboValue->SetTint({1.0f, 1.0f, 1.0f, 1.0f});
-  player1.comboValue->SetText("100");
+  player1.comboValue->SetText("0");
 
 
 #pragma endregion
@@ -151,11 +151,11 @@ void HUD::Init() {
   m_goIndicator->SetActive(false);
 
 #pragma region XPBar
-  money.numbers.resize(money.maxDigits);
-  money.leftX = -60.0f * money.maxDigits/2.0f;
+  money.numbers.resize(game::UIMoneyBar::maxDigits);
+  money.leftX = -60.0f * game::UIMoneyBar::maxDigits/2.0f;
 
-  for (int i = 0; i<money.maxDigits; i++) {
-    money.numbers[i] = GET_FACTORY->CreateObject<Sigma::UINumber>("Money Digit " + std::to_string(i));
+  for (short i = 0; i < game::UIMoneyBar::maxDigits; i++) {
+    money.numbers[i] = GET_FACTORY->CreateObject<Sigma::UINumber>("Money Digit " + std::to_string(i)).get();
     money.numbers[i]->m_screenSpaceTransform.position = money.offset;
     money.numbers[i]->m_screenSpaceTransform.scale = money.numScale;
     money.numbers[i]->m_screenSpaceTransform.position.x += money.leftX + i*60.0f;
@@ -167,7 +167,7 @@ void HUD::Init() {
   money.cashIcon->m_screenSpaceTransform.scale = money.numScale;
   money.cashIcon->m_screenSpaceTransform.position.x -= money.leftX;
 
-  money.maxCash = static_cast<int>(pow(10,money.maxDigits)) - 1;
+  money.maxCash = static_cast<int>(pow(10,game::UIMoneyBar::maxDigits)) - 1;
 #pragma endregion
 
   EnableUIMoney(false);
@@ -175,7 +175,7 @@ void HUD::Init() {
 
 void HUD::EnableUIMoney(bool enable) {
   money.DisplayMoney(0);
-  for (int i = 0; i<money.maxDigits; i++) {
+  for (short i = 0; i < game::UIMoneyBar::maxDigits; i++) {
     money.numbers[i]->SetActive(enable);
   }
   money.cashIcon->SetActive(enable);
@@ -196,6 +196,9 @@ void HUD::EnableUIPlayer1(bool enable) {
   player1.slash->SetActive(enable);
   player1.maxHealth[0]->SetActive(enable);
   player1.maxHealth[1]->SetActive(enable);
+  player1.comboBurningIMG->SetActive(enable);
+  player1.comboText->SetActive(enable);
+  player1.comboValue->SetActive(enable);
 }
 
 void HUD::EnableUIPlayer2(bool enable) {
@@ -209,6 +212,10 @@ void HUD::EnableUIPlayer2(bool enable) {
   player2.slash->SetActive(enable);
   player2.maxHealth[0]->SetActive(enable);
   player2.maxHealth[1]->SetActive(enable);
+
+  // player2.comboBurningIMG->SetActive(enable);
+  // player2.comboText->SetActive(enable);
+  // player2.comboValue->SetActive(enable);
 }
 
 void HUD::EnableGOIndicator() {
@@ -264,11 +271,11 @@ void HUD::Update(double delta) {
 
   if (true) {
     if (player1.combo > 0) {
-      player1.comboDisapear -= delta;
-      if (player1.comboDisapear <= 0) {
+      player1.m_comboDisapear -= delta;
+      if (player1.m_comboDisapear <= 0) {
         player1.combo = 0;
         player1.comboValue->SetText("0");
-        player1.comboDisapear = 15.0f;
+        player1.m_comboDisapear = 15.0f;
       }
     }
   }

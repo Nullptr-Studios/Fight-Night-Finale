@@ -6,6 +6,7 @@
  * @brief [TODO: Brief description of the file's purpose]
  */
 #pragma once
+#include <memory>
 #include "Core.hpp"
 #include "Objects/Manager/GameplayManager.hpp"
 
@@ -39,8 +40,14 @@ struct UIHealthBar {
 
   short combo = 0;
 
-  float comboDisapear = 15.0f;
+  float m_comboDisapear = 15.0f;
   float m_comboTimer = 0.0f;
+
+  void ComboReset() {
+    combo = 0;
+    m_comboTimer = 0.0f;
+    comboValue->SetText("0");
+  }
 
   void ComboAdd(){
     combo++;
@@ -73,7 +80,7 @@ struct UIMoneyBar {
   double timer = 0.0f; //Timer for time-based lerp or whatever the fuck idk what I'm doing rn tbh I want to sleep I'm so done.
 
   std::vector<Sigma::UINumber *> numbers = {};
-  Sigma::UIElement* cashIcon = nullptr;
+  std::shared_ptr<Sigma::UIElement> cashIcon = nullptr;
 
   glm::vec2 numScale = {54,63};
   glm::vec3 offset = {0,461,0};
@@ -85,7 +92,7 @@ struct UIMoneyBar {
 
     displayedCash = val;
     for (int i = 0; i < maxDigits; i++) {
-      int currentVal = displayedCash % static_cast<int>(pow(10, maxDigits-i)) / static_cast<int>(pow(10, maxDigits-i-1));
+      int currentVal = displayedCash % static_cast<int>(glm::pow(10, maxDigits-i)) / static_cast<int>(glm::pow(10, maxDigits-i-1));
       numbers[i]->Change(currentVal);
     }
   }
@@ -96,7 +103,7 @@ struct UIMoneyBar {
       timer = 0.0f;
       return endCash;
     }
-    return round(std::lerp(startCash, endCash, timer * 1/timerMax));
+    return glm::round(std::lerp(startCash, endCash, timer * 1/timerMax));
   }
 
 };
@@ -138,7 +145,7 @@ private:
   UIHealthBar player2 = {};
   UIMoneyBar money = {};
 
-  std::array<PlayerStruct, 2>* m_players;
+  std::array<PlayerStruct, 2>* m_players = {};
 };
 
 }
