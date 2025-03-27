@@ -39,6 +39,7 @@ public:
   void Start() override;
   void Update(double delta) override;
   void Destroy() override;
+  void LandedOnGround() override;
 
   /**
   * @brief Set the Controller ID

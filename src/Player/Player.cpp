@@ -3,7 +3,10 @@
 #include <UI/DeadMenu.hpp>
 
 #include "Collision/Collider.hpp"
+#include "Effects/EffectObject.hpp"
+#include "Enemies/BigEnemy.hpp"
 #include "GameManager.hpp"
+#include "Objects/Character.hpp"
 
 namespace game {
 
@@ -110,10 +113,13 @@ void Player::OnDamage(const Sigma::Damage::DamageEvent &e) {
   if (e.GetOther() != this) {
     m_controllerComponent->PlayerDamagedFeedback();
   } else {
-    
+    printf("hi dario\n");
   }
 
 
+  if (dynamic_cast<BigEnemy*>(e.GetOther())) {
+    m_gotHitByFatEnemy = true;
+  }
   // if (!m_isAlive && doFuckingOnce) {
   //   auto scene = dynamic_cast<PrototypeScene*>(GET_SCENE(0));
   //   if (!scene) return;
@@ -139,6 +145,27 @@ void Player::OnDoneDamage() {
 void Player::SetControllerID(int id) {
   m_controllerId = id;
   m_controllerComponent->SetControllerID(id);
+}
+
+
+void Player::LandedOnGround() {
+  transform.position.y = m_movementYFloor;
+  velocity.y = 0;
+  isInAir = false;
+
+  if (!m_gotHitByFatEnemy) {
+    m_invincible = true;
+  } else {
+    m_gotHitByFatEnemy = false;
+  }
+  m_isRecovering = true;
+  if (GetAlive())
+    m_animComp->SetCurrentAnim("Recover");
+  else {
+    m_animComp->SetCurrentAnim("Recover");
+    m_animComp->GotoFrame(0);
+    m_animComp->StopAnim();
+  }
 }
 
 } // namespace game

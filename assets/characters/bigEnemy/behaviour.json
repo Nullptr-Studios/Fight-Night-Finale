@@ -5,7 +5,8 @@
   "jumpVel": 0.0,
   "friction": 1000,
   "distanceToAttack": 35.0,
-  "knockbackRes": 0.5,
+  "knockbackRes": 1,
+  "experience": 5000,
   "basicCombo" : [
     {
       "type" : "dmg",

@@ -34,7 +34,6 @@ void BigEnemy::AttackState() {
   if (rand() % 3) {
     targetLeft = !targetLeft;
   }
-
   TakeKnockback({0, 600});
   // BasicAttack();
   m_nextState = STATE_FOLLOW;
@@ -49,7 +48,7 @@ void BigEnemy::LandedOnGround() {
 
   m_invincible = true;
   m_isRecovering = true;
-  m_attackCollider->Do(transform.position + glm::vec3{0, 40, -40}, {100,100,100}, 1, this, Sigma::Damage::DAMAGE,{},true);
+  m_attackCollider->Do(transform.position + (glm::vec3){0,0,0}, {200,50,100}, 1, this, Sigma::Damage::DAMAGE,{100,100},true);
   if (GetAlive())
     m_animComp->SetCurrentAnim("Recover");
   else {
@@ -57,9 +56,5 @@ void BigEnemy::LandedOnGround() {
     m_animComp->GotoFrame(0);
     m_animComp->StopAnim();
   }
-}
-void BigEnemy::Destroy() {
-  if (m_attackCollider != nullptr)
-    GET_FACTORY->DestroyObject(m_attackCollider);
 }
 } // namespace game

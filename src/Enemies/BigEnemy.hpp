@@ -12,12 +12,10 @@ namespace game {
 class BigEnemy : public DefaultEnemy {
 private:
   bool targetLeft{};
-  std::shared_ptr<Sigma::Collision::OneHitCollider> m_attackCollider{};
 public:
   BigEnemy(const Sigma::id_t id, const char* jsonPath) : DefaultEnemy(id, jsonPath) {}
   void Init() override;
   void AttackState() override;
   void LandedOnGround() override;
-  void Destroy() override;
 };
 }
