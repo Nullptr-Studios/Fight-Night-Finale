@@ -42,6 +42,7 @@ bool Pickup::OnCollision(Sigma::Collision::CollisionEvent &e) {
     std::cerr << e.what() << std::endl;
     return false;
   }
+  return false;
 }
 
 }

@@ -78,7 +78,7 @@ void HUD::Init() {
   player1.comboValue = GET_FACTORY->CreateObject<Sigma::UIText>("Combo Value P1");
   player1.comboValue->m_screenSpaceTransform.position = glm::vec3(-777, 320, 0);
   player1.comboValue->SetTint({1.0f, 1.0f, 1.0f, 1.0f});
-  player1.comboValue->SetText("100");
+  player1.comboValue->SetText("0");
 
 
 #pragma endregion
@@ -149,6 +149,40 @@ void HUD::Init() {
   m_goIndicator->m_screenSpaceTransform.position = {800, 140, 0};
   m_goIndicator->m_screenSpaceTransform.scale = {256, 128};
   m_goIndicator->SetActive(false);
+
+#pragma region XPBar
+  money.numbers.resize(game::UIMoneyBar::maxDigits);
+  money.leftX = -60.0f * game::UIMoneyBar::maxDigits/2.0f;
+
+  for (short i = 0; i < game::UIMoneyBar::maxDigits; i++) {
+    money.numbers[i] = GET_FACTORY->CreateObject<Sigma::UINumber>("Money Digit " + std::to_string(i)).get();
+    money.numbers[i]->m_screenSpaceTransform.position = money.offset;
+    money.numbers[i]->m_screenSpaceTransform.scale = money.numScale;
+    money.numbers[i]->m_screenSpaceTransform.position.x += money.leftX + i*60.0f;
+  }
+
+  money.cashIcon = GET_FACTORY->CreateObject<Sigma::UIElement>("Cash Icon");
+  money.cashIcon->SetTexture("assets/UI/Sprites/Dollar.png");
+  money.cashIcon->m_screenSpaceTransform.position = money.offset;
+  money.cashIcon->m_screenSpaceTransform.scale = money.numScale;
+  money.cashIcon->m_screenSpaceTransform.position.x -= money.leftX;
+
+  money.maxCash = static_cast<int>(pow(10,game::UIMoneyBar::maxDigits)) - 1;
+#pragma endregion
+
+  EnableUIMoney(false);
+}
+
+void HUD::EnableUIMoney(bool enable) {
+  money.DisplayMoney(0);
+  for (short i = 0; i < game::UIMoneyBar::maxDigits; i++) {
+    money.numbers[i]->SetActive(enable);
+  }
+  money.cashIcon->SetActive(enable);
+  money.active = enable;
+  money.startCash = 0;
+  money.endCash = 0;
+  money.timer = 0.0f;
 }
 
 void HUD::EnableUIPlayer1(bool enable) {
@@ -162,6 +196,9 @@ void HUD::EnableUIPlayer1(bool enable) {
   player1.slash->SetActive(enable);
   player1.maxHealth[0]->SetActive(enable);
   player1.maxHealth[1]->SetActive(enable);
+  player1.comboBurningIMG->SetActive(enable);
+  player1.comboText->SetActive(enable);
+  player1.comboValue->SetActive(enable);
 }
 
 void HUD::EnableUIPlayer2(bool enable) {
@@ -175,6 +212,10 @@ void HUD::EnableUIPlayer2(bool enable) {
   player2.slash->SetActive(enable);
   player2.maxHealth[0]->SetActive(enable);
   player2.maxHealth[1]->SetActive(enable);
+
+  // player2.comboBurningIMG->SetActive(enable);
+  // player2.comboText->SetActive(enable);
+  // player2.comboValue->SetActive(enable);
 }
 
 void HUD::EnableGOIndicator() {
@@ -186,6 +227,8 @@ void HUD::EnableGOIndicator() {
 void HUD::Start() {}
 
 void HUD::UpdatePlayerHUD() {
+  EnableUIMoney(true);
+
   EnableUIPlayer1(true);
   m_players = GameplayManager::GetInstance()->GetPlayers();
   SetNumbers(player1.maxHealth, std::floor(m_players->operator[](0).player->GetMaxHealth()));
@@ -228,13 +271,18 @@ void HUD::Update(double delta) {
 
   if (true) {
     if (player1.combo > 0) {
-      player1.comboDisapear -= delta;
-      if (player1.comboDisapear <= 0) {
+      player1.m_comboDisapear -= delta;
+      if (player1.m_comboDisapear <= 0) {
         player1.combo = 0;
         player1.comboValue->SetText("0");
-        player1.comboDisapear = 15.0f;
+        player1.m_comboDisapear = 15.0f;
       }
     }
+  }
+
+  // Money
+  if (money.active && (money.displayedCash != money.endCash)) {
+    money.DisplayMoney(money.LerpMoney(delta));
   }
 }
 
@@ -248,6 +296,7 @@ void HUD::SetNumbers(std::array<std::shared_ptr<Sigma::UINumber>, 2> numbers, in
 void HUD::SetPlayer1Health(int health) {}
 
 void HUD::Enable() {
+  EnableUIMoney(true);
   if (m_players->at(0).player != nullptr) {
     EnableUIPlayer1(true);
   }
@@ -258,6 +307,13 @@ void HUD::Enable() {
 void HUD::Disable() {
   EnableUIPlayer1(false);
   EnableUIPlayer2(false);
+  EnableUIMoney(false);
+}
+
+void HUD::UpdateXP(int currentXP) {
+  money.startCash = money.displayedCash;
+  money.endCash = glm::clamp(currentXP, 0, money.maxCash);
+  money.timer = 0.0f;
 }
 
 } // namespace game

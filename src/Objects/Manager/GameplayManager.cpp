@@ -204,7 +204,9 @@ void game::GameplayManager::UninitializeGame() {
 void game::GameplayManager::StartGame() {
   if (m_started)
     return;
-  
+
+  m_experience = 0;
+
   SetActive(true);
   UpdateCurrentGameScene();
   m_cameraFollow = GET_FACTORY->CreateObject<Sigma::CameraFollow>("Main Camera Follow");
@@ -213,6 +215,11 @@ void game::GameplayManager::StartGame() {
 
 
   GET_AUDIO->PlayEvent("event:/Music/TestMusic");
+}
+
+void game::GameplayManager::GiveXP(int xp) {
+  m_experience += xp;
+  m_gameHud->UpdateXP(m_experience);
 }
 
 

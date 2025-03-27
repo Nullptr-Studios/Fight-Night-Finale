@@ -98,8 +98,11 @@ void Player::OnDamage(const Sigma::Damage::DamageEvent &e) {
     m_healthRecover = m_health;
 
   if (healthBar)
+  {
     healthBar->Update(GetHealth<int>(), m_healthRecover);
-
+    if(e.GetOther() != this)
+      healthBar->ComboReset();
+  }
   if (!GetAlive())
     return;
 

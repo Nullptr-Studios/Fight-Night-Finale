@@ -11,6 +11,7 @@ namespace game {
 void Enemy::Serialize() {
   Character::Serialize();
   m_attackDistance = j["distanceToAttack"];
+  m_xp = j["experience"];
 }
 
 void Enemy::Init() {
@@ -39,7 +40,13 @@ void Enemy::OnDamage(const Sigma::Damage::DamageEvent& e) {
   if(m_invincible)
     return;
 
-  if (!GetAlive()) SetState(STATE_DEAD);
+  int money = m_xp*(e.GetDamageAmount()/m_maxHealth);
+  GameplayManager::GetInstance()->GiveXP(money);
+
+  if (!GetAlive()) {
+    SetState(STATE_DEAD);
+    m_collider->enabled = false;
+  }
 }
 
 void Enemy::DeadAnimFinish() {

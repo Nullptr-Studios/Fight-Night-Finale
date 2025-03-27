@@ -4,7 +4,7 @@
 
 #pragma once
 
-#include "GameScene.hpp"
+#include "../../GameScene.hpp"
 #include "Objects/Object.hpp"
 
 namespace Sigma {
@@ -95,6 +95,10 @@ public:
 
   static GameplayManager* GetInstance() { return m_instance; }
 
+  void GiveXP(int xp);
+
+  [[nodiscard]] int GetXP() const { return m_experience; }
+
 private:
   static GameplayManager* m_instance;
   std::shared_ptr<Sigma::CameraFollow> m_cameraFollow{};
@@ -108,6 +112,11 @@ private:
   game::GameScene *m_currentGameScene = nullptr;
   unsigned char m_playerCount = 0;
   bool m_gameSceneIsDirty = true;
+
+  /**
+   * @brief holds the information required for the xp system
+   */
+  int m_experience = 0;
   bool m_started = false;
 };
 }

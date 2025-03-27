@@ -6,6 +6,9 @@
   "friction" : 1000,
   "distanceToAttack" : 30.0,
   "knockbackRes" : 1.0,
+
+  "experience": 5000,
+
   "basicCombo" : [
     {
       "type" : "dmg",
