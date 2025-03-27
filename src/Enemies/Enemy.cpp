@@ -3,7 +3,6 @@
 #include "Objects/Manager/GameplayManager.hpp"
 #include "aecore/AEFrameRateController.h"
 #include "aecore/imgui/imgui.h"
-#include "XPSystem/XPEvent.hpp"
 
 // #define DEBUG_ENEMY
 
@@ -41,8 +40,7 @@ void Enemy::OnDamage(const Sigma::Damage::DamageEvent& e) {
     return;
 
   int money = m_xp*(e.GetDamageAmount()/m_maxHealth);
-  Sigma::XPEvent XPE(money, GameplayManager::GetInstance());
-  SendEvent(XPE);
+  GameplayManager::GetInstance()->GiveXP(money);
 
   if (!GetAlive()) {
     SetState(STATE_DEAD);

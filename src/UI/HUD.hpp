@@ -47,7 +47,7 @@ struct UIHealthBar {
 
 struct UIMoneyBar {
 
-  int maxDigits = 7; ///>@brief Max amount of digits displayable
+  static constexpr short maxDigits = 7; ///>@brief Max amount of digits displayable
   int maxCash; ///>@brief Max amount cash displayable, dependent on maxDigits
   int startCash = 0; ///>@brief Cash with which linear interpolation starts
   int endCash = 0; ///>@brief Cash with which linear interpolation ends
@@ -55,7 +55,7 @@ struct UIMoneyBar {
 
   bool active = false;
 
-  double timerMax = 0.5f; //Max time on lerp
+  double timerMax = 1.f; //Max time on lerp
   double timer = 0.0f; //Timer for time-based lerp or whatever the fuck idk what I'm doing rn tbh I want to sleep I'm so done.
 
   std::vector<Sigma::UINumber *> numbers = {};
@@ -66,21 +66,23 @@ struct UIMoneyBar {
   float leftX = 0; ///>@brief Left-most coordinate of the money display
 
   void DisplayMoney(int val) {
-    if (val == displayedCash) {return;}
+    if (val == displayedCash) 
+      return; 
+
     displayedCash = val;
-    for (int i = 0; i<maxDigits; i++) {
+    for (int i = 0; i < maxDigits; i++) {
       int currentVal = displayedCash % static_cast<int>(pow(10, maxDigits-i)) / static_cast<int>(pow(10, maxDigits-i-1));
       numbers[i]->Change(currentVal);
     }
   }
 
   int LerpMoney(const double delta) {
+    timer += delta;
     if (timer > timerMax) {
       timer = 0.0f;
       return endCash;
     }
-    timer+= delta;
-    return round(std::lerp(startCash, endCash, timer*1/timerMax));
+    return round(std::lerp(startCash, endCash, timer * 1/timerMax));
   }
 
 };

@@ -246,6 +246,8 @@ void HUD::Update(double delta) {
       m_goIndicator->SetActive(false);
     }
   }
+
+  // Money
   if (money.active && (money.displayedCash != money.endCash)) {
     money.DisplayMoney(money.LerpMoney(delta));
   }
