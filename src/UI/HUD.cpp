@@ -149,6 +149,40 @@ void HUD::Init() {
   m_goIndicator->m_screenSpaceTransform.position = {800, 140, 0};
   m_goIndicator->m_screenSpaceTransform.scale = {256, 128};
   m_goIndicator->SetActive(false);
+
+#pragma region XPBar
+  money.numbers.resize(money.maxDigits);
+  money.leftX = -60.0f * money.maxDigits/2.0f;
+
+  for (int i = 0; i<money.maxDigits; i++) {
+    money.numbers[i] = GET_FACTORY->CreateObject<Sigma::UINumber>("Money Digit " + std::to_string(i));
+    money.numbers[i]->m_screenSpaceTransform.position = money.offset;
+    money.numbers[i]->m_screenSpaceTransform.scale = money.numScale;
+    money.numbers[i]->m_screenSpaceTransform.position.x += money.leftX + i*60.0f;
+  }
+
+  money.cashIcon = GET_FACTORY->CreateObject<Sigma::UIElement>("Cash Icon");
+  money.cashIcon->SetTexture("assets/UI/Sprites/Dollar.png");
+  money.cashIcon->m_screenSpaceTransform.position = money.offset;
+  money.cashIcon->m_screenSpaceTransform.scale = money.numScale;
+  money.cashIcon->m_screenSpaceTransform.position.x -= money.leftX;
+
+  money.maxCash = static_cast<int>(pow(10,money.maxDigits)) - 1;
+#pragma endregion
+
+  EnableUIMoney(false);
+}
+
+void HUD::EnableUIMoney(bool enable) {
+  money.DisplayMoney(0);
+  for (int i = 0; i<money.maxDigits; i++) {
+    money.numbers[i]->SetActive(enable);
+  }
+  money.cashIcon->SetActive(enable);
+  money.active = enable;
+  money.startCash = 0;
+  money.endCash = 0;
+  money.timer = 0.0f;
 }
 
 void HUD::EnableUIPlayer1(bool enable) {
@@ -186,6 +220,8 @@ void HUD::EnableGOIndicator() {
 void HUD::Start() {}
 
 void HUD::UpdatePlayerHUD() {
+  EnableUIMoney(true);
+
   EnableUIPlayer1(true);
   m_players = GameplayManager::GetInstance()->GetPlayers();
   SetNumbers(player1.maxHealth, std::floor(m_players->operator[](0).player->GetMaxHealth()));
@@ -236,6 +272,11 @@ void HUD::Update(double delta) {
       }
     }
   }
+
+  // Money
+  if (money.active && (money.displayedCash != money.endCash)) {
+    money.DisplayMoney(money.LerpMoney(delta));
+  }
 }
 
 
@@ -248,6 +289,7 @@ void HUD::SetNumbers(std::array<std::shared_ptr<Sigma::UINumber>, 2> numbers, in
 void HUD::SetPlayer1Health(int health) {}
 
 void HUD::Enable() {
+  EnableUIMoney(true);
   if (m_players->at(0).player != nullptr) {
     EnableUIPlayer1(true);
   }
@@ -258,6 +300,13 @@ void HUD::Enable() {
 void HUD::Disable() {
   EnableUIPlayer1(false);
   EnableUIPlayer2(false);
+  EnableUIMoney(false);
+}
+
+void HUD::UpdateXP(int currentXP) {
+  money.startCash = money.displayedCash;
+  money.endCash = glm::clamp(currentXP, 0, money.maxCash);
+  money.timer = 0.0f;
 }
 
 } // namespace game
