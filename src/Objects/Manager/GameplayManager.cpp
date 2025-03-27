@@ -65,7 +65,7 @@ void game::GameplayManager::Update(double deltaTime) {
   CheckForCoop();
 
   int dedPlayers = 0;
-  for (auto element: m_players) {
+  for (const auto& element: m_players) {
     if (element.player == nullptr)
       continue;
     
@@ -108,7 +108,7 @@ void game::GameplayManager::RespawnPlayer(game::Player *player) {
 }
 
 void game::GameplayManager::TeleportPlayersToNextScene() {
-  for (auto ps: m_players) {
+  for (const auto& ps: m_players) {
     if (ps.player) {
       RespawnPlayer(ps.player.get());
       ps.player->SetSceneBoundsPoly(m_currentGameScene->GetSceneBoundsPoly());
@@ -187,7 +187,7 @@ void game::GameplayManager::UninitializeGame() {
   DisableHUD();
   SetActive(false);
 
-  for (auto element: m_players) {
+  for (const auto& element: m_players) {
     if (element.player != nullptr)
       GET_FACTORY->DestroyObject(element.player);
   }
