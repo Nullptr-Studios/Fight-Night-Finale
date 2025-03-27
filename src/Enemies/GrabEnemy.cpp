@@ -1,8 +1,14 @@
 #include "GrabEnemy.hpp"
+#include "Enemies/DefaultEnemy.hpp"
 #include "Random.hpp"
 
 
 namespace game {
+
+void GrabEnemy::Update(double delta) {
+  DefaultEnemy::Update(delta);
+  cooldown -= delta;
+}
 
 void GrabEnemy::Init() {
   Enemy::Init();
@@ -38,7 +44,7 @@ void GrabEnemy::FollowState() {
   targets[1] = m_nearest->transform.GetDepthPosition() + glm::vec3(0, 50, 0);
   m_position = ((m_distance.x >= 0) ? targets[0] : targets[1]);
 
-  if (fabs(m_distance.y) <= 25 && fabs(m_distance.x) <= 60 && fabs(m_distance.x) >= 30) {
+  if (fabs(m_distance.y) <= 60 && fabs(m_distance.x) <= 10 && fabs(m_distance.x) >= 0) {
     m_timer = Sigma::Random::Float(.1f, .2f);
     m_nextState = STATE_ATTACK;
     SetState(STATE_PAUSED);
@@ -53,11 +59,18 @@ void GrabEnemy::FollowState() {
 }
 
 void GrabEnemy::AttackState() {
+  cooldown = 5;
   if (!m_isDoingSomething)
     return;
   isAvoiding = false;
   if ((m_distance.x >= 0) != (transform.relativeScale.x >= 0)) {
     transform.relativeScale.x *= -1;
+  }
+  if (cooldown > 0) {
+    m_timer = .1;
+    m_nextState = STATE_FOLLOW;
+    SetState(STATE_PAUSED);
+    return;
   }
   BasicAttack();
 }

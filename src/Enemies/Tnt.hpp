@@ -9,7 +9,6 @@
 
 #include "Collision/OneHitCollider.hpp"
 #include "Objects/Actor.hpp"
-#include "Objects/Character.hpp"
 namespace game {
 class Tnt : public Sigma::Actor {
 public:

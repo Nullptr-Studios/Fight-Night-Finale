@@ -18,5 +18,8 @@ public:
   void Init() override;
   void FollowState() override;
   void AttackState() override;
+  void Update(double delta) override;
+
+  float cooldown = 0;
 };
 }
