@@ -8,7 +8,14 @@
 #include "UI/UINumber.hpp"
 #include "UI/UIText.hpp"
 
+ 
+
 namespace game {
+
+HUD::~HUD(){
+  delete player1.comboShake;
+  delete player2.comboShake;
+}
 
 void HUD::Init() {
 #pragma region Player1
@@ -69,16 +76,13 @@ void HUD::Init() {
   player1.maxHealth[1]->m_screenSpaceTransform.position.y += 42;
 
   // Combo UI
-  player1.comboBurningIMG = GET_FACTORY->CreateObject<Sigma::UIImage>("Combo Burning P1", "HealthbarBackground");
-  player1.comboBurningIMG->m_screenSpaceTransform.position = glm::vec3(-777, 333, 0);
   player1.comboText = GET_FACTORY->CreateObject<Sigma::UIText>("Combo Text P1");
   player1.comboText->m_screenSpaceTransform.position = glm::vec3(-950, 315, 0);
   player1.comboText->SetTint({1.0f, 1.0f, 1.0f, 1.0f});
-  player1.comboText->SetText("Combo ");
-  player1.comboValue = GET_FACTORY->CreateObject<Sigma::UIText>("Combo Value P1");
-  player1.comboValue->m_screenSpaceTransform.position = glm::vec3(-777, 320, 0);
-  player1.comboValue->SetTint({1.0f, 1.0f, 1.0f, 1.0f});
-  player1.comboValue->SetText("0");
+  player1.comboText->SetText("");
+
+  //shake combo
+  player1.comboShake = new Sigma::ShakeObject();
 
 
 #pragma endregion
@@ -138,6 +142,10 @@ void HUD::Init() {
   player2.maxHealth[1]->m_screenSpaceTransform.scale = {24, 28};
   player2.maxHealth[1]->m_screenSpaceTransform.position.x += -74 + 274;
   player2.maxHealth[1]->m_screenSpaceTransform.position.y += 42;
+
+
+
+  player2.comboShake = new Sigma::ShakeObject();
 #pragma endregion
 
   EnableUIPlayer1(false);
@@ -196,9 +204,8 @@ void HUD::EnableUIPlayer1(bool enable) {
   player1.slash->SetActive(enable);
   player1.maxHealth[0]->SetActive(enable);
   player1.maxHealth[1]->SetActive(enable);
-  player1.comboBurningIMG->SetActive(enable);
+
   player1.comboText->SetActive(enable);
-  player1.comboValue->SetActive(enable);
 }
 
 void HUD::EnableUIPlayer2(bool enable) {
@@ -269,16 +276,18 @@ void HUD::Update(double delta) {
     }
   }
 
-  if (true) {
-    if (player1.combo > 0) {
-      player1.m_comboDisapear -= delta;
-      if (player1.m_comboDisapear <= 0) {
-        player1.combo = 0;
-        player1.comboValue->SetText("0");
-        player1.m_comboDisapear = 15.0f;
-      }
-    }
-  }
+    // if (player1.combo > 0) {
+    //   player1.m_comboDisapear -= delta;
+    //   if (player1.m_comboDisapear <= 0) {
+    //     player1.combo = 0;
+    //     player1.comboText->SetText("");
+    //     player1.m_comboDisapear = 15.0f;
+    //   }
+    // }
+  player1.ComboSuccesfull();
+
+  player1.comboShake->ShakeUpdate(delta);
+  player1.comboText->m_screenSpaceTransform.position = glm::vec3(-950, 315, 0) + glm::vec3(player1.comboShake->GetShakeOffset().x, player1.comboShake->GetShakeOffset().y, 0);
 
   // Money
   if (money.active && (money.displayedCash != money.endCash)) {

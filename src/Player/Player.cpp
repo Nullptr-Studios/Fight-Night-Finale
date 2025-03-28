@@ -101,7 +101,7 @@ void Player::OnDamage(const Sigma::Damage::DamageEvent &e) {
   {
     healthBar->Update(GetHealth<int>(), m_healthRecover);
     if(e.GetOther() != this)
-      healthBar->ComboReset();
+      healthBar->ComboBreak();
   }
   if (!GetAlive())
     return;
@@ -133,7 +133,7 @@ void Player::OnDoneDamage() {
 
   // Combo counter
   
-  healthBar->ComboAdd();
+  healthBar->StreakAdd();
 }
 
 void Player::SetControllerID(int id) {
