@@ -7,6 +7,7 @@
  */
 #pragma once
 #include <memory>
+#include <string>
 #include "Core.hpp"
 #include "Objects/Manager/GameplayManager.hpp"
 
@@ -54,12 +55,12 @@ struct UIHealthBar {
   float m_comboSreakEnd = 3.0f;
   float m_comboDisapear = 5.0f;
 
-  float m_comboTimer = 0.0f;
 
   void ComboBreak() {
     combo = 0;
-    m_comboTimer = 0.0f;
+    m_comboDisapear = 5.0f;
     comboText->SetText("Break!!!");
+    comboText->SetTint({.5f, 0.5f, 0.5f, 1.0f});
   }
 
   void ComboSuccesfull() 
@@ -88,20 +89,21 @@ struct UIHealthBar {
       color = {1.0f, 0.0f, 1.0f, 1.0f};
     }
 
-    // TODO: DO COLOR
-
     rating += str;
     comboText->SetTint(color);
     comboText->SetText(rating.c_str());
+    comboShake->StartShake(1.5f, 60, 50, Sigma::ShakeType::EASE_OUT);
 
   }
 
   void StreakAdd(){
     combo++;
-    m_comboTimer = 0.0f;
-    std::string s = "Streak " + std::to_string(combo);
+    m_comboDisapear = 5.0f;
+    std::string s = "Streak ";
+    s.append(std::to_string(combo));
     comboText->SetText(s.c_str());
-    comboShake->StartShake(1.f, 60, 50, Sigma::ShakeType::EASE_OUT);
+    comboShake->StartShake(.5f, 60, 25, Sigma::ShakeType::EASE_OUT);
+    comboText->SetTint({1.0f, 1.0f, 1.0f, 1.0f});
   }
 
 
