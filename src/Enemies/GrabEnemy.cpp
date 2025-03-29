@@ -1,6 +1,7 @@
 #include "GrabEnemy.hpp"
 #include "Enemies/DefaultEnemy.hpp"
 #include "Random.hpp"
+#include "glm/geometric.hpp"
 
 
 namespace game {
@@ -28,6 +29,11 @@ void GrabEnemy::Init() {
 
   m_defaultState = STATE_FOLLOW;
   targetLeft = rand() % 2;
+}
+
+void GrabEnemy::Start() {
+  DefaultEnemy::Start();
+  BindState(STATE_GRABATTACK, [this] { GrabAttackState(); });
 }
 
 void GrabEnemy::FollowState() {
@@ -72,7 +78,6 @@ void GrabEnemy::FollowState() {
 }
 
 void GrabEnemy::AttackState() {
-  cooldown = 5;
   if (!m_isDoingSomething)
     return;
   isAvoiding = false;
@@ -85,6 +90,20 @@ void GrabEnemy::AttackState() {
     SetState(STATE_PAUSED);
     return;
   }
-  BasicAttack();
+  m_nextState = STATE_FOLLOW;
+  SetState(STATE_GRABATTACK);
+  cooldown = 5;
+}
+
+void GrabEnemy::GrabAttackState() {
+  if (glm::length(transform.position - m_nearest->transform.position) < 10) {
+    BasicAttack();
+    SetState(m_nextState);
+    return;
+  }
+  m_position = m_nearest->transform.position;
+  m_nextState = STATE_GRABATTACK;
+  m_timer = 2;
+  SetState(STATE_GOTO);
 }
 } // namespace game
