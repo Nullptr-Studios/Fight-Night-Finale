@@ -7,18 +7,32 @@
  */
 #pragma once
 #include <memory>
+#include <string>
 #include "Core.hpp"
 #include "Objects/Manager/GameplayManager.hpp"
 
+#include "Objects/ShakeObject.hpp"
 #include "UI/UIImage.hpp"
 #include "UI/UINumber.hpp"
 #include "UI/UIText.hpp"
 #include "UI/HealthBar.hpp"
 #include "Objects/Object.hpp"
 
+#include "Objects/ShakeObject.hpp"
+
 namespace game {
 
 class Player;
+
+enum ComboStreakClasification
+{
+  BAD = 5,
+  GREAT = 10,
+  SUPER = 20,
+  AWESOME = 40,
+  EXCELLENT = 60,
+  RAMPAGE = 90
+};
 
 struct UIHealthBar {
   std::shared_ptr<Sigma::UIImage> background = nullptr;
@@ -27,32 +41,71 @@ struct UIHealthBar {
   std::shared_ptr<Sigma::UIImage> border = nullptr;
 
   std::shared_ptr<Sigma::UIImage> frame = nullptr;
- 
   std::array<std::shared_ptr<Sigma::UINumber>, 2> currentHealth = {};
   std::array<std::shared_ptr<Sigma::UINumber>, 2> maxHealth = {};
   std::shared_ptr<Sigma::UIText> slash = nullptr;
 
   std::shared_ptr<Sigma::UIText> comboText = nullptr;
-  std::shared_ptr<Sigma::UIText> comboValue = nullptr;
-  std::shared_ptr<Sigma::UIImage> comboBurningIMG = nullptr;
+  Sigma::ShakeObject* comboShake = nullptr;
 
   glm::vec3 offset = {-280, 450, 0};
 
   short combo = 0;
 
-  float m_comboDisapear = 15.0f;
-  float m_comboTimer = 0.0f;
+  float m_comboSreakEnd = 3.0f;
+  float m_comboDisapear = 5.0f;
 
-  void ComboReset() {
+
+  void ComboBreak() {
     combo = 0;
-    m_comboTimer = 0.0f;
-    comboValue->SetText("0");
+    m_comboDisapear = 5.0f;
+    comboText->SetText("Break!!!");
+    comboText->SetTint({.5f, 0.5f, 0.5f, 1.0f});
   }
 
-  void ComboAdd(){
-    combo++;
-    comboValue->SetText(std::to_string(combo).c_str());
+  void ComboSuccesfull() 
+  {
+    std::string str = std::to_string(combo) + " Hit Streak";
+    std::string rating;
+
+    glm::vec4 color = {1.0f, 1.0f, 1.0f, 1.0f};
+    if(combo <= BAD){
+      rating = "BAD\n";
+      color = {1.0f, 0.0f, 0.0f, 1.0f};
+    }else if(combo <= GREAT){
+      rating = "GREAT\n";
+      color = {1.0f, 1.0f, 0.0f, 1.0f};
+    }else if(combo <= SUPER){
+      rating = "SUPER!\n";
+      color = {0.0f, 1.0f, 0.0f, 1.0f};
+    }else if(combo <= AWESOME){
+      rating = "AWESOME!!\n";
+      color = {0.0f, 1.0f, 1.0f, 1.0f};
+    }else if(combo <= EXCELLENT){
+      rating = "EXCELLENT!!!\n";
+      color = {0.0f, 0.0f, 1.0f, 1.0f};
+    }else{
+      rating = "RAMPAGE!!!!\n";
+      color = {1.0f, 0.0f, 1.0f, 1.0f};
+    }
+
+    rating += str;
+    comboText->SetTint(color);
+    comboText->SetText(rating.c_str());
+    comboShake->StartShake(1.5f, 60, 50, Sigma::ShakeType::EASE_OUT);
+
   }
+
+  void StreakAdd(){
+    combo++;
+    m_comboDisapear = 5.0f;
+    std::string s = "Streak ";
+    s.append(std::to_string(combo));
+    comboText->SetText(s.c_str());
+    comboShake->StartShake(.5f, 60, 25, Sigma::ShakeType::EASE_OUT);
+    comboText->SetTint({1.0f, 1.0f, 1.0f, 1.0f});
+  }
+
 
   void Update(int healthvalue, int healthrecover){
 
@@ -68,7 +121,7 @@ struct UIHealthBar {
 
 struct UIMoneyBar {
 
-  static constexpr short maxDigits = 7; ///>@brief Max amount of digits displayable
+  static constexpr short maxDigits = 8; ///>@brief Max amount of digits displayable
   int maxCash; ///>@brief Max amount cash displayable, dependent on maxDigits
   int startCash = 0; ///>@brief Cash with which linear interpolation starts
   int endCash = 0; ///>@brief Cash with which linear interpolation ends
@@ -111,6 +164,7 @@ struct UIMoneyBar {
 class HUD : public Sigma::Object {
 public:
   explicit HUD(const Sigma::id_t id) : Object(id) {}
+  ~HUD() override;
 
   void Init() override;
   void Start() override;

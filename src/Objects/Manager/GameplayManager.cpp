@@ -214,7 +214,7 @@ void game::GameplayManager::StartGame() {
   GET_CAMERA->SetCurrentCamera(m_cameraFollow);
 
 
-  GET_AUDIO->PlayEvent("event:/Music/TestMusic");
+    // GET_AUDIO->PlayEvent("event:/Music/TestMusic");
 }
 
 void game::GameplayManager::GiveXP(int xp) {
