@@ -68,6 +68,17 @@ void Player::Destroy() {
   Character::Destroy();
   // AEGfxFontFree(font);
 }
+void Player::Respawn() {
+  Character::Respawn();
+  m_healthRecover = GetHealth();
+  if (healthBar)
+    healthBar->Update(GetHealth(), m_healthRecover);
+}
+void Player::DeadAnimFinish() {
+  Character::DeadAnimFinish();
+  transform.position.x += FLT_MAX;
+  GameplayManager::GetInstance()->SetPlayerAsDead(this);
+}
 
 void Player::SuperAttackEnd() {
   m_health -= 10;
@@ -133,7 +144,7 @@ void Player::OnDoneDamage() {
 
   // Combo counter
   
-  healthBar->StreakAdd();
+    healthBar->StreakAdd();
 }
 
 void Player::SetControllerID(int id) {

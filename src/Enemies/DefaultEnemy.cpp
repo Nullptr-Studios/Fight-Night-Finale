@@ -67,7 +67,7 @@ void DefaultEnemy::Update(double delta) {
   Enemy::Update(delta);
 }
 
-bool DefaultEnemy::OnCollision(Sigma::Collision::CollisionEvent &e) {
+/*bool DefaultEnemy::OnCollision(Sigma::Collision::CollisionEvent &e) {
   if (m_currentState == STATE_WANDER || m_currentState == STATE_WALK || m_currentState == STATE_PAUSED) {
     return true;
   }
@@ -86,7 +86,7 @@ bool DefaultEnemy::OnCollision(Sigma::Collision::CollisionEvent &e) {
     return true;
   }
   return true;
-}
+}*/
 
 void DefaultEnemy::WalkState() {
   if (!m_isDoingSomething) return;

@@ -76,7 +76,7 @@ void HUD::Init() {
 
   // Combo UI
   player1.comboText = GET_FACTORY->CreateObject<Sigma::UIText>("Combo Text P1");
-  player1.comboText->m_screenSpaceTransform.position = glm::vec3(-950, 315, 0);
+  player1.comboText->m_screenSpaceTransform.position = player1.offset + glm::vec3(-286, -128, 0);
   player1.comboText->SetTint({1.0f, 1.0f, 1.0f, 1.0f});
   player1.comboText->SetText(" ");
 
@@ -142,6 +142,10 @@ void HUD::Init() {
   player2.maxHealth[1]->m_screenSpaceTransform.position.x += -74 + 274;
   player2.maxHealth[1]->m_screenSpaceTransform.position.y += 42;
 
+  player2.comboText = GET_FACTORY->CreateObject<Sigma::UIText>("Combo Text P1");
+  player2.comboText->m_screenSpaceTransform.position = player2.offset + glm::vec3(-286, -128, 0);
+  player2.comboText->SetTint({1.0f, 1.0f, 1.0f, 1.0f});
+  player2.comboText->SetText(" ");
 
   player2.comboShake = new Sigma::ShakeObject();
 #pragma endregion
@@ -204,6 +208,8 @@ void HUD::EnableUIPlayer1(bool enable) {
   player1.maxHealth[1]->SetActive(enable);
 
   player1.comboText->SetActive(enable);
+  player1.comboText->SetTint({1,1,1,0});
+  player1.combo = 0;
 }
 
 void HUD::EnableUIPlayer2(bool enable) {
@@ -217,10 +223,10 @@ void HUD::EnableUIPlayer2(bool enable) {
   player2.slash->SetActive(enable);
   player2.maxHealth[0]->SetActive(enable);
   player2.maxHealth[1]->SetActive(enable);
-
-  // player2.comboBurningIMG->SetActive(enable);
-  // player2.comboText->SetActive(enable);
-  // player2.comboValue->SetActive(enable);
+  
+  player2.comboText->SetActive(enable);
+  player2.comboText->SetTint({1,1,1,0});
+  player2.combo = 0;
 }
 
 void HUD::EnableGOIndicator() {
@@ -283,10 +289,22 @@ void HUD::Update(double delta) {
     }
   }
 
+  if (player2.combo > 0) {
+    player2.m_comboDisapear -= delta;
+    if (player2.m_comboDisapear <= 0) {
+      player2.m_comboDisapear = 5.0f;
+      player2.ComboSuccesfull();
+      player2.combo = 0;
+    }
+  }
+
   player1.comboShake->ShakeUpdate(delta);
-  player1.comboText->m_screenSpaceTransform.position =
-      glm::vec3(-950, 315, 0) +
-      glm::vec3(player1.comboShake->GetShakeOffset().x, player1.comboShake->GetShakeOffset().y, 0);
+  player1.comboText->m_screenSpaceTransform.position = player1.offset + glm::vec3(-286, -128, 0)
+          + glm::vec3(player1.comboShake->GetShakeOffset().x, player1.comboShake->GetShakeOffset().y, 0);
+
+  player2.comboShake->ShakeUpdate(delta);
+  player2.comboText->m_screenSpaceTransform.position = player2.offset + glm::vec3(-286, -128, 0) 
+          + glm::vec3(player2.comboShake->GetShakeOffset().x, player2.comboShake->GetShakeOffset().y, 0);
 
   // Money
   if (money.active && (money.displayedCash != money.endCash)) {

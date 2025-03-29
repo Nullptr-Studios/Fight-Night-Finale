@@ -40,6 +40,10 @@ public:
   void Update(double delta) override;
   void Destroy() override;
 
+  void Respawn() override;
+
+  void DeadAnimFinish() override;
+
   /**
   * @brief Set the Controller ID
   * @param id the ID to set

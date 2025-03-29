@@ -57,6 +57,8 @@ public:
    */
   void RespawnPlayer(game::Player* player);
 
+  void SetPlayerAsDead(game::Player* player);
+
   void TeleportPlayersToNextScene();
 
   /**

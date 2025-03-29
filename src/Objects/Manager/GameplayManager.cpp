@@ -37,8 +37,8 @@ void game::GameplayManager::Init() {
   GET_AUDIO->LoadBank("assets/Sound/Desktop/Master.bank");
   GET_AUDIO->LoadBank("assets/Sound/Desktop/Master.strings.bank");
   GET_AUDIO->LoadBank("assets/Sound/Desktop/Music.bank");
+  GET_AUDIO->LoadBank("assets/Sound/Desktop/SFX.bank");
   GET_AUDIO->LoadEvent("event:/Music/TestMusic");
-  
 
 }
 void game::GameplayManager::Start() {
@@ -99,18 +99,25 @@ void game::GameplayManager::RespawnPlayer(game::Player *player) {
   if (m_currentGameScene)
     player->transform.position = {m_currentGameScene->GetPlayerStartPos().x, m_currentGameScene->GetPlayerStartPos().y,
                                   -m_currentGameScene->GetPlayerStartPos().y};
-  /*player->SetTint(glm::vec4(1));
-  player->SetAlive(true);
-  player->ResetHealth();
-  player->SetActive(true);
-  player->m_animComp->SetCurrentAnim("Idle");
-  player->m_animComp->PlayAnim();*/
+  // player->SetTint(glm::vec4(1));
+  // player->SetAlive(true);
+  // player->ResetHealth();
+  // player->SetActive(true);
+  // player->m_animComp->SetCurrentAnim("Idle");
+  // player->m_animComp->PlayAnim();
+  player->Respawn();
+}
+void game::GameplayManager::SetPlayerAsDead(game::Player* player) {
+  m_cameraFollow->targets.erase(std::remove(m_cameraFollow->targets.begin(), m_cameraFollow->targets.end(), player), m_cameraFollow->targets.end());
+  player->SetActive(false);
 }
 
 void game::GameplayManager::TeleportPlayersToNextScene() {
   for (const auto& ps: m_players) {
     if (ps.player) {
-      RespawnPlayer(ps.player.get());
+      ps.player->transform.position = {m_currentGameScene->GetPlayerStartPos().x, m_currentGameScene->GetPlayerStartPos().y,
+                                  -m_currentGameScene->GetPlayerStartPos().y};
+      ps.player->Respawn();
       ps.player->SetSceneBoundsPoly(m_currentGameScene->GetSceneBoundsPoly());
     }
   }
@@ -127,10 +134,12 @@ void game::GameplayManager::InitPlayer(unsigned controllerID)
   m_gameHud->UpdatePlayerHUD();
 
   // Setup Camera
-  if (m_playerCount == 0) 
+  /*if (m_playerCount == 0) 
     m_cameraFollow->m_targetP1 = p.player.get();
   else
-    m_cameraFollow->m_targetP2 = p.player.get();
+    m_cameraFollow->m_targetP2 = p.player.get();*/
+
+  m_cameraFollow->targets.push_back(p.player.get());
 
   RespawnPlayer(p.player.get());
   
@@ -215,7 +224,8 @@ void game::GameplayManager::StartGame() {
   GET_CAMERA->SetCurrentCamera(m_cameraFollow);
 
 
-    // GET_AUDIO->PlayEvent("event:/Music/TestMusic");
+  //GET_AUDIO->PlayEvent("event:/Music/TestMusic");
+  GET_AUDIO->PlayEvent("event:/Music/TestMusic");
 }
 
 void game::GameplayManager::GiveXP(int xp) {

@@ -31,21 +31,33 @@ void Enemy::Start() {
   SetState(STATE_IDLE);
 }
 
-void Enemy::OnDamage(const Sigma::Damage::DamageEvent& e) {
-  if (e.GetOther()->GetName().contains("Enemy")) return;
- 
-  Character::OnDamage(e);
-
-  if(m_invincible)
+void Enemy::OnDamage(const Sigma::Damage::DamageEvent &e) {
+  if (e.GetOther()->GetName().contains("Enemy"))
     return;
 
-  int money = m_xp*(e.GetDamageAmount()/m_maxHealth);
+  Character::OnDamage(e);
+
+  if (m_invincible)
+    return;
+
+  int money = m_xp * (e.GetDamageAmount() / m_maxHealth);
   GameplayManager::GetInstance()->GiveXP(money);
 
   if (!GetAlive()) {
     SetState(STATE_DEAD);
     m_collider->enabled = false;
   }
+}
+bool Enemy::OnCollision(Sigma::Collision::CollisionEvent &e) {
+  auto enemy = dynamic_cast<Enemy*>(e.GetOther());
+  if (enemy) {
+    if (enemy->isInAir && !isInAir) {
+      this->TakeKnockback(enemy->velocity / 2.0f);
+      if (enemy->velocity.y != 0)
+        m_animComp->SetCurrentAnim("Thrown");
+    }
+  }
+  return true;
 }
 
 void Enemy::DeadAnimFinish() {

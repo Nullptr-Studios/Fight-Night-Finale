@@ -26,6 +26,7 @@ public:
   void Destroy() override { Character::Destroy(); }
 
   void OnDamage(const Sigma::Damage::DamageEvent& e) override;
+  bool OnCollision(Sigma::Collision::CollisionEvent &e) override;
 
   void DeadAnimFinish() override;
 
