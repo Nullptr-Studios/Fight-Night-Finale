@@ -48,7 +48,7 @@ void BigEnemy::LandedOnGround() {
 
   m_invincible = true;
   m_isRecovering = true;
-  m_attackCollider->Do(transform.position + (glm::vec3){0,0,0}, {170,50,100}, 15, this, Sigma::Damage::DAMAGE,{100,100},true);
+  m_attackCollider->Do(transform.position + (glm::vec3){0,0,0}, {150,50,100}, 15, this, Sigma::Damage::DAMAGE,{100,100},true);
   if (GetAlive())
     m_animComp->SetCurrentAnim("Recover");
   else {

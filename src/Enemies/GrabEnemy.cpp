@@ -96,12 +96,18 @@ void GrabEnemy::AttackState() {
 }
 
 void GrabEnemy::GrabAttackState() {
-  if (glm::length(transform.position - m_nearest->transform.position) < 10) {
+  glm::vec3 targets[2];
+  targets[0] = m_nearest->transform.GetDepthPosition() + glm::vec3(-30, 0, 0);
+  targets[1] = m_nearest->transform.GetDepthPosition() + glm::vec3(30, 0, 0);
+  m_position = ((m_distance.x >= 0) ? targets[0] : targets[1]);
+  if ((m_distance.x >= 0) != (transform.relativeScale.x >= 0)) {
+    transform.relativeScale.x *= -1;
+  }
+  if (glm::length((glm::vec2)transform.position - m_position) < 10) {
     BasicAttack();
     SetState(m_nextState);
     return;
   }
-  m_position = m_nearest->transform.position;
   m_nextState = STATE_GRABATTACK;
   m_timer = 2;
   SetState(STATE_GOTO);

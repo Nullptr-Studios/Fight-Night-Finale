@@ -105,8 +105,8 @@ void DefaultEnemy::FollowState() {
   isAvoiding = false;
   m_animComp->SetCurrentAnim("Walk");
   glm::vec3 targets[2];
-  targets[0] = m_nearest->transform.GetDepthPosition() + glm::vec3(-50, 0, 0);
-  targets[1] = m_nearest->transform.GetDepthPosition() + glm::vec3(50, 0, 0);
+  targets[0] = m_nearest->transform.GetDepthPosition() + glm::vec3(-45, 0, 0);
+  targets[1] = m_nearest->transform.GetDepthPosition() + glm::vec3(45, 0, 0);
   m_position = ((m_distance.x >= 0) ? targets[0] : targets[1]);
 
   if (fabs(m_distance.y) <= 25 && fabs(m_distance.x) <= 60 && fabs(m_distance.x) >= 30) {
