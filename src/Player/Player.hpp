@@ -32,7 +32,7 @@ public:
    * @param id
    * @param controllerId
    */
-  explicit Player(const Sigma::id_t id, int controllerId, std::string jsonPath) : Character(id, std::move(jsonPath)), m_controllerId(controllerId) {}
+  explicit Player(const Sigma::id_t id, int controllerId, std::string jsonPath, bool isSecondP) : Character(id, std::move(jsonPath)), m_isSecondPlayer(isSecondP), m_controllerId(controllerId) {}
 
   void Init() override;
   void Serialize() override;
@@ -80,6 +80,8 @@ private:
   int m_healthRecover = 75;
 
   Sigma::Actor* m_debugPlayerCol = nullptr;
+
+  bool m_isSecondPlayer = false; ///< @brief Is this player the second player?
   
 };
 

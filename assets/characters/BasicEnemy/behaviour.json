@@ -7,6 +7,10 @@
   "distanceToAttack" : 30.0,
   "experience": 5000,
 
+  "hitAnimations" : [
+    "Hit1", "Hit2"
+  ],
+
   "basicCombo" : [
     {
       "type" : "dmg",

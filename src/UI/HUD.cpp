@@ -177,7 +177,6 @@ void HUD::Init() {
   money.cashIcon->m_screenSpaceTransform.scale = money.numScale;
   money.cashIcon->m_screenSpaceTransform.position.x -= money.leftX;
 
-  money.maxCash = static_cast<int>(pow(10, game::UIMoneyBar::maxDigits)) - 1;
 #pragma endregion
 
   EnableUIMoney(false);

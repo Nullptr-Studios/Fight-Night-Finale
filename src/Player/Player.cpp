@@ -14,7 +14,7 @@ void Player::Init() {
   transform.relativeScale = glm::vec2(1);
 
   // Setup Animation
-  auto anim = GET_ANIMATION->LoadTextureAtlas("assets/characters/player/anim-data.json");
+  auto anim = GET_ANIMATION->LoadTextureAtlas(m_isSecondPlayer ? "assets/characters/player/Player1.json" : "assets/characters/player/Player2.json");
   m_animComp->SetTextureAtlas(anim);
   m_animComp->SetCurrentAnim("Idle");
   SetTexture(anim->textureStr.c_str());

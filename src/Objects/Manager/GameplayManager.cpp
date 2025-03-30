@@ -126,7 +126,7 @@ void game::GameplayManager::TeleportPlayersToNextScene() {
 void game::GameplayManager::InitPlayer(unsigned controllerID)
 {
   PlayerStruct p {};
-  p.player = GET_FACTORY->CreateObject<game::Player>("Player", controllerID, "assets/characters/player/behaviour.json");
+  p.player = GET_FACTORY->CreateObject<game::Player>("Player", controllerID, "assets/characters/player/behaviour.json", m_playerCount > 0);
 
   // Add player to the array
   m_players[m_playerCount] = p;

@@ -119,10 +119,14 @@ struct UIHealthBar {
   }
 };
 
+constexpr int pow(int base, int exp) {
+  return (exp == 0) ? 1 : base * pow(base, exp - 1);
+}
+
 struct UIMoneyBar {
 
-  static constexpr short maxDigits = 8; ///>@brief Max amount of digits displayable
-  int maxCash; ///>@brief Max amount cash displayable, dependent on maxDigits
+  static constexpr int maxDigits {8}; ///>@brief Max amount of digits displayable
+  static constexpr int maxCash {pow(10, game::UIMoneyBar::maxDigits) - 1}; ///>@brief Max amount cash displayable, dependent on maxDigits
   int startCash = 0; ///>@brief Cash with which linear interpolation starts
   int endCash = 0; ///>@brief Cash with which linear interpolation ends
   int displayedCash = 0; ///>@brief Cash currently displayed

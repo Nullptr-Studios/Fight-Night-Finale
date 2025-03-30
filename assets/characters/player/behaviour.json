@@ -6,6 +6,9 @@
   "dashTime" : 0.23,
   "dashCool" : 0.5,
   "friction" :750,
+  "hitAnimations" : [
+    "Hit2", "Hit1", "Hit3"
+  ],
 
   "basicCombo" : [
     {
