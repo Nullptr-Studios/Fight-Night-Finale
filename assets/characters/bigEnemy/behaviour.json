@@ -7,6 +7,9 @@
   "distanceToAttack": 35.0,
   "knockbackRes": 1,
   "experience": 5000,
+  "hitAnimations" : [
+    "Hit1", "Hit2"
+  ],
   "basicCombo" : [
     {
       "type" : "dmg",

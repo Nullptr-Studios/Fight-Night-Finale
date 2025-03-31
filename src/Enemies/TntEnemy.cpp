@@ -29,6 +29,10 @@ void TntEnemy::FollowState() {
   isAvoiding = false;
   glm::vec3 targets[2];
 
+  // if player ded or nullptr check
+  if (!m_nearest)
+    return;
+
   targets[0] = m_nearest->transform.GetDepthPosition()+ glm::vec3(-200,0,0);
   targets[1] = m_nearest->transform.GetDepthPosition()+ glm::vec3(200,0,0);
   m_position = ((m_distance.x >= 0)?targets[0]:targets[1]);
@@ -73,16 +77,23 @@ void TntEnemy::FollowState() {
 }
 
 void TntEnemy::AttackState() {
-  if (!m_isDoingSomething) return;
+  if (!m_isDoingSomething)
+    return;
   isAvoiding = false;
   if ((m_distance.x >= 0) != (transform.relativeScale.x >= 0)) {
     transform.relativeScale.x *= -1;
   }
 
-  auto tnt = GET_FACTORY->CreateObject<Tnt>("Tnt");
-  tnt->m_start = transform.position;
-  tnt->m_target = m_nearest->transform.position;
+  m_tnt = GET_FACTORY->CreateObject<Tnt>("Tnt");
+  m_tnt->m_start = transform.position;
+  m_tnt->m_target = m_nearest->transform.position;
   BasicAttack();
+}
+void TntEnemy::Destroy() {
+  DefaultEnemy::Destroy();
+  if (m_tnt) {
+    GET_FACTORY->DestroyObject(m_tnt);
+  }
 }
 }
 

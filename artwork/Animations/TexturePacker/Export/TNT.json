@@ -34,8 +34,7 @@
 	"trimmed": true,
 	"spriteSourceSize": {"x":53,"y":36,"w":36,"h":92},
 	"sourceSize": {"w":128,"h":128},
-	"pivot": {"x":0.5,"y":1},
-	"callback": "DoHit"
+	"pivot": {"x":0.5,"y":1}
 },
 {
 	"filename": "Combo1_0033.png",
@@ -78,7 +77,6 @@
 	"frame": {"x":52,"y":121,"w":55,"h":75},
 	"rotated": false,
 	"trimmed": true,
-	"fps": 3,
 	"spriteSourceSize": {"x":28,"y":52,"w":55,"h":75},
 	"sourceSize": {"w":128,"h":128},
 	"pivot": {"x":0.5,"y":1}
@@ -106,7 +104,6 @@
 	"frame": {"x":89,"y":30,"w":37,"h":83},
 	"rotated": false,
 	"trimmed": true,
-	"fps": 3,
 	"spriteSourceSize": {"x":54,"y":44,"w":37,"h":83},
 	"sourceSize": {"w":128,"h":128},
 	"pivot": {"x":0.5,"y":1}
@@ -143,7 +140,6 @@
 	"frame": {"x":1,"y":1,"w":97,"h":27},
 	"rotated": false,
 	"trimmed": true,
-	"fps": 3,
 	"spriteSourceSize": {"x":17,"y":71,"w":97,"h":27},
 	"sourceSize": {"w":128,"h":128},
 	"pivot": {"x":0.5,"y":1}
@@ -167,7 +163,7 @@
 	"pivot": {"x":0.5,"y":1}
 },
 {
-	"filename": "Thrown_0.png",
+	"filename": "Throw_0.png",
 	"frame": {"x":1,"y":30,"w":86,"h":43},
 	"rotated": false,
 	"trimmed": true,
@@ -223,7 +219,7 @@
 "meta": {
 	"app": "https://www.codeandweb.com/texturepacker",
 	"version": "1.0",
-	"image": "assets/characters/tntEnemy/sprites.png",
+	"image": "TNT.png",
 	"format": "RGBA8888",
 	"size": {"w":127,"h":478},
 	"scale": "1",

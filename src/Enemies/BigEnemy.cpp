@@ -50,7 +50,7 @@ void BigEnemy::LandedOnGround() {
   m_invincible = true;
   m_isRecovering = true;
   if (attack) {
-    m_attackCollider->Do(transform.position + (glm::vec3){0,0,0}, {150,50,100}, 13, this, Sigma::Damage::DAMAGE,{100,140},true);
+    m_attackCollider->Do(transform.position + glm::vec3(0), {150,50,100}, 13, this, Sigma::Damage::DAMAGE,{100,140},true);
     attack = false;
   }
   if (GetAlive())
