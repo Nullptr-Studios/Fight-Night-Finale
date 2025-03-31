@@ -32,11 +32,6 @@ void Scene1::Load() {
   walls->transform.position.z = -5000;
   AddChild(walls);
 
-  auto door = GET_FACTORY->CreateObject<Door> ("Door", 1);
-  door->transform.scale = {50, 100};
-  door->transform.position = {100, 0 ,0};
-  AddChild(door);
-
   // xd
   // auto nig = GET_FACTORY->CreateObject<HUD>("HUD");
 
