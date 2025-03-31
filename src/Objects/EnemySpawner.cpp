@@ -23,6 +23,9 @@ void game::EnemySpawner::SpawnEnemy() {
   e->Enable(m_gameplayManager->GetPlayers());
   e->SetSceneBoundsPoly(m_gameplayManager->GetSceneBoundsPoly());
   m_enemies.push_back(e);
+  for (auto door: m_doors) {
+    door->Open();
+  }
 }
 
 void game::EnemySpawner::Update(double deltaTime) {
@@ -97,6 +100,7 @@ void game::EnemySpawner::Update(double deltaTime) {
     game::GameplayManager::GetInstance()->FinishedAnSpawner();
   }
 }
+
 void game::EnemySpawner::Destroy() {
   Object::Destroy();
 
@@ -104,4 +108,9 @@ void game::EnemySpawner::Destroy() {
     GET_FACTORY->DestroyObject(enemy);
   }
   m_enemies.clear();
+
+  for (auto door: m_doors) {
+    GET_FACTORY->DestroyObject(door);
+  }
+  m_doors.clear();
 }

@@ -7,6 +7,7 @@
 #include "Objects/Camera.hpp"
 #include "Objects/CameraFollow.hpp"
 #include "Objects/Destructibles/Box.hpp"
+#include "Objects/Door.hpp"
 #include "Scene2.hpp"
 #include "UI/HUD.hpp"
 #include "UI/HealthBar.hpp"
@@ -31,10 +32,13 @@ void Scene1::Load() {
   walls->transform.position.z = -5000;
   AddChild(walls);
 
+  auto door = GET_FACTORY->CreateObject<Door> ("Door", 1);
+  door->transform.scale = {50, 100};
+  door->transform.position = {100, 0 ,0};
+  AddChild(door);
+
   // xd
   // auto nig = GET_FACTORY->CreateObject<HUD>("HUD");
-
-  
 
   SetNextScene(new Scene2("Game Scene 2", 2, "assets/level-1/scene-2.json"));
 }

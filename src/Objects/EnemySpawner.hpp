@@ -3,6 +3,7 @@
 //
 
 #pragma once
+#include "Door.hpp"
 #include "Objects/Object.hpp"
 
 namespace game {
@@ -66,6 +67,8 @@ private:
   std::list<Enemy*> m_enemies;
 
   GameplayManager* m_gameplayManager = nullptr;
+
+  std::vector<Door*> m_doors;
   
 };
 
