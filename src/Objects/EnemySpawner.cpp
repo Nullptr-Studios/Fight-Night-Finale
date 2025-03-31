@@ -3,7 +3,10 @@
 //
 
 #include "EnemySpawner.hpp"
+#include "Enemies/BigEnemy.hpp"
 #include "Enemies/DefaultEnemy.hpp"
+#include "Enemies/GrabEnemy.hpp"
+#include "Enemies/TntEnemy.hpp"
 #include "GameScene.hpp"
 #include "Manager/GameplayManager.hpp"
 
@@ -16,7 +19,7 @@ void game::EnemySpawner::Start() { Object::Start(); }
 
 void game::EnemySpawner::SpawnEnemy() {
   std::shared_ptr<Enemy> e;
-  e = GET_FACTORY->CreateObject<game::DefaultEnemy>("Enemy", "assets/characters/BasicEnemy/behaviour.json");
+  e = GET_FACTORY->CreateObject<game::BigEnemy>("Enemy", "assets/characters/bigEnemy/behaviour.json");
   e->transform.position.x = m_currentEnemyData.position.x;
   e->transform.position.y = m_currentEnemyData.position.y;
   e->transform.scale = {32.0f, 64.0f};
@@ -48,7 +51,7 @@ void game::EnemySpawner::Update(double deltaTime) {
       if (!ps.player)
         continue;
 
-      if(!ps.player->GetAlive())
+      if (!ps.player->GetAlive())
         continue;
 
       float distance = glm::distance(ps.player->transform.position, transform.position);
@@ -76,7 +79,7 @@ void game::EnemySpawner::Update(double deltaTime) {
         m_currentEnemyData = m_spawnData[m_currentEnemyIndex];
         SpawnEnemy();
 
-        m_currentEnemyIndex++; 
+        m_currentEnemyIndex++;
       }
     }
   }

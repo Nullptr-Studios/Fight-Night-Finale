@@ -1,16 +1,16 @@
 {
-  "maxHealth": 100.0,
-  "maxSpeed": 90.0,
-  "accelerationRate": 5.0,
-  "jumpVel": 0.0,
-  "friction": 1000,
-  "distanceToAttack": 35.0,
-  "knockbackRes": 1,
+  "maxHealth" : 70.0,
+  "maxSpeed" : 140.0,
+  "accelerationRate" : 5.0,
+  "jumpVel" : 0.0,
+  "friction" : 1000,
+  "distanceToAttack" : 30.0,
+  "knockbackRes" : 1.0,
   "experience": 5000,
   "basicCombo" : [
     {
       "type" : "dmg",
-      "damage" : 10.0,
+      "damage" : 7.0,
       "knockback" : { "x" : 80.0, "y" : 0 },
       "colliderOffset" : { "x" : 22, "y" : 60 },
       "colliderSize" : { "x" : 20, "y" : 15, "z" : 3 },
@@ -18,7 +18,7 @@
     },
     {
       "type" : "dmg",
-      "damage" : 20.0,
+      "damage" : 9.0,
       "knockback" : { "x" : 380.0, "y" : 0 },
       "colliderOffset" : { "x" : 24, "y" : 59 },
       "colliderSize" : { "x" : 21, "y" : 15, "z" : 3 },

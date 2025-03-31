@@ -10,6 +10,7 @@
     "Hit2", "Hit1", "Hit3"
   ],
 
+  "knockbackRes" : 1.0,
   "basicCombo" : [
     {
       "type" : "dmg",

@@ -25,7 +25,7 @@ class MainMenu;
  */
 class Player : public Sigma::Character {
 public:
-  
+
   /**
    * @brief Construct a Player object
    *
@@ -39,6 +39,7 @@ public:
   void Start() override;
   void Update(double delta) override;
   void Destroy() override;
+  void LandedOnGround() override;
 
   void Respawn() override;
 
