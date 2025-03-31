@@ -35,7 +35,7 @@ public:
 
 protected:
 
-  Object* m_pickup = nullptr; ///>@brief pickup object
+  std::shared_ptr<Object> m_pickup = nullptr; ///>@brief pickup object
   //Box
   const char * m_texture; ///>@brief box texture
   const char * m_brokenTexture; ///>@brief box broken texture

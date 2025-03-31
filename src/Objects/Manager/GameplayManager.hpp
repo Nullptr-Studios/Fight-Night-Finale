@@ -4,7 +4,7 @@
 
 #pragma once
 
-#include "GameScene.hpp"
+#include "../../GameScene.hpp"
 #include "Objects/Object.hpp"
 
 namespace Sigma {
@@ -19,8 +19,8 @@ class Player;
 class HealthBar;
 
 struct PlayerStruct {
-  Player* player = nullptr;
-  HealthBar* healthBar = nullptr;
+  std::shared_ptr<Player> player = nullptr;
+  std::shared_ptr<HealthBar> healthBar = nullptr;
 };
 
 /**
@@ -56,6 +56,8 @@ public:
    * @brief Respawn the player
    */
   void RespawnPlayer(game::Player* player);
+
+  void SetPlayerAsDead(game::Player* player);
 
   void TeleportPlayersToNextScene();
 
@@ -95,21 +97,29 @@ public:
 
   static GameplayManager* GetInstance() { return m_instance; }
 
+  void GiveXP(int xp);
+
+  [[nodiscard]] int GetXP() const { return m_experience; }
+
 private:
   static GameplayManager* m_instance;
-  Sigma::CameraFollow* m_cameraFollow{};
+  std::shared_ptr<Sigma::CameraFollow> m_cameraFollow{};
 
-  HUD* m_gameHud = nullptr;
-
-  bool m_started = false;
+  std::shared_ptr<HUD> m_gameHud = nullptr;
 
   /**
    * @brief holds the information required for the players
    */
   std::array<PlayerStruct, 2> m_players = {};
+  game::GameScene *m_currentGameScene = nullptr;
   unsigned char m_playerCount = 0;
-  game::GameScene* m_currentGameScene = nullptr;
   bool m_gameSceneIsDirty = true;
+
+  /**
+   * @brief holds the information required for the xp system
+   */
+  int m_experience = 0;
+  bool m_started = false;
 };
 }
 

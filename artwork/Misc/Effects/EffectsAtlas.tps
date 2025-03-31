@@ -173,7 +173,7 @@
         </struct>
         <key>individualSpriteSettings</key>
         <map type="IndividualSpriteSettingsMap">
-            <key type="filename">Blood/BloodEffect_02.bmp</key>
+            <key type="filename">Blood/BloodEffect_02.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
@@ -188,7 +188,7 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">Blood/BloodEffect_03.bmp</key>
+            <key type="filename">Blood/BloodEffect_03.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
@@ -203,7 +203,7 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">Blood/BloodEffect_05.bmp</key>
+            <key type="filename">Blood/BloodEffect_05.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
@@ -218,7 +218,7 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">Blood/BloodEffect_4.bmp</key>
+            <key type="filename">Blood/BloodEffect_4.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
@@ -230,6 +230,112 @@
                 <rect>2,2,4,4</rect>
                 <key>scale9Paddings</key>
                 <rect>2,2,4,4</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">Fall/Fall_0.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>spriteScale</key>
+                <double>1</double>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>20,6,40,12</rect>
+                <key>scale9Paddings</key>
+                <rect>20,6,40,12</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">Fall/Fall_1.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>spriteScale</key>
+                <double>1</double>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>18,6,36,12</rect>
+                <key>scale9Paddings</key>
+                <rect>18,6,36,12</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">Fall/Fall_2.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>spriteScale</key>
+                <double>1</double>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>27,6,55,12</rect>
+                <key>scale9Paddings</key>
+                <rect>27,6,55,12</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">Fall/Fall_3.png</key>
+            <key type="filename">Fall/Fall_4.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>spriteScale</key>
+                <double>1</double>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>30,6,60,12</rect>
+                <key>scale9Paddings</key>
+                <rect>30,6,60,12</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">Fall/Fall_5.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>spriteScale</key>
+                <double>1</double>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>39,8,79,16</rect>
+                <key>scale9Paddings</key>
+                <rect>39,8,79,16</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">Fall/Fall_6.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>spriteScale</key>
+                <double>1</double>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>39,9,77,17</rect>
+                <key>scale9Paddings</key>
+                <rect>39,9,77,17</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">Fall/Fall_7.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>spriteScale</key>
+                <double>1</double>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>33,8,65,16</rect>
+                <key>scale9Paddings</key>
+                <rect>33,8,65,16</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
@@ -339,7 +445,7 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">Hit/HitEffect2_01.bmp</key>
+            <key type="filename">Hit/HitEffect2_01.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
@@ -354,7 +460,7 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">Hit/HitEffect2_02.bmp</key>
+            <key type="filename">Hit/HitEffect2_02.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
@@ -369,7 +475,7 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">Hit/HitEffect2_03.bmp</key>
+            <key type="filename">Hit/HitEffect2_03.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
@@ -384,7 +490,7 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">Hit/HitEffect2_04.bmp</key>
+            <key type="filename">Hit/HitEffect2_04.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
@@ -399,7 +505,7 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">Hit/HitEffect2_05.bmp</key>
+            <key type="filename">Hit/HitEffect2_05.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
@@ -414,7 +520,7 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">Hit/HitEffect2_06.bmp</key>
+            <key type="filename">Hit/HitEffect2_06.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
@@ -429,7 +535,7 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">Hit/HitEffect2_07.bmp</key>
+            <key type="filename">Hit/HitEffect2_07.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
@@ -444,7 +550,7 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">Hit/HitEffect2_08.bmp</key>
+            <key type="filename">Hit/HitEffect2_08.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
@@ -666,6 +772,7 @@
                 <array>
                     <filename>Blood</filename>
                     <filename>Hit</filename>
+                    <filename>Fall</filename>
                 </array>
             </struct>
         </map>

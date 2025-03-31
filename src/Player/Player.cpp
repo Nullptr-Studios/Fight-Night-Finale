@@ -14,7 +14,7 @@ void Player::Init() {
   transform.relativeScale = glm::vec2(1);
 
   // Setup Animation
-  auto anim = GET_ANIMATION->LoadTextureAtlas("assets/characters/player/anim-data.json");
+  auto anim = GET_ANIMATION->LoadTextureAtlas(m_isSecondPlayer ? "assets/characters/player/Player1.json" : "assets/characters/player/Player2.json");
   m_animComp->SetTextureAtlas(anim);
   m_animComp->SetCurrentAnim("Idle");
   SetTexture(anim->textureStr.c_str());
@@ -53,7 +53,7 @@ void Player::Update(double delta) {
   if (m_controllerComponent)
     m_controllerComponent->Update();
 
-  if (GetIsIdle()) {
+  if (GetIsIdle() && !m_inCombo) {
     if (velocity.x > .1f || velocity.x < -.1f || velocity.y > .1f || velocity.y < -.1f) {
       m_animComp->SetCurrentAnim("Walk");
     } else {
@@ -68,12 +68,29 @@ void Player::Destroy() {
   Character::Destroy();
   // AEGfxFontFree(font);
 }
+void Player::Respawn() {
+  Character::Respawn();
+  m_healthRecover = GetHealth();
+  if (healthBar)
+    healthBar->Update(GetHealth(), m_healthRecover);
+}
+void Player::DeadAnimFinish() {
+  Character::DeadAnimFinish();
+  transform.position.x += FLT_MAX;
+  GameplayManager::GetInstance()->SetPlayerAsDead(this);
+}
 
-void Player::DoSuperAttack() {
+void Player::SuperAttackEnd() {
   m_health -= 10;
 
   if (healthBar)
     healthBar->Update(GetHealth<int>(), m_healthRecover);
+}
+void Player::DoSuperAttack() {
+  /*m_health -= 10;
+
+  if (healthBar)
+    healthBar->Update(GetHealth<int>(), m_healthRecover);*/
 }
 
 void Player::RegainHPCombo() {
@@ -92,8 +109,11 @@ void Player::OnDamage(const Sigma::Damage::DamageEvent &e) {
     m_healthRecover = m_health;
 
   if (healthBar)
+  {
     healthBar->Update(GetHealth<int>(), m_healthRecover);
-
+    if(e.GetOther() != this)
+      healthBar->ComboBreak();
+  }
   if (!GetAlive())
     return;
 
@@ -121,6 +141,10 @@ void Player::OnDamage(const Sigma::Damage::DamageEvent &e) {
 void Player::OnDoneDamage() {
   Character::OnDoneDamage();
   m_controllerComponent->PlayerAttackFeedback();
+
+  // Combo counter
+  
+    healthBar->StreakAdd();
 }
 
 void Player::SetControllerID(int id) {

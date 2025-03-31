@@ -33,12 +33,18 @@ void game::GameplayManager::Init() {
 
 
   m_gameHud = GET_FACTORY->CreateObject<game::HUD>("Game HUD");
-  
+
+  GET_AUDIO->LoadBank("assets/Sound/Desktop/Master.bank");
+  GET_AUDIO->LoadBank("assets/Sound/Desktop/Master.strings.bank");
+  GET_AUDIO->LoadBank("assets/Sound/Desktop/Music.bank");
+  GET_AUDIO->LoadBank("assets/Sound/Desktop/SFX.bank");
+  GET_AUDIO->LoadEvent("event:/Music/TestMusic");
 
 }
 void game::GameplayManager::Start() {
   Object::Start();
   StartGame();
+  
 }
 void game::GameplayManager::FirstUpdate(double deltaTime) {
   Object::FirstUpdate(deltaTime);
@@ -59,7 +65,7 @@ void game::GameplayManager::Update(double deltaTime) {
   CheckForCoop();
 
   int dedPlayers = 0;
-  for (auto element: m_players) {
+  for (const auto& element: m_players) {
     if (element.player == nullptr)
       continue;
     
@@ -93,18 +99,25 @@ void game::GameplayManager::RespawnPlayer(game::Player *player) {
   if (m_currentGameScene)
     player->transform.position = {m_currentGameScene->GetPlayerStartPos().x, m_currentGameScene->GetPlayerStartPos().y,
                                   -m_currentGameScene->GetPlayerStartPos().y};
-  /*player->SetTint(glm::vec4(1));
-  player->SetAlive(true);
-  player->ResetHealth();
-  player->SetActive(true);
-  player->m_animComp->SetCurrentAnim("Idle");
-  player->m_animComp->PlayAnim();*/
+  // player->SetTint(glm::vec4(1));
+  // player->SetAlive(true);
+  // player->ResetHealth();
+  // player->SetActive(true);
+  // player->m_animComp->SetCurrentAnim("Idle");
+  // player->m_animComp->PlayAnim();
+  player->Respawn();
+}
+void game::GameplayManager::SetPlayerAsDead(game::Player* player) {
+  m_cameraFollow->targets.erase(std::remove(m_cameraFollow->targets.begin(), m_cameraFollow->targets.end(), player), m_cameraFollow->targets.end());
+  player->SetActive(false);
 }
 
 void game::GameplayManager::TeleportPlayersToNextScene() {
-  for (auto ps: m_players) {
+  for (const auto& ps: m_players) {
     if (ps.player) {
-      RespawnPlayer(ps.player);
+      ps.player->transform.position = {m_currentGameScene->GetPlayerStartPos().x, m_currentGameScene->GetPlayerStartPos().y,
+                                  -m_currentGameScene->GetPlayerStartPos().y};
+      ps.player->Respawn();
       ps.player->SetSceneBoundsPoly(m_currentGameScene->GetSceneBoundsPoly());
     }
   }
@@ -113,7 +126,7 @@ void game::GameplayManager::TeleportPlayersToNextScene() {
 void game::GameplayManager::InitPlayer(unsigned controllerID)
 {
   PlayerStruct p {};
-  p.player = GET_FACTORY->CreateObject<game::Player>("Player", controllerID, "assets/characters/player/behaviour.json");
+  p.player = GET_FACTORY->CreateObject<game::Player>("Player", controllerID, "assets/characters/player/behaviour.json", m_playerCount > 0);
 
   // Add player to the array
   m_players[m_playerCount] = p;
@@ -121,12 +134,14 @@ void game::GameplayManager::InitPlayer(unsigned controllerID)
   m_gameHud->UpdatePlayerHUD();
 
   // Setup Camera
-  if (m_playerCount == 0) 
-    m_cameraFollow->m_targetP1 = p.player;
+  /*if (m_playerCount == 0) 
+    m_cameraFollow->m_targetP1 = p.player.get();
   else
-    m_cameraFollow->m_targetP2 = p.player;
+    m_cameraFollow->m_targetP2 = p.player.get();*/
 
-  RespawnPlayer(p.player);
+  m_cameraFollow->targets.push_back(p.player.get());
+
+  RespawnPlayer(p.player.get());
   
   p.player->SetSceneBoundsPoly(m_currentGameScene->GetSceneBoundsPoly());
   
@@ -140,10 +155,10 @@ void game::GameplayManager::CheckForCoop() {
       return;
   if (m_players[0].player->GetControllerID() <= -1 && AEInputGamepadButtonTriggered(0, AE_GAMEPAD_START)) {
     InitPlayer(0);
-    RespawnPlayer(m_players[1].player);
+    RespawnPlayer(m_players[1].player.get());
   } else if (AEInputGamepadButtonTriggered(1, AE_GAMEPAD_START)) {
     InitPlayer(1);
-    RespawnPlayer(m_players[1].player);
+    RespawnPlayer(m_players[1].player.get());
     }
 }
 
@@ -181,7 +196,7 @@ void game::GameplayManager::UninitializeGame() {
   DisableHUD();
   SetActive(false);
 
-  for (auto element: m_players) {
+  for (const auto& element: m_players) {
     if (element.player != nullptr)
       GET_FACTORY->DestroyObject(element.player);
   }
@@ -192,17 +207,30 @@ void game::GameplayManager::UninitializeGame() {
   m_currentGameScene = nullptr;
 
   m_started = false;
+
+  GET_AUDIO->StopEvent("event:/Music/TestMusic");
 }
 
 void game::GameplayManager::StartGame() {
   if (m_started)
     return;
-  
+
+  m_experience = 0;
+
   SetActive(true);
   UpdateCurrentGameScene();
   m_cameraFollow = GET_FACTORY->CreateObject<Sigma::CameraFollow>("Main Camera Follow");
   m_cameraFollow->size = 3;
   GET_CAMERA->SetCurrentCamera(m_cameraFollow);
+
+
+  //GET_AUDIO->PlayEvent("event:/Music/TestMusic");
+  GET_AUDIO->PlayEvent("event:/Music/TestMusic");
+}
+
+void game::GameplayManager::GiveXP(int xp) {
+  m_experience += xp;
+  m_gameHud->UpdateXP(m_experience);
 }
 
 

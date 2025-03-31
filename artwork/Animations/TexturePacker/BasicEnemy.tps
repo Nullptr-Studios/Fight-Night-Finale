@@ -183,9 +183,12 @@
             <key type="filename">../Frames/Characters/BasicEnemy/Combo/Combo2_0036.png</key>
             <key type="filename">../Frames/Characters/BasicEnemy/Combo/Combo2_0037.png</key>
             <key type="filename">../Frames/Characters/BasicEnemy/Combo/Combo2_0038.png</key>
-            <key type="filename">../Frames/Characters/BasicEnemy/Hit/Hit_0008.png</key>
-            <key type="filename">../Frames/Characters/BasicEnemy/Hit/Hit_0009.png</key>
-            <key type="filename">../Frames/Characters/BasicEnemy/Hit/Hit_0010.png</key>
+            <key type="filename">../Frames/Characters/BasicEnemy/Hit/Hit1_0008.png</key>
+            <key type="filename">../Frames/Characters/BasicEnemy/Hit/Hit1_0009.png</key>
+            <key type="filename">../Frames/Characters/BasicEnemy/Hit/Hit1_0010.png</key>
+            <key type="filename">../Frames/Characters/BasicEnemy/Hit/Hit2_0011.png</key>
+            <key type="filename">../Frames/Characters/BasicEnemy/Hit/Hit2_0012.png</key>
+            <key type="filename">../Frames/Characters/BasicEnemy/Hit/Hit2_0013.png</key>
             <key type="filename">../Frames/Characters/BasicEnemy/Idle/Idle_0.png</key>
             <key type="filename">../Frames/Characters/BasicEnemy/Recover/Recover_0023.png</key>
             <key type="filename">../Frames/Characters/BasicEnemy/Recover/Recover_0024.png</key>

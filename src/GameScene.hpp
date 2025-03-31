@@ -57,13 +57,13 @@ protected:
 
   bool m_isSceneFinished = false;
 
-  GlowArea* m_exitLocation = nullptr;
-  Door* m_exitLocationDoor = nullptr;
+  std::shared_ptr<GlowArea> m_exitLocation = nullptr;
+  std::shared_ptr<Door> m_exitLocationDoor = nullptr;
   
   std::string m_jsonPath{};
   glm::vec2 m_playerStartPos{};
   std::vector<glm::vec2> m_sceneBounds{};
-  std::vector<EnemySpawner *> m_enemySpawners{};
+  std::vector<std::shared_ptr<EnemySpawner>> m_enemySpawners{};
   Sigma::Scene * m_nextScene = nullptr;
 };
 

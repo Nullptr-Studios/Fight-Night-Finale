@@ -46,12 +46,21 @@ add_custom_command(TARGET game POST_BUILD
         ${CMAKE_SOURCE_DIR}/assets ${CMAKE_BINARY_DIR}/${CMAKE_BUILD_TYPE}/assets)
 
 # Copy FMOD dlls to build directory
-add_custom_command(TARGET game POST_BUILD
-        COMMAND ${CMAKE_COMMAND} -E copy_if_different
-        ${CMAKE_SOURCE_DIR}/inc/sigma/engine/lib/fmodL.dll ${CMAKE_BINARY_DIR}/)
-add_custom_command(TARGET game POST_BUILD
-        COMMAND ${CMAKE_COMMAND} -E copy_if_different
-        ${CMAKE_SOURCE_DIR}/inc/sigma/engine/lib/fmodstudioL.dll ${CMAKE_BINARY_DIR}/)
+if(${CMAKE_BUILD_TYPE} STREQUAL "Debug")
+    add_custom_command(TARGET game POST_BUILD
+            COMMAND ${CMAKE_COMMAND} -E copy_if_different
+            ${CMAKE_SOURCE_DIR}/inc/sigma/engine/lib/fmodL.dll ${CMAKE_BINARY_DIR}/${CMAKE_BUILD_TYPE}/)
+    add_custom_command(TARGET game POST_BUILD
+            COMMAND ${CMAKE_COMMAND} -E copy_if_different
+            ${CMAKE_SOURCE_DIR}/inc/sigma/engine/lib/fmodstudioL.dll ${CMAKE_BINARY_DIR}/${CMAKE_BUILD_TYPE}/)
+else ()
+    add_custom_command(TARGET game POST_BUILD
+            COMMAND ${CMAKE_COMMAND} -E copy_if_different
+            ${CMAKE_SOURCE_DIR}/inc/sigma/engine/lib/fmod.dll ${CMAKE_BINARY_DIR}/${CMAKE_BUILD_TYPE}/)
+    add_custom_command(TARGET game POST_BUILD
+            COMMAND ${CMAKE_COMMAND} -E copy_if_different
+            ${CMAKE_SOURCE_DIR}/inc/sigma/engine/lib/fmodstudio.dll ${CMAKE_BINARY_DIR}/${CMAKE_BUILD_TYPE}/)
+endif ()
 
 # Compile commands .json
 #add_custom_command(TARGET game POST_BUILD

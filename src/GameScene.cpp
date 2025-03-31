@@ -61,7 +61,7 @@ void game::GameScene::Load() {
 
   for (auto &spawners: J["enemySpawners"]) {
 
-    game::EnemySpawner* s;
+    std::shared_ptr<EnemySpawner> s;
     if (spawners.contains("required"))
       s = GET_FACTORY->CreateObject<EnemySpawner>(spawners["name"], spawners["activationRange"], m_enemySpawners[spawners["required"]]);
     else
@@ -105,7 +105,7 @@ void game::GameScene::Update(double delta){
   Sigma::Scene::Update(delta);
 
   int spawnercount = 0;
-  for(auto enemyspawner : m_enemySpawners) {
+  for(const auto& enemyspawner : m_enemySpawners) {
    if(enemyspawner->GetFinished())
      spawnercount++;
   }
@@ -122,7 +122,7 @@ void game::GameScene::Update(double delta){
 void game::GameScene::Unload() {
   Scene::Unload();
 
-  for (auto spawner: m_enemySpawners) {
+  for (const auto& spawner: m_enemySpawners) {
     GET_FACTORY->DestroyObject(spawner);
   }
 

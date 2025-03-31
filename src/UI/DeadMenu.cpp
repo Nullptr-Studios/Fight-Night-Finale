@@ -25,7 +25,7 @@ void DeadMenu::Load() {
 }
 void DeadMenu::Unload() {
   Scene::Unload();
-  GET_FACTORY->DestroyObject(m_background);
-  GET_FACTORY->DestroyObject(m_button);
+  GET_FACTORY->DestroyObject(m_background->GetId());
+  GET_FACTORY->DestroyObject(m_button->GetId());
 }
 } // namespace game

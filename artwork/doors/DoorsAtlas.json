@@ -1,0 +1,84 @@
+{"frames": [
+
+{
+	"filename": "door1_1.png",
+	"frame": {"x":77,"y":1,"w":37,"h":67},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":37,"h":67},
+	"sourceSize": {"w":37,"h":67}
+},
+{
+	"filename": "door1_2.png",
+	"frame": {"x":77,"y":70,"w":37,"h":67},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":37,"h":67},
+	"sourceSize": {"w":37,"h":67}
+},
+{
+	"filename": "door1_3.png",
+	"frame": {"x":77,"y":139,"w":37,"h":67},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":37,"h":67},
+	"sourceSize": {"w":37,"h":67}
+},
+{
+	"filename": "door2_1.png",
+	"frame": {"x":1,"y":208,"w":29,"h":96},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":29,"h":96},
+	"sourceSize": {"w":29,"h":96}
+},
+{
+	"filename": "door2_2.png",
+	"frame": {"x":32,"y":208,"w":29,"h":96},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":29,"h":96},
+	"sourceSize": {"w":29,"h":96}
+},
+{
+	"filename": "door2_3.png",
+	"frame": {"x":63,"y":208,"w":29,"h":96},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":29,"h":96},
+	"sourceSize": {"w":29,"h":96}
+},
+{
+	"filename": "door3_1.png",
+	"frame": {"x":1,"y":1,"w":74,"h":67},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":74,"h":67},
+	"sourceSize": {"w":74,"h":67}
+},
+{
+	"filename": "door3_2.png",
+	"frame": {"x":1,"y":70,"w":74,"h":67},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":74,"h":67},
+	"sourceSize": {"w":74,"h":67}
+},
+{
+	"filename": "door3_3.png",
+	"frame": {"x":1,"y":139,"w":74,"h":67},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":74,"h":67},
+	"sourceSize": {"w":74,"h":67}
+}],
+"meta": {
+	"app": "https://www.codeandweb.com/texturepacker",
+	"version": "1.0",
+	"image": "DoorsAtlas.png",
+	"format": "RGBA8888",
+	"size": {"w":115,"h":305},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:76a81f6256dce7a85552571872ef4d31:21e325c5ef8892a2396fbca10e2526dc:2dae185fcd518f00fb83a80724b42a0c$"
+}
+}

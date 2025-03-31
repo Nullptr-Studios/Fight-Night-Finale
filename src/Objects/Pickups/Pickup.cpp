@@ -40,8 +40,9 @@ bool Pickup::OnCollision(Sigma::Collision::CollisionEvent &e) {
   return false;
   } catch (const std::exception& e) {
     std::cerr << e.what() << std::endl;
-    
+    return false;
   }
+  return false;
 }
 
 }

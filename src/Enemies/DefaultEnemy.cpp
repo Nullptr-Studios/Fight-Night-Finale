@@ -67,7 +67,7 @@ void DefaultEnemy::Update(double delta) {
   Enemy::Update(delta);
 }
 
-bool DefaultEnemy::OnCollision(Sigma::Collision::CollisionEvent &e) {
+/*bool DefaultEnemy::OnCollision(Sigma::Collision::CollisionEvent &e) {
   if (m_currentState == STATE_WANDER || m_currentState == STATE_WALK || m_currentState == STATE_PAUSED) {
     return true;
   }
@@ -86,7 +86,7 @@ bool DefaultEnemy::OnCollision(Sigma::Collision::CollisionEvent &e) {
     return true;
   }
   return true;
-}
+}*/
 
 void DefaultEnemy::WalkState() {
   if (!m_isDoingSomething) return;
@@ -255,7 +255,7 @@ void DefaultEnemy::DeadState() {
   m_enabled = false;
 }
 
-void DefaultEnemy::OnFullComboPerformed() {
+void DefaultEnemy::OnFullComboPerformed(bool super) {
   m_timer = Sigma::Random::Float(1.2f, 1.6f);
   m_nextState = STATE_REPOSITION; // TODO: change this to reposition
   SetState(STATE_PAUSED);

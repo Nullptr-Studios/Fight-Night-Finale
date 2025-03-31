@@ -29,9 +29,9 @@ public:
   void Free() override;
 
 private:
-  Sigma::Actor* background = nullptr;
-  GlowArea* m_glowArea = nullptr;
-  PunchingBag* m_punchBag = nullptr;
+  std::shared_ptr<Sigma::Actor> background = nullptr;
+  std::shared_ptr<GlowArea> m_glowArea = nullptr;
+  std::shared_ptr<PunchingBag> m_punchBag = nullptr;
 
 protected:
   bool m_debug = true;
