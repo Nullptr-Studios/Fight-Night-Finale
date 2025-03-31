@@ -34,6 +34,13 @@ void game::GameScene::Load() {
     AddChild(m_exitLocation);
   }
 
+  if (J.contains("exitDoorLoc")) {
+    m_exitLocationDoor = GET_FACTORY->CreateObject<Door>("Exit_Door", J["exitDoorType"].get<int>());
+    m_exitLocationDoor->transform.position = {J["exitDoorLoc"]["x"], J["exitDoorLoc"]["y"], -J["exitDoorLoc"]["y"].get<int>()};
+    m_exitLocationDoor->transform.scale = {J["exitDoorScale"]["x"], J["exitDoorScale"]["y"]};
+    AddChild(m_exitLocationDoor);
+  }
+
   m_sceneBounds.reserve(J["bounds"].size());
 
   for (auto &boundCoords: J["bounds"]) {
@@ -107,6 +114,8 @@ void game::GameScene::Update(double delta){
   if (spawnercount >= m_enemySpawners.size() && !m_isSceneFinished) {
     if (m_exitLocation)
       m_exitLocation->SetActive(true);
+    if (m_exitLocationDoor)
+      m_exitLocationDoor->Open(9999.9f);
     m_isSceneFinished = true;
   }
 }

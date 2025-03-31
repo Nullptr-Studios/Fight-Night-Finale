@@ -7,6 +7,7 @@
  */
 
 #pragma once
+#include "Objects/Door.hpp"
 #include "Scene.hpp"
 
 namespace Sigma {
@@ -57,6 +58,7 @@ protected:
   bool m_isSceneFinished = false;
 
   GlowArea* m_exitLocation = nullptr;
+  Door* m_exitLocationDoor = nullptr;
   
   std::string m_jsonPath{};
   glm::vec2 m_playerStartPos{};
