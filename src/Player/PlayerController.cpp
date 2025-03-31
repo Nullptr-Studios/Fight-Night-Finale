@@ -48,7 +48,7 @@ void PlayerController::PlayerDamagedFeedback() {
   if(m_controllerId == -1)
     return;
 
-  m_inputSystem.DoGamepadRumble(m_controllerId, 1, .15f);
+  m_inputSystem.DoGamepadRumble(m_controllerId, 1, .25f);
 
   // TODO: dante the fucking shake camera its not exposed >:( -d
  
@@ -58,7 +58,7 @@ void PlayerController::PlayerAttackFeedback(){
   if(m_controllerId == -1)
     return;
 
-  m_inputSystem.DoGamepadRumble(m_controllerId, .75f, .05f);
+  m_inputSystem.DoGamepadRumble(m_controllerId, .75f, .1f);
 }
 
 
