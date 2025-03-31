@@ -118,7 +118,7 @@ void Player::OnDamage(const Sigma::Damage::DamageEvent &e) {
 
 
   if (dynamic_cast<BigEnemy*>(e.GetOther())) {
-    m_gotHitByFatEnemy = true;
+    // m_gotHitByFatEnemy = true;
   }
   // if (!m_isAlive && doFuckingOnce) {
   //   auto scene = dynamic_cast<PrototypeScene*>(GET_SCENE(0));

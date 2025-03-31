@@ -36,6 +36,7 @@ void BigEnemy::AttackState() {
   }
   TakeKnockback({0, 600});
   // BasicAttack();
+  attack = true;
   m_nextState = STATE_FOLLOW;
   m_timer = 2;
   SetState(STATE_PAUSED);
@@ -48,7 +49,10 @@ void BigEnemy::LandedOnGround() {
 
   m_invincible = true;
   m_isRecovering = true;
-  m_attackCollider->Do(transform.position + (glm::vec3){0,0,0}, {150,50,100}, 15, this, Sigma::Damage::DAMAGE,{100,100},true);
+  if (attack) {
+    m_attackCollider->Do(transform.position + (glm::vec3){0,0,0}, {150,50,100}, 13, this, Sigma::Damage::DAMAGE,{100,140},true);
+    attack = false;
+  }
   if (GetAlive())
     m_animComp->SetCurrentAnim("Recover");
   else {

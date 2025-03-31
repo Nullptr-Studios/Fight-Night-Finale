@@ -17,5 +17,6 @@ public:
   void Init() override;
   void AttackState() override;
   void LandedOnGround() override;
+  bool attack = false;
 };
 }

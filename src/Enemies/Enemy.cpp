@@ -32,8 +32,12 @@ void Enemy::Start() {
 }
 
 void Enemy::OnDamage(const Sigma::Damage::DamageEvent& e) {
-   if (e.GetOther()->GetName().contains("Enemy"))
-    return;
+  try {
+    if (e.GetOther()->GetName().contains("Enemy"))
+      return;
+  } catch (std::exception &e) {
+    std::cerr << e.what();
+  }
  
   Character::OnDamage(e);
 

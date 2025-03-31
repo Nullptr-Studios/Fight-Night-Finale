@@ -46,7 +46,7 @@ void TntEnemy::FollowState() {
 
   while(!m_sceneBoundsPoly->IsPointInside((glm::vec2) m_position)) {
     Sigma::Random::Circle();
-    m_position = (glm::vec2)m_nearest->transform.position + (Sigma::Random::Circle() * 200.0f);
+    m_position = (glm::vec2)m_nearest->transform.position + (Sigma::Random::Circle() * 200.0f); //:3 dario faults
   }
 
   if (!m_sceneBoundsPoly->IsPointInside((glm::vec2) m_position)) {
