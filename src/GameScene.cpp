@@ -37,7 +37,6 @@ void game::GameScene::Load() {
   if (J.contains("exitDoorLoc")) {
     m_exitLocationDoor = GET_FACTORY->CreateObject<Door>("Exit_Door", J["exitDoorType"].get<int>());
     m_exitLocationDoor->transform.position = {J["exitDoorLoc"]["x"], J["exitDoorLoc"]["y"], -J["exitDoorLoc"]["y"].get<int>()};
-    m_exitLocationDoor->transform.scale = {J["exitDoorScale"]["x"], J["exitDoorScale"]["y"]};
     AddChild(m_exitLocationDoor);
   }
 
