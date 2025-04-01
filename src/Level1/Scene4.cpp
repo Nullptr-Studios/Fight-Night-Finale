@@ -23,6 +23,9 @@ void Scene4::Load() {
   floor->transform.position.z = -5000;
   AddChild(floor);
 
+  m_exitLocationDoor = GET_FACTORY->CreateObject<Door>("Exit_Door", 2);
+  m_exitLocationDoor->transform.position = {370, -7, 7};
+  AddChild(m_exitLocationDoor);
 
   auto b1 = GET_FACTORY->CreateObject<Box>("Machine1");
   b1->transform.position = {400, -88, 88};

@@ -26,6 +26,10 @@ void Scene2::Load() {
   walls->transform.scale = {1185.0f, 429.0f};
   walls->transform.position.z = -5000;
   AddChild(walls);
+
+  m_exitLocationDoor = GET_FACTORY->CreateObject<Door>("Exit_Door", 3);
+  m_exitLocationDoor->transform.position = {448, -132, 132};
+  AddChild(m_exitLocationDoor);
   
   auto b1 = GET_FACTORY->CreateObject<Box>("Machine1");
   b1->transform.position = {111, 58, -58};

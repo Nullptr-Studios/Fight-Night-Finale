@@ -11,7 +11,7 @@ class Door : public Sigma::Actor {
     explicit Door(uint32_t id, int doorType) : Actor(id) { m_doorType = glm::clamp(1, doorType, 3); }
 
   void Init() override;
-  void Open(float timeToClose = 1.5f);
+  void Open(float timeToClose = 1.5f, bool forever = false);
   void Close();
   void Update(double deltaTime) override;
   void LateUpdate(double deltaTime) override;

@@ -59,6 +59,7 @@ protected:
 
   std::shared_ptr<GlowArea> m_exitLocation = nullptr;
   std::shared_ptr<Door> m_exitLocationDoor = nullptr;
+  std::vector<std::shared_ptr<Door>> m_spawnerDoors{};
   
   std::string m_jsonPath{};
   glm::vec2 m_playerStartPos{};

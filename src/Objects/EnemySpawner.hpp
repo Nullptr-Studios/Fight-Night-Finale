@@ -68,11 +68,5 @@ private:
 
   GameplayManager* m_gameplayManager = nullptr;
 
-  std::vector<std::shared_ptr<Door>> m_doors;
-  
 };
-
 }
-
-
-

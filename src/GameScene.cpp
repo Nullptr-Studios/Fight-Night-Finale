@@ -34,12 +34,6 @@ void game::GameScene::Load() {
     AddChild(m_exitLocation);
   }
 
-  if (J.contains("exitDoorLoc")) {
-    m_exitLocationDoor = GET_FACTORY->CreateObject<Door>("Exit_Door", J["exitDoorType"].get<int>());
-    m_exitLocationDoor->transform.position = {J["exitDoorLoc"]["x"], J["exitDoorLoc"]["y"], -J["exitDoorLoc"]["y"].get<int>()};
-    AddChild(m_exitLocationDoor);
-  }
-
   m_sceneBounds.reserve(J["bounds"].size());
 
   for (auto &boundCoords: J["bounds"]) {
@@ -114,7 +108,7 @@ void game::GameScene::Update(double delta){
     if (m_exitLocation)
       m_exitLocation->SetActive(true);
     if (m_exitLocationDoor)
-      m_exitLocationDoor->Open(9999.9f);
+      m_exitLocationDoor->Open(0, true);
     m_isSceneFinished = true;
   }
 }
@@ -125,7 +119,10 @@ void game::GameScene::Unload() {
   for (const auto& spawner: m_enemySpawners) {
     GET_FACTORY->DestroyObject(spawner);
   }
-
+  for (const auto& door: m_spawnerDoors) {
+    GET_FACTORY->DestroyObject(door);
+  }
+  m_spawnerDoors.clear();
   delete m_sceneBoundsPoly;
 }
 

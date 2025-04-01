@@ -32,6 +32,10 @@ void Scene1::Load() {
   walls->transform.position.z = -5000;
   AddChild(walls);
 
+  m_exitLocationDoor = GET_FACTORY->CreateObject<Door>("Exit_Door", 2);
+  m_exitLocationDoor->transform.position = {344, -70, 70};
+  AddChild(m_exitLocationDoor);
+
   // xd
   // auto nig = GET_FACTORY->CreateObject<HUD>("HUD");
 
