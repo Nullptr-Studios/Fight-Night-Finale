@@ -14,7 +14,6 @@
 namespace game {
 
 void Scene6::Load() {
-  GameScene::Load();
 
   floor = GET_FACTORY->CreateObject<Sigma::Actor>();
   floor->SetTexture("assets/level-1/scene-6-floor.png");
@@ -27,6 +26,8 @@ void Scene6::Load() {
   walls->transform.scale = {953.0f, 538.0f};
   walls->transform.position.z = -5000;
   AddChild(walls);
+
+  GameScene::Load();
 
   SetNextScene(new WinScene("Win Scene", 7));
 }

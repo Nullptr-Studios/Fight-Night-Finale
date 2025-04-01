@@ -10,7 +10,6 @@
 namespace game {
 
 void Scene3::Load() {
-  GameScene::Load();
 
   floor = GET_FACTORY->CreateObject<Sigma::Actor>();
   floor->SetTexture("assets/level-1/scene-3-floor.png");
@@ -37,6 +36,8 @@ void Scene3::Load() {
 
   AddChild(b1);
   AddChild(b2);
+
+  GameScene::Load();
 
   SetNextScene(new Scene4("Game Scene 4", 4, "assets/level-1/scene-4.json"));
 }

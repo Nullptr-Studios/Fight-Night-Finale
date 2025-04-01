@@ -9,7 +9,6 @@
 namespace game {
 
 void Scene4::Load() {
-  GameScene::Load();
 
   walls = GET_FACTORY->CreateObject<Sigma::Actor>("walls");
   walls->SetTexture("assets/level-1/scene-4-walls.png");
@@ -31,6 +30,8 @@ void Scene4::Load() {
   b1->transform.position = {400, -88, 88};
 
   AddChild(b1);
+
+  GameScene::Load();
 
   SetNextScene(new Scene5("Game Scene 5", 5, "assets/level-1/scene-5.json"));
 }

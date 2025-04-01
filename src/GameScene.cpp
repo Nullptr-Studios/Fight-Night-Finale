@@ -84,6 +84,9 @@ void game::GameScene::Load() {
       s->AddEnemiesData(data);
     }
 
+    //Door stuff
+    s->AddDoorData(m_spawnerDoors);
+
     m_enemySpawners.push_back(s);
   }
 

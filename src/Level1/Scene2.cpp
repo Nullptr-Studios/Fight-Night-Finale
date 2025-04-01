@@ -13,7 +13,6 @@
 namespace game {
 
 void Scene2::Load() {
-  GameScene::Load();
 
   floor = GET_FACTORY->CreateObject<Sigma::Actor>();
   floor->SetTexture("assets/level-1/scene-2-floor.png");
@@ -40,21 +39,23 @@ void Scene2::Load() {
   auto Sdoor1 = GET_FACTORY->CreateObject<Door>("Spawner_Door1", 1);
   Sdoor1->transform.position = {-428, 119, -119};
   AddChild(Sdoor1);
-  m_spawnerDoors.emplace_back(Sdoor1);
+  m_spawnerDoors.push_back(Sdoor1);
 
   auto Sdoor2 = GET_FACTORY->CreateObject<Door>("Spawner_Door2", 1);
   Sdoor2->transform.position = {-172, 119, -119};
   AddChild(Sdoor2);
-  m_spawnerDoors.emplace_back(Sdoor2);
+  m_spawnerDoors.push_back(Sdoor2);
 
   auto Sdoor3 = GET_FACTORY->CreateObject<Door>("Spawner_Door3", 2);
   Sdoor3->transform.position = {148, 72, -72};
   AddChild(Sdoor3);
-  m_spawnerDoors.emplace_back(Sdoor3);
+  m_spawnerDoors.push_back(Sdoor3);
 
   m_spawnerDoors.emplace_back(m_exitLocationDoor);
   AddChild(b1);
   AddChild(b2);
+
+  GameScene::Load();
 
   SetNextScene(new Scene3("Game Scene 3", 3, "assets/level-1/scene-3.json"));
 }

@@ -43,6 +43,7 @@ public:
 
   [[nodiscard]] bool GetFinished() const {return m_finished;}
   void AddEnemiesData(EnemySpawnData &enemies) { m_spawnData.emplace_back(enemies); }
+  void AddDoorData(const std::vector<std::shared_ptr<Door>> &spawnerDoors) {m_spawnerDoors = spawnerDoors;}
 
 private:
 
@@ -67,6 +68,8 @@ private:
   std::list<std::shared_ptr<Enemy>> m_enemies;
 
   GameplayManager* m_gameplayManager = nullptr;
+
+  std::vector<std::shared_ptr<Door>> m_spawnerDoors{};
 
 };
 }
