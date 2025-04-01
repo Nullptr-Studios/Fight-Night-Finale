@@ -42,7 +42,6 @@ void DefaultEnemy::Init() {
 void DefaultEnemy::Start() {
   Enemy::Start();
 
-  BindState(STATE_WALK, [this] { WalkState(); });
   BindState(STATE_PAUSED, [this] { PausedState(); });
   BindState(STATE_FOLLOW, [this] { FollowState(); });
   BindState(STATE_ATTACK, [this] { AttackState(); });
@@ -67,45 +66,7 @@ void DefaultEnemy::Update(double delta) {
   Enemy::Update(delta);
 }
 
-/*bool DefaultEnemy::OnCollision(Sigma::Collision::CollisionEvent &e) {
-  if (m_currentState == STATE_WANDER || m_currentState == STATE_WALK || m_currentState == STATE_PAUSED) {
-    return true;
-  }
-  if (auto enemy = dynamic_cast<DefaultEnemy*>(e.GetOther())) {
-    if (isAvoiding || enemy->isAvoiding) {
-      return true;
-    }
-    if (m_distance.length() > enemy->m_distance.length()) {
-      return false;
-    }
-    isAvoiding = true;
-    m_position = Sigma::Random::Circle();
-    m_timer = .7;
-    m_nextState = STATE_FOLLOW;
-    SetState(STATE_WALK);
-    return true;
-  }
-  return true;
-}*/
 
-void DefaultEnemy::WalkState() {
-  if (!m_isDoingSomething)
-    return;
-  if (m_timer <= 0) {
-    m_position = {};
-    m_timer = Sigma::Random::Float(.9f, 1.1f);
-    SetState(STATE_PAUSED);
-  }
-  m_animComp->SetCurrentAnim("Walk");
-  Move({m_position.x, m_position.y});
-  if ((m_position.x >= 0) != (transform.relativeScale.x >= 0)) {
-    transform.relativeScale.x *= -1;
-  }
-  if (!m_sceneBoundsPoly->IsPointInside((glm::vec2) transform.position + (m_position * 5.0f))) {
-    m_timer = Sigma::Random::Float(.6f, .9f);
-    SetState(STATE_PAUSED);
-  }
-}
 
 void DefaultEnemy::PausedState() {
   if (!m_isDoingSomething)
@@ -210,8 +171,7 @@ void DefaultEnemy::RePosing() {
 }
 
 void DefaultEnemy::RepositionState() {
-  if (!m_isDoingSomething)
-    return;
+  if (!m_isDoingSomething) return;
   isAvoiding = false;
   glm::vec2 position = {transform.GetDepthPosition().x, transform.GetDepthPosition().y};
   Player *nearest = GetNearestPlayer();

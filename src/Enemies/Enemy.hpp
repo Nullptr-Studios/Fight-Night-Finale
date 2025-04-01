@@ -93,7 +93,7 @@ private:
   std::map<int, std::function<void()>> m_states = {};
 
   // Placeholder idle state
-  void IdleState() { }
+  virtual void IdleState() {}
   virtual void DeadState() { }
 
   // Timer methods

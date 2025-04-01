@@ -1,0 +1,53 @@
+{
+  "maxHealth" : 70.0,
+  "maxSpeed" : 140.0,
+  "accelerationRate" : 5.0,
+  "jumpVel" : 0.0,
+  "friction" : 1000,
+  "distanceToAttack" : 30.0,
+  "knockbackRes" : 1.0,
+
+  "experience": 5000,
+
+  "hitAnimations" : [
+    "Hit1", "Hit2"
+  ],
+
+  "basicCombo" : [
+    {
+      "type" : "dmg",
+      "damage" : 7.0,
+      "knockback" : { "x" : 80.0, "y" : 0 },
+      "colliderOffset" : { "x" : 22, "y" : 60 },
+      "colliderSize" : { "x" : 20, "y" : 15, "z" : 3 },
+      "animationName" : "Combo1"
+    },
+    {
+      "type" : "dmg",
+      "damage" : 9.0,
+      "knockback" : { "x" : 380.0, "y" : 0 },
+      "colliderOffset" : { "x" : 24, "y" : 59 },
+      "colliderSize" : { "x" : 21, "y" : 15, "z" : 3 },
+      "animationName" : "Combo2"
+    }
+  ],
+
+  "superCombo" : [
+    {
+      "type" : "grb",
+      "damage" : 0.0,
+      "knockback" : { "x" : 300.0, "y" : 300.0 },
+      "colliderOffset" : { "x" : 0.0, "y" : 0.0 },
+      "colliderSize" : { "x" : 0.0, "y" : 0.0, "z" : 0.0 },
+      "animationName" : "hit_super_0"
+    },
+    {
+      "type" : "thr",
+      "damage" : 10.0,
+      "knockback" : { "x" : 300.0, "y" : 300.0 },
+      "colliderOffset" : { "x" : 0.0, "y" : 0.0 },
+      "colliderSize" : { "x" : 0.0, "y" : 0.0, "z" : 0.0 },
+      "animationName" : "hit_super_1"
+    }
+  ]
+}
