@@ -10,6 +10,7 @@ message("Generated with config types: ${CMAKE_CONFIGURATION_TYPES}")
 message("${CMAKE_BUILD_TYPE}")
 
 if(${CMAKE_BUILD_TYPE} STREQUAL "Release")
+    cmake_policy(SET CMP0077 NEW)
     add_compile_options(/W4)
     set(CMAKE_EXE_LINKER_FLAGS_RELEASE "/LTCG")
     set(CMAKE_CXX_FLAGS_RELEASE "/O2 /Ob3 /Qfast_transcendentals /fp:fast")
