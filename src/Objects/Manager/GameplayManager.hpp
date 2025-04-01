@@ -57,16 +57,21 @@ public:
    */
   void RespawnPlayer(game::Player* player);
 
-  void SetPlayerAsDead(game::Player* player);
+  void SetPlayerAsDead(Object* player);
 
-  void TeleportPlayersToNextScene();
 
   /**
    * @brief Check if the second player wants to join the game
    */
   void CheckForCoop();
 
-  /**
+  #pragma region Scene
+
+  void OnScenePass();
+
+  void TeleportPlayersToNextScene();
+
+/**
    * @brief Update the current game scene pointer
    */
   void UpdateCurrentGameScene();
@@ -81,11 +86,14 @@ public:
    */
   void GotoNextSceneAfter();
 
+  Sigma::Polygon* GetSceneBoundsPoly() { return m_currentGameScene->GetSceneBoundsPoly(); }
+
+  #pragma endregion
+
+  
   void FinishedAnSpawner();
 
-  void EnableHUD();
 
-  void DisableHUD();
 
   void UninitializeGame();
 
@@ -93,13 +101,19 @@ public:
 
   std::array<PlayerStruct, 2> *GetPlayers() { return &m_players; }
 
-  Sigma::Polygon* GetSceneBoundsPoly() { return m_currentGameScene->GetSceneBoundsPoly(); }
-
   static GameplayManager* GetInstance() { return m_instance; }
 
+  #pragma region HUD
+  void EnableHUD();
+
+  void DisableHUD();
+  
   void GiveXP(int xp);
 
   [[nodiscard]] int GetXP() const { return m_experience; }
+
+  
+  #pragma endregion
 
 private:
   static GameplayManager* m_instance;

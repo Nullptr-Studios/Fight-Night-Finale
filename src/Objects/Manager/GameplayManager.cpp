@@ -107,7 +107,7 @@ void game::GameplayManager::RespawnPlayer(game::Player *player) {
   // player->m_animComp->PlayAnim();
   player->Respawn();
 }
-void game::GameplayManager::SetPlayerAsDead(game::Player* player) {
+void game::GameplayManager::SetPlayerAsDead(Object* player) {
   m_cameraFollow->targets.erase(std::remove(m_cameraFollow->targets.begin(), m_cameraFollow->targets.end(), player), m_cameraFollow->targets.end());
   player->SetActive(false);
 }
@@ -117,7 +117,7 @@ void game::GameplayManager::TeleportPlayersToNextScene() {
     if (ps.player) {
       ps.player->transform.position = {m_currentGameScene->GetPlayerStartPos().x, m_currentGameScene->GetPlayerStartPos().y,
                                   -m_currentGameScene->GetPlayerStartPos().y};
-      ps.player->Respawn();
+      // ps.player->Respawn();
       ps.player->SetSceneBoundsPoly(m_currentGameScene->GetSceneBoundsPoly());
     }
   }
@@ -184,13 +184,14 @@ void game::GameplayManager::GotoNextSceneAfter() {
   m_cameraFollow->transform.position.y = m_players[0].player->transform.position.y;
 }
 
-
-
-
-void game::GameplayManager::FinishedAnSpawner() { m_gameHud->EnableGOIndicator(); }
+void game::GameplayManager::FinishedAnSpawner() { /*m_gameHud->EnableGOIndicator();*/ }
 
 void game::GameplayManager::EnableHUD() { m_gameHud->Enable(); }
 void game::GameplayManager::DisableHUD() { m_gameHud->Disable(); }
+
+void game::GameplayManager::OnScenePass() {
+  m_gameHud->EnableGOIndicator();
+}
 
 void game::GameplayManager::UninitializeGame() {
   DisableHUD();
@@ -224,7 +225,7 @@ void game::GameplayManager::StartGame() {
   GET_CAMERA->SetCurrentCamera(m_cameraFollow);
 
   
-  //GET_AUDIO->PlayEvent("event:/Music/TestMusic");
+  GET_AUDIO->PlayEvent("event:/Music/TestMusic");
 }
 
 void game::GameplayManager::GiveXP(int xp) {

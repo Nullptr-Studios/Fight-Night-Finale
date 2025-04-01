@@ -6,6 +6,8 @@
 #include "Scene.hpp"
 #include "Tutorial/GlowArea.hpp"
 
+#include "Objects/Manager/GameplayManager.hpp"
+
 
 void game::GameScene::Load() {
   Sigma::Scene::Load();
@@ -115,6 +117,7 @@ void game::GameScene::Update(double delta){
       m_exitLocation->SetActive(true);
     if (m_exitLocationDoor)
       m_exitLocationDoor->Open(9999.9f);
+    GameplayManager::GetInstance()->OnScenePass();
     m_isSceneFinished = true;
   }
 }
