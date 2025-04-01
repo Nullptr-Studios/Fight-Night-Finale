@@ -119,9 +119,7 @@ void game::GameScene::Unload() {
   for (const auto& spawner: m_enemySpawners) {
     GET_FACTORY->DestroyObject(spawner);
   }
-  for (const auto& door: m_spawnerDoors) {
-    GET_FACTORY->DestroyObject(door);
-  }
+
   m_spawnerDoors.clear();
   delete m_sceneBoundsPoly;
 }

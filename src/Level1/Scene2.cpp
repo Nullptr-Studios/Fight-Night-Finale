@@ -37,7 +37,22 @@ void Scene2::Load() {
   auto b2 = GET_FACTORY->CreateObject<Box>("Machine2");
   b2->transform.position = {557, -195, 195};
 
+  auto Sdoor1 = GET_FACTORY->CreateObject<Door>("Spawner_Door1", 1);
+  Sdoor1->transform.position = {-428, 119, -119};
+  AddChild(Sdoor1);
+  m_spawnerDoors.emplace_back(Sdoor1);
 
+  auto Sdoor2 = GET_FACTORY->CreateObject<Door>("Spawner_Door2", 1);
+  Sdoor2->transform.position = {-172, 119, -119};
+  AddChild(Sdoor2);
+  m_spawnerDoors.emplace_back(Sdoor2);
+
+  auto Sdoor3 = GET_FACTORY->CreateObject<Door>("Spawner_Door3", 2);
+  Sdoor3->transform.position = {148, 72, -72};
+  AddChild(Sdoor3);
+  m_spawnerDoors.emplace_back(Sdoor3);
+
+  m_spawnerDoors.emplace_back(m_exitLocationDoor);
   AddChild(b1);
   AddChild(b2);
 
