@@ -1,4 +1,5 @@
 #include "TntEnemy.hpp"
+#include "Enemies/DefaultEnemy.hpp"
 #include "Random.hpp"
 #include "Enemies/Tnt.hpp"
 #include "glm/trigonometric.hpp"
@@ -6,6 +7,11 @@
 #include "glm/gtx/rotate_vector.hpp"
 
 namespace game {
+
+  void TntEnemy::Update(double delta) {
+    DefaultEnemy::Update(delta);
+    m_cooldown -= delta;
+}
 void TntEnemy::Init() {
   Enemy::Init();
   // Setup Animation
@@ -60,16 +66,23 @@ void TntEnemy::FollowState() {
     return;
   }
 
-  m_animComp->SetCurrentAnim("Walk");
 
   if (fabs(m_distance.y) <= 200 && fabs(m_distance.x) <= 200 && fabs(m_distance.x) >= 150) {
+    if (m_cooldown > 0 ) {
+      m_timer = 0.1;
+      m_nextState = STATE_FOLLOW;
+      SetState(STATE_PAUSED);
+      return;
+    }
     m_timer = Sigma::Random::Float(.2f, .3f);
     m_nextState = STATE_ATTACK;
     SetState(STATE_PAUSED);
   } else if (fabs(m_distance.y) <= 25 && fabs(m_distance.x) <= 60 && fabs(m_distance.x) <= 30) {
+    m_animComp->SetCurrentAnim("Walk");
     m_nextState = STATE_FOLLOW;
     SetState(STATE_DISPERSE);
   } else {
+    m_animComp->SetCurrentAnim("Walk");
     m_nextState = STATE_FOLLOW;
     m_timer = 2;
     SetState(STATE_GOTO);
@@ -83,11 +96,19 @@ void TntEnemy::AttackState() {
   if ((m_distance.x >= 0) != (transform.relativeScale.x >= 0)) {
     transform.relativeScale.x *= -1;
   }
+  if (m_cooldown > 0 ) {
+    m_timer = 0.1;
+    m_nextState = STATE_FOLLOW;
+    SetState(STATE_PAUSED);
+    return;
+  }
 
+  m_cooldown = 5;
   m_tnt = GET_FACTORY->CreateObject<Tnt>("Tnt");
   m_tnt->m_start = transform.position;
   m_tnt->m_target = m_nearest->transform.position;
   BasicAttack();
+  SetState(STATE_FOLLOW);
 }
 void TntEnemy::Destroy() {
   DefaultEnemy::Destroy();
