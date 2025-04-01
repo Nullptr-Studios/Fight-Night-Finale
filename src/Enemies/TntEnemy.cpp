@@ -83,6 +83,7 @@ void TntEnemy::AttackState() {
   tnt->m_start = transform.position;
   tnt->m_target = m_nearest->transform.position;
   BasicAttack();
+  SetState(STATE_FOLLOW);
 }
 }
 
