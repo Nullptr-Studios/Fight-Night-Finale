@@ -4,6 +4,7 @@
 #include "Objects/Manager/GameplayManager.hpp"
 #include "Player/Player.hpp"
 #include "UI/HealthBar.hpp"
+#include "UI/UIFade.hpp"
 #include "UI/UIImage.hpp"
 #include "UI/UINumber.hpp"
 #include "UI/UIText.hpp"
@@ -162,22 +163,27 @@ void HUD::Init() {
 
 #pragma region XPBar
   money.numbers.resize(game::UIMoneyBar::maxDigits);
-  money.leftX = -60.0f * game::UIMoneyBar::maxDigits / 2.0f;
 
   for (short i = 0; i < game::UIMoneyBar::maxDigits; i++) {
     money.numbers[i] = GET_FACTORY->CreateObject<Sigma::UINumber>("Money Digit " + std::to_string(i)).get();
     money.numbers[i]->m_screenSpaceTransform.position = money.offset;
     money.numbers[i]->m_screenSpaceTransform.scale = money.numScale;
-    money.numbers[i]->m_screenSpaceTransform.position.x += money.leftX + i * 60.0f;
+    money.numbers[i]->m_screenSpaceTransform.position.x += game::UIMoneyBar::leftX + i * 60.0f;
   }
 
-  money.cashIcon = GET_FACTORY->CreateObject<Sigma::UIElement>("Cash Icon");
-  money.cashIcon->SetTexture("assets/UI/Sprites/Dollar.png");
+  // money.cashIcon = GET_FACTORY->CreateObject<Sigma::UIElement>("Cash Icon");
+  // money.cashIcon->SetTexture("assets/UI/Sprites/Dollar.png");
+  money.cashIcon = GET_FACTORY->CreateObject<Sigma::UIImage>("Cash Icon", "Dollar");
   money.cashIcon->m_screenSpaceTransform.position = money.offset;
   money.cashIcon->m_screenSpaceTransform.scale = money.numScale;
-  money.cashIcon->m_screenSpaceTransform.position.x -= money.leftX;
+  money.cashIcon->m_screenSpaceTransform.position.x -= game::UIMoneyBar::leftX;
 
 #pragma endregion
+
+
+  m_fadeScreen = GET_FACTORY->CreateObject<Sigma::UIFade>("Fade Screen", "White");
+
+  m_fadeScreen->m_screenSpaceTransform.scale = {1920, 1080};
 
   EnableUIMoney(false);
 }
@@ -318,21 +324,23 @@ void HUD::SetNumbers(std::array<std::shared_ptr<Sigma::UINumber>, 2> numbers, in
   numbers[1]->Change(value % 10);
 }
 
-void HUD::SetPlayer1Health(int health) {}
 
 void HUD::Enable() {
-  EnableUIMoney(true);
-  if (m_players->at(0).player != nullptr) {
-    EnableUIPlayer1(true);
-  }
-  if (m_players->at(1).player != nullptr) {
-    EnableUIPlayer2(true);
-  }
+  EnableUIMoney(false);
+  EnableUIPlayer1(false);
+  EnableUIPlayer2(false);
+  m_fadeScreen->ToggleDisable(true);
 }
 void HUD::Disable() {
   EnableUIPlayer1(false);
   EnableUIPlayer2(false);
   EnableUIMoney(false);
+
+  m_fadeScreen->ToggleDisable(false);
+}
+
+void HUD::DoInitialSceneText(std::string text) {
+  
 }
 
 void HUD::UpdateXP(int currentXP) {

@@ -4,7 +4,7 @@
 #include "Polygon.hpp"
 #include "Objects/EnemySpawner.hpp"
 #include "Scene.hpp"
-#include "Tutorial/GlowArea.hpp"
+#include "ScenePassTrigger.hpp"
 
 #include "Objects/Manager/GameplayManager.hpp"
 
@@ -30,7 +30,7 @@ void game::GameScene::Load() {
   m_playerStartPos = {J["playerStart"]["x"], J["playerStart"]["y"]};
 
   if (J.contains("exitLoc")) {
-    m_exitLocation = GET_FACTORY->CreateObject<GlowArea>("Exit");
+    m_exitLocation = GET_FACTORY->CreateObject<ScenePassTrigger>("Exit");
     m_exitLocation->transform.position = {J["exitLoc"]["x"], J["exitLoc"]["y"], -J["exitLoc"]["y"].get<int>()};
     m_exitLocation->SetActive(false);
     AddChild(m_exitLocation);

@@ -9,11 +9,15 @@
 #pragma once
 
 #include "Objects/Object.hpp"
+
 namespace game{
+
 class ScenePassTrigger : public Sigma::Object {
+public:
+  explicit ScenePassTrigger(size_t id) : Object(id) {}
+
   
   void Init() override;
-  void Update(double deltaTime) override;
   bool OnCollision(Sigma::Collision::CollisionEvent& e) override;
 };
 

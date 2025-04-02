@@ -38,12 +38,12 @@ void game::GameplayManager::Init() {
   GET_AUDIO->LoadBank("assets/Sound/Desktop/Master.strings.bank");
   GET_AUDIO->LoadBank("assets/Sound/Desktop/Music.bank");
   GET_AUDIO->LoadBank("assets/Sound/Desktop/SFX.bank");
-  GET_AUDIO->LoadEvent("event:/Music/TestMusic");
+  GET_AUDIO->LoadEvent("event:/Music/MainMusic");
 
 }
 void game::GameplayManager::Start() {
   Object::Start();
-  StartGame();
+  //StartGame();
   
 }
 void game::GameplayManager::FirstUpdate(double deltaTime) {
@@ -162,17 +162,24 @@ void game::GameplayManager::CheckForCoop() {
     }
 }
 
-void game::GameplayManager::UpdateCurrentGameScene() {
+  void game::GameplayManager::UpdateCurrentGameScene() {
   m_currentGameScene = dynamic_cast<game::GameScene *>(*GET_SCENES->begin());
   m_gameSceneIsDirty = false;
 }
 
 void game::GameplayManager::GotoNextScene() {
-  GET_MANAGER->LoadScene(m_currentGameScene->GetNextScene());
-  GET_MANAGER->UnloadScene(m_currentGameScene->GetID());
 
-  //Because the scene is being unloaded at late update wee need to wait till next frame to update the current scene
-  m_gameSceneIsDirty = true;
+  // Do the scene transition
+  m_gameHud->m_fadeScreen->FadeIn(.5f, [this]() {
+    GET_MANAGER->LoadScene(m_currentGameScene->GetNextScene());
+    GET_MANAGER->UnloadScene(m_currentGameScene->GetID());
+    //Because the scene is being unloaded at late update wee need to wait till next frame to update the current scene
+    m_gameSceneIsDirty = true;
+    m_gameHud->m_fadeScreen->FadeOut(.5f);
+  });
+
+  //TODO: Add notification thingi
+  
 }
 
 void game::GameplayManager::GotoNextSceneAfter() {
@@ -181,7 +188,7 @@ void game::GameplayManager::GotoNextSceneAfter() {
   
   AEDbgAssertFunction(m_players[0].player != nullptr, __FILE__, __LINE__, "m_player[0] is nullptr");
   m_cameraFollow->transform.position.x = m_players[0].player->transform.position.x;
-  m_cameraFollow->transform.position.y = m_players[0].player->transform.position.y;
+  m_cameraFollow->transform.position.y = m_players[0].player->transform.position.y + m_cameraFollow->offset;
 }
 
 void game::GameplayManager::FinishedAnSpawner() { /*m_gameHud->EnableGOIndicator();*/ }
@@ -205,14 +212,15 @@ void game::GameplayManager::UninitializeGame() {
   m_players = {};
 
   GET_FACTORY->DestroyObject(m_cameraFollow);
+  m_cameraFollow = nullptr;
   m_currentGameScene = nullptr;
 
   m_started = false;
 
-  GET_AUDIO->StopEvent("event:/Music/TestMusic");
+  GET_AUDIO->StopEvent("event:/Music/MainMusic");
 }
 
-void game::GameplayManager::StartGame() {
+void game::GameplayManager::StartGame(const std::string& sceneName) {
   if (m_started)
     return;
 
@@ -220,12 +228,14 @@ void game::GameplayManager::StartGame() {
 
   SetActive(true);
   UpdateCurrentGameScene();
+  m_gameHud->Enable();
+  m_gameHud->m_fadeScreen->DoIntermission(sceneName);
   m_cameraFollow = GET_FACTORY->CreateObject<Sigma::CameraFollow>("Main Camera Follow");
   m_cameraFollow->size = 3;
   GET_CAMERA->SetCurrentCamera(m_cameraFollow);
 
   
-  GET_AUDIO->PlayEvent("event:/Music/TestMusic");
+  GET_AUDIO->PlayEvent("event:/Music/MainMusic");
 }
 
 void game::GameplayManager::GiveXP(int xp) {

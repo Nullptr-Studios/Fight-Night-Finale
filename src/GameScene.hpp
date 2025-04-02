@@ -16,14 +16,14 @@ class Polygon;
 
 namespace game {
 
-class GlowArea;
+class ScenePassTrigger;
 class EnemySpawner;
 class Player;
 
 class GameScene : public Sigma::Scene {
 public:
  
-  /**
+    /**
    * @brief Construct a new Game Scene object
    *
    * @param name
@@ -57,7 +57,7 @@ protected:
 
   bool m_isSceneFinished = false;
 
-  std::shared_ptr<GlowArea> m_exitLocation = nullptr;
+  std::shared_ptr<ScenePassTrigger> m_exitLocation = nullptr;
   std::shared_ptr<Door> m_exitLocationDoor = nullptr;
   
   std::string m_jsonPath{};

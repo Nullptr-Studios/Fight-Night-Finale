@@ -13,6 +13,7 @@
 
 #include "Objects/ShakeObject.hpp"
 #include "UI/UIImage.hpp"
+#include "UI/UIFade.hpp"
 #include "UI/UINumber.hpp"
 #include "UI/UIText.hpp"
 #include "UI/HealthBar.hpp"
@@ -63,7 +64,7 @@ struct UIHealthBar {
     comboText->SetTint({.5f, 0.5f, 0.5f, 1.0f});
   }
 
-  void ComboSuccesfull() 
+  void ComboSuccesfull() const 
   {
     std::string str = std::to_string(combo) + " Hit Streak";
     std::string rating;
@@ -125,7 +126,7 @@ constexpr int pow(int base, int exp) {
 
 struct UIMoneyBar {
 
-  static constexpr int maxDigits {8}; ///>@brief Max amount of digits displayable
+  static constexpr int maxDigits {7}; ///>@brief Max amount of digits displayable
   static constexpr int maxCash {pow(10, game::UIMoneyBar::maxDigits) - 1}; ///>@brief Max amount cash displayable, dependent on maxDigits
   int startCash = 0; ///>@brief Cash with which linear interpolation starts
   int endCash = 0; ///>@brief Cash with which linear interpolation ends
@@ -141,7 +142,7 @@ struct UIMoneyBar {
 
   glm::vec2 numScale = {54,63};
   glm::vec3 offset = {0,461,0};
-  float leftX = 0; ///>@brief Left-most coordinate of the money display
+  static constexpr float leftX {-60.0f * game::UIMoneyBar::maxDigits / 2.0f}; ///>@brief Left-most coordinate of the money display
 
   void DisplayMoney(int val) {
     if (val == displayedCash) 
@@ -173,10 +174,11 @@ public:
   void Init() override;
   void Start() override;
   void Update(double delta) override;
-  void SetPlayer1Health(int health);
 
   void Enable();
   void Disable();
+
+  void DoInitialSceneText(std::string text);
 
   void UpdateXP(int currentXP);
 
@@ -185,6 +187,10 @@ public:
   void SetNumbers(std::array<std::shared_ptr<Sigma::UINumber>, 2> numbers, int value);
 
   void EnableGOIndicator();
+
+  
+  std::shared_ptr<Sigma::UIFade> m_fadeScreen = nullptr;
+
 private:
 
   float m_goMaxTimer = 3.0f;
@@ -202,6 +208,7 @@ private:
   UIHealthBar player1 = {};
   UIHealthBar player2 = {};
   UIMoneyBar money = {};
+
 
   std::array<PlayerStruct, 2>* m_players = {};
 };

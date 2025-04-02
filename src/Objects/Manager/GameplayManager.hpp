@@ -97,7 +97,7 @@ public:
 
   void UninitializeGame();
 
-  void StartGame();
+  void StartGame(const std::string& sceneName = "Level 1");
 
   std::array<PlayerStruct, 2> *GetPlayers() { return &m_players; }
 

@@ -43,7 +43,7 @@ void game::MainMenu::Load() {
   //
   // AddChild(m_studioLogo);
   
-  auto s = new game::Tutorial1("Tutorial 1 ", 1, "assets/tutorial/tutorial-1.json");
+    auto s = new game::Tutorial1("Tutorial 1 ", 1, "assets/tutorial/tutorial-1.json");
   // auto s = new game::WinScene("Game Scene1", 0);
   m_playButton = GET_FACTORY->CreateObject<Sigma::SceneButton>("Play Button", s, GetID());
   m_playButton->m_screenSpaceTransform.scale = {200, 100};
