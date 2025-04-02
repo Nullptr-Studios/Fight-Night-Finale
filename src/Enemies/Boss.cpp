@@ -96,7 +96,6 @@ void Boss::BasicAttack() {
   float distance = glm::distance(position, m_goto);
   if (distance < 5.0f) {
     BasicAttack();
-    EndAttack();
     WaitSeconds(.1f, STATE_PURSUE);
   } else {
     WaitSeconds(.1f, STATE_PURSUE);
@@ -109,13 +108,12 @@ void Boss::SpecialAttack() {
   float distance = glm::distance(position, m_goto);
   if (distance < 5.0f) {
     BasicAttack();
-    EndAttack();
   } else {
     WaitSeconds(.1f, STATE_RETREAT);
   }
 }
 
-void Boss::EndAttack() {
+void Boss::OnFullComboPerformed(bool super) {
   if (m_nextState == STATE_BASIC) {
     m_nextState = STATE_SPECIAL;
     WaitSeconds(.1f, STATE_RETREAT);

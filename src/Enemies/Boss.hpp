@@ -34,7 +34,7 @@ public:
   static constexpr int STATE_SPECIAL = 96;
   virtual void SpecialAttack();
 
-  void EndAttack();
+  void OnFullComboPerformed(bool super) override;
   void DebugWindow() override;
 
 private:
