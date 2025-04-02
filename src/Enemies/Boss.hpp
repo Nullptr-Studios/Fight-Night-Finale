@@ -29,13 +29,13 @@ public:
   void IdleState() override;
 
   static constexpr int STATE_BASIC = 42;
-  virtual void BasicAttack();
+  virtual void BasicState();
 
   static constexpr int STATE_SPECIAL = 96;
-  virtual void SpecialAttack();
+  virtual void SpecialState();
 
-  void OnFullComboPerformed(bool super) override;
   void DebugWindow() override;
+  void EndAttack();
 
 private:
   Player* m_player{};
