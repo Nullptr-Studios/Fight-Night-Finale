@@ -35,7 +35,8 @@ public:
   virtual void SpecialState();
 
   void DebugWindow() override;
-  void EndAttack();
+  void EndedMove() override;
+  void FacePlayer();
 
 private:
   Player* m_player{};

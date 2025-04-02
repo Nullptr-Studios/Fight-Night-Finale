@@ -1,6 +1,8 @@
 #include "Boss.hpp"
 #include "Random.hpp"
 #include "aecore/imgui/imgui.h"
+#include "glm/fwd.hpp"
+#include "glm/geometric.hpp"
 
 
 namespace game {
@@ -97,15 +99,18 @@ void Boss::Retreat() {
 }
 
 void Boss::BasicState() {
-  if (!m_isDoingSomething)
-    return;
+  if (!m_isDoingSomething) return;
+  glm::vec3 targets[2];
+  targets[0] = m_player->transform.position + glm::vec3(-30,0,0);
+  targets[1] = m_player->transform.position + glm::vec3(30,0,0);
+  m_goto = glm::distance(transform.position, targets[0]) < glm::distance(transform.position, targets[1]) ? targets[0] : targets[1];
   glm::vec2 position = (glm::vec2) transform.GetDepthPosition();
   float distance = glm::distance(position, m_goto);
   if (distance <= 10) {
+    FacePlayer();
     BasicAttack();
-    EndAttack();
   } else {
-    WaitSeconds(.1f, STATE_PURSUE);
+    WaitSeconds(.1f, STATE_GOTO);
   }
 }
 
@@ -115,15 +120,29 @@ void Boss::SpecialState() {
   glm::vec2 position = (glm::vec2) transform.GetDepthPosition();
   float distance = glm::distance(position, m_goto);
   if (distance <= 10) {
+    FacePlayer();
     SuperAttack();
-    EndAttack();
   } else {
     WaitSeconds(.1f, STATE_RETREAT);
   }
 }
 
-void Boss::EndAttack() {
-  if (m_nextState == STATE_BASIC) {
+void Boss::FacePlayer() {
+  glm::vec3 distance = m_player->transform.GetDepthPosition() - transform.GetDepthPosition();
+  if ((distance.x >= 0) != (transform.relativeScale.x >= 0)) {
+    transform.relativeScale.x *= -1;
+  }
+}
+
+void Boss::EndedMove() {
+  std::cout << "oopsi";
+  if (m_hasDoneDamage) {
+    if (m_basicCombo == m_basicDefault.size()) {
+      WaitSeconds(5.5f, m_currentState);
+    }
+    return;
+  }
+  if (rand() % 10 == 0) {
     m_nextState = STATE_SPECIAL;
     SetState(STATE_RETREAT);
   } else {
