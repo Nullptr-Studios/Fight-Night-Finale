@@ -81,10 +81,9 @@ void game::GameplayManager::Update(double deltaTime) {
   }
 
   //return to main menu
-  if (AEInputKeyPressed(27)) {
-    GET_MANAGER->LoadScene(new MainMenu("Main Menu", 0));
-    GET_MANAGER->UnloadScene(m_currentGameScene->GetID());
-    UninitializeGame();
+  if (AEInputKeyTriggered(27)) {
+    m_paused = m_paused==false;
+    m_gameHud->EnableUIPauseMenu(m_paused);
   }
 
   // Debug pass level

@@ -20,6 +20,8 @@
 #include "Objects/Object.hpp"
 
 #include "Objects/ShakeObject.hpp"
+#include "UI/SceneButton.hpp"
+#include "UI/UIButton.hpp"
 
 namespace game {
 
@@ -166,6 +168,13 @@ struct UIMoneyBar {
 
 };
 
+struct UIPauseMenu {
+  std::shared_ptr<Sigma::UIElement> m_background = nullptr;
+  std::shared_ptr<Sigma::SceneButton> m_exitButton = nullptr;
+
+  bool active = false;
+};
+
 class HUD : public Sigma::Object {
 public:
   explicit HUD(const Sigma::id_t id) : Object(id) {}
@@ -187,9 +196,10 @@ public:
   void SetNumbers(std::array<std::shared_ptr<Sigma::UINumber>, 2> numbers, int value);
 
   void EnableGOIndicator();
-
+  void EnableUIPauseMenu(bool enable);
   
   std::shared_ptr<Sigma::UIFade> m_fadeScreen = nullptr;
+
 
 private:
 
@@ -208,6 +218,7 @@ private:
   UIHealthBar player1 = {};
   UIHealthBar player2 = {};
   UIMoneyBar money = {};
+  UIPauseMenu pauseMenu = {};
 
 
   std::array<PlayerStruct, 2>* m_players = {};

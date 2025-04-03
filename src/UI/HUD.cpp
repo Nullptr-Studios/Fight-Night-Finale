@@ -1,6 +1,8 @@
 #include "HUD.hpp"
 #include "Core.hpp"
 #include "Factory.hpp"
+#include "GameManager.hpp"
+#include "MainMenu.hpp"
 #include "Objects/Manager/GameplayManager.hpp"
 #include "Player/Player.hpp"
 #include "UI/HealthBar.hpp"
@@ -180,12 +182,31 @@ void HUD::Init() {
 
 #pragma endregion
 
+#pragma region PauseMenu
+
+  pauseMenu.m_background = GET_FACTORY->CreateObject<Sigma::UIElement>("Pause Background");
+  pauseMenu.m_background->SetTexture("assets/UI/Paused.png");
+  pauseMenu.m_background->m_screenSpaceTransform.scale = {1920,1080};
+
+  pauseMenu.m_exitButton = GET_FACTORY->CreateObject<Sigma::SceneButton>("Quit Button", []()
+  {
+    GET_MANAGER->UnloadScene(GameplayManager::GetInstance()->GetCurrentGameScene()->GetID());
+    GameplayManager::GetInstance()->UninitializeGame();
+    GET_MANAGER->LoadScene(new MainMenu("Main Menu", 0));
+  });
+  pauseMenu.m_exitButton->m_screenSpaceTransform.scale = {200, 100};
+  pauseMenu.m_exitButton->m_screenSpaceTransform.position.y -= 440;
+  pauseMenu.m_exitButton->SetTexture("assets/UI/Sprites/Exit_Sign.png");
+
+#pragma endregion
+
 
   m_fadeScreen = GET_FACTORY->CreateObject<Sigma::UIFade>("Fade Screen", "White");
 
   m_fadeScreen->m_screenSpaceTransform.scale = {1920, 1080};
 
   EnableUIMoney(false);
+  EnableUIPauseMenu(false);
 }
 
 void HUD::EnableUIMoney(bool enable) {
@@ -198,6 +219,12 @@ void HUD::EnableUIMoney(bool enable) {
   money.startCash = 0;
   money.endCash = 0;
   money.timer = 0.0f;
+}
+
+void HUD::EnableUIPauseMenu(bool enable) {
+  pauseMenu.m_background->SetActive(enable);
+  pauseMenu.m_exitButton->SetActive(enable);
+  pauseMenu.active = enable;
 }
 
 void HUD::EnableUIPlayer1(bool enable) {
@@ -329,13 +356,14 @@ void HUD::Enable() {
   EnableUIMoney(false);
   EnableUIPlayer1(false);
   EnableUIPlayer2(false);
+  EnableUIPauseMenu(false);
   m_fadeScreen->ToggleDisable(true);
 }
 void HUD::Disable() {
   EnableUIPlayer1(false);
   EnableUIPlayer2(false);
   EnableUIMoney(false);
-
+  EnableUIPauseMenu(false);
   m_fadeScreen->ToggleDisable(false);
 }
 

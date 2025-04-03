@@ -86,6 +86,8 @@ public:
    */
   void GotoNextSceneAfter();
 
+  GameScene* GetCurrentGameScene() const { return m_currentGameScene; };
+
   Sigma::Polygon* GetSceneBoundsPoly() { return m_currentGameScene->GetSceneBoundsPoly(); }
 
   #pragma endregion
@@ -128,6 +130,7 @@ private:
   game::GameScene *m_currentGameScene = nullptr;
   unsigned char m_playerCount = 0;
   bool m_gameSceneIsDirty = true;
+  bool m_paused = false;
 
   /**
    * @brief holds the information required for the xp system
