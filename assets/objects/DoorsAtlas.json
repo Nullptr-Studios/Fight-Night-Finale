@@ -173,6 +173,7 @@
 	"version": "1.0",
 	"image": "assets/objects/DoorsAtlas.png",
 	"format": "RGBA8888",
+	"fps": 12,
 	"size": {"w":115,"h":305},
 	"scale": "1",
 	"smartupdate": "$TexturePacker:SmartUpdate:76a81f6256dce7a85552571872ef4d31:21e325c5ef8892a2396fbca10e2526dc:2dae185fcd518f00fb83a80724b42a0c$"
