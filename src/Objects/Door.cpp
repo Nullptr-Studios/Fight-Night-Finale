@@ -12,13 +12,14 @@ void game::Door::Init() {
   m_animComp->PlayAndStop();
 }
 
-void game::Door::Open(float timeToClose) {
+void game::Door::Open(float timeToClose, bool forever) {
   m_timer = 0.0f;
   m_timerMax = timeToClose;
   if (!m_isOpen) {
     m_animComp->SetCurrentAnim("Open"+std::to_string(m_doorType));
     m_animComp->PlayAndStop();
-    m_isOpen = true;
+    if (!forever)
+      m_isOpen = true;
   }
 }
 

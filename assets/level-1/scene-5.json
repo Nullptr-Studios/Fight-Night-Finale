@@ -1,8 +1,6 @@
 {
   "playerStart": {"x": -550, "y": -50},
   "exitLoc": {"x": 668, "y": -132},
-  "exitDoorLoc" : {"x": 706, "y": -97},
-  "exitDoorType" : 2,
   "bounds": [
     {"x": -636, "y": -70},
     {"x": -410, "y": -70},
