@@ -183,6 +183,8 @@ void game::GameplayManager::GotoNextScene() {
 }
 
 void game::GameplayManager::GotoNextSceneAfter() {
+  if (m_uninitializeGame)
+    return;
   UpdateCurrentGameScene();
   TeleportPlayersToNextScene();
   
@@ -203,6 +205,7 @@ void game::GameplayManager::OnScenePass() {
 void game::GameplayManager::UninitializeGame() {
   DisableHUD();
   SetActive(false);
+  m_uninitializeGame = true;
 
   for (const auto& element: m_players) {
     if (element.player != nullptr)
@@ -223,6 +226,8 @@ void game::GameplayManager::UninitializeGame() {
 void game::GameplayManager::StartGame(const std::string& sceneName) {
   if (m_started)
     return;
+
+  m_uninitializeGame =false;
 
   m_experience = 0;
 

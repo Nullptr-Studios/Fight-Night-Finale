@@ -128,6 +128,7 @@ private:
   game::GameScene *m_currentGameScene = nullptr;
   unsigned char m_playerCount = 0;
   bool m_gameSceneIsDirty = true;
+  bool m_uninitializeGame = false;
 
   /**
    * @brief holds the information required for the xp system
