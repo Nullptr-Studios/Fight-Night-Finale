@@ -47,7 +47,7 @@ private:
   glm::vec2 m_goto{};
   int m_nextState{};
   int m_consectutiveAttack{};
-  std::vector<std::shared_ptr<Proj>> destructionQueue{};
+  std::vector<std::shared_ptr<Proj>> destructionQueue;
 
 };
 }

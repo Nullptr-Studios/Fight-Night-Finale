@@ -136,10 +136,7 @@ void Boss::SpecialState() {
     }
     m_consectutiveAttack++;
     std::shared_ptr<Proj> proj = GET_FACTORY->CreateObject<game::Proj>("Proj");
-    proj->transform.position =
-        transform.position +
-        glm::vec3(Sigma::Random::Float(.5, .5), Sigma::Random::Float(.5, .5), Sigma::Random::Float(.5, .5)) * 3.0f +
-        glm::vec3(0, 60, 0);
+    proj->transform.position = transform.position + glm::vec3(0, 60, 0);
     proj->velocity =
         glm::normalize(proj->transform.position - (m_player->transform.position + glm::vec3(0, 55, 0))) * -100.0f;
     destructionQueue.push_back(proj);
@@ -174,10 +171,10 @@ void Boss::EndedMove() {
 void Boss::Destroy() {
   Enemy::Destroy();
   while (!destructionQueue.empty()) {
-    if (destructionQueue.front()) {
-      GET_FACTORY->DestroyObject(destructionQueue.front());
-      destructionQueue.pop_back();
+    if (destructionQueue.back()) {
+      GET_FACTORY->DestroyObject(destructionQueue.back());
     }
+    destructionQueue.pop_back();
   }
 }
 
