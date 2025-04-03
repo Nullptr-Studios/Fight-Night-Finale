@@ -9,6 +9,7 @@
 #pragma once
 
 #include "Enemies/Enemy.hpp"
+#include "Enemies/Proj.hpp"
 namespace game {
 class Boss : public Enemy {
 public:
@@ -34,6 +35,8 @@ public:
   static constexpr int STATE_SPECIAL = 96;
   virtual void SpecialState();
 
+  void Destroy() override;
+
   void DebugWindow() override;
   void EndedMove() override;
   void FacePlayer();
@@ -43,6 +46,8 @@ private:
   float m_timer{};
   glm::vec2 m_goto{};
   int m_nextState{};
+  int m_consectutiveAttack{};
+  std::vector<std::shared_ptr<Proj>> destructionQueue{};
 
 };
 }

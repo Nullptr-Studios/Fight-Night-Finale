@@ -1,4 +1,8 @@
 #include "Boss.hpp"
+#include <cstdlib>
+#include "Core.hpp"
+#include "Enemies/Proj.hpp"
+#include "Factory.hpp"
 #include "Random.hpp"
 #include "aecore/imgui/imgui.h"
 #include "glm/fwd.hpp"
@@ -99,11 +103,13 @@ void Boss::Retreat() {
 }
 
 void Boss::BasicState() {
-  if (!m_isDoingSomething) return;
+  if (!m_isDoingSomething)
+    return;
   glm::vec3 targets[2];
-  targets[0] = m_player->transform.position + glm::vec3(-30,0,0);
-  targets[1] = m_player->transform.position + glm::vec3(30,0,0);
-  m_goto = glm::distance(transform.position, targets[0]) < glm::distance(transform.position, targets[1]) ? targets[0] : targets[1];
+  targets[0] = m_player->transform.position + glm::vec3(-30, 0, 0);
+  targets[1] = m_player->transform.position + glm::vec3(30, 0, 0);
+  m_goto = glm::distance(transform.position, targets[0]) < glm::distance(transform.position, targets[1]) ? targets[0]
+                                                                                                         : targets[1];
   glm::vec2 position = (glm::vec2) transform.GetDepthPosition();
   float distance = glm::distance(position, m_goto);
   if (distance <= 10) {
@@ -122,6 +128,21 @@ void Boss::SpecialState() {
   if (distance <= 10) {
     FacePlayer();
     SuperAttack();
+
+    if (m_consectutiveAttack == 3) {
+      m_consectutiveAttack = 0;
+      EndedMove();
+      return;
+    }
+    m_consectutiveAttack++;
+    std::shared_ptr<Proj> proj = GET_FACTORY->CreateObject<game::Proj>("Proj");
+    proj->transform.position =
+        transform.position +
+        glm::vec3(Sigma::Random::Float(.5, .5), Sigma::Random::Float(.5, .5), Sigma::Random::Float(.5, .5)) * 3.0f +
+        glm::vec3(0, 60, 0);
+    proj->velocity =
+        glm::normalize(proj->transform.position - (m_player->transform.position + glm::vec3(0, 55, 0))) * -100.0f;
+    destructionQueue.push_back(proj);
   } else {
     WaitSeconds(.1f, STATE_RETREAT);
   }
@@ -136,13 +157,15 @@ void Boss::FacePlayer() {
 
 void Boss::EndedMove() {
   std::cout << "oopsi";
-  if (m_hasDoneDamage) {
-    if (m_basicCombo == m_basicDefault.size()) {
-      WaitSeconds(5.5f, m_currentState);
-    }
+  if (m_hasDoneDamage && m_consectutiveAttack < m_basicDefault.size() && m_nextState == STATE_BASIC) {
+    // if (m_basicCombo == m_basicDefault.size() - 1) {
+    //   WaitSeconds(5.5f, m_currentState);
+    // }
+    m_consectutiveAttack++;
     return;
   }
-  if (rand() % 10 == 0) {
+  m_consectutiveAttack = 0;
+  if (rand() % 2 == 0) {
     m_nextState = STATE_SPECIAL;
     SetState(STATE_RETREAT);
   } else {
@@ -151,5 +174,13 @@ void Boss::EndedMove() {
   }
 }
 
+void Boss::Destroy() {
+  while (!destructionQueue.empty()) {
+    if (destructionQueue.front()) {
+      GET_FACTORY->DestroyObject(destructionQueue.front()->GetId());
+      destructionQueue.pop_back();
+    }
+  }
+}
 
 } // namespace game
