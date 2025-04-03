@@ -35,6 +35,9 @@ public:
   static constexpr int STATE_SPECIAL = 96;
   virtual void SpecialState();
 
+  void SpecialOne();
+  void SpecialTwo();
+
   void Destroy() override;
 
   void DebugWindow() override;
@@ -44,9 +47,11 @@ public:
 private:
   Player* m_player{};
   float m_timer{};
+  bool m_phaseDose = true;
   glm::vec2 m_goto{};
   int m_nextState{};
   int m_consectutiveAttack{};
+  bool dash{};
   std::vector<std::shared_ptr<Proj>> destructionQueue;
 
 };

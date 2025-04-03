@@ -78,6 +78,10 @@ void Boss::GotoState() {
   }
   m_animComp->SetCurrentAnim("Walk");
   Move(direction);
+  if (dash) {
+    Dash();
+    dash = false;
+  }
 }
 
 void Boss::Pursue() {
@@ -99,6 +103,7 @@ void Boss::Retreat() {
   while (!m_sceneBoundsPoly->IsPointInside(m_goto)) {
     m_goto = (glm::vec2) m_player->transform.position + (Sigma::Random::Circle() * 150.0f);
   }
+  dash = true;
   WaitSeconds(.1f, STATE_GOTO);
 }
 
@@ -126,23 +131,36 @@ void Boss::SpecialState() {
   glm::vec2 position = (glm::vec2) transform.GetDepthPosition();
   float distance = glm::distance(position, m_goto);
   if (distance <= 10) {
+    dash = false;
     FacePlayer();
-    SuperAttack();
-
-    if (m_consectutiveAttack == 3) {
-      m_consectutiveAttack = 0;
-      EndedMove();
-      return;
+    // SuperAttack();
+    if (!m_phaseDose) {
+      SpecialOne();
+    } else {
+      SpecialTwo();
+      SpecialOne();
     }
-    m_consectutiveAttack++;
-    std::shared_ptr<Proj> proj = GET_FACTORY->CreateObject<game::Proj>("Proj");
-    proj->transform.position = transform.position + glm::vec3(0, 60, 0);
-    proj->velocity =
-        glm::normalize(proj->transform.position - (m_player->transform.position + glm::vec3(0, 55, 0))) * -100.0f;
-    destructionQueue.push_back(proj);
+    if (m_consectutiveAttack >= 3) {
+      EndedMove();
+    }
   } else {
     WaitSeconds(.1f, STATE_RETREAT);
   }
+}
+
+void Boss::SpecialOne() {
+  m_consectutiveAttack++;
+  std::shared_ptr<Proj> proj = GET_FACTORY->CreateObject<game::Proj>("Proj");
+  proj->transform.position = transform.position + glm::vec3(0, 60, 0);
+  proj->velocity =
+    glm::normalize(proj->transform.position - (m_player->transform.position + glm::vec3(0, 55, 0))) * -200.0f;
+  destructionQueue.push_back(proj);
+}
+
+void Boss::SpecialTwo() {
+  // glm::vec2 direction = glm::normalize(m_player->transform.position - transform.position);
+  // Move(direction);
+  // Dash();
 }
 
 void Boss::FacePlayer() {
@@ -153,7 +171,6 @@ void Boss::FacePlayer() {
 }
 
 void Boss::EndedMove() {
-  std::cout << "oopsi";
   if (m_hasDoneDamage && m_consectutiveAttack < m_basicDefault.size() && m_nextState == STATE_BASIC) {
     m_consectutiveAttack++;
     return;

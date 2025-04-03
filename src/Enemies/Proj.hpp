@@ -19,6 +19,6 @@ public:
   bool OnCollision(Sigma::Collision::CollisionEvent &e) override;
   glm::vec3 velocity{};
 private:
-  float m_damage = 10;
+  float m_damage = 1;
 };
 } // namespace game
