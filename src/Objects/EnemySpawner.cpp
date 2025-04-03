@@ -75,7 +75,9 @@ void game::EnemySpawner::Update(double deltaTime) {
 
       for (int i = 0; i < stepAmount && m_currentEnemyIndex < m_spawnData.size(); ++i) {
         m_currentEnemyData = m_spawnData[m_currentEnemyIndex];
-        SpawnEnemy();
+        for (int j = 0; j < 20; j++) {
+          SpawnEnemy();
+        }
         if (!m_spawnerDoors.empty() && m_currentEnemyData.entranceId < m_spawnerDoors.size()) {
           m_spawnerDoors[m_currentEnemyData.entranceId]->Open(0.75f);
         }
