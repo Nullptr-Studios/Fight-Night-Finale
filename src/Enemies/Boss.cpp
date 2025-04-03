@@ -158,9 +158,6 @@ void Boss::FacePlayer() {
 void Boss::EndedMove() {
   std::cout << "oopsi";
   if (m_hasDoneDamage && m_consectutiveAttack < m_basicDefault.size() && m_nextState == STATE_BASIC) {
-    // if (m_basicCombo == m_basicDefault.size() - 1) {
-    //   WaitSeconds(5.5f, m_currentState);
-    // }
     m_consectutiveAttack++;
     return;
   }
@@ -175,9 +172,10 @@ void Boss::EndedMove() {
 }
 
 void Boss::Destroy() {
+  Enemy::Destroy();
   while (!destructionQueue.empty()) {
     if (destructionQueue.front()) {
-      GET_FACTORY->DestroyObject(destructionQueue.front()->GetId());
+      GET_FACTORY->DestroyObject(destructionQueue.front());
       destructionQueue.pop_back();
     }
   }
