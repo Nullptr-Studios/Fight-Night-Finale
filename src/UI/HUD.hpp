@@ -144,16 +144,19 @@ struct UIMoneyBar {
   glm::vec3 offset = {0,461,0};
   static constexpr float leftX {-60.0f * game::UIMoneyBar::maxDigits / 2.0f}; ///>@brief Left-most coordinate of the money display
 
-  void DisplayMoney(int val) {
-    if (val == displayedCash) 
-      return; 
+void DisplayMoney(int val) {
+    if (val == displayedCash)
+      return;
 
     displayedCash = val;
+    int divisor = static_cast<int>(glm::pow(10, maxDigits - 1));
     for (int i = 0; i < maxDigits; i++) {
-      int currentVal = displayedCash % static_cast<int>(glm::pow(10, maxDigits-i)) / static_cast<int>(glm::pow(10, maxDigits-i-1));
+      int currentVal = (displayedCash / divisor) % 10;
       numbers[i]->Change(currentVal);
+      divisor /= 10;
     }
   }
+
 
   int LerpMoney(const double delta) {
     timer += delta;
