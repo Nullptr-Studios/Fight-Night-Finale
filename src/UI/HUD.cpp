@@ -188,16 +188,6 @@ void HUD::Init() {
   pauseMenu.m_background->SetTexture("assets/UI/Paused.png");
   pauseMenu.m_background->m_screenSpaceTransform.scale = {1920,1080};
 
-  pauseMenu.m_exitButton = GET_FACTORY->CreateObject<Sigma::SceneButton>("Quit Button", []()
-  {
-    GET_MANAGER->UnloadScene(GameplayManager::GetInstance()->GetCurrentGameScene()->GetID());
-    GameplayManager::GetInstance()->UninitializeGame();
-    GET_MANAGER->LoadScene(new MainMenu("Main Menu", 0));
-  });
-  pauseMenu.m_exitButton->m_screenSpaceTransform.scale = {200, 100};
-  pauseMenu.m_exitButton->m_screenSpaceTransform.position.y -= 440;
-  pauseMenu.m_exitButton->SetTexture("assets/UI/Sprites/Exit_Sign.png");
-
 #pragma endregion
 
 
@@ -223,7 +213,6 @@ void HUD::EnableUIMoney(bool enable) {
 
 void HUD::EnableUIPauseMenu(bool enable) {
   pauseMenu.m_background->SetActive(enable);
-  pauseMenu.m_exitButton->SetActive(enable);
   pauseMenu.active = enable;
 }
 

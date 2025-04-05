@@ -170,8 +170,6 @@ struct UIMoneyBar {
 
 struct UIPauseMenu {
   std::shared_ptr<Sigma::UIElement> m_background = nullptr;
-  std::shared_ptr<Sigma::SceneButton> m_exitButton = nullptr;
-
   bool active = false;
 };
 
