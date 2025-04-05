@@ -1,5 +1,5 @@
 #include "Boss.hpp"
-#include <cstdlib>
+#include "AnimationSystem/AnimationSystem.hpp"
 #include "Core.hpp"
 #include "Enemies/Proj.hpp"
 #include "Factory.hpp"
@@ -19,6 +19,11 @@ void Boss::DebugWindow() {
 void Boss::Update(double delta) {
   Enemy::Update(delta);
   m_player = GetNearestPlayer();
+  if (!m_phaseDose && m_isGrabbed) {
+    float health = m_health;
+    Transition();
+    m_health = health;
+  }
 }
 
 void Boss::Init() {
@@ -52,8 +57,16 @@ void Boss::Start() {
 }
 
 void Boss::Transition() {
-  m_jsonPath = "assets/characters/Boss/behaviourDose.json";
-  Serialize();
+  auto anim = GET_ANIMATION->LoadTextureAtlas("assets/characters/Boss/anim-dataDose.json");
+  m_animComp->SetTextureAtlas(anim);
+  // m_animComp->SetCurrentAnim("Idle");
+  SetTexture(anim->textureStr.c_str());
+  m_animComp->PlayAnim();
+  m_phaseDose = true;
+}
+
+bool Boss::IsInBounds(glm::vec2 pos) {
+  return m_sceneBoundsPoly->IsPointInside(pos);
 }
 
 void Boss::IdleState() {
@@ -71,7 +84,7 @@ void Boss::GotoState() {
   if ((direction.x >= 0) != (transform.relativeScale.x >= 0)) {
     transform.relativeScale.x *= -1;
   }
-  if (!m_sceneBoundsPoly->IsPointInside((glm::vec2) transform.position + (direction * 5.0f)) ||
+  if (!IsInBounds((glm::vec2)transform.position + (direction * 5.0f)) ||
       glm::distance(position, m_goto) < 1.0f) {
     WaitSeconds(.1f, m_nextState);
     return;
@@ -85,36 +98,35 @@ void Boss::GotoState() {
 }
 
 void Boss::Pursue() {
-  if (!m_isDoingSomething)
-    return;
+  if (!m_isDoingSomething) return;
   m_animComp->SetCurrentAnim("Idle");
-  m_goto = (glm::vec2) m_player->transform.position + (Sigma::Random::Circle() * 30.0f);
-  while (!m_sceneBoundsPoly->IsPointInside(m_goto)) {
+
+  do {
     m_goto = (glm::vec2) m_player->transform.position + (Sigma::Random::Circle() * 30.0f);
-  }
+  } while (!IsInBounds(m_goto));
+
   WaitSeconds(.1f, STATE_GOTO);
 }
 
 void Boss::Retreat() {
-  if (!m_isDoingSomething)
-    return;
+  if (!m_isDoingSomething) return;
+  m_consectutiveAttack = 0;
   m_animComp->SetCurrentAnim("Idle");
-  m_goto = (glm::vec2) m_player->transform.position + (Sigma::Random::Circle() * 150.0f);
-  while (!m_sceneBoundsPoly->IsPointInside(m_goto)) {
+
+  do {
     m_goto = (glm::vec2) m_player->transform.position + (Sigma::Random::Circle() * 150.0f);
-  }
+  } while (!IsInBounds(m_goto));
+
   dash = true;
   WaitSeconds(.1f, STATE_GOTO);
 }
 
 void Boss::BasicState() {
-  if (!m_isDoingSomething)
-    return;
+  if (!m_isDoingSomething) return;
   glm::vec3 targets[2];
   targets[0] = m_player->transform.position + glm::vec3(-30, 0, 0);
   targets[1] = m_player->transform.position + glm::vec3(30, 0, 0);
-  m_goto = glm::distance(transform.position, targets[0]) < glm::distance(transform.position, targets[1]) ? targets[0]
-                                                                                                         : targets[1];
+  m_goto = glm::distance(transform.position, targets[0]) < glm::distance(transform.position, targets[1]) ? targets[0] : targets[1];
   glm::vec2 position = (glm::vec2) transform.GetDepthPosition();
   float distance = glm::distance(position, m_goto);
   if (distance <= 10) {
@@ -126,21 +138,15 @@ void Boss::BasicState() {
 }
 
 void Boss::SpecialState() {
-  if (!m_isDoingSomething)
-    return;
+  if (!m_isDoingSomething) return;
   glm::vec2 position = (glm::vec2) transform.GetDepthPosition();
   float distance = glm::distance(position, m_goto);
   if (distance <= 10) {
     dash = false;
     FacePlayer();
-    // SuperAttack();
-    if (!m_phaseDose) {
-      SpecialOne();
-    } else {
-      SpecialTwo();
-      SpecialOne();
-    }
+    SpecialOne();
     if (m_consectutiveAttack >= 3) {
+      m_consectutiveAttack = 0;
       EndedMove();
     }
   } else {
@@ -149,18 +155,13 @@ void Boss::SpecialState() {
 }
 
 void Boss::SpecialOne() {
+  SuperAttack();
   m_consectutiveAttack++;
   std::shared_ptr<Proj> proj = GET_FACTORY->CreateObject<game::Proj>("Proj");
   proj->transform.position = transform.position + glm::vec3(0, 60, 0);
   proj->velocity =
     glm::normalize(proj->transform.position - (m_player->transform.position + glm::vec3(0, 55, 0))) * -200.0f;
   destructionQueue.push_back(proj);
-}
-
-void Boss::SpecialTwo() {
-  // glm::vec2 direction = glm::normalize(m_player->transform.position - transform.position);
-  // Move(direction);
-  // Dash();
 }
 
 void Boss::FacePlayer() {
@@ -171,11 +172,9 @@ void Boss::FacePlayer() {
 }
 
 void Boss::EndedMove() {
-  if (m_hasDoneDamage && m_consectutiveAttack < m_basicDefault.size() && m_nextState == STATE_BASIC) {
-    m_consectutiveAttack++;
+  if (m_hasDoneDamage && m_nextState == STATE_BASIC) {
     return;
   }
-  m_consectutiveAttack = 0;
   if (rand() % 2 == 0) {
     m_nextState = STATE_SPECIAL;
     SetState(STATE_RETREAT);

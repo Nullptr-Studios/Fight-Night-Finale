@@ -40,6 +40,7 @@ public:
 
   void Destroy() override;
 
+  bool IsInBounds(glm::vec2 pos);
   void DebugWindow() override;
   void EndedMove() override;
   void FacePlayer();
@@ -47,7 +48,7 @@ public:
 private:
   Player* m_player{};
   float m_timer{};
-  bool m_phaseDose = true;
+  bool m_phaseDose{};
   glm::vec2 m_goto{};
   int m_nextState{};
   int m_consectutiveAttack{};
