@@ -55,6 +55,12 @@ void Scene2::Load() {
   AddChild(b1);
   AddChild(b2);
 
+  auto overlay = GET_FACTORY->CreateObject<Sigma::Actor>();
+  overlay->SetTexture("assets/level-1/scene-2-overlay.png");
+  overlay->transform.scale = {1185.0f, 429.0f};
+  overlay->transform.position.z = 5000;
+  AddChild(overlay);
+
   GameScene::Load();
 
   SetNextScene(new Scene3("Game Scene 3", 3, "assets/level-1/scene-3.json"));

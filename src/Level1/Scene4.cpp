@@ -3,7 +3,7 @@
 #include "Factory.hpp"
 #include "Objects/Actor.hpp"
 #include "Objects/Destructibles/Box.hpp"
-#include "Scene5.hpp"
+#include "Scene8.hpp"
 
 
 namespace game {
@@ -43,9 +43,15 @@ void Scene4::Load() {
 
   m_spawnerDoors.emplace_back(m_exitLocationDoor);
 
+  auto overlay = GET_FACTORY->CreateObject<Sigma::Actor>();
+  overlay->SetTexture("assets/level-1/scene-4-overlay.png");
+  overlay->transform.scale = {933.0f, 273.0f};
+  overlay->transform.position.z = 5000;
+  AddChild(overlay);
+
   GameScene::Load();
 
-  SetNextScene(new Scene5("Game Scene 5", 5, "assets/level-1/scene-5.json"));
+  SetNextScene(new Scene8("Game Scene 8", 8, "assets/level-1/scene-8.json"));
 }
 
 void Scene4::Update(double delta) {

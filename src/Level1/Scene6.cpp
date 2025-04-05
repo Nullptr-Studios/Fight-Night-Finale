@@ -6,8 +6,7 @@
 #include "Objects/Actor.hpp"
 #include "Objects/Camera.hpp"
 #include "Objects/Destructibles/Box.hpp"
-#include "Scene7.hpp"
-#include "UI/WinScene.hpp"
+#include "Scene9.hpp"
 
 #define DEBUG_CAMERA
 
@@ -47,9 +46,15 @@ void Scene6::Load() {
   AddChild(Sdoor4);
   m_spawnerDoors.push_back(Sdoor4);
 
+  auto overlay = GET_FACTORY->CreateObject<Sigma::Actor>();
+  overlay->SetTexture("assets/level-1/scene-6-overlay.png");
+  overlay->transform.scale = {953.0f, 538.0f};
+  overlay->transform.position.z = 5000;
+  AddChild(overlay);
+
   GameScene::Load();
 
-  SetNextScene(new WinScene("Win Scene", 7));
+  SetNextScene(new Scene9("Game Scene 9", 9, "assets/level-1/scene-9.json"));
 }
 
 void Scene6::Update(double delta) {

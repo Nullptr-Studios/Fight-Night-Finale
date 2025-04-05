@@ -35,6 +35,12 @@ void Scene1::Load() {
   m_exitLocationDoor->transform.position = {344, -70, 70};
   AddChild(m_exitLocationDoor);
 
+  auto overlay = GET_FACTORY->CreateObject<Sigma::Actor>();
+  overlay->SetTexture("assets/level-1/scene-1-overlay.png");
+  overlay->transform.scale = {761.0f, 281.0f};
+  overlay->transform.position.z = 5000;
+  AddChild(overlay);
+
   // xd
   // auto nig = GET_FACTORY->CreateObject<HUD>("HUD");
 

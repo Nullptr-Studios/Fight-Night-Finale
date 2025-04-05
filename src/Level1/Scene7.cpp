@@ -5,7 +5,7 @@
 #include "GameManager.hpp"
 #include "Objects/Actor.hpp"
 #include "Objects/Camera.hpp"
-#include "Scene1.hpp"
+#include "UI/WinScene.hpp"
 
 #define DEBUG_CAMERA
 
@@ -27,7 +27,7 @@ void Scene7::Load() {
 
   GameScene::Load();
 
-  SetNextScene(new Scene1("Game Scene 1", 1, "assets/level-1/scene-1.json"));
+  SetNextScene(new WinScene("Win Scene", 7));
 }
 
 void Scene7::Update(double delta) {
