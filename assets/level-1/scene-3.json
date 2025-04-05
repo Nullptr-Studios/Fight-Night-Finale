@@ -63,22 +63,22 @@
     {
       "id": 1,
       "pos": {"x": 0, "y": 15},
-      "entranceId": 2
+      "entranceId": 1
     },
     {
       "id": 2,
-      "pos": {"x": -10, "y": 20},
-      "entranceId": 2
+      "pos": {"x": -10, "y": 10},
+      "entranceId": 1
     },
     {
       "id": 1,
       "pos": {"x": 10, "y": 10},
-      "entranceId": 2
+      "entranceId": 1
     },
     {
       "id": 1,
       "pos": {"x": 480, "y": -115},
-      "entranceId": 2
+      "entranceId": 3
     },
     {
       "id": 2,

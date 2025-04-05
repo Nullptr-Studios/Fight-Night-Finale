@@ -29,8 +29,8 @@ public:
 
 
 private:
-  Sigma::Actor* floor = nullptr;
-  Sigma::Actor* walls = nullptr;
+  std::shared_ptr<Sigma::Actor> floor = nullptr;
+  std::shared_ptr<Sigma::Actor> walls = nullptr;
 
 };
 

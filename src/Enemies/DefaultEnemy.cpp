@@ -1,9 +1,11 @@
 #include "DefaultEnemy.hpp"
 #include <random>
-#include "Polygon.hpp"
 #include "Factory.hpp"
+#include "Polygon.hpp"
 #include "Random.hpp"
+#include "aecore/AEFrameRateController.h"
 #include "aecore/imgui/imgui.h"
+#include "glm/geometric.hpp"
 
 namespace game {
 
@@ -34,22 +36,20 @@ void DefaultEnemy::Init() {
   m_collider->damage = 1.0f;
   m_collider->SetOwner(this);
 
-  m_defaultState = STATE_WANDER;
   m_defaultState = STATE_FOLLOW;
 }
 
 void DefaultEnemy::Start() {
   Enemy::Start();
 
-  BindState(STATE_WALK, std::bind(&DefaultEnemy::WalkState, this));
-  BindState(STATE_PAUSED, std::bind(&DefaultEnemy::PausedState, this));
-  BindState(STATE_WANDER, std::bind(&DefaultEnemy::WanderState, this));
-  BindState(STATE_FOLLOW, std::bind(&DefaultEnemy::FollowState, this));
-  BindState(STATE_ATTACK, std::bind(&DefaultEnemy::AttackState, this));
-  BindState(STATE_DISPERSE, std::bind(&DefaultEnemy::DisperseState, this));
-  BindState(STATE_GOTO, std::bind(&DefaultEnemy::GoToState, this));
-  BindState(STATE_REPOSITION, std::bind(&DefaultEnemy::RepositionState, this));
-  BindState(STATE_REPOSING, std::bind(&DefaultEnemy::RePosing, this));
+  BindState(STATE_WALK, [this] { WalkState(); });
+  BindState(STATE_PAUSED, [this] { PausedState(); });
+  BindState(STATE_FOLLOW, [this] { FollowState(); });
+  BindState(STATE_ATTACK, [this] { AttackState(); });
+  BindState(STATE_DISPERSE, [this] { DisperseState(); });
+  BindState(STATE_GOTO, [this] { GoToState(); });
+  BindState(STATE_REPOSITION, [this] { RepositionState(); });
+  BindState(STATE_REPOSING, [this] { RePosing(); });
   // BindState(STATE_AVOID, std::bind(&DefaultEnemy::AvoidState, this));
 }
 
@@ -67,7 +67,7 @@ void DefaultEnemy::Update(double delta) {
   Enemy::Update(delta);
 }
 
-bool DefaultEnemy::OnCollision(Sigma::Collision::CollisionEvent &e) {
+/*bool DefaultEnemy::OnCollision(Sigma::Collision::CollisionEvent &e) {
   if (m_currentState == STATE_WANDER || m_currentState == STATE_WALK || m_currentState == STATE_PAUSED) {
     return true;
   }
@@ -86,68 +86,52 @@ bool DefaultEnemy::OnCollision(Sigma::Collision::CollisionEvent &e) {
     return true;
   }
   return true;
-}
+}*/
 
 void DefaultEnemy::WalkState() {
-  if (!m_isDoingSomething) return;
+  if (!m_isDoingSomething)
+    return;
   if (m_timer <= 0) {
     m_position = {};
     m_timer = Sigma::Random::Float(.9f, 1.1f);
     SetState(STATE_PAUSED);
   }
   m_animComp->SetCurrentAnim("Walk");
-  Move( {m_position.x, m_position.y} );
+  Move({m_position.x, m_position.y});
   if ((m_position.x >= 0) != (transform.relativeScale.x >= 0)) {
     transform.relativeScale.x *= -1;
   }
-  if (!m_sceneBoundsPoly->IsPointInside((glm::vec2)transform.position + (m_position * 5.0f))) {
-    m_timer = Sigma::Random::Float(.9f, 1.1f);
+  if (!m_sceneBoundsPoly->IsPointInside((glm::vec2) transform.position + (m_position * 5.0f))) {
+    m_timer = Sigma::Random::Float(.6f, .9f);
     SetState(STATE_PAUSED);
   }
-
 }
 
 void DefaultEnemy::PausedState() {
-  if (!m_isDoingSomething) return;
+  if (!m_isDoingSomething)
+    return;
   if (m_timer <= 0) {
     SetState(m_nextState);
   }
   m_animComp->SetCurrentAnim("Idle");
 }
 
-void DefaultEnemy::WanderState() {
-  if (!m_isDoingSomething) return;
-  isAvoiding = false;
-  m_position = Sigma::Random::Circle();
-  while (!m_sceneBoundsPoly->IsPointInside((glm::vec2)transform.position + (m_position * 5.0f))) {
-    m_position = Sigma::Random::Circle();
-  }
-  m_position = Sigma::Random::Circle();
-  m_timer = Sigma::Random::Float(.9f, 1.1f);
-  m_nextState = STATE_WANDER;
-  SetState(STATE_WALK);
-
-  if (m_distance.length() <= detectionRange){
-    SetState(STATE_FOLLOW);
-    m_defaultState = STATE_FOLLOW;
-  }
-}
-
 void DefaultEnemy::FollowState() {
-  if (!m_isDoingSomething) return;
-  
+  if (!m_isDoingSomething)
+    return;
+
   if (m_nearest == nullptr)
     return;
-  
+
   isAvoiding = false;
   m_animComp->SetCurrentAnim("Walk");
   glm::vec3 targets[2];
-  targets[0] = m_nearest->transform.GetDepthPosition()+ glm::vec3(-50,0,0);
-  targets[1] = m_nearest->transform.GetDepthPosition()+ glm::vec3(50,0,0);
-  m_position = ((m_distance.x >= 0)?targets[0]:targets[1]);
+  targets[0] = m_nearest->transform.GetDepthPosition() + glm::vec3(-45, 0, 0);
+  targets[1] = m_nearest->transform.GetDepthPosition() + glm::vec3(45, 0, 0);
+  m_position = ((m_distance.x >= 0) ? targets[0] : targets[1]);
 
   if (fabs(m_distance.y) <= 25 && fabs(m_distance.x) <= 60 && fabs(m_distance.x) >= 30) {
-    m_timer = Sigma::Random::Float(.2f, .3f);
+    m_timer = Sigma::Random::Float(.1f, .2f);
     m_nextState = STATE_ATTACK;
     SetState(STATE_PAUSED);
   } else if (fabs(m_distance.y) <= 25 && fabs(m_distance.x) <= 60 && fabs(m_distance.x) <= 30) {
@@ -161,7 +145,8 @@ void DefaultEnemy::FollowState() {
 }
 
 void DefaultEnemy::AttackState() {
-  if (!m_isDoingSomething) return;
+  if (!m_isDoingSomething)
+    return;
   isAvoiding = false;
   if ((m_distance.x >= 0) != (transform.relativeScale.x >= 0)) {
     transform.relativeScale.x *= -1;
@@ -170,12 +155,13 @@ void DefaultEnemy::AttackState() {
 }
 
 void DefaultEnemy::GoToState() {
-  glm::vec2 position = (glm::vec2)transform.GetDepthPosition();
+  glm::vec2 position = (glm::vec2) transform.GetDepthPosition();
   glm::vec2 direction = glm::normalize(m_position - position);
   if ((direction.x >= 0) != (transform.relativeScale.x >= 0)) {
     transform.relativeScale.x *= -1;
   }
-  if (!m_sceneBoundsPoly->IsPointInside((glm::vec2)transform.position + (direction * 5.0f)) || glm::distance(position, m_position) < 1.0f  || m_timer <= 0) {
+  if (!m_sceneBoundsPoly->IsPointInside((glm::vec2) transform.position + (direction * 5.0f)) ||
+      glm::distance(position, m_position) < 1.0f || m_timer <= 0) {
     m_position = {};
     SetState(m_nextState);
     return;
@@ -184,19 +170,22 @@ void DefaultEnemy::GoToState() {
 }
 
 void DefaultEnemy::DisperseState() {
-  if (!m_isDoingSomething) return;
-  glm::vec2 position = (glm::vec2)transform.GetDepthPosition();
-    std::random_device rd;
-    std::mt19937 gen(rd());
-    std::uniform_int_distribution<> distrib_x( 30, 60);
-    std::uniform_int_distribution<> distrib_y(-30, 30);
-    m_position = m_nearest->transform.GetDepthPosition();
+  if (!m_isDoingSomething)
+    return;
+  glm::vec2 position = (glm::vec2) transform.GetDepthPosition();
+  std::random_device rd;
+  std::mt19937 gen(rd());
+  std::uniform_int_distribution<> distrib_x(30, 60);
+  std::uniform_int_distribution<> distrib_y(-30, 30);
+  m_position = m_nearest->transform.GetDepthPosition();
 
-    if (m_position.x - position.x >= 0) m_position.x -= 60 + static_cast<float>(distrib_x(gen));
-    else                                m_position.x += m_attackDistance - static_cast<float>(distrib_x(gen));
-    m_position.y = (m_nearest->transform.GetDepthPosition().y + static_cast<float>(distrib_y(gen)));
-    m_timer = 2;
-    SetState(STATE_GOTO);
+  if (m_position.x - position.x >= 0)
+    m_position.x -= 60 + static_cast<float>(distrib_x(gen));
+  else
+    m_position.x += m_attackDistance - static_cast<float>(distrib_x(gen));
+  m_position.y = (m_nearest->transform.GetDepthPosition().y + static_cast<float>(distrib_y(gen)));
+  m_timer = 2;
+  SetState(STATE_GOTO);
 }
 
 void DefaultEnemy::AvoidState() {
@@ -221,10 +210,11 @@ void DefaultEnemy::RePosing() {
 }
 
 void DefaultEnemy::RepositionState() {
-  if (!m_isDoingSomething) return;
+  if (!m_isDoingSomething)
+    return;
   isAvoiding = false;
   glm::vec2 position = {transform.GetDepthPosition().x, transform.GetDepthPosition().y};
-  Player* nearest = GetNearestPlayer();
+  Player *nearest = GetNearestPlayer();
   if (!nearest) {
     SetState(STATE_IDLE);
     return;
@@ -238,24 +228,23 @@ void DefaultEnemy::RepositionState() {
   std::uniform_int_distribution<> distrib_x(-playerScale.x * 2, playerScale.x * 2);
   std::uniform_int_distribution<> distrib_y(-playerScale.y, playerScale.y);
 
-  m_position = { playerPosition.x + distrib_x(gen), playerPosition.y + distrib_y(gen) };
+  m_position = {playerPosition.x + distrib_x(gen), playerPosition.y + distrib_y(gen)};
 
   if (m_sceneBoundsPoly->IsPointInside(m_position)) {
     m_timer = 2;
     SetState(STATE_REPOSING);
   }
-
 }
 
 
 void DefaultEnemy::DeadState() {
   // GET_FACTORY->DestroyObject(m_debugCol->GetId());
   // GET_FACTORY->DestroyObject(GetId());
-  
+
   m_enabled = false;
 }
 
-void DefaultEnemy::OnFullComboPerformed() {
+void DefaultEnemy::OnFullComboPerformed(bool super) {
   m_timer = Sigma::Random::Float(1.2f, 1.6f);
   m_nextState = STATE_REPOSITION; // TODO: change this to reposition
   SetState(STATE_PAUSED);
@@ -267,8 +256,6 @@ void DefaultEnemy::EndedMove() {
   }
 }
 
-void DefaultEnemy::Destroy() {
-  Enemy::Destroy();
-}
+void DefaultEnemy::Destroy() { Enemy::Destroy(); }
 
-}
+} // namespace game

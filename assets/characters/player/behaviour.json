@@ -6,7 +6,11 @@
   "dashTime" : 0.23,
   "dashCool" : 0.5,
   "friction" :750,
+  "hitAnimations" : [
+    "Hit2", "Hit1", "Hit3"
+  ],
 
+  "knockbackRes" : 1.0,
   "basicCombo" : [
     {
       "type" : "dmg",
@@ -46,7 +50,7 @@
     {
       "type" : "thr",
       "damage" : 30.0,
-      "knockback" : { "x" : 800.0, "y" : 800.0 },
+      "knockback" : { "x" : 700, "y" : 400.0},
       "colliderOffset" : { "x" : 0.0, "y" : 0.0 },
       "colliderSize" : { "x" : 0.0, "y" : 0.0, "z" : 0.0 },
       "animationName" : "BasicCombo1"

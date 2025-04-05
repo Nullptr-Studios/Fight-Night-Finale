@@ -3,6 +3,7 @@
 //
 
 #pragma once
+#include "Door.hpp"
 #include "Objects/Object.hpp"
 
 namespace game {
@@ -22,10 +23,13 @@ struct EnemySpawnData {
   int stepAmmount;
 };
 
+/**
+  * @brief Spawns enemies in a given position
+  */
 class EnemySpawner : public Sigma::Object {
 public:
   explicit EnemySpawner(uint32_t id) : Object(id) {}
-  explicit EnemySpawner(uint32_t id, int activationDistance, EnemySpawner* requiredSpawner = nullptr) : Object(id), m_activationDistance(activationDistance), m_requiredSpawner(requiredSpawner) {}
+  explicit EnemySpawner(uint32_t id, int activationDistance, std::shared_ptr<EnemySpawner> requiredSpawner = nullptr) : Object(id), m_activationDistance(activationDistance), m_requiredSpawner(requiredSpawner) {}
 
   void Init() override;
   void Start() override;
@@ -39,26 +43,21 @@ public:
 
   [[nodiscard]] bool GetFinished() const {return m_finished;}
   void AddEnemiesData(EnemySpawnData &enemies) { m_spawnData.emplace_back(enemies); }
+  void AddDoorData(const std::vector<std::shared_ptr<Door>> &spawnerDoors) {m_spawnerDoors = spawnerDoors;}
 
 private:
 
   void SpawnEnemy();
 
-  EnemySpawnData m_currentEnemyData;
+  EnemySpawnData m_currentEnemyData{};
 
-  EnemySpawner* m_requiredSpawner = nullptr;
+  std::shared_ptr<EnemySpawner> m_requiredSpawner = nullptr;
 
   unsigned int m_currentEnemyIndex = 0;
 
   float m_spawnTimer = 0.0f;
 
-  bool m_triggered = false;
-
-  bool m_finished = false;
-
-  bool m_enabled = false;
-
-  bool m_spawned = false;
+  bool m_triggered = false, m_spawned = false, m_finished = false, m_enabled = false;
   
   int m_activationDistance = 0;
 
@@ -66,13 +65,11 @@ private:
 
   std::list<Object*> m_players;
 
-  std::list<Enemy*> m_enemies;
+  std::list<std::shared_ptr<Enemy>> m_enemies;
 
   GameplayManager* m_gameplayManager = nullptr;
-  
+
+  std::vector<std::shared_ptr<Door>> m_spawnerDoors{};
+
 };
-
 }
-
-
-

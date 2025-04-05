@@ -13,3 +13,4 @@ compile_commands.json
 */.ignore/*
 *.old
 imgui.ini
+design/gcd.pdf

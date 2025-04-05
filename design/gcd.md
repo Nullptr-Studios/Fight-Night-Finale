@@ -1,14 +1,3 @@
----
-class: GAM150
-date: 2025-01-28
-aliases:
-  - GCD
-  - GCD FNF
-  - GCD Fight Night Finale
-  - Fight Night Finale
-tags:
-  - FNF
----
 # GCD Fight Night Finale
 
 ## Overview

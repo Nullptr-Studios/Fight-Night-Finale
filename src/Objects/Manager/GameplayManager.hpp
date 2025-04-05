@@ -4,7 +4,7 @@
 
 #pragma once
 
-#include "GameScene.hpp"
+#include "../../GameScene.hpp"
 #include "Objects/Object.hpp"
 
 namespace Sigma {
@@ -19,8 +19,8 @@ class Player;
 class HealthBar;
 
 struct PlayerStruct {
-  Player* player = nullptr;
-  HealthBar* healthBar = nullptr;
+  std::shared_ptr<Player> player = nullptr;
+  std::shared_ptr<HealthBar> healthBar = nullptr;
 };
 
 /**
@@ -57,51 +57,84 @@ public:
    */
   void RespawnPlayer(game::Player* player);
 
-  void TeleportPlayersToNextScene();
+  void SetPlayerAsDead(Object* player);
+
 
   /**
    * @brief Check if the second player wants to join the game
    */
   void CheckForCoop();
 
+  #pragma region Scene
+
+  void OnScenePass();
+
+  void TeleportPlayersToNextScene();
+
+/**
+   * @brief Update the current game scene pointer
+   */
   void UpdateCurrentGameScene();
 
+  /**
+   * @brief Go to the next scene
+   */
   void GotoNextScene();
 
+  /**
+   * @brief Next scene logic after a frame
+   */
   void GotoNextSceneAfter();
-
-  void FinishedAnSpawner();
-
-  void EnableHUD();
-
-  void DisableHUD();
-
-  void UninitializeGame();
-
-  void StartGame();
-
-  std::array<PlayerStruct, 2> *GetPlayers() { return &m_players; }
 
   Sigma::Polygon* GetSceneBoundsPoly() { return m_currentGameScene->GetSceneBoundsPoly(); }
 
+  #pragma endregion
+
+  
+  void FinishedAnSpawner();
+
+
+
+  void UninitializeGame();
+
+  void StartGame(const std::string& sceneName = "Level 1");
+
+  std::array<PlayerStruct, 2> *GetPlayers() { return &m_players; }
+
   static GameplayManager* GetInstance() { return m_instance; }
+
+  #pragma region HUD
+  void EnableHUD();
+
+  void DisableHUD();
+  
+  void GiveXP(int xp);
+
+  [[nodiscard]] int GetXP() const { return m_experience; }
+
+  
+  #pragma endregion
 
 private:
   static GameplayManager* m_instance;
-  //bool m_gameStarted = false;
-  Sigma::CameraFollow* m_cameraFollow;
+  std::shared_ptr<Sigma::CameraFollow> m_cameraFollow{};
 
-  HUD* m_gameHud = nullptr;
-
-  bool m_started = false;
+  std::shared_ptr<HUD> m_gameHud = nullptr;
 
   /**
    * @brief holds the information required for the players
    */
   std::array<PlayerStruct, 2> m_players = {};
+  game::GameScene *m_currentGameScene = nullptr;
   unsigned char m_playerCount = 0;
-  game::GameScene* m_currentGameScene = nullptr;
   bool m_gameSceneIsDirty = true;
+  bool m_uninitializeGame = false;
+
+  /**
+   * @brief holds the information required for the xp system
+   */
+  int m_experience = 0;
+  bool m_started = false;
 };
 }
 

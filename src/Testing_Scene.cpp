@@ -53,7 +53,7 @@ void Testing_Scene::Load() {
   AddChild(healthBar);
 
 
-  p = GET_FACTORY->CreateObject<game::Player>("Player", -1, "assets/characters/player/behaviour.json");
+  p = GET_FACTORY->CreateObject<game::Player>("Player", -1, "assets/characters/player/behaviour.json", false);
   p->transform.position.x = m_playerStartPos.x;
   p->transform.position.y = m_playerStartPos.y;
   p->transform.position.z = 0.0f;
@@ -64,7 +64,6 @@ void Testing_Scene::Load() {
 
 
 #ifndef DEBUG_CAMERA
-  dynamic_cast<Sigma::CameraFollow*>(GET_CAMERA->GetCurrentCamera())->m_targetP1 = p;
 #endif
 }
 void Testing_Scene::Update(double delta) {
@@ -81,12 +80,12 @@ void Testing_Scene::Update(double delta) {
     healthBar2->m_progress = 1;
     healthBar2->SetTexture("assets/core/debug_green.png");
 
-    p2 = GET_FACTORY->CreateObject<game::Player>("Player2", 0, "assets/characters/player/behaviour.json");
+    p2 = GET_FACTORY->CreateObject<game::Player>("Player2", 0, "assets/characters/player/behaviour.json", false);
     p2->transform.position.x = m_playerStartPos.x;
     p2->transform.position.y = m_playerStartPos.y;
     p2->transform.position.z = 0.0f;
     //p2->m_healthBar = healthBar2;
-    dynamic_cast<Sigma::CameraFollow *>(GET_CAMERA->GetCurrentCamera())->m_targetP2 = p2;
+    //std::dynamic_pointer_cast<Sigma::CameraFollow>(GET_CAMERA->GetCurrentCamera())->m_targetP2 = p2.get();
     m_players[1] = p2;
     AddChild(p2);
     AddChild(healthBar2);

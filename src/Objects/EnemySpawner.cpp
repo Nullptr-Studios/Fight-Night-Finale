@@ -5,6 +5,8 @@
 #include "EnemySpawner.hpp"
 #include "Enemies/BigEnemy.hpp"
 #include "Enemies/DefaultEnemy.hpp"
+#include "Enemies/GrabEnemy.hpp"
+#include "Enemies/TntEnemy.hpp"
 #include "GameScene.hpp"
 #include "Manager/GameplayManager.hpp"
 
@@ -16,7 +18,8 @@ void game::EnemySpawner::Init() {
 void game::EnemySpawner::Start() { Object::Start(); }
 
 void game::EnemySpawner::SpawnEnemy() {
-  Enemy* e;
+  std::shared_ptr<Enemy> e;
+  // TODO: DO SPWN MULTIPLE ENEMIES
   e = GET_FACTORY->CreateObject<game::DefaultEnemy>("Enemy", "assets/characters/BasicEnemy/behaviour.json");
   e->transform.position.x = m_currentEnemyData.position.x;
   e->transform.position.y = m_currentEnemyData.position.y;
@@ -46,7 +49,7 @@ void game::EnemySpawner::Update(double deltaTime) {
       if (!ps.player)
         continue;
 
-      if(!ps.player->GetAlive())
+      if (!ps.player->GetAlive())
         continue;
 
       float distance = glm::distance(ps.player->transform.position, transform.position);
@@ -72,9 +75,14 @@ void game::EnemySpawner::Update(double deltaTime) {
 
       for (int i = 0; i < stepAmount && m_currentEnemyIndex < m_spawnData.size(); ++i) {
         m_currentEnemyData = m_spawnData[m_currentEnemyIndex];
-        SpawnEnemy();
+        for (int j = 0; j < 20; j++) {
+          SpawnEnemy();
+        }
+        if (!m_spawnerDoors.empty() && m_currentEnemyData.entranceId < m_spawnerDoors.size()) {
+          m_spawnerDoors[m_currentEnemyData.entranceId]->Open(0.75f);
+        }
 
-        m_currentEnemyIndex++; 
+        m_currentEnemyIndex++;
       }
     }
   }
@@ -98,10 +106,12 @@ void game::EnemySpawner::Update(double deltaTime) {
     game::GameplayManager::GetInstance()->FinishedAnSpawner();
   }
 }
+
 void game::EnemySpawner::Destroy() {
   Object::Destroy();
 
   for (auto enemy: m_enemies) {
     GET_FACTORY->DestroyObject(enemy);
   }
+  m_enemies.clear();
 }

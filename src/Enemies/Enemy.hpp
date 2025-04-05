@@ -19,7 +19,6 @@ protected:
 public:
   explicit Enemy(const Sigma::id_t id, const char* jsonPath) : Character(id, jsonPath) {}
   
-  
   void Init() override;
   void Serialize() override;
   void Start() override;
@@ -27,6 +26,7 @@ public:
   void Destroy() override { Character::Destroy(); }
 
   void OnDamage(const Sigma::Damage::DamageEvent& e) override;
+  bool OnCollision(Sigma::Collision::CollisionEvent &e) override;
 
   void DeadAnimFinish() override;
 
@@ -81,10 +81,13 @@ public:
 protected:
   std::array<PlayerStruct, 2>* m_players = {};
   float m_attackDistance = 0.0f;
+  int m_xp = 0;
   int m_defaultState = 0;
   int m_currentState = 0;
 
-  bool m_enabled;
+  bool m_enabled{};
+
+  bool isAvoiding = false;
 
 private:
   std::map<int, std::function<void()>> m_states = {};

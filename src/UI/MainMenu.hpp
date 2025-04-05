@@ -20,12 +20,12 @@ public:
   void Update(double delta) override;
   void Unload() override;
 private:
-  Sigma::SceneButton *m_playButton = nullptr;
-  Sigma::CtrlButton *m_controlsButton = nullptr;
-  Sigma::SceneButton *m_scoreButton = nullptr;
-  Sigma::SceneButton *m_quitButton = nullptr;
-  Sigma::Actor *m_background = nullptr;
-  Sigma::Actor *m_logo = nullptr;
-  Sigma::Actor* m_studioName = nullptr;
+  std::shared_ptr<Sigma::SceneButton> m_playButton = nullptr;
+  std::shared_ptr<Sigma::CtrlButton> m_controlsButton = nullptr;
+  std::shared_ptr<Sigma::SceneButton> m_scoreButton = nullptr;
+  std::shared_ptr<Sigma::SceneButton> m_quitButton = nullptr;
+  std::shared_ptr<Sigma::Actor> m_background = nullptr;
+  std::shared_ptr<Sigma::Actor> m_logo = nullptr;
+  std::shared_ptr<Sigma::Actor> m_studioName = nullptr;
 };
 }

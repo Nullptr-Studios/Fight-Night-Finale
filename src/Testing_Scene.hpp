@@ -28,15 +28,15 @@ public:
   void Update(double delta) override;
   void Free() override;
 
-  std::array<Player*, 2> m_players = {};
+  std::array<std::shared_ptr<Player>, 2> m_players = {};
 
 private:
-  Sigma::Actor *floor;
-  Sigma::Actor *walls;
-  HealthBar *healthBar;
-  HealthBar *healthBar2 = nullptr;
-  Player *p;
-  Player *p2 = nullptr;
+  std::shared_ptr<Sigma::Actor> floor;
+  std::shared_ptr<Sigma::Actor> walls;
+  std::shared_ptr<HealthBar> healthBar;
+  std::shared_ptr<HealthBar> healthBar2 = nullptr;
+  std::shared_ptr<Player> p;
+  std::shared_ptr<Player> p2 = nullptr;
 
   MainMenu* m_deadScene = nullptr;
 };

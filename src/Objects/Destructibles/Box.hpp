@@ -35,7 +35,7 @@ public:
 
 protected:
 
-  Object* m_pickup = nullptr; ///>@brief pickup object
+  std::shared_ptr<Object> m_pickup = nullptr; ///>@brief pickup object
   //Box
   const char * m_texture; ///>@brief box texture
   const char * m_brokenTexture; ///>@brief box broken texture
@@ -44,5 +44,6 @@ protected:
   const char * m_pickupTexture; ///>@brief pickup texture
   glm::vec3 m_pickupSize = {16, 16, 32}; ///>@brief pickup size
   float m_pickupHeal = 50; ///>@brief pickup heal amount
+  
 };
 }
