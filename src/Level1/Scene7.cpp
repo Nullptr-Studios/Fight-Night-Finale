@@ -15,14 +15,14 @@ void Scene7::Load() {
 
   floor = GET_FACTORY->CreateObject<Sigma::Actor>();
   floor->SetTexture("assets/level-1/scene-7-floor.png");
-  floor->transform.scale = {2000.0f, 2000.0f};
-  floor->transform.position.z = -5000;
+  floor->transform.scale = {757.0f, 261.0f};
+  floor->transform.position = {-282, -22, -5000};
   AddChild(floor);
 
   walls = GET_FACTORY->CreateObject<Sigma::Actor>();
   walls->SetTexture("assets/level-1/scene-7-walls.png");
-  walls->transform.scale = {2000.0f, 2000.0f};
-  walls->transform.position.z = -5000;
+  walls->transform.scale = {757.0f, 261.0f};
+  walls->transform.position = {-282, -22, -5000};
   AddChild(walls);
 
   GameScene::Load();

@@ -52,6 +52,11 @@ void Scene6::Load() {
   overlay->transform.position.z = 5000;
   AddChild(overlay);
 
+  auto b1 = GET_FACTORY->CreateObject<Box>("Machine1");
+  b1->transform.position = {-236, 108, -108};
+
+  AddChild(b1);
+
   GameScene::Load();
 
   SetNextScene(new Scene9("Game Scene 9", 9, "assets/level-1/scene-9.json"));

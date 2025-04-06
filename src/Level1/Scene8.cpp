@@ -24,11 +24,21 @@ void Scene8::Load() {
   AddChild(walls);
 
   m_exitLocationDoor = GET_FACTORY->CreateObject<Door>("Exit_Door", 2);
-  m_exitLocationDoor->transform.position = {496, -79, 79};
+  m_exitLocationDoor->transform.position = {470, -90, 90};
   AddChild(m_exitLocationDoor);
 
+  auto b1 = GET_FACTORY->CreateObject<Box>("Machine1");
+  b1->transform.position = {370, -40, 40};
+
+  AddChild(b1);
+
+  auto b2 = GET_FACTORY->CreateObject<Box>("Machine2");
+  b2->transform.position = {410, -80, 80};
+
+  AddChild(b2);
+
   auto Sdoor1 = GET_FACTORY->CreateObject<Door>("Spawner_Door1", 1);
-  Sdoor1->transform.position = {-293, 54, -54};
+  Sdoor1->transform.position = {302, 29, -29};
   AddChild(Sdoor1);
   m_spawnerDoors.push_back(Sdoor1);
 

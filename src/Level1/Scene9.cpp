@@ -4,7 +4,6 @@
 #include "Objects/Actor.hpp"
 #include "Objects/Destructibles/Box.hpp"
 #include "Scene7.hpp"
-#include "UI/WinScene.hpp"
 
 #define DEBUG_CAMERA
 
@@ -24,20 +23,29 @@ void Scene9::Load() {
   walls->transform.position.z = -5000;
   AddChild(walls);
 
-  m_exitLocationDoor = GET_FACTORY->CreateObject<Door>("Exit_Door", 2);
-  m_exitLocationDoor->transform.position = {496, -79, 79};
-  AddChild(m_exitLocationDoor);
-
-  auto Sdoor1 = GET_FACTORY->CreateObject<Door>("Spawner_Door1", 1);
-  Sdoor1->transform.position = {-293, 54, -54};
+  auto Sdoor1 = GET_FACTORY->CreateObject<Door>("Spawner_Door1", 2);
+  Sdoor1->transform.position = {-274, 82, -82};
   AddChild(Sdoor1);
   m_spawnerDoors.push_back(Sdoor1);
 
-  m_spawnerDoors.emplace_back(m_exitLocationDoor);
+  auto Sdoor2 = GET_FACTORY->CreateObject<Door>("Spawner_Door2", 1);
+  Sdoor2->transform.position = {-106, -37, 37};
+  AddChild(Sdoor2);
+  m_spawnerDoors.push_back(Sdoor2);
+
+  auto Sdoor3 = GET_FACTORY->CreateObject<Door>("Spawner_Door3", 2);
+  Sdoor3->transform.position = {10, -74, 74};
+  AddChild(Sdoor3);
+  m_spawnerDoors.push_back(Sdoor3);
+
+  auto Sdoor4 = GET_FACTORY->CreateObject<Door>("Spawner_Door4", 2);
+  Sdoor4->transform.position = {442, -122, 122};
+  AddChild(Sdoor4);
+  m_spawnerDoors.push_back(Sdoor4);
 
   GameScene::Load();
 
-  SetNextScene(new WinScene("Win Scene", 7));
+  SetNextScene(new Scene7("Game Scene 7", 7, "assets/level-1/scene-7.json"));
 }
 
 void Scene9::Update(double delta) {

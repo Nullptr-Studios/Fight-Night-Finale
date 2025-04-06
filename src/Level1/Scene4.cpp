@@ -27,7 +27,7 @@ void Scene4::Load() {
   AddChild(m_exitLocationDoor);
 
   auto b1 = GET_FACTORY->CreateObject<Box>("Machine1");
-  b1->transform.position = {400, -88, 88};
+  b1->transform.position = {426, -112, 112};
 
   AddChild(b1);
 

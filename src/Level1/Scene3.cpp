@@ -28,10 +28,7 @@ void Scene3::Load() {
   AddChild(m_exitLocationDoor);
 
   auto b1 = GET_FACTORY->CreateObject<Box>("Machine1");
-  b1->transform.position = {-250, 9, -9};
-
-  auto b2 = GET_FACTORY->CreateObject<Box>("Machine2");
-  b2->transform.position = {200, 10, -10};
+  b1->transform.position = {230, -22, 22};
 
   auto Sdoor1 = GET_FACTORY->CreateObject<Door>("Spawner_Door1", 1);
   Sdoor1->transform.position = {-293, 54, -54};
@@ -51,7 +48,6 @@ void Scene3::Load() {
   m_spawnerDoors.emplace_back(m_exitLocationDoor);
 
   AddChild(b1);
-  AddChild(b2);
 
   GameScene::Load();
 
