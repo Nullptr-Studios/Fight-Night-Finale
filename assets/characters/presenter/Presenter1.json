@@ -109,7 +109,8 @@
 	"trimmed": true,
 	"spriteSourceSize": {"x":20,"y":36,"w":69,"h":92},
 	"sourceSize": {"w":128,"h":128},
-	"pivot": {"x":0.5,"y":1}
+	"pivot": {"x":0.5,"y":1},
+  "callback": "DoHit"
 },
 {
 	"filename": "MainAttack1_0053.png",
@@ -155,7 +156,8 @@
 	"trimmed": true,
 	"spriteSourceSize": {"x":21,"y":46,"w":49,"h":82},
 	"sourceSize": {"w":128,"h":128},
-	"pivot": {"x":0.5,"y":1}
+	"pivot": {"x":0.5,"y":1},
+  "callback": "DoHit"
 },
 {
 	"filename": "MainAttack2_0058.png",
@@ -237,7 +239,8 @@
 	"trimmed": true,
 	"spriteSourceSize": {"x":21,"y":51,"w":71,"h":77},
 	"sourceSize": {"w":128,"h":128},
-	"pivot": {"x":0.5,"y":1}
+	"pivot": {"x":0.5,"y":1},
+  "callback": "DoHit"
 },
 {
 	"filename": "MainAttack3_0067.png",
