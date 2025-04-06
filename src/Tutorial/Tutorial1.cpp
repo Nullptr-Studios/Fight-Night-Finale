@@ -35,7 +35,7 @@ void Tutorial1::Load() {
   AddChild(m_glowArea);
 
   SetNextScene(new Tutorial2("Tutorial 2", 1, "assets/tutorial/tutorial-2.json"));
-  //SetNextScene(new Scene9("Game Scene 9", 9, "assets/level-1/scene-9.json"));
+  //SetNextScene(new Scene6("Game Scene 2", 2, "assets/level-1/scene-6.json"));
 
   auto tut = GET_FACTORY->CreateObject<Sigma::StaticImage>("StaticImage");
   tut->SetTexture("assets/tutorial/prompt1.png");
