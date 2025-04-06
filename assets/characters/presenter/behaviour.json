@@ -20,7 +20,23 @@
       "knockback" : { "x" : 80.0, "y" : 0 },
       "colliderOffset" : { "x" : 22, "y" : 60 },
       "colliderSize" : { "x" : 20, "y" : 15, "z" : 3 },
-      "animationName" : "MainAttack"
+      "animationName" : "MainAttack1"
+    },
+    {
+      "type" : "dmg",
+      "damage" : 0.0,
+      "knockback" : { "x" : 80.0, "y" : 0 },
+      "colliderOffset" : { "x" : 22, "y" : 60 },
+      "colliderSize" : { "x" : 20, "y" : 15, "z" : 3 },
+      "animationName" : "MainAttack1"
+    },
+    {
+      "type" : "dmg",
+      "damage" : 0.0,
+      "knockback" : { "x" : 80.0, "y" : 0 },
+      "colliderOffset" : { "x" : 22, "y" : 60 },
+      "colliderSize" : { "x" : 20, "y" : 15, "z" : 3 },
+      "animationName" : "MainAttack1"
     }
   ],
 
