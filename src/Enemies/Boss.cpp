@@ -30,7 +30,7 @@ void Boss::Init() {
   Enemy::Init();
 
   // Setup Animation
-  auto anim = GET_ANIMATION->LoadTextureAtlas("assets/characters/Boss/anim-data.json");
+  auto anim = GET_ANIMATION->LoadTextureAtlas("assets/characters/presenter/anim-data1.json");
   m_animComp->SetTextureAtlas(anim);
   m_animComp->SetCurrentAnim("Idle");
   SetTexture(anim->textureStr.c_str());
@@ -54,10 +54,11 @@ void Boss::Start() {
   BindState(STATE_SPECIAL, [this] { SpecialState(); });
   BindState(STATE_PURSUE, [this] { Pursue(); });
   BindState(STATE_RETREAT, [this] { Retreat(); });
+  BindState(-1, [this] { });
 }
 
 void Boss::Transition() {
-  auto anim = GET_ANIMATION->LoadTextureAtlas("assets/characters/Boss/anim-dataDose.json");
+  auto anim = GET_ANIMATION->LoadTextureAtlas("assets/characters/presenter/anim-data1.json");
   m_animComp->SetTextureAtlas(anim);
   // m_animComp->SetCurrentAnim("Idle");
   SetTexture(anim->textureStr.c_str());
@@ -145,6 +146,7 @@ void Boss::SpecialState() {
     dash = false;
     FacePlayer();
     SpecialOne();
+    SetState(-1);
     if (m_consectutiveAttack >= 3) {
       m_consectutiveAttack = 0;
       EndedMove();
