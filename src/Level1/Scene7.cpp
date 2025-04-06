@@ -12,7 +12,6 @@
 namespace game {
 
 void Scene7::Load() {
-  GameScene::Load();
 
   floor = GET_FACTORY->CreateObject<Sigma::Actor>();
   floor->SetTexture("assets/level-1/scene-7-floor.png");
@@ -25,6 +24,8 @@ void Scene7::Load() {
   walls->transform.scale = {2000.0f, 2000.0f};
   walls->transform.position.z = -5000;
   AddChild(walls);
+
+  GameScene::Load();
 
   SetNextScene(new Scene1("Game Scene 1", 1, "assets/level-1/scene-1.json"));
 }

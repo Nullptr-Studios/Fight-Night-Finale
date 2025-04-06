@@ -40,8 +40,13 @@
       "name": "Spawner 2",
       "required": 0,
       "pos": {"x": 25, "y": -85},
-      "activationRange": 150,
+      "activationRange": 175,
       "enemies": [
+        {
+          "id": 3,
+          "pos": {"x": 120, "y": -250},
+          "entranceId": 2
+        },
         {
           "id": 1,
           "pos": {"x": 105, "y": -115},
@@ -56,11 +61,6 @@
           "id": 1,
           "pos": {"x": -90, "y": 85},
           "entranceId": 0
-        },
-        {
-          "id": 3,
-          "pos": {"x": 120, "y": -230},
-          "entranceId": 3
         }
       ]
     },
@@ -88,7 +88,7 @@
         {
           "id": 3,
           "pos": {"x": 130, "y": -130},
-          "entranceId": 7
+          "entranceId": 2
         }
       ]
     }

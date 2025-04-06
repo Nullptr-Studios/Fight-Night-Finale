@@ -4,7 +4,9 @@
 #include "Polygon.hpp"
 #include "Objects/EnemySpawner.hpp"
 #include "Scene.hpp"
-#include "Tutorial/GlowArea.hpp"
+#include "ScenePassTrigger.hpp"
+
+#include "Objects/Manager/GameplayManager.hpp"
 
 
 void game::GameScene::Load() {
@@ -28,16 +30,10 @@ void game::GameScene::Load() {
   m_playerStartPos = {J["playerStart"]["x"], J["playerStart"]["y"]};
 
   if (J.contains("exitLoc")) {
-    m_exitLocation = GET_FACTORY->CreateObject<GlowArea>("Exit");
+    m_exitLocation = GET_FACTORY->CreateObject<ScenePassTrigger>("Exit");
     m_exitLocation->transform.position = {J["exitLoc"]["x"], J["exitLoc"]["y"], -J["exitLoc"]["y"].get<int>()};
     m_exitLocation->SetActive(false);
     AddChild(m_exitLocation);
-  }
-
-  if (J.contains("exitDoorLoc")) {
-    m_exitLocationDoor = GET_FACTORY->CreateObject<Door>("Exit_Door", J["exitDoorType"].get<int>());
-    m_exitLocationDoor->transform.position = {J["exitDoorLoc"]["x"], J["exitDoorLoc"]["y"], -J["exitDoorLoc"]["y"].get<int>()};
-    AddChild(m_exitLocationDoor);
   }
 
   m_sceneBounds.reserve(J["bounds"].size());
@@ -90,6 +86,8 @@ void game::GameScene::Load() {
       s->AddEnemiesData(data);
     }
 
+//Door stuff
+    s->AddDoorData(m_spawnerDoors);
     m_enemySpawners.push_back(s);
   }
 
@@ -114,7 +112,8 @@ void game::GameScene::Update(double delta){
     if (m_exitLocation)
       m_exitLocation->SetActive(true);
     if (m_exitLocationDoor)
-      m_exitLocationDoor->Open(9999.9f);
+    	m_exitLocationDoor->Open(0, true);
+    GameplayManager::GetInstance()->OnScenePass();
     m_isSceneFinished = true;
   }
 }
@@ -126,6 +125,7 @@ void game::GameScene::Unload() {
     GET_FACTORY->DestroyObject(spawner);
   }
 
+  m_spawnerDoors.clear();
   delete m_sceneBoundsPoly;
 }
 

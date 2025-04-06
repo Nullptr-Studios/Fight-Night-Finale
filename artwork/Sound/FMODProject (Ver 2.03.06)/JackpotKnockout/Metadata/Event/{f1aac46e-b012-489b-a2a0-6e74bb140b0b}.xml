@@ -107,7 +107,7 @@
 			<value>2</value>
 		</property>
 		<property name="playlistMode">
-			<value>4</value>
+			<value>1</value>
 		</property>
 		<relationship name="modulators">
 			<destination>{7054e5a9-7988-45f2-94e6-e5df1b1ddd39}</destination>
@@ -125,7 +125,7 @@
 			<value>pitch</value>
 		</property>
 		<property name="amount">
-			<value>9</value>
+			<value>10.5</value>
 		</property>
 	</object>
 	<object class="SingleSound" id="{013e6d75-9cea-4f8b-8de2-c1a9400dd4ce}">

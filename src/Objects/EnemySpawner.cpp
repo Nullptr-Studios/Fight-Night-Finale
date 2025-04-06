@@ -19,16 +19,14 @@ void game::EnemySpawner::Start() { Object::Start(); }
 
 void game::EnemySpawner::SpawnEnemy() {
   std::shared_ptr<Enemy> e;
-  e = GET_FACTORY->CreateObject<game::TntEnemy>("Enemy", "assets/characters/tntEnemy/behaviour.json");
+  // TODO: DO SPWN MULTIPLE ENEMIES
+  e = GET_FACTORY->CreateObject<game::DefaultEnemy>("Enemy", "assets/characters/BasicEnemy/behaviour.json");
   e->transform.position.x = m_currentEnemyData.position.x;
   e->transform.position.y = m_currentEnemyData.position.y;
   e->transform.scale = {32.0f, 64.0f};
   e->Enable(m_gameplayManager->GetPlayers());
   e->SetSceneBoundsPoly(m_gameplayManager->GetSceneBoundsPoly());
   m_enemies.push_back(e);
-  for (auto door: m_doors) {
-    door->Open();
-  }
 }
 
 void game::EnemySpawner::Update(double deltaTime) {
@@ -78,6 +76,9 @@ void game::EnemySpawner::Update(double deltaTime) {
       for (int i = 0; i < stepAmount && m_currentEnemyIndex < m_spawnData.size(); ++i) {
         m_currentEnemyData = m_spawnData[m_currentEnemyIndex];
         SpawnEnemy();
+        if (!m_spawnerDoors.empty() && m_currentEnemyData.entranceId < m_spawnerDoors.size()) {
+          m_spawnerDoors[m_currentEnemyData.entranceId]->Open(0.75f);
+        }
 
         m_currentEnemyIndex++;
       }
@@ -111,9 +112,4 @@ void game::EnemySpawner::Destroy() {
     GET_FACTORY->DestroyObject(enemy);
   }
   m_enemies.clear();
-
-  for (auto door: m_doors) {
-    GET_FACTORY->DestroyObject(door);
-  }
-  m_doors.clear();
 }

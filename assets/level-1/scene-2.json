@@ -1,8 +1,6 @@
 {
   "playerStart": {"x": -475, "y": 25},
   "exitLoc": {"x": 450, "y": -190},
-  "exitDoorLoc" : {"x": 448, "y": -132},
-  "exitDoorType" : 3,
   "bounds": [
     {"x": -485, "y": -33},
     {"x": 27, "y": -30},
@@ -35,6 +33,16 @@
       "id": 1,
       "pos": {"x": -165, "y": 80},
       "entranceId": 1
+    },
+    {
+      "id": 1,
+      "pos": {"x": -425, "y": 80},
+      "entranceId": 0
+    },
+    {
+      "id": 1,
+      "pos": {"x": -425, "y": 80},
+      "entranceId": 0
     }
     ]
   },
