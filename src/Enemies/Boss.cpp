@@ -28,6 +28,7 @@ void Boss::Update(double delta) {
 
 void Boss::Init() {
   Enemy::Init();
+  m_restartTime = 2;
 
   // Setup Animation
   auto anim = GET_ANIMATION->LoadTextureAtlas("assets/characters/presenter/Presenter1.json");
@@ -35,6 +36,8 @@ void Boss::Init() {
   m_animComp->SetCurrentAnim("Idle");
   SetTexture(anim->textureStr.c_str());
   m_animComp->PlayAnim();
+
+  m_animComp->SetupTrailEffect(4, .07f, .5f, glm::vec4(1, 1, 1, .75f), glm::vec4(1, 1, 1, 0));
 
   // Setup player collider
   m_collider->box.Set(25, 25, 50, 50, 10, transform.offset);
@@ -172,11 +175,22 @@ void Boss::FacePlayer() {
     transform.relativeScale.x *= -1;
   }
 }
+void Boss::OnFullComboPerformed(bool super) {
+  m_basicCombo = 0;
+  if (rand() % 2 == 0) {
+    m_nextState = STATE_SPECIAL;
+    SetState(STATE_RETREAT);
+  } else {
+    m_nextState = STATE_BASIC;
+    SetState(STATE_PURSUE);
+  }
+}
 
 void Boss::EndedMove() {
   if (m_hasDoneDamage && m_nextState == STATE_BASIC) {
     return;
   }
+  m_basicCombo = 0;
   if (rand() % 2 == 0) {
     m_nextState = STATE_SPECIAL;
     SetState(STATE_RETREAT);

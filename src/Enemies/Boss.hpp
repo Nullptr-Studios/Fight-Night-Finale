@@ -44,6 +44,7 @@ public:
   void DebugWindow() override;
   void EndedMove() override;
   void FacePlayer();
+  void OnFullComboPerformed(bool super) override;
 
 private:
   Player* m_player{};
