@@ -6,6 +6,32 @@
 #include "UI/SceneButton.hpp"
 
 void game::DeadScene::Load() {
+
+  std::string m_jsonPath = "assets/UI/Score.Json";
+
+  if (m_jsonPath.empty())
+    return;
+
+  std::fstream file(m_jsonPath);
+
+  if (!file.is_open()) {
+    std::cout << "[GameScene] " << GetName() << " failed to open JSON file " << m_jsonPath << '\n';
+    return;
+  }
+
+  std::cout << "[GameScene] " << GetName() << " Loading JSON file: " << m_jsonPath << '\n';
+
+  Sigma::json_t J = Sigma::json_t::parse(file);
+
+  file.close();
+
+  m_topScore = J["topScore"];
+  m_playerScore = J["playerScore"];
+
+  std::cout << "[GameScene] " << GetName() << " JSON file loaded\n";
+
+  J.clear();
+
   Scene::Load();
 
   GET_CAMERA->SetCurrentCamera(GET_FACTORY->CreateObject<Sigma::Camera>("Main Camera"));
@@ -33,7 +59,35 @@ void game::DeadScene::Load() {
 
   AddChild(GET_CAMERA->GetCurrentCamera());
 
+  m_top.numbers.resize(game::UIMoneyBar::maxDigits);
+  for (short i = 0; i < game::UIMoneyBar::maxDigits; i++) {
+    m_top.numbers[i] = GET_FACTORY->CreateObject<Sigma::UINumber>("Money Digit " + std::to_string(i));
+    m_top.numbers[i]->m_screenSpaceTransform.position = m_top.offset;
+    m_top.numbers[i]->m_screenSpaceTransform.scale = m_top.numScale;
+    m_top.numbers[i]->m_screenSpaceTransform.position.x += game::UIMoneyBar::leftX + i * 60.0f;
+    AddChild(m_top.numbers[i]);
+  }
+  m_top.cashIcon = GET_FACTORY->CreateObject<Sigma::UIImage>("Cash Icon", "Dollar");
+  m_top.cashIcon->m_screenSpaceTransform.position = m_top.offset;
+  m_top.cashIcon->m_screenSpaceTransform.scale = m_top.numScale;
+  m_top.cashIcon->m_screenSpaceTransform.position.x -= game::UIMoneyBar::leftX;
+  AddChild(m_top.cashIcon);
+  m_top.active = true;
+
+  m_top.startCash = m_top.displayedCash;
+  m_top.endCash = glm::clamp(m_topScore, 0, m_top.maxCash);
+  m_top.timer = 0.0f;
+
 }
+
+void game::DeadScene::Update(double delta) {
+  Scene::Update(delta);
+  // Money
+  if (m_top.active && (m_top.displayedCash != m_top.endCash)) {
+    m_top.DisplayMoney(m_top.LerpMoney(delta));
+  }
+}
+
 void game::DeadScene::Unload() {
   Scene::Unload();
 }

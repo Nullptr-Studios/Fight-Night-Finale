@@ -75,6 +75,7 @@ void game::GameplayManager::Update(double deltaTime) {
   }
 
   if (dedPlayers >= m_playerCount && m_playerCount != 0) {
+    storeScore();
     GET_MANAGER->LoadScene(new DeadScene("Dead Scene", 0));
     GET_MANAGER->UnloadScene(m_currentGameScene->GetID());
     UninitializeGame();
@@ -201,7 +202,7 @@ void game::GameplayManager::GotoNextScene() {
     m_gameHud->m_fadeScreen->FadeOut(.5f);
   });
 
-  //TODO: Add notification thingi
+  //TODO: Add notification thing
   
 }
 
@@ -271,6 +272,34 @@ void game::GameplayManager::GiveXP(int xp) {
   m_gameHud->UpdateXP(m_experience);
 }
 
+void game::GameplayManager::storeScore() {
+  if (m_scoreJson.empty())
+    return;
 
+  std::fstream rfile(m_scoreJson);
 
+  if (!rfile.is_open()) {
+    std::cout << "[GameScene] " << GetName() << " failed to open JSON file " << m_scoreJson << '\n';
+    return;
+  }
 
+  std::cout << "[GameScene] " << GetName() << " Loading JSON file: " << m_scoreJson << '\n';
+  Sigma::json_t rJ = Sigma::json_t::parse(rfile);
+
+  int topScore = rJ["topScore"];
+
+  rJ.clear();
+  rfile.close();
+
+  std::ofstream wfile(m_scoreJson);
+
+  Sigma::json_t wJ;
+  wJ["topScore"] = topScore<m_experience?m_experience:topScore;
+  wJ["playerScore"] = m_experience;
+
+  wfile << wJ;
+  wJ.clear();
+  wfile.close();
+
+  std::cout << "[GameScene] " << GetName() << " JSON file loaded\n";
+}

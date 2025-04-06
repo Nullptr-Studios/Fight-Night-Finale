@@ -167,7 +167,7 @@ void HUD::Init() {
   money.numbers.resize(game::UIMoneyBar::maxDigits);
 
   for (short i = 0; i < game::UIMoneyBar::maxDigits; i++) {
-    money.numbers[i] = GET_FACTORY->CreateObject<Sigma::UINumber>("Money Digit " + std::to_string(i)).get();
+    money.numbers[i] = GET_FACTORY->CreateObject<Sigma::UINumber>("Money Digit " + std::to_string(i));
     money.numbers[i]->m_screenSpaceTransform.position = money.offset;
     money.numbers[i]->m_screenSpaceTransform.scale = money.numScale;
     money.numbers[i]->m_screenSpaceTransform.position.x += game::UIMoneyBar::leftX + i * 60.0f;

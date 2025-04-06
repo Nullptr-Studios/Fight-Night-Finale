@@ -139,7 +139,7 @@ struct UIMoneyBar {
   double timerMax = 1.f; //Max time on lerp
   double timer = 0.0f; //Timer for time-based lerp or whatever the fuck idk what I'm doing rn tbh I want to sleep I'm so done.
 
-  std::vector<Sigma::UINumber *> numbers = {};
+  std::vector<std::shared_ptr<Sigma::UINumber>> numbers = {};
   std::shared_ptr<Sigma::UIElement> cashIcon = nullptr;
 
   glm::vec2 numScale = {54,63};

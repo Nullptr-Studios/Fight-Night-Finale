@@ -138,6 +138,13 @@ private:
    */
   int m_experience = 0;
   bool m_started = false;
+
+  /**
+   * @brief holds stuff required for the score system
+   */
+  std::string m_scoreJson = "assets/UI/Score.Json";
+  void storeScore(); //Stores score
+
 };
 }
 
