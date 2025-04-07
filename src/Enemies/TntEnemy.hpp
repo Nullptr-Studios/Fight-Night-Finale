@@ -18,11 +18,13 @@ public:
   void Init() override;
   void FollowState() override;
   void AttackState() override;
+  void Update(double delta) override;
 
   void Destroy() override;
 
 private:
   std::shared_ptr<Tnt> m_tnt = nullptr;
+  float m_cooldown = 0;
 
 };
 }

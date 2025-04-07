@@ -30,8 +30,6 @@ protected:
 
   void EndedMove() override;
 
-  virtual void WalkState();
-
   virtual void GoToState();
   virtual void FollowState();
   virtual void PausedState();

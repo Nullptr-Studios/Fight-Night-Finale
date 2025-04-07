@@ -19,7 +19,7 @@ void Tnt::Init() {
   transform.scale = {100,10};
   m_boomBox = {100,100,100};
   m_powBox = {300,300};
-  m_damage = 30;
+  m_damage = 10;
   m_length = 1;
   m_timer = 0;
 }
@@ -35,6 +35,7 @@ void Tnt::Update(double delta) {
   }
   if (m_timer >= m_length + .4) {
     boom = true;
+    int id = GetId();
     m_attackCollider->Do(transform.position, m_boomBox, m_damage, this, Sigma::Damage::DamageType::DAMAGE,m_powBox, true);
     transform.position = m_target;
   }

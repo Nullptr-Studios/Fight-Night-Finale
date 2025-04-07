@@ -24,9 +24,9 @@ void Enemy::Init() {
 void Enemy::Start() {
   Character::Start();
 
-  BindState(STATE_IDLE, std::bind(&Enemy::IdleState, this));
-  BindState(STATE_WAIT, std::bind(&Enemy::TimerState, this));
-  BindState(STATE_DEAD, std::bind(&Enemy::DeadState, this));
+  BindState(STATE_IDLE, [this] { IdleState(); });
+  BindState(STATE_WAIT, [this] { TimerState(); });
+  BindState(STATE_DEAD, [this] { DeadState(); });
 
   SetState(STATE_IDLE);
 }
