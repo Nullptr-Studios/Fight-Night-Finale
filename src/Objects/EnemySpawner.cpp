@@ -19,8 +19,22 @@ void game::EnemySpawner::Start() { Object::Start(); }
 
 void game::EnemySpawner::SpawnEnemy() {
   std::shared_ptr<Enemy> e;
-  // TODO: DO SPWN MULTIPLE ENEMIES
-  e = GET_FACTORY->CreateObject<game::DefaultEnemy>("Enemy", "assets/characters/BasicEnemy/behaviour.json");
+
+  switch (m_currentEnemyData.id) {
+    case 1:
+      e = GET_FACTORY->CreateObject<game::GrabEnemy>("Grab Enemy", "assets/characters/grabEnemy/behaviour.json");
+    break;
+    case 2:
+      e = GET_FACTORY->CreateObject<game::BigEnemy>("Enemy", "assets/characters/bigEnemy/behaviour.json");
+    break;
+    case 3:
+      e = GET_FACTORY->CreateObject<game::TntEnemy>("Enemy", "assets/characters/tntEnemy/behaviour.json");
+    break;
+    default:
+      e = GET_FACTORY->CreateObject<game::DefaultEnemy>("Enemy", "assets/characters/BasicEnemy/behaviour.json");
+    break;
+  }
+
   e->transform.position.x = m_currentEnemyData.position.x;
   e->transform.position.y = m_currentEnemyData.position.y;
   e->transform.scale = {32.0f, 64.0f};
