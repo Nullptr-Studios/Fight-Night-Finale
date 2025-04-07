@@ -165,12 +165,12 @@ void HUD::Init() {
 
 #pragma region XPBar
   money.numbers.resize(game::UIMoneyBar::maxDigits);
-
+  money.leftX = -money.offsetMultiplier * game::UIMoneyBar::maxDigits / 2.0f;
   for (short i = 0; i < game::UIMoneyBar::maxDigits; i++) {
     money.numbers[i] = GET_FACTORY->CreateObject<Sigma::UINumber>("Money Digit " + std::to_string(i));
     money.numbers[i]->m_screenSpaceTransform.position = money.offset;
     money.numbers[i]->m_screenSpaceTransform.scale = money.numScale;
-    money.numbers[i]->m_screenSpaceTransform.position.x += game::UIMoneyBar::leftX + i * 60.0f;
+    money.numbers[i]->m_screenSpaceTransform.position.x += money.leftX + i * money.offsetMultiplier;
   }
 
   // money.cashIcon = GET_FACTORY->CreateObject<Sigma::UIElement>("Cash Icon");
@@ -178,7 +178,7 @@ void HUD::Init() {
   money.cashIcon = GET_FACTORY->CreateObject<Sigma::UIImage>("Cash Icon", "Dollar");
   money.cashIcon->m_screenSpaceTransform.position = money.offset;
   money.cashIcon->m_screenSpaceTransform.scale = money.numScale;
-  money.cashIcon->m_screenSpaceTransform.position.x -= game::UIMoneyBar::leftX;
+  money.cashIcon->m_screenSpaceTransform.position.x -= money.leftX;
 
 #pragma endregion
 

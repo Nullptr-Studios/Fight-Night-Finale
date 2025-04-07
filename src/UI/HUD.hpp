@@ -133,6 +133,8 @@ struct UIMoneyBar {
   int startCash = 0; ///>@brief Cash with which linear interpolation starts
   int endCash = 0; ///>@brief Cash with which linear interpolation ends
   int displayedCash = 0; ///>@brief Cash currently displayed
+  int offsetMultiplier = 60; ///>@brief offset multiplier
+  int leftX; ///>@brief Left-most coordinate of the money display
 
   bool active = false;
 
@@ -144,7 +146,6 @@ struct UIMoneyBar {
 
   glm::vec2 numScale = {54,63};
   glm::vec3 offset = {0,461,0};
-  static constexpr float leftX {-60.0f * game::UIMoneyBar::maxDigits / 2.0f}; ///>@brief Left-most coordinate of the money display
 
 void DisplayMoney(int val) {
     if (val == displayedCash)

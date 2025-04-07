@@ -61,24 +61,27 @@ void game::WinScene::Load() {
   //TOP SCORE
   m_topText = GET_FACTORY->CreateObject<Sigma::Actor>();
   m_topText->SetTexture("assets/UI/Sprites/topScore.png");
-  m_topText->transform.scale = {120.0f, 32.0f};
-  m_topText->transform.position.y = 48;
+  m_topText->transform.scale = {90.0f, 26.0f};
+  m_topText->transform.position.y = 40;
 
   AddChild(m_topText);
 
-  m_top.offset.y = 81;
+  m_top.offset.y = 58;
+  m_top.offsetMultiplier = 45;
+  m_top.numScale = {40.5f,47.25f};
   m_top.numbers.resize(game::UIMoneyBar::maxDigits);
+  m_top.leftX = -m_top.offsetMultiplier * game::UIMoneyBar::maxDigits / 2.0f;
   for (short i = 0; i < game::UIMoneyBar::maxDigits; i++) {
     m_top.numbers[i] = GET_FACTORY->CreateObject<Sigma::UINumber>("Money Digit " + std::to_string(i));
     m_top.numbers[i]->m_screenSpaceTransform.position = m_top.offset;
     m_top.numbers[i]->m_screenSpaceTransform.scale = m_top.numScale;
-    m_top.numbers[i]->m_screenSpaceTransform.position.x += game::UIMoneyBar::leftX + i * 60.0f;
+    m_top.numbers[i]->m_screenSpaceTransform.position.x += m_top.leftX + i * m_top.offsetMultiplier;
     AddChild(m_top.numbers[i]);
   }
   m_top.cashIcon = GET_FACTORY->CreateObject<Sigma::UIImage>("Cash Icon", "Dollar");
   m_top.cashIcon->m_screenSpaceTransform.position = m_top.offset;
   m_top.cashIcon->m_screenSpaceTransform.scale = m_top.numScale;
-  m_top.cashIcon->m_screenSpaceTransform.position.x -= game::UIMoneyBar::leftX;
+  m_top.cashIcon->m_screenSpaceTransform.position.x -= m_top.leftX;
   AddChild(m_top.cashIcon);
   m_top.active = true;
 
@@ -99,17 +102,18 @@ void game::WinScene::Load() {
 
   m_current.offset.y = -137;
   m_current.numbers.resize(game::UIMoneyBar::maxDigits);
+  m_current.leftX = -m_current.offsetMultiplier * game::UIMoneyBar::maxDigits / 2.0f;
   for (short i = 0; i < game::UIMoneyBar::maxDigits; i++) {
     m_current.numbers[i] = GET_FACTORY->CreateObject<Sigma::UINumber>("Money Digit " + std::to_string(i));
     m_current.numbers[i]->m_screenSpaceTransform.position = m_current.offset;
     m_current.numbers[i]->m_screenSpaceTransform.scale = m_current.numScale;
-    m_current.numbers[i]->m_screenSpaceTransform.position.x += game::UIMoneyBar::leftX + i * 60.0f;
+    m_current.numbers[i]->m_screenSpaceTransform.position.x += m_current.leftX + i * 60.0f;
     AddChild(m_current.numbers[i]);
   }
   m_current.cashIcon = GET_FACTORY->CreateObject<Sigma::UIImage>("Cash Icon", "Dollar");
   m_current.cashIcon->m_screenSpaceTransform.position = m_current.offset;
   m_current.cashIcon->m_screenSpaceTransform.scale = m_current.numScale;
-  m_current.cashIcon->m_screenSpaceTransform.position.x -= game::UIMoneyBar::leftX;
+  m_current.cashIcon->m_screenSpaceTransform.position.x -= m_current.leftX;
   AddChild(m_current.cashIcon);
   m_current.active = true;
 
@@ -118,6 +122,7 @@ void game::WinScene::Load() {
   m_current.timer = 0.0f;
 
 #pragma endregion currentScore
+
 
   AddChild(GET_CAMERA->GetCurrentCamera());
   GameplayManager::GetInstance()->UninitializeGame();
