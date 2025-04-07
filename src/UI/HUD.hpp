@@ -60,6 +60,14 @@ struct UIHealthBar {
 
 
   void ComboBreak() {
+
+    //Wombo Combo!!!
+    int comboMult = 997;
+
+    //Return Combo Wombo
+    GameplayManager::GetInstance()->GiveXP(combo*comboMult*0.8);
+
+    //Weset
     combo = 0;
     m_comboDisapear = 5.0f;
     comboText->SetText("Break!!!");
@@ -91,6 +99,12 @@ struct UIHealthBar {
       rating = "RAMPAGE!!!!\n";
       color = {1.0f, 0.0f, 1.0f, 1.0f};
     }
+
+     //Wombo Combo!!!
+    int comboMult = 997;
+
+    //Return Combo Wombo
+    GameplayManager::GetInstance()->GiveXP(combo*comboMult);
 
     rating += str;
     comboText->SetTint(color);
