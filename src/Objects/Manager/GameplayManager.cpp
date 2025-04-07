@@ -273,11 +273,12 @@ void game::GameplayManager::GiveXP(int xp) {
 }
 
 void game::GameplayManager::storeScore() {
+  //Sanity
   if (m_scoreJson.empty())
     return;
 
+  //Read
   std::fstream rfile(m_scoreJson);
-
   if (!rfile.is_open()) {
     std::cout << "[GameScene] " << GetName() << " failed to open JSON file " << m_scoreJson << '\n';
     return;
@@ -287,19 +288,23 @@ void game::GameplayManager::storeScore() {
   Sigma::json_t rJ = Sigma::json_t::parse(rfile);
 
   int topScore = rJ["topScore"];
-
-  rJ.clear();
   rfile.close();
+  rJ.clear();
 
+  //Write
   std::ofstream wfile(m_scoreJson);
+  if (!wfile.is_open()) {
+    std::cout << "[GameScene] " << GetName() << " failed to open JSON file " << m_scoreJson << '\n';
+    return;
+  }
 
   Sigma::json_t wJ;
   wJ["topScore"] = topScore<m_experience?m_experience:topScore;
   wJ["playerScore"] = m_experience;
 
   wfile << wJ;
-  wJ.clear();
   wfile.close();
+  wJ.clear();
 
   std::cout << "[GameScene] " << GetName() << " JSON file loaded\n";
 }

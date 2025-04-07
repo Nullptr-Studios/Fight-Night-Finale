@@ -21,9 +21,12 @@ private:
   std::shared_ptr<Sigma::SceneButton> m_quitButton = nullptr;
   std::shared_ptr<Sigma::Actor> m_background = nullptr;
   std::shared_ptr<Sigma::Actor> m_death = nullptr;
+  std::shared_ptr<Sigma::Actor> m_topText = nullptr;
+  std::shared_ptr<Sigma::Actor> m_currentText = nullptr;
   int m_topScore = 0;
-  int m_playerScore = 0;
+  int m_currentScore = 0;
   UIMoneyBar m_top = {};
   UIMoneyBar m_current = {};
+  std::string m_scoreJson = "assets/UI/Score.Json";
 };
 }

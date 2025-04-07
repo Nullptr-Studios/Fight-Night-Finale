@@ -112,6 +112,8 @@ public:
   
   void GiveXP(int xp);
 
+  void storeScore(); //Stores score
+
   [[nodiscard]] int GetXP() const { return m_experience; }
 
   
@@ -143,7 +145,6 @@ private:
    * @brief holds stuff required for the score system
    */
   std::string m_scoreJson = "assets/UI/Score.Json";
-  void storeScore(); //Stores score
 
 };
 }
