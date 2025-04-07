@@ -227,7 +227,7 @@
 "meta": {
 	"app": "https://www.codeandweb.com/texturepacker",
 	"version": "1.0",
-	"image": "assets/UI/UI_Atlas.png",
+	"image": "UI_Atlas.png",
 	"format": "RGBA8888",
 	"size": {"w":747,"h":55},
 	"scale": "1",
