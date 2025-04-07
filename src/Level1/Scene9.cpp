@@ -43,6 +43,16 @@ void Scene9::Load() {
   AddChild(Sdoor4);
   m_spawnerDoors.push_back(Sdoor4);
 
+  auto b1 = GET_FACTORY->CreateObject<Box>("Machine1");
+  b1->transform.position = {-219, -21, 21};
+
+  AddChild(b1);
+
+  auto b2 = GET_FACTORY->CreateObject<Box>("Machine2");
+  b2->transform.position = {-188, -52, 52};
+
+  AddChild(b2);
+
   GameScene::Load();
 
   SetNextScene(new Scene7("Game Scene 7", 7, "assets/level-1/scene-7.json"));
