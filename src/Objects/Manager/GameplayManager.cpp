@@ -52,6 +52,40 @@ void game::GameplayManager::FirstUpdate(double deltaTime) {
   if (m_gameSceneIsDirty) {
     GotoNextSceneAfter();
   }
+
+  //Pause and Exit
+  if (AEInputKeyTriggered(27)
+    || AEInputGamepadButtonTriggered(0, AE_GAMEPAD_START)
+    || AEInputGamepadButtonTriggered(1, AE_GAMEPAD_START)) {
+
+    //Return to Main Menu
+    if (m_paused == true && (AEInputKeyTriggered(27)
+    || AEInputGamepadButtonTriggered(0, AE_GAMEPAD_START)
+    || AEInputGamepadButtonTriggered(1, AE_GAMEPAD_START))) {
+      m_paused = false;
+      GET_MANAGER->SetPauseGame(m_paused);
+      m_gameHud->EnableUIPauseMenu(m_paused);
+      GET_MANAGER->UnloadScene(GameplayManager::GetInstance()->GetCurrentGameScene()->GetID());
+      GameplayManager::GetInstance()->UninitializeGame();
+      GET_MANAGER->LoadScene(new MainMenu("Main Menu", 0));
+    }
+
+    //Pause
+    else {
+      m_paused = true;
+      GET_MANAGER->SetPauseGame(m_paused);
+      m_gameHud->EnableUIPauseMenu(m_paused);
+    }
+    }
+
+  //Unpause
+  if (m_paused == true && (AEInputKeyTriggered(' ')
+    or AEInputGamepadButtonTriggered(0, AE_GAMEPAD_A)
+    or AEInputGamepadButtonTriggered(1, AE_GAMEPAD_A))) {
+    m_paused = false;
+    GET_MANAGER->SetPauseGame(m_paused);
+    m_gameHud->EnableUIPauseMenu(m_paused);
+    }
 }
 
 void game::GameplayManager::Update(double deltaTime) {
@@ -65,7 +99,7 @@ void game::GameplayManager::Update(double deltaTime) {
   CheckForCoop();
 
   int dedPlayers = 0;
-  for (const auto& element: m_players) {
+  for (const auto &element: m_players) {
     if (element.player == nullptr)
       continue;
 
@@ -81,42 +115,10 @@ void game::GameplayManager::Update(double deltaTime) {
     UninitializeGame();
   }
 
-  //Pause and Exit
-  if (AEInputKeyTriggered(27)
-    or AEInputGamepadButtonTriggered(0, AE_GAMEPAD_START)
-    or AEInputGamepadButtonTriggered(1, AE_GAMEPAD_START)) {
-
-    //Return to Main Menu
-    if (m_paused == true && (AEInputKeyTriggered(27)
-    or AEInputGamepadButtonTriggered(0, AE_GAMEPAD_START)
-    or AEInputGamepadButtonTriggered(1, AE_GAMEPAD_START))) {
-      m_paused = false;
-      m_gameHud->EnableUIPauseMenu(m_paused);
-      GET_MANAGER->UnloadScene(GameplayManager::GetInstance()->GetCurrentGameScene()->GetID());
-      GameplayManager::GetInstance()->UninitializeGame();
-      GET_MANAGER->LoadScene(new MainMenu("Main Menu", 0));
-    }
-
-    //Pause
-    else {
-      m_paused = true;
-      m_gameHud->EnableUIPauseMenu(m_paused);
-    }
-  }
-
-  //Unpause
-  if (m_paused == true && (AEInputKeyTriggered(' ')
-    or AEInputGamepadButtonTriggered(0, AE_GAMEPAD_A)
-    or AEInputGamepadButtonTriggered(1, AE_GAMEPAD_A))) {
-      m_paused = false;
-      m_gameHud->EnableUIPauseMenu(m_paused);
-  }
-
   // Debug pass level
   if (AEInputKeyTriggered('P')) {
     GotoNextScene();
   }
-  
 }
 
 void game::GameplayManager::RespawnPlayer(game::Player *player) {

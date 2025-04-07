@@ -53,7 +53,7 @@ public:
   [[nodiscard]] bool IsSceneFinished() const { return m_isSceneFinished; }
 
 protected:
-  bool m_debug = true;
+  bool m_debug = false;
 
   bool m_isSceneFinished = false;
 

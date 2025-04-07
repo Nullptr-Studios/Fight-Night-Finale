@@ -39,6 +39,9 @@ public:
   void Start() override;
   void FirstUpdate(double deltaTime) override;
   void Update(double deltaTime) override;
+
+  //Used for paused logic
+  //void Draw() override;
   //void DebugWindow() override;
 
   /**
@@ -86,7 +89,7 @@ public:
    */
   void GotoNextSceneAfter();
 
-  GameScene* GetCurrentGameScene() const { return m_currentGameScene; };
+  [[nodiscard]] GameScene* GetCurrentGameScene() const { return m_currentGameScene; };
 
   Sigma::Polygon* GetSceneBoundsPoly() { return m_currentGameScene->GetSceneBoundsPoly(); }
 
