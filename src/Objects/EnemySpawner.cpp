@@ -7,6 +7,7 @@
 #include "Enemies/DefaultEnemy.hpp"
 #include "Enemies/GrabEnemy.hpp"
 #include "Enemies/TntEnemy.hpp"
+#include "Enemies/Boss.hpp"
 #include "GameScene.hpp"
 #include "Manager/GameplayManager.hpp"
 
@@ -22,7 +23,7 @@ void game::EnemySpawner::SpawnEnemy() {
 
   switch (m_currentEnemyData.id) {
     case 1:
-      e = GET_FACTORY->CreateObject<game::GrabEnemy>("Grab Enemy", "assets/characters/grabEnemy/behaviour.json");
+      e = GET_FACTORY->CreateObject<game::Boss>("Grab Enemy", "assets/characters/presenter/behaviour.json");
     break;
     case 2:
       e = GET_FACTORY->CreateObject<game::BigEnemy>("Enemy", "assets/characters/bigEnemy/behaviour.json");

@@ -10,10 +10,13 @@
 
 #include "Enemies/Enemy.hpp"
 #include "Enemies/Proj.hpp"
+#include "UI/HealthBar.hpp"
+#include "UI/UIImage.hpp"
+
 namespace game {
 class Boss : public Enemy {
 public:
-  Boss(const Sigma::id_t id, const char *jsonPath) : Enemy(id, jsonPath) {}
+  Boss(const Sigma::id_t id, const char *jsonPath);
   void Update(double delta) override;
   void Init() override;
   void Start() override;
@@ -46,8 +49,10 @@ public:
   void FacePlayer();
   void OnFullComboPerformed(bool super) override;
 
+  void OnDamage(const Sigma::Damage::DamageEvent &e) override;
+
 private:
-  Player* m_player{};
+  Player *m_player{};
   float m_timer{};
   bool m_phaseDose{};
   glm::vec2 m_goto{};
@@ -56,5 +61,13 @@ private:
   bool dash{};
   std::vector<std::shared_ptr<Proj>> destructionQueue;
 
+  // Boss UI
+  std::shared_ptr<Sigma::UIImage> m_barBorder;
+  std::shared_ptr<Sigma::UIImage> m_barBackground;
+  std::shared_ptr<HealthBar> m_bar;
 };
+inline void Boss::OnDamage(const Sigma::Damage::DamageEvent &e) {
+  Enemy::OnDamage(e);
+  m_bar->m_currentHealth = GetHealth();
 }
+} // namespace game

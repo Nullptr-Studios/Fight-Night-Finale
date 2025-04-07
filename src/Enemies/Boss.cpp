@@ -8,7 +8,6 @@
 #include "glm/fwd.hpp"
 #include "glm/geometric.hpp"
 
-
 namespace game {
 
 void Boss::DebugWindow() {
@@ -24,6 +23,24 @@ void Boss::Update(double delta) {
     Transition();
     m_health = health;
   }
+}
+
+Boss::Boss(const Sigma::id_t id, const char *jsonPath) : Enemy(id, jsonPath) {
+  glm::vec2 scale = {1024, 80};
+  glm::vec3 pos = {0.0f, -400.0f, 0.0f};
+
+  m_barBackground = GET_FACTORY->CreateObject<Sigma::UIImage>("Boss Health Background", "BossbarBackground");
+  m_barBackground->m_screenSpaceTransform.position = pos;
+  m_barBackground->m_screenSpaceTransform.scale = scale;
+  m_bar = GET_FACTORY->CreateObject<HealthBar>("Boss Health Bar", "BossbarRed");
+  m_bar->m_maxHealth = 100;
+  m_bar->m_currentHealth = 100;
+  m_bar->m_screenSpaceTransform.position = pos + glm::vec3{-scale.x / 2, 0, 0};
+  m_bar->SetScale(scale);
+  m_bar->SetAlignment(Sigma::UIProgressBar::LEFT);
+  m_barBorder = GET_FACTORY->CreateObject<Sigma::UIImage>("Boss Health border", "BossbarRim");
+  m_barBorder->m_screenSpaceTransform.position = pos;
+  m_barBorder->m_screenSpaceTransform.scale = scale;
 }
 
 void Boss::Init() {
@@ -58,6 +75,9 @@ void Boss::Start() {
   BindState(STATE_PURSUE, [this] { Pursue(); });
   BindState(STATE_RETREAT, [this] { Retreat(); });
   BindState(-1, [this] { });
+
+  m_bar->m_maxHealth  = GetMaxHealth();
+  m_bar->m_currentHealth = GetMaxHealth();
 }
 
 void Boss::Transition() {
@@ -202,12 +222,17 @@ void Boss::EndedMove() {
 
 void Boss::Destroy() {
   Enemy::Destroy();
+  // Dante this is shit 0x
   while (!destructionQueue.empty()) {
     if (destructionQueue.back()) {
       GET_FACTORY->DestroyObject(destructionQueue.back());
     }
     destructionQueue.pop_back();
   }
+
+  GET_FACTORY->DestroyObject(m_barBorder);
+  GET_FACTORY->DestroyObject(m_bar);
+  GET_FACTORY->DestroyObject(m_barBackground);
 }
 
 } // namespace game

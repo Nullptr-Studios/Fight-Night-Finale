@@ -173,6 +173,23 @@
         </struct>
         <key>individualSpriteSettings</key>
         <map type="IndividualSpriteSettingsMap">
+            <key type="filename">png/BossbarBackground_0.png</key>
+            <key type="filename">png/BossbarRed_0.png</key>
+            <key type="filename">png/BossbarRim_0.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>spriteScale</key>
+                <double>1</double>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>64,5,128,10</rect>
+                <key>scale9Paddings</key>
+                <rect>64,5,128,10</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
             <key type="filename">png/CharacterFrame_0.png</key>
             <key type="filename">png/PlaceholderFrame_0.png</key>
             <struct type="IndividualSpriteSettings">
@@ -205,7 +222,7 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">png/Dollar.png</key>
+            <key type="filename">png/Dollar_0.png</key>
             <key type="filename">png/Numbers_0.png</key>
             <key type="filename">png/Numbers_1.png</key>
             <key type="filename">png/Numbers_2.png</key>
@@ -277,7 +294,7 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">png/SceneIntro.png</key>
+            <key type="filename">png/SceneIntro_0.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
@@ -307,7 +324,7 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">png/White.png</key>
+            <key type="filename">png/White_0.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
