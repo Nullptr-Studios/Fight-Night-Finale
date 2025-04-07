@@ -43,6 +43,7 @@ void BigEnemy::AttackState() {
 }
 
 void BigEnemy::LandedOnGround() {
+  Character::LandedOnGround();
   transform.position.y = m_movementYFloor;
   velocity.y = 0;
   isInAir = false;

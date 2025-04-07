@@ -49,6 +49,10 @@ void game::GameplayManager::Start() {
 void game::GameplayManager::FirstUpdate(double deltaTime) {
   Object::FirstUpdate(deltaTime);
   // Update the current game scene, and for now teleport players
+
+  if (m_uninitializeGame)
+    return; 
+  
   if (m_gameSceneIsDirty) {
     GotoNextSceneAfter();
   }

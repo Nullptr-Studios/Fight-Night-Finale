@@ -46,7 +46,7 @@
     "activationRange": 140,
     "enemies": [
     {
-      "id": 1,
+      "id": 0,
       "pos": {"x": -10, "y": 10},
       "entranceId": 1
     },
@@ -56,7 +56,7 @@
       "entranceId": 1
     },
     {
-      "id": 1,
+      "id": 0,
       "pos": {"x": 240, "y": -40},
       "entranceId": 2
     }
