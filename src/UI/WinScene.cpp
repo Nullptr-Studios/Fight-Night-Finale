@@ -6,6 +6,9 @@
 #include "UI/SceneButton.hpp"
 
 void game::WinScene::Load() {
+
+  GameplayManager::GetInstance()->enableComboScore(false);
+
   //Sanity
   if (m_scoreJson.empty())
     return;

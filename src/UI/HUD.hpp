@@ -55,10 +55,10 @@ struct UIHealthBar {
   glm::vec3 offset = {-280, 450, 0};
 
   short combo = 0;
+  bool giveScore = false;
 
   float m_comboSreakEnd = 3.0f;
   float m_comboDisapear = 5.0f;
-
 
   void ComboBreak() {
 
@@ -66,7 +66,8 @@ struct UIHealthBar {
     constexpr int comboMult = 997 * 0.8f;
 
     //Return Combo Wombo
-    GameplayManager::GetInstance()->GiveXP(combo*comboMult);
+    if (giveScore)
+      GameplayManager::GetInstance()->GiveXP(combo*comboMult);
 
     //Reset
     combo = 0;
@@ -104,7 +105,8 @@ struct UIHealthBar {
     //Wombo Combo!!!
 
     //Return Combo Wombo
-    GameplayManager::GetInstance()->GiveXP(combo*997);
+    if (giveScore)
+      GameplayManager::GetInstance()->GiveXP(combo*997);
 
     rating += str;
     comboText->SetTint(color);
@@ -213,9 +215,10 @@ public:
 
   void EnableGOIndicator();
   void EnableUIPauseMenu(bool enable);
+
+  void EnableGiveComboScore(bool enable);
   
   std::shared_ptr<Sigma::UIFade> m_fadeScreen = nullptr;
-
 
 private:
 

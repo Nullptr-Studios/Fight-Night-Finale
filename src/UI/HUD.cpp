@@ -93,7 +93,6 @@ void HUD::Init() {
   // shake combo
   player1.comboShake = new Sigma::ShakeObject();
 
-
 #pragma endregion
 
 #pragma region Player2
@@ -168,7 +167,6 @@ void HUD::Init() {
 
   EnableUIPlayer1(false);
   EnableUIPlayer2(false);
-
 
   // Go Indicator
   m_goIndicator = GET_FACTORY->CreateObject<Sigma::UIImage>("Go Indicator", "GO");
@@ -379,6 +377,15 @@ void HUD::UpdateXP(int currentXP) {
   money.startCash = money.displayedCash;
   money.endCash = glm::clamp(currentXP, 0, money.maxCash);
   money.timer = 0.0f;
+}
+
+void HUD::EnableGiveComboScore(bool enable) {
+  player1.giveScore = enable;
+  player2.giveScore = enable;
+  player1.combo = 0;
+  player2.combo = 0;
+  player1.ComboBreak();
+  player2.ComboBreak();
 }
 
 } // namespace game
