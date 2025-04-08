@@ -127,6 +127,16 @@ void game::GameplayManager::Update(double deltaTime) {
 }
 
 void game::GameplayManager::RespawnPlayer(game::Player *player) {
+
+  // if player is alive, do not respawn
+  if (player == nullptr)
+    return;
+  if (player->GetAlive())
+    return;
+
+  // TODO: DO THE SUBSTARCT MONEY correctly
+  GiveXP(-5000);
+
   if (m_currentGameScene)
     player->transform.position = {m_currentGameScene->GetPlayerStartPos().x, m_currentGameScene->GetPlayerStartPos().y,
                                   -m_currentGameScene->GetPlayerStartPos().y};
@@ -175,7 +185,10 @@ void game::GameplayManager::InitPlayer(unsigned controllerID)
   RespawnPlayer(p.player.get());
   
   p.player->SetSceneBoundsPoly(m_currentGameScene->GetSceneBoundsPoly());
-  
+
+  if (m_currentGameScene)
+    p.player->transform.position = {m_currentGameScene->GetPlayerStartPos().x, m_currentGameScene->GetPlayerStartPos().y,
+                                  -m_currentGameScene->GetPlayerStartPos().y};
   
   m_playerCount++;
 }
@@ -221,6 +234,9 @@ void game::GameplayManager::GotoNextSceneAfter() {
     return;
   UpdateCurrentGameScene();
   TeleportPlayersToNextScene();
+
+  for (auto& player : m_players)
+  RespawnPlayer(player.player.get());
   
   AEDbgAssertFunction(m_players[0].player != nullptr, __FILE__, __LINE__, "m_player[0] is nullptr");
   m_cameraFollow->transform.position.x = m_players[0].player->transform.position.x;
