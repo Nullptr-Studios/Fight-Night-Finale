@@ -40,11 +40,18 @@ void HUD::Init() {
   player1.border->m_screenSpaceTransform.position = player1.offset;
   player1.border->m_screenSpaceTransform.scale = {432, 40};
 
-  player1.frame = GET_FACTORY->CreateObject<Sigma::UIImage>("Frame P1", "PlaceholderFrame");
+  player1.frame = GET_FACTORY->CreateObject<Sigma::UIImage>("Frame P1", "CharacterFrame");
   player1.frame->m_screenSpaceTransform.position = player1.offset;
   player1.frame->m_screenSpaceTransform.scale = {120, 96};
   player1.frame->m_screenSpaceTransform.position.x += -286.0f;
   player1.frame->m_screenSpaceTransform.position.y += 18.0f;
+  player1.frameImage = GET_FACTORY->CreateObject<Sigma::UIImage>("Frame P1 Iamge", "PlayerUI");
+  player1.frameImage->m_animComp->GotoFrame(0);
+  player1.frameImage->m_screenSpaceTransform.position = player1.offset;
+  player1.frameImage->m_screenSpaceTransform.scale = {86, 88};
+  player1.frameImage->m_screenSpaceTransform.position.x += -286.0f;
+  player1.frameImage->m_screenSpaceTransform.position.y += 18.0f;
+
 
   player1.currentHealth[0] = GET_FACTORY->CreateObject<Sigma::UINumber>("CurrentHealth Decs P1");
   player1.currentHealth[0]->m_screenSpaceTransform.position = player1.offset;
@@ -109,11 +116,17 @@ void HUD::Init() {
   player2.border->m_screenSpaceTransform.position = player2.offset;
   player2.border->m_screenSpaceTransform.scale = {432, 40};
 
-  player2.frame = GET_FACTORY->CreateObject<Sigma::UIImage>("Frame P2", "PlaceholderFrame");
+  player2.frame = GET_FACTORY->CreateObject<Sigma::UIImage>("Frame P2", "CharacterFrame");
   player2.frame->m_screenSpaceTransform.position = player2.offset;
   player2.frame->m_screenSpaceTransform.scale = {120, 96};
   player2.frame->m_screenSpaceTransform.position.x += 286.0f;
   player2.frame->m_screenSpaceTransform.position.y += 18.0f;
+  player2.frameImage = GET_FACTORY->CreateObject<Sigma::UIImage>("Frame P2 Iamge", "PlayerUI");
+  player2.frameImage->m_animComp->GotoFrame(1);
+  player2.frameImage->m_screenSpaceTransform.position = player2.offset;
+  player2.frameImage->m_screenSpaceTransform.scale = {-86, 88};
+  player2.frameImage->m_screenSpaceTransform.position.x += 286.0f;
+  player2.frameImage->m_screenSpaceTransform.position.y += 18.0f;
 
   player2.currentHealth[0] = GET_FACTORY->CreateObject<Sigma::UINumber>("CurrentHealth Decs P2");
   player2.currentHealth[0]->m_screenSpaceTransform.position = player2.offset;
@@ -222,6 +235,7 @@ void HUD::EnableUIPlayer1(bool enable) {
   player1.health->SetActive(enable);
   player1.border->SetActive(enable);
   player1.frame->SetActive(enable);
+  player1.frameImage->SetActive(enable);
   player1.currentHealth[0]->SetActive(enable);
   player1.currentHealth[1]->SetActive(enable);
   player1.slash->SetActive(enable);
@@ -239,6 +253,7 @@ void HUD::EnableUIPlayer2(bool enable) {
   player2.health->SetActive(enable);
   player2.border->SetActive(enable);
   player2.frame->SetActive(enable);
+  player2.frameImage->SetActive(enable);
   player2.currentHealth[0]->SetActive(enable);
   player2.currentHealth[1]->SetActive(enable);
   player2.slash->SetActive(enable);

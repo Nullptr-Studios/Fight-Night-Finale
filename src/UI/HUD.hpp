@@ -44,6 +44,7 @@ struct UIHealthBar {
   std::shared_ptr<Sigma::UIImage> border = nullptr;
 
   std::shared_ptr<Sigma::UIImage> frame = nullptr;
+  std::shared_ptr<Sigma::UIImage> frameImage = nullptr;
   std::array<std::shared_ptr<Sigma::UINumber>, 2> currentHealth = {};
   std::array<std::shared_ptr<Sigma::UINumber>, 2> maxHealth = {};
   std::shared_ptr<Sigma::UIText> slash = nullptr;
