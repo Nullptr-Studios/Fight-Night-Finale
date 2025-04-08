@@ -61,14 +61,20 @@ private:
   int m_consectutiveAttack{};
   bool dash{};
   std::vector<std::shared_ptr<Proj>> destructionQueue;
+  std::vector<std::shared_ptr<Enemy>> enemyDeletionQueue;
+
+  void SpawnWave1();
+  void SpawnWave2();
+  void SpawnWave3();
+
+  bool m_wave1 = false;
+  bool m_wave2 = false;
+  bool m_wave3 = false;
 
   // Boss UI
   std::shared_ptr<Sigma::UIImage> m_barBorder;
   std::shared_ptr<Sigma::UIImage> m_barBackground;
   std::shared_ptr<HealthBar> m_bar;
 };
-inline void Boss::OnDamage(const Sigma::Damage::DamageEvent &e) {
-  Enemy::OnDamage(e);
-  m_bar->m_currentHealth = GetHealth();
-}
+
 } // namespace game

@@ -22,68 +22,48 @@
   "enemySpawners": [
     {
       "name": "Spawner 1",
-      "pos": {"x": -130, "y": 80},
+      "pos": {"x": -50, "y": -25},
       "activationRange": 200,
+      "delayTime": 1.1,
       "enemies": [
         {
-          "id": 1,
-          "pos": {"x": -100, "y": 85},
-          "entranceId": 0
-        },
-        {
-          "id": 2,
-          "pos": {"x": -90, "y": 75},
-          "entranceId": 0
+          "id": 0,
+          "pos": {"x": -90, "y": 80},
+          "entranceId": 0,
+          "stepAmmount": 2
         },
         {
           "id": 1,
           "pos": {"x": 5, "y": -15},
-          "entranceId": 1
+          "entranceId": 0
+        },
+        {
+          "id": 0,
+          "pos": {"x": -90, "y": 80},
+          "entranceId": 1,
+          "stepAmmount": 2
+        },
+        {
+          "id": 2,
+          "pos": {"x": 115, "y": -125},
+          "entranceId": 2
         }
       ]
     },
     {
       "name": "Spawner 2",
       "required": 0,
-      "pos": {"x": 25, "y": -85},
-      "activationRange": 175,
+      "pos": {"x": 240, "y": -185},
+      "activationRange": 350,
       "enemies": [
         {
-          "id": 3,
-          "pos": {"x": 295, "y": -170},
-          "entranceId": -1
-        },
-        {
-          "id": 1,
-          "pos": {"x": 95, "y": -115},
+          "id": 0,
+          "pos": {"x": 115, "y": -125},
           "entranceId": 2
         },
         {
-          "id": 2,
-          "pos": {"x": 105, "y": -130},
-          "entranceId": 2
-        },
-        {
-          "id": 1,
-          "pos": {"x": -90, "y": 80},
-          "entranceId": 0
-        }
-      ]
-    },
-    {
-      "name": "Spawner 3",
-      "required": 1,
-      "pos": {"x": 255, "y": -205},
-      "activationRange": 250,
-      "enemies": [
-        {
-          "id": 1,
-          "pos": {"x": 410, "y": -225},
-          "entranceId": 3
-        },
-        {
-          "id": 3,
-          "pos": {"x": 420, "y": -235},
+          "id": 0,
+          "pos": {"x": 290, "y": -170},
           "entranceId": 3
         },
         {
@@ -93,8 +73,13 @@
         },
         {
           "id": 3,
-          "pos": {"x": 115, "y": -130},
-          "entranceId": 2
+          "pos": {"x": -90, "y": 80},
+          "entranceId": 0
+        },
+        {
+          "id": 3,
+          "pos": {"x": 410, "y": -230},
+          "entranceId": 4
         }
       ]
     }
