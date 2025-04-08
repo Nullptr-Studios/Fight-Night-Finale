@@ -7,7 +7,9 @@
 
 void game::WinScene::Load() {
 
+  GameplayManager::GetInstance()->storeScore();
   GameplayManager::GetInstance()->enableComboScore(false);
+  GameplayManager::GetInstance()->UninitializeGame();
 
   //Sanity
   if (m_scoreJson.empty())
