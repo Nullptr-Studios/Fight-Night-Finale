@@ -38,12 +38,12 @@ void game::GameplayManager::Init() {
   GET_AUDIO->LoadBank("assets/Sound/Desktop/Master.strings.bank");
   GET_AUDIO->LoadBank("assets/Sound/Desktop/Music.bank");
   GET_AUDIO->LoadBank("assets/Sound/Desktop/SFX.bank");
+  //StartGame();
   GET_AUDIO->LoadEvent("event:/Music/MainMusic");
+} // :3
 
-}
 void game::GameplayManager::Start() {
   Object::Start();
-  //StartGame();
   
 }
 void game::GameplayManager::FirstUpdate(double deltaTime) {
@@ -147,6 +147,9 @@ void game::GameplayManager::RespawnPlayer(game::Player *player) {
   // player->m_animComp->SetCurrentAnim("Idle");
   // player->m_animComp->PlayAnim();
   player->Respawn();
+
+  m_cameraFollow->targets.push_back(player);
+
 }
 void game::GameplayManager::SetPlayerAsDead(Object* player) {
   m_cameraFollow->targets.erase(std::remove(m_cameraFollow->targets.begin(), m_cameraFollow->targets.end(), player), m_cameraFollow->targets.end());
