@@ -29,9 +29,13 @@ void Boss::Update(double delta) {
     m_phaseDose = true;
     Transition();
   }
-  if (m_currentState == -2 && m_timer >= 2) {
+  if (m_currentState == 21 && m_timer >= 2) {
     SetState(STATE_IDLE);
     m_invincible = false;
+  }
+  if (m_animComp->GetCurrentAnimation()->name == "Taunt") {
+    m_health += 1.0 * delta;
+    m_bar->m_currentHealth = GetHealth();
   }
 }
 
@@ -84,7 +88,7 @@ void Boss::Start() {
   BindState(STATE_PURSUE, [this] { Pursue(); });
   BindState(STATE_RETREAT, [this] { Retreat(); });
   BindState(-1, [this] {});
-  BindState(-2, [this] {m_animComp->SetCurrentAnim("Taunt");});
+  BindState(21, [this] { m_animComp->SetCurrentAnim("Taunt"); m_invincible = true; });
 
   m_bar->m_maxHealth = GetMaxHealth();
   m_bar->m_currentHealth = GetMaxHealth();
@@ -93,9 +97,9 @@ void Boss::Start() {
 void Boss::Transition() {
   velocity = {};
   m_timer = 2;
-  SetState(-2);
   m_invincible = true;
   m_animComp->SetCurrentAnim("Taunt");
+  SetState(21);
   float health = m_health;
   m_jsonPath = "assets/characters/presenter/behaviour2.json";
   Serialize();
@@ -234,6 +238,12 @@ void Boss::OnFullComboPerformed(bool super) {
   maxSpeed = m_baseMaxSpeed;
   m_consectutiveAttack = 0;
 
+  if (m_nextState == STATE_SPECIAL) {
+    m_nextState = STATE_BASIC;
+    SetState(STATE_PURSUE);
+    return;
+  }
+
   if (rand() % 2 == 0) {
     m_nextState = STATE_SPECIAL;
     SetState(STATE_RETREAT);
@@ -241,6 +251,7 @@ void Boss::OnFullComboPerformed(bool super) {
     m_nextState = STATE_BASIC;
     SetState(STATE_PURSUE);
   }
+
 }
 
 void Boss::SpawnWave1() {
@@ -341,6 +352,7 @@ void Boss::Destroy() {
 
 void Boss::OnDamage(const Sigma::Damage::DamageEvent &e) {
   Enemy::OnDamage(e);
+  OnFullComboPerformed(false);
   m_bar->m_currentHealth = GetHealth();
 
   if (GetHealth() / GetMaxHealth() <= 0.75f && !m_wave1) SpawnWave1();

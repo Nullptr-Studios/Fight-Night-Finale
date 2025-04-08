@@ -1,5 +1,5 @@
 {
-  "maxHealth" : 300.0,
+  "maxHealth" : 1000.0,
   "maxSpeed" : 140.0,
   "accelerationRate" : 5.0,
   "jumpVel" : 0.0,
