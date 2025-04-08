@@ -167,45 +167,19 @@
             <key>heuristicMask</key>
             <false/>
             <key>defaultPivotPoint</key>
-            <point_f>0.5,0.5</point_f>
+            <point_f>0.5,1</point_f>
             <key>writePivotPoints</key>
             <true/>
         </struct>
         <key>individualSpriteSettings</key>
         <map type="IndividualSpriteSettingsMap">
-            <key type="filename">../Frames/Characters/HeavyEnemy/Combo/Combo1_0045.png</key>
-            <key type="filename">../Frames/Characters/HeavyEnemy/Combo/Combo1_0046.png</key>
-            <key type="filename">../Frames/Characters/HeavyEnemy/Combo/Combo1_0047.png</key>
-            <key type="filename">../Frames/Characters/HeavyEnemy/Combo/Combo1_0048.png</key>
-            <key type="filename">../Frames/Characters/HeavyEnemy/Combo/Combo1_0049.png</key>
-            <key type="filename">../Frames/Characters/HeavyEnemy/Combo/Combo1_0050.png</key>
-            <key type="filename">../Frames/Characters/HeavyEnemy/Combo/Combo1_0051.png</key>
-            <key type="filename">../Frames/Characters/HeavyEnemy/Combo/Combo1_0052.png</key>
-            <key type="filename">../Frames/Characters/HeavyEnemy/Combo/Combo1_0053.png</key>
-            <key type="filename">../Frames/Characters/HeavyEnemy/Combo/Combo1_0054.png</key>
-            <key type="filename">../Frames/Characters/HeavyEnemy/Combo/Combo1_0055.png</key>
-            <key type="filename">../Frames/Characters/HeavyEnemy/Combo/Combo1_0056.png</key>
-            <key type="filename">../Frames/Characters/HeavyEnemy/Combo/Combo1_0057.png</key>
-            <key type="filename">../Frames/Characters/HeavyEnemy/Combo/Combo1_0058.png</key>
-            <key type="filename">../Frames/Characters/HeavyEnemy/Combo/Combo2_0059.png</key>
-            <key type="filename">../Frames/Characters/HeavyEnemy/Combo/Combo2_0060.png</key>
-            <key type="filename">../Frames/Characters/HeavyEnemy/Combo/Combo2_0061.png</key>
-            <key type="filename">../Frames/Characters/HeavyEnemy/Combo/Combo2_0062.png</key>
-            <key type="filename">../Frames/Characters/HeavyEnemy/Combo/Combo2_0063.png</key>
-            <key type="filename">../Frames/Characters/HeavyEnemy/Combo/Combo2_0064.png</key>
-            <key type="filename">../Frames/Characters/HeavyEnemy/Combo/Combo2_0065.png</key>
-            <key type="filename">../Frames/Characters/HeavyEnemy/Combo/Combo2_0066.png</key>
-            <key type="filename">../Frames/Characters/HeavyEnemy/Combo/Combo2_0067.png</key>
-            <key type="filename">../Frames/Characters/HeavyEnemy/Combo/Combo2_0068.png</key>
-            <key type="filename">../Frames/Characters/HeavyEnemy/Combo/Combo2_0069.png</key>
-            <key type="filename">../Frames/Characters/HeavyEnemy/Combo/Combo2_0070.png</key>
-            <key type="filename">../Frames/Characters/HeavyEnemy/Combo/Combo2_0071.png</key>
-            <key type="filename">../Frames/Characters/HeavyEnemy/Combo/Combo2_0072.png</key>
             <key type="filename">../Frames/Characters/HeavyEnemy/Idle/Idle_00.png</key>
-            <key type="filename">../Frames/Characters/HeavyEnemy/hit/Hit_00.png</key>
-            <key type="filename">../Frames/Characters/HeavyEnemy/hit/Hit_01.png</key>
-            <key type="filename">../Frames/Characters/HeavyEnemy/hit/Hit_02.png</key>
-            <key type="filename">../Frames/Characters/HeavyEnemy/hit/Hit_03.png</key>
+            <key type="filename">../Frames/Characters/HeavyEnemy/hit/Hit1_0.png</key>
+            <key type="filename">../Frames/Characters/HeavyEnemy/hit/Hit1_1.png</key>
+            <key type="filename">../Frames/Characters/HeavyEnemy/hit/Hit1_2.png</key>
+            <key type="filename">../Frames/Characters/HeavyEnemy/hit/Hit2_0.png</key>
+            <key type="filename">../Frames/Characters/HeavyEnemy/hit/Hit2_1.png</key>
+            <key type="filename">../Frames/Characters/HeavyEnemy/hit/Hit2_2.png</key>
             <key type="filename">../Frames/Characters/HeavyEnemy/recover/Recover_0041.png</key>
             <key type="filename">../Frames/Characters/HeavyEnemy/recover/Recover_0042.png</key>
             <key type="filename">../Frames/Characters/HeavyEnemy/recover/Recover_0043.png</key>
@@ -236,7 +210,6 @@
             <struct type="SpriteSheet">
                 <key>files</key>
                 <array>
-                    <filename>../Frames/Characters/HeavyEnemy/Combo</filename>
                     <filename>../Frames/Characters/HeavyEnemy/Idle</filename>
                     <filename>../Frames/Characters/HeavyEnemy/hit</filename>
                     <filename>../Frames/Characters/HeavyEnemy/recover</filename>

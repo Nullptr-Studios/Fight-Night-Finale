@@ -37,6 +37,7 @@
 	"frame": {"x":53,"y":71,"w":80,"h":24},
 	"rotated": false,
 	"trimmed": false,
+	"fps": 20,
 	"spriteSourceSize": {"x":0,"y":0,"w":80,"h":24},
 	"sourceSize": {"w":80,"h":24}
 },

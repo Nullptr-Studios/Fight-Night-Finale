@@ -1,5 +1,9 @@
 #include "BigEnemy.hpp"
+
+#include "Controller/CameraController.hpp"
 #include "Enemies/Enemy.hpp"
+#include "Objects/Camera.hpp"
+#include "Effects/EffectObject.hpp"
 
 namespace game {
 
@@ -22,6 +26,8 @@ void BigEnemy::Init() {
 
   m_defaultState = STATE_FOLLOW;
   targetLeft = rand() % 2;
+
+  hitEffectStr = "Fall";
 }
 
 void BigEnemy::AttackState() {
@@ -35,6 +41,7 @@ void BigEnemy::AttackState() {
     targetLeft = !targetLeft;
   }
   TakeKnockback({0, 600});
+  m_animComp->SetCurrentAnim("Thrown");
   // BasicAttack();
   attack = true;
   m_nextState = STATE_FOLLOW;
@@ -51,8 +58,12 @@ void BigEnemy::LandedOnGround() {
   m_invincible = true;
   m_isRecovering = true;
   if (attack) {
-    m_attackCollider->Do(transform.position + glm::vec3(0), {150,50,100}, 13, this, Sigma::Damage::DAMAGE,{100,140},true);
+    m_attackCollider->Do(transform.position + glm::vec3(0), {150,50,100}, 13, this, Sigma::Damage::DAMAGE,{400,300},false);
     attack = false;
+    // Shake the camera, this is beautifull
+    m_hitEffect->transform.position = m_attackCollider->transform.position;
+    m_hitEffect->DoEffect(hitEffectStr);
+    GET_CAMERA->GetCurrentCamera()->GetShakeObject()->StartShake(.5f,50,15, Sigma::EASE_OUT);
   }
   if (GetAlive())
     m_animComp->SetCurrentAnim("Recover");
