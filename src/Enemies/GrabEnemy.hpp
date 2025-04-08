@@ -23,8 +23,12 @@ public:
 
   void GrabAttackState();
 
+  void OnDoneDamage() override;
+
   static constexpr int STATE_GRABATTACK = 13;     ///< @constexpr STATE_GOTO         The enemy GOTO's point
 
   float cooldown = 0;
+  bool attack = false;
+  float timer = 0;
 };
 }

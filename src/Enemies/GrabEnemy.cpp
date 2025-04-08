@@ -9,6 +9,13 @@ namespace game {
 void GrabEnemy::Update(double delta) {
   DefaultEnemy::Update(delta);
   cooldown -= delta;
+  if (attack) {
+    timer -= delta;
+    if (timer <= 0) {
+      attack = false;
+      BasicAttack();
+    }
+  }
 }
 
 void GrabEnemy::Init() {
@@ -111,5 +118,12 @@ void GrabEnemy::GrabAttackState() {
   m_nextState = STATE_GRABATTACK;
   m_timer = 2;
   SetState(STATE_GOTO);
+}
+
+void GrabEnemy::OnDoneDamage() {
+  DefaultEnemy::OnDoneDamage();
+  attack = true;
+  timer = .4;
+
 }
 } // namespace game
