@@ -127,6 +127,7 @@ void DefaultEnemy::GoToState() {
     SetState(m_nextState);
     return;
   }
+  m_animComp->SetCurrentAnim("Walk");
   Move(direction);
 }
 
