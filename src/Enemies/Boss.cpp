@@ -333,8 +333,8 @@ void Boss::Destroy() {
   GET_FACTORY->DestroyObject(m_bar);
   GET_FACTORY->DestroyObject(m_barBackground);
 
-  for (auto enemy: enemyDeletionQueue) {
-    GET_FACTORY->DestroyObject(enemy);
+  for (auto& enemy: enemyDeletionQueue) {
+    enemy->OnDamage(Sigma::Damage::DamageEvent(enemy->GetId(),this,Sigma::Collision::DAMAGE, 100000, {0,0},Sigma::Damage::DamageType::DAMAGE));
   }
   enemyDeletionQueue.clear();
 }
