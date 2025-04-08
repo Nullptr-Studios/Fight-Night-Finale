@@ -95,7 +95,7 @@ void game::GameplayManager::FirstUpdate(double deltaTime) {
 void game::GameplayManager::Update(double deltaTime) {
   Object::Update(deltaTime);
 
-  if (!m_playerCount && AEInputGamepadButtonPressed(0, AE_GAMEPAD_START)) {
+  if (!m_playerCount && AEInputGamepadButtonPressed(0, AE_GAMEPAD_A)) {
     InitPlayer(0);
   } else if (!m_playerCount && AEInputKeyPressed(' ')) {
     InitPlayer(-1);
@@ -183,13 +183,16 @@ void game::GameplayManager::CheckForCoop() {
   // If pressed key 2 create 2nd player
   if (m_playerCount == 2 || m_playerCount == 0)
       return;
-  if (m_players[0].player->GetControllerID() <= -1 && AEInputGamepadButtonTriggered(0, AE_GAMEPAD_START)) {
+  if (m_players[0].player->GetControllerID() <= -1 && AEInputGamepadButtonTriggered(0, AE_GAMEPAD_A)) {
     InitPlayer(0);
     RespawnPlayer(m_players[1].player.get());
-  } else if (AEInputGamepadButtonTriggered(1, AE_GAMEPAD_START)) {
+  } else if (AEInputGamepadButtonTriggered(1, AE_GAMEPAD_A)) {
     InitPlayer(1);
     RespawnPlayer(m_players[1].player.get());
-    }
+  } else if (m_players[0].player->GetControllerID() >= 0 && AEInputKeyPressed(' ')) {
+    InitPlayer(-1);
+    RespawnPlayer(m_players[1].player.get());
+  }
 }
 
   void game::GameplayManager::UpdateCurrentGameScene() {
