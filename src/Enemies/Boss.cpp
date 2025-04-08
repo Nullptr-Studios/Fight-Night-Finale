@@ -119,12 +119,12 @@ void Boss::GotoState() {
     WaitSeconds(0.0f, m_nextState);
     return;
   }
-  m_animComp->SetCurrentAnim("Walk");
   Move(direction);
   if (dash) {
     Dash();
     dash = false;
   }
+  m_animComp->SetCurrentAnim("Walk");
 }
 
 void Boss::Pursue() {
