@@ -134,7 +134,7 @@ void game::GameplayManager::RespawnPlayer(game::Player *player) {
   if (player->GetAlive())
     return;
 
-  // TODO: DO THE SUBSTARCT MONEY correctly
+  // TODO: DO THE SUBSTRACT MONEY correctly
   GiveXP(-5000);
 
   if (m_currentGameScene)
