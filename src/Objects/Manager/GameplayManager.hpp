@@ -117,6 +117,8 @@ public:
 
   void storeScore(); //Stores score
 
+  void enableComboScore(bool enable) const; //Enables combo giving extra score
+
   [[nodiscard]] int GetXP() const { return m_experience; }
 
   

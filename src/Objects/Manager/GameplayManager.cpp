@@ -317,3 +317,7 @@ void game::GameplayManager::storeScore() {
 
   std::cout << "[GameScene] " << GetName() << " JSON file loaded\n";
 }
+
+void game::GameplayManager::enableComboScore(bool enable) const {
+  m_gameHud->EnableGiveComboScore(enable);
+}

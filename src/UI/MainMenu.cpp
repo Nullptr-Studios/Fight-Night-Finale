@@ -57,13 +57,13 @@ void game::MainMenu::Load() {
   m_controlsButton->SetTexture("assets/UI/Sprites/Controls.png");
   AddChild(m_controlsButton);
 
-  m_scoreButton = GET_FACTORY->CreateObject<Sigma::SceneButton>("Score Button", nullptr,GetID());
+  /*m_scoreButton = GET_FACTORY->CreateObject<Sigma::SceneButton>("Score Button", nullptr,GetID());
   m_scoreButton->m_screenSpaceTransform.scale = {200, 100};
   m_scoreButton->m_screenSpaceTransform.position.y -= 340;
   m_scoreButton->SetTexture("assets/UI/Sprites/Score.png");
   m_scoreButton->SetTint({.5,.5,.5,1});
   m_scoreButton->DisableUpdate();
-  AddChild(m_scoreButton);
+  AddChild(m_scoreButton);*/
 
   m_quitButton = GET_FACTORY->CreateObject<Sigma::SceneButton>("Quit Button", nullptr,GetID());
   m_quitButton->m_screenSpaceTransform.scale = {200, 100};
