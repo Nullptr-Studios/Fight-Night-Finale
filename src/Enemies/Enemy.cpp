@@ -32,6 +32,7 @@ void Enemy::Start() {
 }
 
 void Enemy::OnDamage(const Sigma::Damage::DamageEvent &e) {
+  if (e.GetOther() == nullptr) return;
   if (e.GetOther()->GetName().contains("Enemy"))
     return;
 
