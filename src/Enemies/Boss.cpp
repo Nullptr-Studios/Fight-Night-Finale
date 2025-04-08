@@ -325,7 +325,7 @@ void Boss::SpawnWave3() {
 }
 
 void Boss::EndedMove() {
-  if (!m_hasDoneDamage && m_nextState == STATE_BASIC) {
+  if (m_hasDoneDamage && m_nextState == STATE_BASIC) {
     OnFullComboPerformed(false);
     return;
   } else if (m_hasDoneDamage && m_nextState == STATE_BASIC || m_consectutiveAttack != 3) {
