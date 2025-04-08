@@ -105,7 +105,7 @@ void TntEnemy::AttackState() {
 
   m_cooldown = 5;
   m_tnt = GET_FACTORY->CreateObject<Tnt>("Tnt");
-  m_tnt->m_start = transform.position + glm::vec3(0,60,0);
+  m_tnt->m_start = transform.position + glm::vec3(0,60,-50);
   m_tnt->m_target = m_nearest->transform.position;
   BasicAttack();
   SetState(STATE_FOLLOW);

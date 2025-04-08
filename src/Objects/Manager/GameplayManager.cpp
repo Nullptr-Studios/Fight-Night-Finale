@@ -260,7 +260,7 @@ void game::GameplayManager::UninitializeGame() {
   SetActive(false);
   m_uninitializeGame = true;
 
-  for (const auto& element: m_players) {
+  for (const auto &element: m_players) {
     if (element.player != nullptr)
       GET_FACTORY->DestroyObject(element.player);
   }
@@ -273,7 +273,16 @@ void game::GameplayManager::UninitializeGame() {
 
   m_started = false;
 
+  GET_AUDIO->StopEvent(m_currentMusic.c_str());
+}
+
+void game::GameplayManager::BossMusic() {
   GET_AUDIO->StopEvent("event:/Music/MainMusic");
+
+  m_currentMusic = "event:/Music/BossMusic";
+
+  GET_AUDIO->LoadEvent("event:/Music/BossMusic");
+  GET_AUDIO->PlayEvent("event:/Music/BossMusic");
 }
 
 void game::GameplayManager::StartGame(const std::string& sceneName) {

@@ -98,9 +98,9 @@ public:
   
   void FinishedAnSpawner();
 
-
-
   void UninitializeGame();
+
+  void BossMusic();
 
   void StartGame(const std::string& sceneName = "Level 1");
 
@@ -127,6 +127,8 @@ public:
 private:
   static GameplayManager* m_instance;
   std::shared_ptr<Sigma::CameraFollow> m_cameraFollow{};
+
+  std::string m_currentMusic = "event:/Music/MainMusic";
 
   std::shared_ptr<HUD> m_gameHud = nullptr;
 
