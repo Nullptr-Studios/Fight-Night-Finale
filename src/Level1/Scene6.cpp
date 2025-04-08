@@ -26,6 +26,10 @@ void Scene6::Load() {
   walls->transform.position.z = -5000;
   AddChild(walls);
 
+  m_exitLocationDoor = GET_FACTORY->CreateObject<Door>("Exit_Door", 3);
+  m_exitLocationDoor->transform.position = {296, -115, 115};
+  AddChild(m_exitLocationDoor);
+
   auto Sdoor1 = GET_FACTORY->CreateObject<Door>("Spawner_Door1", 2);
   Sdoor1->transform.position = {-64, 112, -112};
   AddChild(Sdoor1);
@@ -56,6 +60,8 @@ void Scene6::Load() {
   b1->transform.position = {-236, 108, -108};
 
   AddChild(b1);
+
+  m_spawnerDoors.emplace_back(m_exitLocationDoor);
 
   GameScene::Load();
 

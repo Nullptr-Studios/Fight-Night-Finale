@@ -27,7 +27,7 @@ void Scene2::Load() {
   AddChild(walls);
 
   m_exitLocationDoor = GET_FACTORY->CreateObject<Door>("Exit_Door", 3);
-  m_exitLocationDoor->transform.position = {448, -132, 132};
+  m_exitLocationDoor->transform.position = {451, -133, 133};
   AddChild(m_exitLocationDoor);
   
   auto b1 = GET_FACTORY->CreateObject<Box>("Machine1");
