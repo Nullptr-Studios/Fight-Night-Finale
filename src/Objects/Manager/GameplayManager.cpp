@@ -79,8 +79,8 @@ void game::GameplayManager::FirstUpdate(double deltaTime) {
 
  //Return to Main Menu
   if (m_paused == true && (AEInputKeyTriggered(' ')
-  || AEInputGamepadButtonTriggered(0, AE_GAMEPAD_A)
-  || AEInputGamepadButtonTriggered(1, AE_GAMEPAD_A))) {
+  || AEInputGamepadButtonTriggered(0, AE_GAMEPAD_B)
+  || AEInputGamepadButtonTriggered(1, AE_GAMEPAD_B))) {
     m_paused = false;
     GET_MANAGER->SetPauseGame(m_paused);
     m_gameHud->EnableUIPauseMenu(m_paused);
