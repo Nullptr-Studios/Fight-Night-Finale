@@ -127,7 +127,6 @@ void game::GameplayManager::Update(double deltaTime) {
 }
 
 void game::GameplayManager::RespawnPlayer(game::Player *player) {
-
   // if player is alive, do not respawn
   if (player == nullptr)
     return;
@@ -135,7 +134,11 @@ void game::GameplayManager::RespawnPlayer(game::Player *player) {
     return;
 
   // TODO: DO THE SUBSTRACT MONEY correctly
-  GiveXP(-5000);
+  if (GetXP() - 5000 >= 0){
+    GiveXP(-5000);
+  }else {
+    return;
+  }
 
   if (m_currentGameScene)
     player->transform.position = {m_currentGameScene->GetPlayerStartPos().x, m_currentGameScene->GetPlayerStartPos().y,
