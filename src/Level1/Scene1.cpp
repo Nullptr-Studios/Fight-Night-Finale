@@ -19,6 +19,8 @@ namespace game {
 
 void Scene1::Load() {
 
+  GameplayManager::GetInstance()->enableComboScore(true);
+
   floor = GET_FACTORY->CreateObject<Sigma::Actor>();
   floor->SetTexture("assets/level-1/scene-1-floor.png");
   floor->transform.scale = {761.0f, 281.0f};

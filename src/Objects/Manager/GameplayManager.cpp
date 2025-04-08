@@ -61,41 +61,42 @@ void game::GameplayManager::FirstUpdate(double deltaTime) {
   if (AEInputKeyTriggered(27)
     || AEInputGamepadButtonTriggered(0, AE_GAMEPAD_START)
     || AEInputGamepadButtonTriggered(1, AE_GAMEPAD_START)) {
-
-    //Return to Main Menu
+    //Unpause
     if (m_paused == true && (AEInputKeyTriggered(27)
-    || AEInputGamepadButtonTriggered(0, AE_GAMEPAD_START)
-    || AEInputGamepadButtonTriggered(1, AE_GAMEPAD_START))) {
+      || AEInputGamepadButtonTriggered(0, AE_GAMEPAD_START)
+      || AEInputGamepadButtonTriggered(1, AE_GAMEPAD_START))) {
       m_paused = false;
       GET_MANAGER->SetPauseGame(m_paused);
       m_gameHud->EnableUIPauseMenu(m_paused);
-      GET_MANAGER->UnloadScene(GameplayManager::GetInstance()->GetCurrentGameScene()->GetID());
-      GameplayManager::GetInstance()->UninitializeGame();
-      GET_MANAGER->LoadScene(new MainMenu("Main Menu", 0));
-    }
-
+      }
     //Pause
     else {
       m_paused = true;
       GET_MANAGER->SetPauseGame(m_paused);
       m_gameHud->EnableUIPauseMenu(m_paused);
     }
-    }
+  }
 
-  //Unpause
+ //Return to Main Menu
   if (m_paused == true && (AEInputKeyTriggered(' ')
-    or AEInputGamepadButtonTriggered(0, AE_GAMEPAD_A)
-    or AEInputGamepadButtonTriggered(1, AE_GAMEPAD_A))) {
+  || AEInputGamepadButtonTriggered(0, AE_GAMEPAD_A)
+  || AEInputGamepadButtonTriggered(1, AE_GAMEPAD_A))) {
     m_paused = false;
     GET_MANAGER->SetPauseGame(m_paused);
     m_gameHud->EnableUIPauseMenu(m_paused);
-    }
+    GET_MANAGER->UnloadScene(GameplayManager::GetInstance()->GetCurrentGameScene()->GetID());
+    GameplayManager::GetInstance()->UninitializeGame();
+    GET_MANAGER->LoadScene(new MainMenu("Main Menu", 0));
+  }
 }
 
 void game::GameplayManager::Update(double deltaTime) {
   Object::Update(deltaTime);
 
-  if (!m_playerCount && AEInputGamepadButtonPressed(0, AE_GAMEPAD_START)) {
+  if (m_uninitializeGame)
+    return;
+
+  if (!m_playerCount && AEInputGamepadButtonPressed(0, AE_GAMEPAD_A)) {
     InitPlayer(0);
   } else if (!m_playerCount && AEInputKeyPressed(' ')) {
     InitPlayer(-1);
@@ -183,13 +184,16 @@ void game::GameplayManager::CheckForCoop() {
   // If pressed key 2 create 2nd player
   if (m_playerCount == 2 || m_playerCount == 0)
       return;
-  if (m_players[0].player->GetControllerID() <= -1 && AEInputGamepadButtonTriggered(0, AE_GAMEPAD_START)) {
+  if (m_players[0].player->GetControllerID() <= -1 && AEInputGamepadButtonTriggered(0, AE_GAMEPAD_A)) {
     InitPlayer(0);
     RespawnPlayer(m_players[1].player.get());
-  } else if (AEInputGamepadButtonTriggered(1, AE_GAMEPAD_START)) {
+  } else if (AEInputGamepadButtonTriggered(1, AE_GAMEPAD_A)) {
     InitPlayer(1);
     RespawnPlayer(m_players[1].player.get());
-    }
+  } else if (m_players[0].player->GetControllerID() >= 0 && AEInputKeyPressed(' ')) {
+    InitPlayer(-1);
+    RespawnPlayer(m_players[1].player.get());
+  }
 }
 
   void game::GameplayManager::UpdateCurrentGameScene() {
@@ -313,4 +317,8 @@ void game::GameplayManager::storeScore() {
   wJ.clear();
 
   std::cout << "[GameScene] " << GetName() << " JSON file loaded\n";
+}
+
+void game::GameplayManager::enableComboScore(bool enable) const {
+  m_gameHud->EnableGiveComboScore(enable);
 }
