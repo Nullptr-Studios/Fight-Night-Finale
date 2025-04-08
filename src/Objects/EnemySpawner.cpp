@@ -22,6 +22,10 @@ void game::EnemySpawner::SpawnEnemy() {
   std::shared_ptr<Enemy> e;
 
   switch (m_currentEnemyData.id) {
+    default:
+    case 0:
+      e = GET_FACTORY->CreateObject<game::DefaultEnemy>("Basic Enemy", "assets/characters/BasicEnemy/behaviour.json");
+    break;
     case 1:
       e = GET_FACTORY->CreateObject<game::GrabEnemy>("Grab Enemy", "assets/characters/grabEnemy/behaviour.json");
     break;
@@ -32,10 +36,7 @@ void game::EnemySpawner::SpawnEnemy() {
       e = GET_FACTORY->CreateObject<game::TntEnemy>("TNT Enemy", "assets/characters/tntEnemy/behaviour.json");
     break;
     case 4:
-      e = GET_FACTORY->CreateObject<game::Boss>("The Presenter", "assets/characters/presenter/behaviour.json");
-    break;
-    default:
-      e = GET_FACTORY->CreateObject<game::DefaultEnemy>("Basic Enemy", "assets/characters/BasicEnemy/behaviour.json");
+      e = GET_FACTORY->CreateObject<game::Boss>("The Presenter Enemy", "assets/characters/presenter/behaviour.json");
     break;
   }
 

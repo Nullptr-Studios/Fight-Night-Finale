@@ -8,6 +8,7 @@
 #pragma once
 
 #include "Collision/OneHitCollider.hpp"
+#include "Effects/EffectObject.hpp"
 #include "Objects/Actor.hpp"
 namespace game {
 class Tnt : public Sigma::Actor {
@@ -27,6 +28,7 @@ public:
   glm::vec3 m_target{};
   std::shared_ptr<Sigma::Collision::OneHitCollider> m_attackCollider{};
 private:
+  std::shared_ptr<Sigma::EffectObject> m_hitEffect{};
 };
 }
 

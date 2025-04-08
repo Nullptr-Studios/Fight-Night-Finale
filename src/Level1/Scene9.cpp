@@ -60,7 +60,7 @@ void Scene9::Load() {
   m_spawnerDoors.emplace_back(m_exitLocationDoor);
 
   GameScene::Load();
-
+  
   SetNextScene(new Scene7("Game Scene 7", 7, "assets/level-1/scene-7.json"));
 }
 

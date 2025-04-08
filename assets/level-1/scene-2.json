@@ -23,27 +23,17 @@
     "name": "Spawner 1",
     "pos": {"x": -275, "y": 45},
     "activationRange": 175,
-    "delayTime": 1.5,
+    "delayTime": 1,
     "enemies": [
     {
-      "id": 1,
+      "id": 0,
       "pos": {"x": -425, "y": 80},
       "entranceId": 0
     },
     {
-      "id": 1,
+      "id": 0,
       "pos": {"x": -165, "y": 80},
       "entranceId": 1
-    },
-    {
-      "id": 1,
-      "pos": {"x": -425, "y": 80},
-      "entranceId": 0
-    },
-    {
-      "id": 1,
-      "pos": {"x": -425, "y": 80},
-      "entranceId": 0
     }
     ]
   },
@@ -52,23 +42,24 @@
     "required" : 0,
     "pos": {"x": -275, "y": 45},
     "activationRange": 175,
+    "delayTime": 1,
     "enemies": [
     {
-      "id": 1,
+      "id": 0,
       "pos": {"x": -425, "y": 80},
       "entranceId": 0,
-      "stepAmmount": 3
+      "stepAmmount": 2
+    },
+    {
+      "id": 0,
+      "pos": {"x": -160, "y": 70},
+      "entranceId": 1
     },
     {
       "id": 1,
       "pos": {"x": -430, "y": 70},
       "entranceId": 0,
       "stepAmmount": 1
-    },
-    {
-      "id": 1,
-      "pos": {"x": -160, "y": 70},
-      "entranceId": 1
     }
     ]
   },
@@ -76,19 +67,33 @@
     "name": "Spawner 3",
     "pos": {"x": 160, "y": -50},
     "activationRange": 175,
+    "delayTime": 1,
     "enemies": [
     {
-      "id": 1,
+      "id": 0,
       "pos": {"x": 120, "y": 40},
-      "entranceId": 2
+      "entranceId": 2,
+      "stepAmmount": 2
     },
     {
-      "id": 1,
+      "id": 0,
+      "pos": {"x": -425, "y": 80},
+      "entranceId": 0,
+      "stepAmmount": 2
+    },
+    {
+      "id": 0,
       "pos": {"x": 115, "y": 35},
       "entranceId": 2
     },
     {
-      "id": 1,
+      "id": 0,
+      "pos": {"x": 115, "y": 35},
+      "entranceId": 2,
+      "stepAmmount": 2
+    },
+    {
+      "id": 0,
       "pos": {"x": 410, "y": -190},
       "entranceId": 3
     }

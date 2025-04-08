@@ -27,6 +27,8 @@ void Scene7::Load() {
 
   GameScene::Load();
 
+  GameplayManager::GetInstance()->BossMusic();
+
   SetNextScene(new WinScene("Win Scene", 7));
 }
 

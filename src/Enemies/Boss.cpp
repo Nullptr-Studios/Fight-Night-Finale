@@ -1,9 +1,14 @@
 #include "Boss.hpp"
+
 #include "AnimationSystem/AnimationSystem.hpp"
+#include "BigEnemy.hpp"
 #include "Core.hpp"
+#include "DefaultEnemy.hpp"
 #include "Enemies/Proj.hpp"
 #include "Factory.hpp"
+#include "GrabEnemy.hpp"
 #include "Random.hpp"
+#include "TntEnemy.hpp"
 #include "aecore/imgui/imgui.h"
 #include "glm/fwd.hpp"
 #include "glm/geometric.hpp"
@@ -238,6 +243,72 @@ void Boss::OnFullComboPerformed(bool super) {
   }
 }
 
+void Boss::SpawnWave1() {
+  m_wave1 = true;
+  auto m_gameplayManager = GameplayManager::GetInstance();
+
+  auto e1 = GET_FACTORY->CreateObject<game::DefaultEnemy>("Enemy 1", "assets/characters/BasicEnemy/behaviour.json");
+  auto e2 = GET_FACTORY->CreateObject<game::DefaultEnemy>("Enemy 1", "assets/characters/BasicEnemy/behaviour.json");
+
+  e1->transform.position = glm::vec3{-100, -90, 90};
+  e1->Enable(m_gameplayManager->GetPlayers());
+  e1->SetSceneBoundsPoly(m_gameplayManager->GetSceneBoundsPoly());
+  enemyDeletionQueue.push_back(e1);
+  e2->transform.position = glm::vec3{-485, -90, 90};
+  e2->Enable(m_gameplayManager->GetPlayers());
+  e2->SetSceneBoundsPoly(m_gameplayManager->GetSceneBoundsPoly());
+  enemyDeletionQueue.push_back(e2);
+}
+
+void Boss::SpawnWave2() {
+  m_wave2 = true;
+  auto m_gameplayManager = GameplayManager::GetInstance();
+
+  auto e1 = GET_FACTORY->CreateObject<game::DefaultEnemy>("Enemy 1", "assets/characters/BasicEnemy/behaviour.json");
+  auto e2 = GET_FACTORY->CreateObject<game::DefaultEnemy>("Enemy 1", "assets/characters/BasicEnemy/behaviour.json");
+  auto e3 = GET_FACTORY->CreateObject<game::GrabEnemy>("Grab Enemy", "assets/characters/grabEnemy/behaviour.json");
+
+  e1->transform.position = glm::vec3{-100, - 90,  90};
+  e1->Enable(m_gameplayManager->GetPlayers());
+  e1->SetSceneBoundsPoly(m_gameplayManager->GetSceneBoundsPoly());
+  enemyDeletionQueue.push_back(e1);
+  e2->transform.position = glm::vec3{-485, - 90,  90};
+  e2->Enable(m_gameplayManager->GetPlayers());
+  e2->SetSceneBoundsPoly(m_gameplayManager->GetSceneBoundsPoly());
+  enemyDeletionQueue.push_back(e2);
+  e3->transform.position = glm::vec3{-210, -140, 140};
+  e3->Enable(m_gameplayManager->GetPlayers());
+  e3->SetSceneBoundsPoly(m_gameplayManager->GetSceneBoundsPoly());
+  enemyDeletionQueue.push_back(e3);
+}
+
+void Boss::SpawnWave3() {
+  m_wave3 = true;
+  auto m_gameplayManager = GameplayManager::GetInstance();
+
+  auto e1 = GET_FACTORY->CreateObject<game::DefaultEnemy>("Enemy 1", "assets/characters/BasicEnemy/behaviour.json");
+  auto e2 = GET_FACTORY->CreateObject<game::DefaultEnemy>("Enemy 1", "assets/characters/BasicEnemy/behaviour.json");
+  auto e3 = GET_FACTORY->CreateObject<game::BigEnemy>("Big Enemy", "assets/characters/bigEnemy/behaviour.json");
+  auto e4 = GET_FACTORY->CreateObject<game::TntEnemy>("Tnt Enemy", "assets/characters/tntEnemy/behaviour.json");
+
+  e1->transform.position = glm::vec3{-100, - 90,  90};
+  e1->Enable(m_gameplayManager->GetPlayers());
+  e1->SetSceneBoundsPoly(m_gameplayManager->GetSceneBoundsPoly());
+  enemyDeletionQueue.push_back(e1);
+  e2->transform.position = glm::vec3{-485, - 90,  90};
+  e2->Enable(m_gameplayManager->GetPlayers());
+  e2->SetSceneBoundsPoly(m_gameplayManager->GetSceneBoundsPoly());
+  enemyDeletionQueue.push_back(e2);
+  e3->transform.position = glm::vec3{-210, -140, 140};
+  e3->Enable(m_gameplayManager->GetPlayers());
+  e3->SetSceneBoundsPoly(m_gameplayManager->GetSceneBoundsPoly());
+  enemyDeletionQueue.push_back(e3);
+  e4->transform.position = glm::vec3{-315, - 35,  35};
+  e4->Enable(m_gameplayManager->GetPlayers());
+  e4->SetSceneBoundsPoly(m_gameplayManager->GetSceneBoundsPoly());
+  enemyDeletionQueue.push_back(e4);
+}
+
 void Boss::EndedMove() {
   if (!m_hasDoneDamage && m_nextState == STATE_BASIC) {
     OnFullComboPerformed(false);
@@ -261,6 +332,20 @@ void Boss::Destroy() {
   GET_FACTORY->DestroyObject(m_barBorder);
   GET_FACTORY->DestroyObject(m_bar);
   GET_FACTORY->DestroyObject(m_barBackground);
+
+  for (auto enemy: enemyDeletionQueue) {
+    GET_FACTORY->DestroyObject(enemy);
+  }
+  enemyDeletionQueue.clear();
+}
+
+void Boss::OnDamage(const Sigma::Damage::DamageEvent &e) {
+  Enemy::OnDamage(e);
+  m_bar->m_currentHealth = GetHealth();
+
+  if (GetHealth() / GetMaxHealth() <= 0.75f && !m_wave1) SpawnWave1();
+  if (GetHealth() / GetMaxHealth() <=  0.5f && !m_wave2) SpawnWave2();
+  if (GetHealth() / GetMaxHealth() <= 0.25f && !m_wave3) SpawnWave3();
 }
 
 } // namespace game

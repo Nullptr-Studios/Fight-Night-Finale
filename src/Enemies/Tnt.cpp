@@ -16,12 +16,16 @@ namespace game {
 void Tnt::Init() {
   m_attackCollider = GET_FACTORY->CreateObject<Sigma::Collision::OneHitCollider>("Attack Collider");
   m_attackCollider->GetCollider()->enabled = false;
-  transform.scale = {100,10};
+  transform.scale = {25,25};
+  //SetTexture("");
   m_boomBox = {100,100,100};
   m_powBox = {300,300};
   m_damage = 10;
   m_length = 1;
   m_timer = 0;
+
+  m_hitEffect = GET_FACTORY->CreateObject<Sigma::EffectObject>("Hit Effect", "assets/objects/EffectsAtlas.json");
+  m_hitEffect->transform.relativeScale = {1.5f, 1.5f};
 }
 
 void Tnt::Update(double delta) {
@@ -37,6 +41,8 @@ void Tnt::Update(double delta) {
     boom = true;
     int id = GetId();
     m_attackCollider->Do(transform.position, m_boomBox, m_damage, this, Sigma::Damage::DamageType::DAMAGE,m_powBox, true);
+    m_hitEffect->transform.position = transform.position;
+    m_hitEffect->DoEffect("Explosion");
     transform.position = m_target;
   }
   if (m_timer <= m_length) {

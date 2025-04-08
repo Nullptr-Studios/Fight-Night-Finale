@@ -32,11 +32,6 @@
           "id": 1,
           "pos": {"x": -560, "y": 32},
           "entranceId": 0
-        },
-        {
-          "id": 1,
-          "pos": {"x": -550, "y": 36},
-          "entranceId": 0
         }
       ]
     },
@@ -47,9 +42,14 @@
       "activationRange": 170,
       "enemies": [
         {
-          "id": 3,
+          "id": 1,
           "pos": {"x": 45, "y": -65},
           "entranceId": 3
+        },
+        {
+          "id": 0,
+          "pos": {"x": 140, "y": -65},
+          "entranceId": 4
         }
       ]
     },
@@ -58,9 +58,10 @@
       "required": 1,
       "pos": {"x": 120, "y": -85},
       "activationRange": 150,
+      "delayTime": 1.1,
       "enemies": [
         {
-          "id": 1,
+          "id": 0,
           "pos": {"x": -155, "y": -65},
           "entranceId": 1
         },
@@ -70,12 +71,12 @@
           "entranceId": 1
         },
         {
-          "id": 1,
+          "id": 0,
           "pos": {"x": 140, "y": -65},
           "entranceId": 4
         },
         {
-          "id": 3,
+          "id": 2,
           "pos": {"x": 240, "y": -65},
           "entranceId": 5
         }
@@ -88,29 +89,29 @@
       "activationRange": 180,
       "enemies": [
         {
-          "id": 1,
-          "pos": {"x": 612, "y": -110},
-          "entranceId": 8
-        },
-        {
-          "id": 2,
-          "pos": {"x": 600, "y": -110},
-          "entranceId": 8
+          "id": 0,
+          "pos": {"x": 510, "y": -110},
+          "entranceId": 7
         },
         {
           "id": 1,
-          "pos": {"x": 240, "y": -70},
+          "pos": {"x": 235, "y": -65},
           "entranceId": 5
         },
         {
-          "id": 3,
-          "pos": {"x": 50, "y": -65},
-          "entranceId": 3
+          "id": 0,
+          "pos": {"x": 410, "y": -110},
+          "entranceId": 6
         },
         {
-          "id": 1,
-          "pos": {"x": -45, "y": -65},
-          "entranceId": 2
+          "id": 2,
+          "pos": {"x": 140, "y": -65},
+          "entranceId": 4
+        },
+        {
+          "id": 3,
+          "pos": {"x": 600, "y": -110},
+          "entranceId": 8
         }
       ]
     }
