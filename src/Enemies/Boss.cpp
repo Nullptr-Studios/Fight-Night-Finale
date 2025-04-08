@@ -25,14 +25,14 @@ void Boss::Update(double delta) {
   Enemy::Update(delta);
   m_timer += delta;
   m_player = GetNearestPlayer();
-  if (!m_phaseDose && m_health <= m_maxHealth/2) {
+  if (!m_phaseDose && m_health <= m_maxHealth / 2) {
     m_phaseDose = true;
     Transition();
   }
-  if (m_currentState == 21 && m_timer >= 2) {
-    SetState(STATE_IDLE);
-    m_invincible = false;
-  }
+  // if (m_currentState == 49 && m_timer >= 2) {
+    // SetState(STATE_IDLE);
+    // m_invincible = false;
+  // }
   if (m_animComp->GetCurrentAnimation()->name == "Taunt") {
     m_health += 1.0 * delta;
     m_bar->m_currentHealth = GetHealth();
@@ -80,6 +80,11 @@ void Boss::Init() {
   m_baseMaxSpeed = maxSpeed;
 }
 
+void Boss::Taunt() {
+  m_animComp->SetCurrentAnim("Taunt");
+  m_invincible = true;
+}
+
 void Boss::Start() {
   Enemy::Start();
   BindState(STATE_GOTO, [this] { GotoState(); });
@@ -88,7 +93,7 @@ void Boss::Start() {
   BindState(STATE_PURSUE, [this] { Pursue(); });
   BindState(STATE_RETREAT, [this] { Retreat(); });
   BindState(-1, [this] {});
-  BindState(21, [this] { m_animComp->SetCurrentAnim("Taunt"); m_invincible = true; });
+  BindState(49, [this]{Taunt();});
 
   m_bar->m_maxHealth = GetMaxHealth();
   m_bar->m_currentHealth = GetMaxHealth();
@@ -96,10 +101,10 @@ void Boss::Start() {
 
 void Boss::Transition() {
   velocity = {};
-  m_timer = 2;
+  m_timer = 0;
   m_invincible = true;
   m_animComp->SetCurrentAnim("Taunt");
-  SetState(21);
+  SetState(49);
   float health = m_health;
   m_jsonPath = "assets/characters/presenter/behaviour2.json";
   Serialize();
@@ -251,7 +256,6 @@ void Boss::OnFullComboPerformed(bool super) {
     m_nextState = STATE_BASIC;
     SetState(STATE_PURSUE);
   }
-
 }
 
 void Boss::SpawnWave1() {
@@ -279,11 +283,11 @@ void Boss::SpawnWave2() {
   auto e2 = GET_FACTORY->CreateObject<game::DefaultEnemy>("Enemy 1", "assets/characters/BasicEnemy/behaviour.json");
   auto e3 = GET_FACTORY->CreateObject<game::GrabEnemy>("Grab Enemy", "assets/characters/grabEnemy/behaviour.json");
 
-  e1->transform.position = glm::vec3{-100, - 90,  90};
+  e1->transform.position = glm::vec3{-100, -90, 90};
   e1->Enable(m_gameplayManager->GetPlayers());
   e1->SetSceneBoundsPoly(m_gameplayManager->GetSceneBoundsPoly());
   enemyDeletionQueue.push_back(e1);
-  e2->transform.position = glm::vec3{-485, - 90,  90};
+  e2->transform.position = glm::vec3{-485, -90, 90};
   e2->Enable(m_gameplayManager->GetPlayers());
   e2->SetSceneBoundsPoly(m_gameplayManager->GetSceneBoundsPoly());
   enemyDeletionQueue.push_back(e2);
@@ -302,11 +306,11 @@ void Boss::SpawnWave3() {
   auto e3 = GET_FACTORY->CreateObject<game::BigEnemy>("Big Enemy", "assets/characters/bigEnemy/behaviour.json");
   auto e4 = GET_FACTORY->CreateObject<game::TntEnemy>("Tnt Enemy", "assets/characters/tntEnemy/behaviour.json");
 
-  e1->transform.position = glm::vec3{-100, - 90,  90};
+  e1->transform.position = glm::vec3{-100, -90, 90};
   e1->Enable(m_gameplayManager->GetPlayers());
   e1->SetSceneBoundsPoly(m_gameplayManager->GetSceneBoundsPoly());
   enemyDeletionQueue.push_back(e1);
-  e2->transform.position = glm::vec3{-485, - 90,  90};
+  e2->transform.position = glm::vec3{-485, -90, 90};
   e2->Enable(m_gameplayManager->GetPlayers());
   e2->SetSceneBoundsPoly(m_gameplayManager->GetSceneBoundsPoly());
   enemyDeletionQueue.push_back(e2);
@@ -314,7 +318,7 @@ void Boss::SpawnWave3() {
   e3->Enable(m_gameplayManager->GetPlayers());
   e3->SetSceneBoundsPoly(m_gameplayManager->GetSceneBoundsPoly());
   enemyDeletionQueue.push_back(e3);
-  e4->transform.position = glm::vec3{-315, - 35,  35};
+  e4->transform.position = glm::vec3{-315, -35, 35};
   e4->Enable(m_gameplayManager->GetPlayers());
   e4->SetSceneBoundsPoly(m_gameplayManager->GetSceneBoundsPoly());
   enemyDeletionQueue.push_back(e4);
@@ -344,8 +348,9 @@ void Boss::Destroy() {
   GET_FACTORY->DestroyObject(m_bar);
   GET_FACTORY->DestroyObject(m_barBackground);
 
-  for (auto& enemy: enemyDeletionQueue) {
-    enemy->OnDamage(Sigma::Damage::DamageEvent(enemy->GetId(),this,Sigma::Collision::DAMAGE, 100000, {0,0},Sigma::Damage::DamageType::DAMAGE));
+  for (auto &enemy: enemyDeletionQueue) {
+    enemy->OnDamage(Sigma::Damage::DamageEvent(enemy->GetId(), this, Sigma::Collision::DAMAGE, 100000, {0, 0},
+                                               Sigma::Damage::DamageType::DAMAGE));
   }
   enemyDeletionQueue.clear();
 }
@@ -355,9 +360,12 @@ void Boss::OnDamage(const Sigma::Damage::DamageEvent &e) {
   OnFullComboPerformed(false);
   m_bar->m_currentHealth = GetHealth();
 
-  if (GetHealth() / GetMaxHealth() <= 0.75f && !m_wave1) SpawnWave1();
-  if (GetHealth() / GetMaxHealth() <=  0.5f && !m_wave2) SpawnWave2();
-  if (GetHealth() / GetMaxHealth() <= 0.25f && !m_wave3) SpawnWave3();
+  if (GetHealth() / GetMaxHealth() <= 0.75f && !m_wave1)
+    SpawnWave1();
+  if (GetHealth() / GetMaxHealth() <= 0.5f && !m_wave2)
+    SpawnWave2();
+  if (GetHealth() / GetMaxHealth() <= 0.25f && !m_wave3)
+    SpawnWave3();
 }
 
 } // namespace game

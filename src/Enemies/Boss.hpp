@@ -48,6 +48,7 @@ public:
   void EndedMove() override;
   void FacePlayer();
   void OnFullComboPerformed(bool super) override;
+  void Taunt();
 
   void OnDamage(const Sigma::Damage::DamageEvent &e) override;
 
