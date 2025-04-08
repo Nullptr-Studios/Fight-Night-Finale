@@ -61,39 +61,40 @@ void game::GameplayManager::FirstUpdate(double deltaTime) {
   if (AEInputKeyTriggered(27)
     || AEInputGamepadButtonTriggered(0, AE_GAMEPAD_START)
     || AEInputGamepadButtonTriggered(1, AE_GAMEPAD_START)) {
-
-    //Return to Main Menu
+    //Unpause
     if (m_paused == true && (AEInputKeyTriggered(27)
-    || AEInputGamepadButtonTriggered(0, AE_GAMEPAD_START)
-    || AEInputGamepadButtonTriggered(1, AE_GAMEPAD_START))) {
+      || AEInputGamepadButtonTriggered(0, AE_GAMEPAD_START)
+      || AEInputGamepadButtonTriggered(1, AE_GAMEPAD_START))) {
       m_paused = false;
       GET_MANAGER->SetPauseGame(m_paused);
       m_gameHud->EnableUIPauseMenu(m_paused);
-      GET_MANAGER->UnloadScene(GameplayManager::GetInstance()->GetCurrentGameScene()->GetID());
-      GameplayManager::GetInstance()->UninitializeGame();
-      GET_MANAGER->LoadScene(new MainMenu("Main Menu", 0));
-    }
-
+      }
     //Pause
     else {
       m_paused = true;
       GET_MANAGER->SetPauseGame(m_paused);
       m_gameHud->EnableUIPauseMenu(m_paused);
     }
-    }
+  }
 
-  //Unpause
+ //Return to Main Menu
   if (m_paused == true && (AEInputKeyTriggered(' ')
-    or AEInputGamepadButtonTriggered(0, AE_GAMEPAD_A)
-    or AEInputGamepadButtonTriggered(1, AE_GAMEPAD_A))) {
+  || AEInputGamepadButtonTriggered(0, AE_GAMEPAD_A)
+  || AEInputGamepadButtonTriggered(1, AE_GAMEPAD_A))) {
     m_paused = false;
     GET_MANAGER->SetPauseGame(m_paused);
     m_gameHud->EnableUIPauseMenu(m_paused);
-    }
+    GET_MANAGER->UnloadScene(GameplayManager::GetInstance()->GetCurrentGameScene()->GetID());
+    GameplayManager::GetInstance()->UninitializeGame();
+    GET_MANAGER->LoadScene(new MainMenu("Main Menu", 0));
+  }
 }
 
 void game::GameplayManager::Update(double deltaTime) {
   Object::Update(deltaTime);
+
+  if (m_uninitializeGame)
+    return;
 
   if (!m_playerCount && AEInputGamepadButtonPressed(0, AE_GAMEPAD_A)) {
     InitPlayer(0);
