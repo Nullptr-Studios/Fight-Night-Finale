@@ -124,7 +124,7 @@
             <key>data</key>
             <struct type="DataFile">
                 <key>name</key>
-                <filename>DoorsAtlas.json</filename>
+                <filename>CasinoSign.json</filename>
             </struct>
         </map>
         <key>multiPackMode</key>
@@ -161,7 +161,7 @@
             <key>trimMargin</key>
             <uint>1</uint>
             <key>trimMode</key>
-            <enum type="SpriteSettings::TrimMode">None</enum>
+            <enum type="SpriteSettings::TrimMode">Trim</enum>
             <key>tracerTolerance</key>
             <int>200</int>
             <key>heuristicMask</key>
@@ -173,9 +173,8 @@
         </struct>
         <key>individualSpriteSettings</key>
         <map type="IndividualSpriteSettingsMap">
-            <key type="filename">door1_1.png</key>
-            <key type="filename">door1_2.png</key>
-            <key type="filename">door1_3.png</key>
+            <key type="filename">casino-sign_1.png</key>
+            <key type="filename">casino-sign_2.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
@@ -184,70 +183,9 @@
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
-                <rect>9,17,19,33</rect>
+                <rect>14,21,27,43</rect>
                 <key>scale9Paddings</key>
-                <rect>9,17,19,33</rect>
-                <key>scale9FromFile</key>
-                <false/>
-            </struct>
-            <key type="filename">door2_1.png</key>
-            <key type="filename">door2_2.png</key>
-            <key type="filename">door2_3.png</key>
-            <struct type="IndividualSpriteSettings">
-                <key>pivotPoint</key>
-                <point_f>0.5,0.5</point_f>
-                <key>spriteScale</key>
-                <double>1</double>
-                <key>scale9Enabled</key>
-                <false/>
-                <key>scale9Borders</key>
-                <rect>7,24,15,48</rect>
-                <key>scale9Paddings</key>
-                <rect>7,24,15,48</rect>
-                <key>scale9FromFile</key>
-                <false/>
-            </struct>
-            <key type="filename">door3_1.png</key>
-            <key type="filename">door3_2.png</key>
-            <key type="filename">door3_3.png</key>
-            <struct type="IndividualSpriteSettings">
-                <key>pivotPoint</key>
-                <point_f>0.5,0.5</point_f>
-                <key>spriteScale</key>
-                <double>1</double>
-                <key>scale9Enabled</key>
-                <false/>
-                <key>scale9Borders</key>
-                <rect>19,17,37,33</rect>
-                <key>scale9Paddings</key>
-                <rect>19,17,37,33</rect>
-                <key>scale9FromFile</key>
-                <false/>
-            </struct>
-            <key type="filename">door4/door4_1.png</key>
-            <key type="filename">door4/door4_10.png</key>
-            <key type="filename">door4/door4_11.png</key>
-            <key type="filename">door4/door4_12.png</key>
-            <key type="filename">door4/door4_13.png</key>
-            <key type="filename">door4/door4_2.png</key>
-            <key type="filename">door4/door4_3.png</key>
-            <key type="filename">door4/door4_4.png</key>
-            <key type="filename">door4/door4_5.png</key>
-            <key type="filename">door4/door4_6.png</key>
-            <key type="filename">door4/door4_7.png</key>
-            <key type="filename">door4/door4_8.png</key>
-            <key type="filename">door4/door4_9.png</key>
-            <struct type="IndividualSpriteSettings">
-                <key>pivotPoint</key>
-                <point_f>0.5,0.5</point_f>
-                <key>spriteScale</key>
-                <double>1</double>
-                <key>scale9Enabled</key>
-                <false/>
-                <key>scale9Borders</key>
-                <rect>25,25,51,49</rect>
-                <key>scale9Paddings</key>
-                <rect>25,25,51,49</rect>
+                <rect>14,21,27,43</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
@@ -258,16 +196,8 @@
             <struct type="SpriteSheet">
                 <key>files</key>
                 <array>
-                    <filename>door1_1.png</filename>
-                    <filename>door1_2.png</filename>
-                    <filename>door1_3.png</filename>
-                    <filename>door2_1.png</filename>
-                    <filename>door2_2.png</filename>
-                    <filename>door2_3.png</filename>
-                    <filename>door3_1.png</filename>
-                    <filename>door3_2.png</filename>
-                    <filename>door3_3.png</filename>
-                    <filename>door4</filename>
+                    <filename>casino-sign_1.png</filename>
+                    <filename>casino-sign_2.png</filename>
                 </array>
             </struct>
         </map>

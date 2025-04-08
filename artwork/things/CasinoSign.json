@@ -1,0 +1,28 @@
+{"frames": [
+
+{
+	"filename": "casino-sign_1.png",
+	"frame": {"x":1,"y":1,"w":55,"h":85},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":55,"h":85},
+	"sourceSize": {"w":55,"h":85}
+},
+{
+	"filename": "casino-sign_2.png",
+	"frame": {"x":1,"y":88,"w":55,"h":85},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":55,"h":85},
+	"sourceSize": {"w":55,"h":85}
+}],
+"meta": {
+	"app": "https://www.codeandweb.com/texturepacker",
+	"version": "1.0",
+	"image": "CasinoSign.png",
+	"format": "RGBA8888",
+	"size": {"w":57,"h":174},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:60b740f66c537705981a3c8e96a3c789:90853f58c8eb356cbf8c45f35c55a800:6900c618b4b7ba5a3217e6e464c0c597$"
+}
+}
