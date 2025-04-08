@@ -14,5 +14,22 @@
     {"x": -440, "y": -22},
     {"x": -480, "y": -46},
     {"x": -640, "y": -46}
+  ],
+  "enemySpawners": [
+    {
+      "name": "Spawner 1",
+      "pos": { "x": -282, "y": -82 },
+      "activationRange": 1000,
+      "enemies": [
+        {
+          "id": 4,
+          "pos": {
+            "x": -282,
+            "y": -82
+          },
+          "entranceId": -1
+        }
+      ]
+    }
   ]
 }

@@ -23,16 +23,19 @@ void game::EnemySpawner::SpawnEnemy() {
 
   switch (m_currentEnemyData.id) {
     case 1:
-      e = GET_FACTORY->CreateObject<game::Boss>("Grab Enemy", "assets/characters/presenter/behaviour.json");
+      e = GET_FACTORY->CreateObject<game::GrabEnemy>("Grab Enemy", "assets/characters/grabEnemy/behaviour.json");
     break;
     case 2:
-      e = GET_FACTORY->CreateObject<game::BigEnemy>("Enemy", "assets/characters/bigEnemy/behaviour.json");
+      e = GET_FACTORY->CreateObject<game::BigEnemy>("Big Enemy", "assets/characters/bigEnemy/behaviour.json");
     break;
     case 3:
-      e = GET_FACTORY->CreateObject<game::TntEnemy>("Enemy", "assets/characters/tntEnemy/behaviour.json");
+      e = GET_FACTORY->CreateObject<game::TntEnemy>("TNT Enemy", "assets/characters/tntEnemy/behaviour.json");
+    break;
+    case 4:
+      e = GET_FACTORY->CreateObject<game::Boss>("The Presenter", "assets/characters/presenter/behaviour.json");
     break;
     default:
-      e = GET_FACTORY->CreateObject<game::DefaultEnemy>("Enemy", "assets/characters/BasicEnemy/behaviour.json");
+      e = GET_FACTORY->CreateObject<game::DefaultEnemy>("Basic Enemy", "assets/characters/BasicEnemy/behaviour.json");
     break;
   }
 

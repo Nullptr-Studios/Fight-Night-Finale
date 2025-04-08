@@ -28,8 +28,23 @@
       "activationRange": 150,
       "enemies": [
         {
+          "id": 0,
+          "pos": {"x": -340, "y": 30},
+          "entranceId": -1
+        },
+        {
           "id": 1,
-          "pos": {"x": 200, "y": -100},
+          "pos": {"x": -360, "y": 30},
+          "entranceId": -1
+        },
+        {
+          "id": 1,
+          "pos": {"x": -260, "y": 30},
+          "entranceId": -1
+        },
+        {
+          "id": 0,
+          "pos": {"x": -280, "y": 30},
           "entranceId": -1
         }
       ]
@@ -41,8 +56,23 @@
       "activationRange": 150,
       "enemies": [
         {
+          "id": 1,
+          "pos": {"x": 10, "y": 30},
+          "entranceId": -1
+        },
+        {
           "id": 3,
-          "pos": {"x": 200, "y": -100},
+          "pos": {"x": 20, "y": 30},
+          "entranceId": -1
+        },
+        {
+          "id": 3,
+          "pos": {"x": 70, "y": 30},
+          "entranceId": -1
+        },
+        {
+          "id": 1,
+          "pos": {"x": 90, "y": 30},
           "entranceId": -1
         }
       ]
@@ -54,13 +84,18 @@
       "activationRange": 150,
       "enemies": [
         {
-          "id": 1,
-          "pos": {"x": 200, "y": -100},
+          "id": 2,
+          "pos": {"x": 295, "y": -20},
           "entranceId": 0
         },
         {
           "id": 3,
-          "pos": {"x": 200, "y": -100},
+          "pos": {"x": 315, "y": -15},
+          "entranceId": 0
+        },
+        {
+          "id": 2,
+          "pos": {"x": 445, "y": -125},
           "entranceId": 1
         }
       ]

@@ -21,21 +21,6 @@
       "id": 0,
       "pos": {"x": 300, "y": -90},
       "entranceId": 0
-    },
-    {
-      "id": 1,
-      "pos": {"x": 300, "y": -90},
-      "entranceId": 0
-    },
-    {
-      "id": 2,
-      "pos": {"x": 300, "y": -90},
-      "entranceId": 0
-    },
-    {
-      "id": 3,
-      "pos": {"x": 300, "y": -90},
-      "entranceId": 0
     }
     ]
   }
