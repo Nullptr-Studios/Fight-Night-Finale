@@ -17,6 +17,7 @@ void Boss::DebugWindow() {
 }
 void Boss::Update(double delta) {
   Enemy::Update(delta);
+  m_timer += delta;
   m_player = GetNearestPlayer();
   if (!m_phaseDose && m_isGrabbed) {
     float health = m_health;
@@ -65,6 +66,7 @@ void Boss::Init() {
 
   m_defaultState = STATE_IDLE;
   m_nextState = STATE_IDLE;
+  m_baseMaxSpeed = maxSpeed;
 }
 
 void Boss::Start() {
@@ -74,9 +76,9 @@ void Boss::Start() {
   BindState(STATE_SPECIAL, [this] { SpecialState(); });
   BindState(STATE_PURSUE, [this] { Pursue(); });
   BindState(STATE_RETREAT, [this] { Retreat(); });
-  BindState(-1, [this] { });
+  BindState(-1, [this] {});
 
-  m_bar->m_maxHealth  = GetMaxHealth();
+  m_bar->m_maxHealth = GetMaxHealth();
   m_bar->m_currentHealth = GetMaxHealth();
 }
 
@@ -89,9 +91,7 @@ void Boss::Transition() {
   m_phaseDose = true;
 }
 
-bool Boss::IsInBounds(glm::vec2 pos) {
-  return m_sceneBoundsPoly->IsPointInside(pos);
-}
+bool Boss::IsInBounds(glm::vec2 pos) { return m_sceneBoundsPoly->IsPointInside(pos); }
 
 void Boss::IdleState() {
   if (!m_isDoingSomething)
@@ -108,9 +108,8 @@ void Boss::GotoState() {
   if ((direction.x >= 0) != (transform.relativeScale.x >= 0)) {
     transform.relativeScale.x *= -1;
   }
-  if (!IsInBounds((glm::vec2)transform.position + (direction * 5.0f)) ||
-      glm::distance(position, m_goto) < 1.0f) {
-    WaitSeconds(.1f, m_nextState);
+  if (!IsInBounds((glm::vec2) transform.position + (direction * 5.0f)) || glm::distance(position, m_goto) < 5.0f) {
+    WaitSeconds(0.0f, m_nextState);
     return;
   }
   m_animComp->SetCurrentAnim("Walk");
@@ -142,11 +141,12 @@ void Boss::Retreat() {
   } while (!IsInBounds(m_goto));
 
   dash = true;
-  WaitSeconds(.1f, STATE_GOTO);
+  SetState(STATE_GOTO);
 }
 
 void Boss::BasicState() {
   if (!m_isDoingSomething) return;
+  maxSpeed = m_baseMaxSpeed * 1.5f;
   glm::vec3 targets[2];
   targets[0] = m_player->transform.position + glm::vec3(-30, 0, 0);
   targets[1] = m_player->transform.position + glm::vec3(30, 0, 0);
@@ -154,39 +154,49 @@ void Boss::BasicState() {
   glm::vec2 position = (glm::vec2) transform.GetDepthPosition();
   float distance = glm::distance(position, m_goto);
   if (distance <= 10) {
+    velocity = {};
     FacePlayer();
     BasicAttack();
   } else {
-    WaitSeconds(.1f, STATE_GOTO);
+    SetState(STATE_GOTO);
   }
 }
 
 void Boss::SpecialState() {
   if (!m_isDoingSomething) return;
+  if (m_consectutiveAttack) {
+    dash = false;
+    SpecialOne();
+    return;
+  }
   glm::vec2 position = (glm::vec2) transform.GetDepthPosition();
   float distance = glm::distance(position, m_goto);
   if (distance <= 10) {
     dash = false;
-    FacePlayer();
     SpecialOne();
-    SetState(-1);
-    if (m_consectutiveAttack >= 3) {
-      m_consectutiveAttack = 0;
-      EndedMove();
-    }
+  } else if (m_consectutiveAttack == 0){
+    SetState(STATE_RETREAT);
   } else {
-    WaitSeconds(.1f, STATE_RETREAT);
+    dash = false;
+    SpecialOne();
   }
 }
 
 void Boss::SpecialOne() {
+  if (!m_isDoingSomething)
+    return;
+  FacePlayer();
   SuperAttack();
   m_consectutiveAttack++;
   std::shared_ptr<Proj> proj = GET_FACTORY->CreateObject<game::Proj>("Proj");
   proj->transform.position = transform.position + glm::vec3(0, 60, 0);
-  proj->velocity =
-    glm::normalize(proj->transform.position - (m_player->transform.position + glm::vec3(0, 55, 0))) * -200.0f;
+  proj->velocity = glm::normalize(proj->transform.position - (m_player->transform.position + glm::vec3(0, 55, 0))) * -200.0f;
   destructionQueue.push_back(proj);
+  if (m_consectutiveAttack >= 3) {
+    EndedMove();
+  } else {
+    WaitSeconds(0.3f, STATE_SPECIAL);
+  }
 }
 
 void Boss::FacePlayer() {
@@ -196,7 +206,12 @@ void Boss::FacePlayer() {
   }
 }
 void Boss::OnFullComboPerformed(bool super) {
+  if (super) {return;}
+  m_timer = 0;
   m_basicCombo = 0;
+  maxSpeed = m_baseMaxSpeed;
+  m_consectutiveAttack = 0;
+
   if (rand() % 2 == 0) {
     m_nextState = STATE_SPECIAL;
     SetState(STATE_RETREAT);
@@ -207,22 +222,15 @@ void Boss::OnFullComboPerformed(bool super) {
 }
 
 void Boss::EndedMove() {
-  if (m_hasDoneDamage && m_nextState == STATE_BASIC) {
+  if (m_hasDoneDamage && m_nextState == STATE_BASIC || m_consectutiveAttack != 3) {
     return;
   }
-  m_basicCombo = 0;
-  if (rand() % 2 == 0) {
-    m_nextState = STATE_SPECIAL;
-    SetState(STATE_RETREAT);
-  } else {
-    m_nextState = STATE_BASIC;
-    SetState(STATE_PURSUE);
-  }
+  OnFullComboPerformed(false);
 }
 
 void Boss::Destroy() {
   Enemy::Destroy();
-  // Dante this is shit 0x
+  // Dante this is shit 0x (thanks -dante)
   while (!destructionQueue.empty()) {
     if (destructionQueue.back()) {
       GET_FACTORY->DestroyObject(destructionQueue.back());

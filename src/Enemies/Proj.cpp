@@ -11,7 +11,7 @@ void Proj::Init() {
   m_collider->box.Set(glm::vec3{10, 10, 10});
   m_collider->SetOwner(this);
   m_collider->damage = m_damage;
-  m_collider->knockback = {};
+  m_collider->knockback = {200,10};
   transform.scale = {10,10};
 
 }

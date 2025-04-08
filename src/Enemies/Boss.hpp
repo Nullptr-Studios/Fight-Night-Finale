@@ -52,6 +52,7 @@ public:
   void OnDamage(const Sigma::Damage::DamageEvent &e) override;
 
 private:
+  float m_baseMaxSpeed;
   Player *m_player{};
   float m_timer{};
   bool m_phaseDose{};
