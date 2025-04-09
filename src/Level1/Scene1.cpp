@@ -46,6 +46,7 @@ void Scene1::Load() {
 
   auto sign = GET_FACTORY->CreateObject<CasinoSign>("Sign");
   sign->SetTexture("assets/objects/CasinoSign.png");
+  sign->transform.position = {346, -5, -5000};
   AddChild(sign);
 
   // xd
