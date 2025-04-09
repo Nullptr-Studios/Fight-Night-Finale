@@ -3,15 +3,16 @@
 
 #include "Controller/CameraController.hpp"
 #include "Core.hpp"
+#include "Credits.hpp"
+#include "DeadScene.hpp"
 #include "Level1/Scene1.hpp"
 #include "Objects/Camera.hpp"
 #include "Objects/Manager/GameplayManager.hpp"
 #include "Tutorial/Tutorial1.hpp"
 #include "Tutorial/Tutorial2.hpp"
 #include "Tutorial/Tutorial3.hpp"
-#include "UI/SceneButton.hpp"
 #include "UI/ControlButton.hpp"
-#include "DeadScene.hpp"
+#include "UI/SceneButton.hpp"
 #include "UI/UIText.hpp"
 #include "WinScene.hpp"
 
@@ -44,6 +45,7 @@ void game::MainMenu::Load() {
   // AddChild(m_studioLogo);
   
   auto s = new game::Tutorial1("Tutorial 1 ", 1, "assets/tutorial/tutorial-1.json");
+  // auto t = new game::Credits("Credits", 1);
   // auto s = new game::WinScene("Game Scene1", 0);
   m_playButton = GET_FACTORY->CreateObject<Sigma::SceneButton>("Play Button", s, GetID());
   m_playButton->m_screenSpaceTransform.scale = {200, 100};
