@@ -3,6 +3,7 @@ project(sigma LANGUAGES CXX)
 set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
+set(GAME_NAME "JackpotKnockout")
 
 set(CMAKE_BUILD_TYPE "Release")
 
@@ -32,33 +33,31 @@ file(GLOB_RECURSE SRC CONFIGURE_DEPENDS
         "src/*.h"
 )
 
-add_executable(game src/main.cpp ${SRC}
-        src/Objects/Door.cpp
-        src/Objects/Door.hpp)
+add_executable(${GAME_NAME} ${SRC})
 
-target_include_directories(game PUBLIC src)
+target_include_directories(${GAME_NAME} PUBLIC src)
 
 # Adds sigma engine static library
-target_link_libraries(game PRIVATE sigma)
+target_link_libraries(${GAME_NAME} PRIVATE sigma)
 
 # Copy res folder to build directory
-add_custom_command(TARGET game POST_BUILD
+add_custom_command(TARGET ${GAME_NAME} POST_BUILD
         COMMAND ${CMAKE_COMMAND} -E copy_directory
         ${CMAKE_SOURCE_DIR}/assets ${CMAKE_BINARY_DIR}/${CMAKE_BUILD_TYPE}/assets)
 
 # Copy FMOD dlls to build directory
 if(${CMAKE_BUILD_TYPE} STREQUAL "Debug")
-    add_custom_command(TARGET game POST_BUILD
+    add_custom_command(TARGET ${GAME_NAME} POST_BUILD
             COMMAND ${CMAKE_COMMAND} -E copy_if_different
             ${CMAKE_SOURCE_DIR}/inc/sigma/engine/lib/fmodL.dll ${CMAKE_BINARY_DIR}/${CMAKE_BUILD_TYPE}/)
-    add_custom_command(TARGET game POST_BUILD
+    add_custom_command(TARGET ${GAME_NAME} POST_BUILD
             COMMAND ${CMAKE_COMMAND} -E copy_if_different
             ${CMAKE_SOURCE_DIR}/inc/sigma/engine/lib/fmodstudioL.dll ${CMAKE_BINARY_DIR}/${CMAKE_BUILD_TYPE}/)
 else ()
-    add_custom_command(TARGET game POST_BUILD
+    add_custom_command(TARGET ${GAME_NAME} POST_BUILD
             COMMAND ${CMAKE_COMMAND} -E copy_if_different
             ${CMAKE_SOURCE_DIR}/inc/sigma/engine/lib/fmod.dll ${CMAKE_BINARY_DIR}/${CMAKE_BUILD_TYPE}/)
-    add_custom_command(TARGET game POST_BUILD
+    add_custom_command(TARGET ${GAME_NAME} POST_BUILD
             COMMAND ${CMAKE_COMMAND} -E copy_if_different
             ${CMAKE_SOURCE_DIR}/inc/sigma/engine/lib/fmodstudio.dll ${CMAKE_BINARY_DIR}/${CMAKE_BUILD_TYPE}/)
 endif ()
