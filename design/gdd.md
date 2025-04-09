@@ -1,6 +1,6 @@
 # GDD
 
-Jackpot Knockout is a 1980's themed, 2.5D beat em up game wherein players will face the ultimate challenge of survival. Set within a high-stakes TV show; with both single player and coop; you play a choice of 2 distinct characters, both sharing the goal of emerging victorious and claiming the life-changing prize of 50 million dollars. However, as the battle progresses, the situation appears to be far more sinister than initially thought...
+Jackpot Knockout is a 1980's themed, 2.5D beat em up game wherein players will face the ultimate challenge of survival. Set within a high-stakes TV show; with both single player and coop; you play a character with the goal of emerging victorious and claiming the life-changing prize of 50 million dollars. However, as the battle progresses, the situation appears to be far more sinister than initially thought...
 
 Describing itself as an over the top, parody take on the retro-style beat 'em up genre; JK strives to combine comedic elements alongside unending action to provide players with a unique and memorable experience.
 
@@ -24,10 +24,10 @@ Since each attack comes with their own attack values and distinct hitboxes, each
 
 Similarly to the player, all enemies will contain within them their own unique attack combos. Alongside this, each enemy fits a certain "niche". For example, while the basic enemy is quite self-explanatory, we also have someone like the TNT Thrower which fills the role of a ranged AOE attacker and the Bodyguard is able to pick the player up and throw them.
 
-The bosses take this a step further however; including alongside their own combos a varied repertoire of "special" moves. 
-An example of this would be the first boss, the Pit Manager's AOE jump attacks which he utilizes mid fight to stun and destroy the player or the last boss, the Presenter, having a special ranged attack wherein he throws casino chips at supersonic speed at the player from a distance.
+The boss takes this a step further however; including alongside his own combo a varied repertoire of "special" moves. 
+An example of this would be the Presenter having a special ranged attack wherein he throws casino chips at supersonic speed at the player from a distance.
 
-Essentially, the game features a wide array of different enemies and bosses, each with their unique attack patterns and methods of attack; be it ranged or melee. In total, there will be 3 bosses within the game, each with their own quirks.
+Essentially, the game features a wide array of different enemies and a boss, each with their unique attack patterns and methods of attack; be it ranged or melee. 
 
 Additionally, as any good beat 'em up, the game will feature certain healing items that will heal the player on pickup. These will be commonly found when destroying a destructible object, such as a slot machine or a storage box. While enemies are also able to destroy these objects, they are unable to utilize the heal pickup. The healing item also does not respawn as to ensure a fair constant difficulty.
 
@@ -35,11 +35,9 @@ Additionally, as any good beat 'em up, the game will feature certain healing ite
 
 ### Players
 
-In terms of playable characters, our game will feature 2 distinct character archetypes, each appealing to a different playstyle and playable in both single and co-op play. These characters will include a Kickboxer character and a Dancer character.
+In terms of playable characters, our game will feature a single main playable character, the Kickboxer, who is playable in both single and co-op play.
 
 Starting off with the Kickboxer, he is your typical beat 'em up protagonist; a melee fighter based on mostly punches with a few kicks mixed in between for variety. He is designed accordingly with most common character archetypes in order to offer players with a familiar yet fun playstyle choice. Design wise, the character portrays a nonchalant, almost chill and relaxed personality with a hint of cockiness; wearing a mix of streetwear and casual clothing whilst destroying anyone in his path.
-
-The Dancer, on the other hand, is a somewhat unique character archetype. She is a melee fighter based on flashy kicks and moves inspired by real life dances and dance-adjacent sports. She is designed to offer players with a new playstyle based on a quicker, more agile AOE playstyle with lower damage but higher flexibility and flair. Design wise, the character portrays an aura of elegance and grace. She is a proud, almost arrogant character who looks down on her enemies whilst putting them in their place with her elaborate combat techniques.
 
 ### Enemies
 
@@ -57,13 +55,9 @@ All this enemies will be very similar design-wise, with a comedic tone to its in
 
 ### Bosses
 
-Regarding Bosses, our game includes 3 Bosses, each per third of the level. These include the Pit Manager, Blake and The Presenter.
+Regarding Boss enemy; The Presenter is the magnum opus of the game. As Its final Villain. The Presenter consists of an eccentric, well dressed man in his late 40's with an iconic smile, irradiating an aura of both confidence, charisma and a slight hint of psychopathy as this game's main Antagonist. Serving as a cunning mastermind, The Presenter toys with the player in the first phase, attacking them with a Cane and Throwing Chips from the casino, doing a moderately-heavy amount of damage.
 
-To start off, the first boss you will face is the Pit Manager. This boss consists of a somewhat sentient Gorilla in a Suit. This boss is almost like a dual-sided coin, with a calm and professional basic attack combo closely followed by a rage induced AOE special, wherein he jumps and pounds the ground, and lastly, an even crazier Ultimate, wherein they grab the player and toss them into the ground with unmatched ferocity. This boss is supposed to keep players on their toes being both the first boss in the game and a somewhat unpredictable one.
-
-Secondly, Blake is essentially a schizophrenic Mafia boss who, similarly to the Pit Manager, cycles between different states of Mania within his boss fight. Utilizing a signature bat weapon seen in a previous Nullptr game, Blake utilizes targeted DPS attacks mixed with an occasional AOE special in order to constantly harass the player and make them gauge their every move in a high-octane, high risk fight. Having a second, "pseudo" phase, Blake switches from his signature bat to an Akimbo pistol setup upon reaching less than 75%, leading to an even more intense battle as he now shoots the player from afar, dealing even more damage.
-
-Lastly, The Presenter is the magnum opus of the game. Its final Villain. The Presenter consists of an eccentric, well dressed man in his late 40's with an iconic smile, irradiating an aura of both confidence, charisma and a slight hint of psychopathy as this game's main Antagonist. Serving as a cunning mastermind, The Presenter toys with the player in the first phase, attacking them with a Cane and Throwing Chips from the casino, doing a moderately-heavy amount of damage albeit ever so slightly easier than previous boss battles such as Blake. However, once the player manages to get past this first phase, the presenter will move on towards a new battlefield, wherein he will unsheathe his cane into a beautiful sword, utilizing it to deal significantly more damage, complete with a new special attack wherein he dash attacks the player, stunning them upon hit and dealing heavy damage.
+However, once the player manages to get past this first phase, the presenter will move on towards a new battlefield, wherein he will unsheathe his cane into a beautiful sword, utilizing it to deal significantly more damage, complete with a new special attack wherein he dash attacks the player, stunning them upon hit and dealing heavy damage.
 
 ## Environments
 
@@ -71,7 +65,7 @@ The game will happen on a single casino-themed TV set level and will be divided 
 
 The scenes in the game are going to be relatively small and will have enemies that spawn through different doors located through the level. There will also be destructibles through the scene that can be picked up by the player.
 
-Every few scenes, one of our three boss fights will take place. This fights will consist of a singular unique boss along side with some regular enemies. Upon completion of the fight, the player will get their health completely restored. Boss fights will also provide some narrative exposition of the game with the bosses having a dubbed, simple, dialogue line before and after the fight.
+At the end of the game, a Boss fight will take place. This fight will consist of a singular unique boss along side with some regular enemies. Upon completion of the fight, the player will get their health completely restored. 
 
 ## Narrative
 
@@ -109,4 +103,4 @@ The HUD present in the game is going to be simple as there won't be many things 
 
 The most important information on the HUD is going to be the Health bar that will indicate the remaining health each player has at any moment of the game. If the players are using the co-op mode of the game, two health bars (one on the top left and other on the top right) will appear, showing the current health of each of the players. When a boss fight happens, another health bar will appear on the bottom part of the screen showing the boss name and its current health.
 
-In addition to the health bar, a combo indicator will be present on the UI. This will indicate the current amounts of hits in your current combo. If your combo is less than 10 hits, this value will not appear on the screen.
+In addition to the health bar, a combo indicator will be present on the UI. This will indicate the current amounts of hits in your current combo. If your combo is less than 10 hits, this value will not appear on the screen. Lastly, we will also have a Score system with a Score bar in the centre top of the screen, representing the current amount of cash your character has.

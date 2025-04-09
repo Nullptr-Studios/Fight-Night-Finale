@@ -1,7 +1,9 @@
 #include "WinScene.hpp"
-#include "MainMenu.hpp"
+
 #include "Controller/CameraController.hpp"
+#include "Credits.hpp"
 #include "Level1/Scene1.hpp"
+#include "MainMenu.hpp"
 #include "Objects/Camera.hpp"
 #include "UI/SceneButton.hpp"
 
@@ -52,7 +54,7 @@ void game::WinScene::Load() {
 
   AddChild(m_death);
 
-  auto m = new game::MainMenu("Game Scene1", 0);
+  auto m = new game::Credits("Credits", 69);
   m_quitButton = GET_FACTORY->CreateObject<Sigma::SceneButton>("Quit Button", m ,GetID());
   m_quitButton->m_screenSpaceTransform.scale = {200, 100};
   m_quitButton->m_screenSpaceTransform.position.y -= 340;
