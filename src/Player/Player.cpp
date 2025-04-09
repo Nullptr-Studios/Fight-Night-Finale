@@ -67,7 +67,7 @@ void Player::Update(double delta) {
 void Player::LateUpdate(double deltaTime) {
   Character::LateUpdate(deltaTime);
 
-  if (!m_sceneBoundsPoly->IsPointInside(transform.position)) {
+  if (!m_sceneBoundsPoly->IsPointInside(transform.position) && GetAlive()) {
     GameplayManager::GetInstance()->RespawnPlayer(this);
   }
 }
