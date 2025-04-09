@@ -38,6 +38,7 @@ public:
   void Serialize() override;
   void Start() override;
   void Update(double delta) override;
+  void LateUpdate(double deltaTime) override;
   void Destroy() override;
   void LandedOnGround() override;
 

@@ -64,6 +64,13 @@ void Player::Update(double delta) {
 
   // m_collider->DebugDraw(m_debugPlayerCol, this, "assets/core/debug_blue.png");
 }
+void Player::LateUpdate(double deltaTime) {
+  Character::LateUpdate(deltaTime);
+
+  if (!m_sceneBoundsPoly->IsPointInside(transform.position)) {
+    GameplayManager::GetInstance()->RespawnPlayer(this);
+  }
+}
 
 void Player::Destroy() {
   Character::Destroy();
