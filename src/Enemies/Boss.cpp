@@ -29,12 +29,12 @@ void Boss::Update(double delta) {
     m_phaseDose = true;
     Transition();
   }
+  if (m_currentState == 49 && m_timer >= 3) {
+    m_taunt = false;
+    m_invincible = false;
+  }
   if (m_animComp->GetCurrentAnimation()->name == "Taunt") {
-    if (m_timer >=3) {
-      m_taunt = false;
-      m_invincible = false;
-    }
-    m_health += 1.0 * delta;
+    m_health += 10.0 * delta;
     m_bar->m_currentHealth = GetHealth();
   }
 }
@@ -161,6 +161,8 @@ void Boss::Retreat() {
   m_animComp->SetCurrentAnim("Idle");
 
   do {
+    if (m_player == nullptr)
+      return;
     m_goto = static_cast<glm::vec2>(m_player->transform.position) + (Sigma::Random::Circle() * 150.0f);
   } while (!IsInBounds(m_goto));
 
@@ -173,6 +175,8 @@ void Boss::BasicState() {
     return;
   maxSpeed = m_baseMaxSpeed * 1.5f;
   glm::vec3 targets[2];
+  if (m_player == nullptr)
+    return;
   targets[0] = m_player->transform.position + glm::vec3(-50, 0, 0);
   targets[1] = m_player->transform.position + glm::vec3(50, 0, 0);
   m_goto = glm::distance(transform.position, targets[0]) < glm::distance(transform.position, targets[1]) ? targets[0]
@@ -230,6 +234,8 @@ void Boss::SpecialOne() {
 }
 
 void Boss::FacePlayer() {
+  if (m_player == nullptr)
+    return;
   glm::vec3 distance = m_player->transform.GetDepthPosition() - transform.GetDepthPosition();
   if ((distance.x >= 0) != (transform.relativeScale.x >= 0)) {
     transform.relativeScale.x *= -1;

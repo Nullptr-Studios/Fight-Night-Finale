@@ -14,7 +14,7 @@ public:
   void Unload() override;
 private:
 
-  Sigma::Actor *m_credits = nullptr;
+  std::shared_ptr<Sigma::Actor> m_credits = nullptr;
   float m_timer;
 };
 }

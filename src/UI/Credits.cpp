@@ -27,8 +27,9 @@ void Credits::Update(double delta) {
   // Exit credits
   if (m_timer > 55.5f) {
     auto s = new game::MainMenu("Main Menu", 0);
-    GET_MANAGER->LoadScene(s);
     GET_MANAGER->UnloadScene(GetID());
+    GET_MANAGER->LoadScene(s);
+    
   }
 
   // Second wait
