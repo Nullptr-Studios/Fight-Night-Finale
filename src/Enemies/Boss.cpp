@@ -7,6 +7,7 @@
 #include "Enemies/Proj.hpp"
 #include "Factory.hpp"
 #include "GrabEnemy.hpp"
+#include "Objects/Pickups/Pickup.hpp"
 #include "Random.hpp"
 #include "TntEnemy.hpp"
 #include "aecore/imgui/imgui.h"
@@ -302,6 +303,19 @@ void Boss::SpawnWave2() {
   e3->Enable(m_gameplayManager->GetPlayers());
   e3->SetSceneBoundsPoly(m_gameplayManager->GetSceneBoundsPoly());
   enemyDeletionQueue.push_back(e3);
+
+  m_pickups[0] = GET_FACTORY->CreateObject<Pickup>();
+  m_pickups[1] = GET_FACTORY->CreateObject<Pickup>();
+  m_pickups[0]->transform.position = glm::vec3{-575, -85, 85};
+  m_pickups[0]->transform.scale = glm::vec2{25, 25};
+  m_pickups[0]->SetColSize(glm::vec3{25, 25, 25});
+  m_pickups[0]->SetHeal(50);
+  m_pickups[0]->SetTexture("assets/objects/Hamburger.png");
+  m_pickups[1]->transform.position = glm::vec3{0, -85, 85};
+  m_pickups[1]->transform.scale = glm::vec2{25, 25};
+  m_pickups[1]->SetColSize(glm::vec3{25, 25, 25});
+  m_pickups[1]->SetHeal(50);
+  m_pickups[1]->SetTexture("assets/objects/Hamburger.png");
 }
 
 void Boss::SpawnWave3() {

@@ -14,6 +14,7 @@
 #include "UI/UIImage.hpp"
 
 namespace game {
+class Pickup;
 class Boss : public Enemy {
 public:
   Boss(const Sigma::id_t id, const char *jsonPath);
@@ -77,6 +78,8 @@ private:
   std::shared_ptr<Sigma::UIImage> m_barBorder;
   std::shared_ptr<Sigma::UIImage> m_barBackground;
   std::shared_ptr<HealthBar> m_bar;
+
+  std::shared_ptr<Pickup> m_pickups[2];
 };
 
 } // namespace game
