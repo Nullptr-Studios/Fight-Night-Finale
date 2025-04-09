@@ -16,8 +16,8 @@ namespace game {
 void Tnt::Init() {
   m_attackCollider = GET_FACTORY->CreateObject<Sigma::Collision::OneHitCollider>("Attack Collider");
   m_attackCollider->GetCollider()->enabled = false;
-  transform.scale = {25,25};
-  //SetTexture("");
+  transform.scale = {12,12};
+  SetTexture("assets/objects/tnt.png");
   m_boomBox = {100,100,100};
   m_powBox = {300,300};
   m_damage = 10;
@@ -31,7 +31,7 @@ void Tnt::Init() {
 void Tnt::Update(double delta) {
   m_timer += (float)delta;
   m_length = glm::length(m_start - m_target) /200.0f;
-  if ( m_timer >= m_length + 2) {
+  if ( m_timer >= m_length + .5f) {
     GET_FACTORY->DestroyObject(this->GetId());
   }
   if (boom) {
@@ -40,8 +40,8 @@ void Tnt::Update(double delta) {
   if (m_timer >= m_length + .4) {
     boom = true;
     int id = GetId();
-    m_attackCollider->Do(transform.position, m_boomBox, m_damage, this, Sigma::Damage::DamageType::DAMAGE,m_powBox, true);
-    m_hitEffect->transform.position = transform.position;
+    m_attackCollider->Do(transform.position, m_boomBox, m_damage, this, Sigma::Damage::DamageType::DAMAGE,m_powBox, false);
+    m_hitEffect->transform.position = transform.position+glm::vec3(0,0,1000);
     m_hitEffect->DoEffect("Explosion");
     transform.position = m_target;
   }

@@ -50,6 +50,4 @@ void game::Door::animationEnded(const std::string& animName) {
 
 void game::Door::LateUpdate(double deltaTime) {
   Sigma::Actor::LateUpdate(deltaTime);
-  if (m_animComp)
-    m_animComp->Update(deltaTime);
 }

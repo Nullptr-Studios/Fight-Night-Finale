@@ -70,6 +70,7 @@ void HUD::Init() {
   player1.slash->m_screenSpaceTransform.position.x += -136;
   player1.slash->m_screenSpaceTransform.position.y += 28;
   player1.slash->m_screenSpaceTransform.scale = {.75f, .75f};
+  player1.slash->m_screenSpaceTransform.scale.x = .5f;
   player1.slash->SetText("/");
   player1.slash->SetTint({1.0f, 1.0f, 1.0f, 1.0f});
 
@@ -143,6 +144,7 @@ void HUD::Init() {
   player2.slash->m_screenSpaceTransform.scale = {1.0f, 1.8f};
   player2.slash->m_screenSpaceTransform.position.x += -136 + 274;
   player2.slash->m_screenSpaceTransform.position.y += 28;
+  player1.slash->m_screenSpaceTransform.scale.x = .5f;
   player2.slash->SetText("/");
   player2.slash->SetTint({1.0f, 1.0f, 1.0f, 1.0f});
 

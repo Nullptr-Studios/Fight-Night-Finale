@@ -31,9 +31,7 @@ void Box::Init() {
 }
 void Box::Update(double deltaTime) {
   Damageable::Update(deltaTime);
-
-  if (m_animComp)
-    m_animComp->Update(deltaTime);
+  
 }
 
 void Box::OnDed() {

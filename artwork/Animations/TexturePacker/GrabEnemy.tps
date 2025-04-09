@@ -124,7 +124,7 @@
             <key>data</key>
             <struct type="DataFile">
                 <key>name</key>
-                <filename></filename>
+                <filename>Export/GrabEnemy.json</filename>
             </struct>
         </map>
         <key>multiPackMode</key>
@@ -173,8 +173,22 @@
         </struct>
         <key>individualSpriteSettings</key>
         <map type="IndividualSpriteSettingsMap">
+            <key type="filename">../Frames/Characters/GrabEnemy/BasicCombo/BasicCombo_0029.png</key>
+            <key type="filename">../Frames/Characters/GrabEnemy/BasicCombo/BasicCombo_0030.png</key>
+            <key type="filename">../Frames/Characters/GrabEnemy/BasicCombo/BasicCombo_0031.png</key>
+            <key type="filename">../Frames/Characters/GrabEnemy/BasicCombo/BasicCombo_0032.png</key>
+            <key type="filename">../Frames/Characters/GrabEnemy/BasicCombo/BasicCombo_0033.png</key>
+            <key type="filename">../Frames/Characters/GrabEnemy/BasicCombo/BasicCombo_0034.png</key>
+            <key type="filename">../Frames/Characters/GrabEnemy/BasicCombo/BasicCombo_0035.png</key>
+            <key type="filename">../Frames/Characters/GrabEnemy/BasicCombo/BasicCombo_0036.png</key>
+            <key type="filename">../Frames/Characters/GrabEnemy/BasicCombo/BasicCombo_0037.png</key>
+            <key type="filename">../Frames/Characters/GrabEnemy/BasicCombo/BasicCombo_0038.png</key>
             <key type="filename">../Frames/Characters/GrabEnemy/Hit/Hit1_0.png</key>
+            <key type="filename">../Frames/Characters/GrabEnemy/Hit/Hit1_01.png</key>
+            <key type="filename">../Frames/Characters/GrabEnemy/Hit/Hit1_02.png</key>
             <key type="filename">../Frames/Characters/GrabEnemy/Hit/Hit2_0.png</key>
+            <key type="filename">../Frames/Characters/GrabEnemy/Hit/Hit2_01.png</key>
+            <key type="filename">../Frames/Characters/GrabEnemy/Hit/Hit2_02.png</key>
             <key type="filename">../Frames/Characters/GrabEnemy/Idle/Idle_0.png</key>
             <key type="filename">../Frames/Characters/GrabEnemy/Recover/Recover_0023.png</key>
             <key type="filename">../Frames/Characters/GrabEnemy/Recover/Recover_0024.png</key>
@@ -211,6 +225,7 @@
                     <filename>../Frames/Characters/GrabEnemy/Recover</filename>
                     <filename>../Frames/Characters/GrabEnemy/Thrown</filename>
                     <filename>../Frames/Characters/GrabEnemy/Walk</filename>
+                    <filename>../Frames/Characters/GrabEnemy/BasicCombo</filename>
                 </array>
             </struct>
         </map>

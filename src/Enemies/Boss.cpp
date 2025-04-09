@@ -244,6 +244,7 @@ void Boss::FacePlayer() {
     transform.relativeScale.x *= -1;
   }
 }
+
 void Boss::OnFullComboPerformed(bool super) {
   if (super) {
     return;

@@ -17,7 +17,7 @@
       "knockback" : { "x" : 80.0, "y" : 0 },
       "colliderOffset" : { "x" : 22, "y" : 60 },
       "colliderSize" : { "x" : 20, "y" : 15, "z" : 3 },
-      "animationName" : "Combo1"
+      "animationName" : "BasicCombo1"
     },
     {
       "type" : "thr",
@@ -25,7 +25,7 @@
       "knockback" : { "x" : 380.0, "y" : 0 },
       "colliderOffset" : { "x" : 24, "y" : 59 },
       "colliderSize" : { "x" : 21, "y" : 15, "z" : 3 },
-      "animationName" : "Combo2"
+      "animationName" : "BasicCombo2"
     }
   ],
 

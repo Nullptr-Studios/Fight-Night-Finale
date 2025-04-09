@@ -24,8 +24,6 @@ void GlowArea::Init() {
 void GlowArea::Update(double deltaTime) {
   Actor::Update(deltaTime);
 
-  m_animComp->Update(deltaTime);
-
 }
 
 bool GlowArea::OnCollision(Sigma::Collision::CollisionEvent& e) {
