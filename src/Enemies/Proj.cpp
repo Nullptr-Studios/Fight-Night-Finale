@@ -15,7 +15,7 @@ void Proj::Init() {
   m_collider->box.Set(glm::vec3{5, 5, 5});
   m_collider->SetOwner(this);
   m_collider->damage = m_damage;
-  m_collider->knockback = {200,10};
+  m_collider->knockback = {200,0};
   transform.scale = {10,10};
   SetTexture("assets/objects/chip.png");
   auto e = GET_MANAGER->GetRandomEngine();

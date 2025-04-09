@@ -9,6 +9,7 @@
 
 namespace game {
 void Credits::Load() {
+  Scene::Load();
   m_credits = GET_FACTORY->CreateObject<Sigma::Actor>("Credits");
   m_credits->SetTexture("assets/credits.png");
   // Oh wow i love magic numbers 0x
@@ -20,6 +21,7 @@ void Credits::Load() {
 }
 
 void Credits::Update(double delta) {
+  Scene::Update(delta);
   m_timer += delta;
   // Initial wait
   if (m_timer < 5) return;
@@ -39,7 +41,7 @@ void Credits::Update(double delta) {
   m_credits->transform.position.y += delta * 200/(1.39f*2.8);
 }
 
-void Credits::Unload() { }
-
-
+void Credits::Unload() { 
+  Scene::Unload();
+}
 }

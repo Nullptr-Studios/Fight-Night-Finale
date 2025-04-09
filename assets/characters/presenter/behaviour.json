@@ -3,7 +3,6 @@
   "maxSpeed" : 140.0,
   "accelerationRate" : 5.0,
   "jumpVel" : 0.0,
-  "dashVel" : 500,
   "friction" : 1000,
   "distanceToAttack" : 30.0,
   "knockbackRes" : 1.0,

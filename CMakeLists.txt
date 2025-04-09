@@ -4,7 +4,7 @@ set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 
-set(CMAKE_BUILD_TYPE "Debug")
+set(CMAKE_BUILD_TYPE "Release")
 
 message("Generated with config types: ${CMAKE_CONFIGURATION_TYPES}")
 message("${CMAKE_BUILD_TYPE}")

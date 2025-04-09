@@ -1,10 +1,11 @@
 {
   "maxHealth" : 1000.0,
-  "maxSpeed" : 140.0,
+  "maxSpeed" : 300.0,
   "accelerationRate" : 5.0,
   "jumpVel" : 0.0,
   "friction" : 1000,
-  "dashVel" : 310,
+  "dashVel" : 500,
+  "dashTime" : 0.3,
   "distanceToAttack" : 30.0,
   "knockbackRes" : 1.0,
 

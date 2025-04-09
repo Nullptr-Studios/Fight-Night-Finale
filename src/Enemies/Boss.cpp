@@ -35,7 +35,7 @@ void Boss::Update(double delta) {
     m_invincible = false;
   }
   if (m_animComp->GetCurrentAnimation()->name == "Taunt") {
-    m_health += 10.0 * delta;
+    m_health += 20.0 * delta;
     m_bar->m_currentHealth = GetHealth();
   }
 }
@@ -83,7 +83,7 @@ void Boss::Init() {
 
 void Boss::Taunt() {
   m_animComp->SetCurrentAnim("Taunt");
-  m_invincible = m_taunt;
+  m_invincible = false;
 }
 
 void Boss::Start() {
@@ -103,13 +103,15 @@ void Boss::Start() {
 void Boss::Transition() {
   velocity = {};
   m_timer = 0;
-  m_invincible = true;
+  m_invincible = false;
   m_taunt = true;
+  Taunt();
   m_animComp->SetCurrentAnim("Taunt");
   SetState(49);
   float health = m_health;
   m_jsonPath = "assets/characters/presenter/behaviour2.json";
   Serialize();
+  m_baseMaxSpeed = maxSpeed;
   m_health = health;
 }
 

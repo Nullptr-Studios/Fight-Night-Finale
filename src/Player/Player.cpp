@@ -39,9 +39,7 @@ void Player::Init() {
 }
 void Player::Serialize() {
   Character::Serialize();
-  dashVel = j["dashVel"];
-  dashTime = j["dashTime"];
-  dashCool = j["dashCool"];
+
 }
 
 void Player::Start() {
