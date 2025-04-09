@@ -18,6 +18,10 @@ void Proj::Init() {
 
 void Proj::Update(double delta) {
   transform.position += velocity * static_cast<float>(delta);
+  m_timer += delta;
+  if (m_timer >= 10) {
+    GET_FACTORY->DestroyObject(this->GetId());
+  }
 }
 
 bool Proj::OnCollision(Sigma::Collision::CollisionEvent &e) {

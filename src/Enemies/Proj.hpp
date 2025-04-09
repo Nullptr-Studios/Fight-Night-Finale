@@ -20,5 +20,6 @@ public:
   glm::vec3 velocity{};
 private:
   float m_damage = 1;
+  float m_timer = 0;
 };
 } // namespace game

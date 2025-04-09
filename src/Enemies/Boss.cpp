@@ -66,7 +66,7 @@ void Boss::Init() {
   m_animComp->SetCurrentAnim("Idle");
   m_animComp->PlayAnim();
 
-  m_animComp->SetupTrailEffect(4, .07f, .5f, glm::vec4(1, 1, 1, .75f), glm::vec4(1, 1, 1, 0));
+  m_animComp->SetupTrailEffect(20, .02f, .25f, glm::vec4(.7f, .4f, .6f, 1), glm::vec4(.7f, .4f, .6f, 0));
 
   // Setup player collider
   m_collider->box.Set(25, 25, 50, 50, 10, transform.offset);
@@ -129,7 +129,7 @@ void Boss::GotoState() {
   if ((direction.x >= 0) != (transform.relativeScale.x >= 0)) {
     transform.relativeScale.x *= -1;
   }
-  if (!IsInBounds((glm::vec2) transform.position + (direction * 5.0f)) || glm::distance(position, m_goto) < 5.0f) {
+  if (!IsInBounds(static_cast<glm::vec2>(transform.position) + (direction * 5.0f)) || glm::distance(position, m_goto) < 5.0f) {
     WaitSeconds(0.0f, m_nextState);
     return;
   }
@@ -147,7 +147,7 @@ void Boss::Pursue() {
   m_animComp->SetCurrentAnim("Idle");
 
   do {
-    m_goto = (glm::vec2) m_player->transform.position + (Sigma::Random::Circle() * 30.0f);
+    m_goto = static_cast<glm::vec2>(m_player->transform.position) + (Sigma::Random::Circle() * 30.0f);
   } while (!IsInBounds(m_goto));
 
   WaitSeconds(.1f, STATE_GOTO);
@@ -160,7 +160,7 @@ void Boss::Retreat() {
   m_animComp->SetCurrentAnim("Idle");
 
   do {
-    m_goto = (glm::vec2) m_player->transform.position + (Sigma::Random::Circle() * 150.0f);
+    m_goto = static_cast<glm::vec2>(m_player->transform.position) + (Sigma::Random::Circle() * 150.0f);
   } while (!IsInBounds(m_goto));
 
   dash = true;
@@ -168,12 +168,12 @@ void Boss::Retreat() {
 }
 
 void Boss::BasicState() {
-  if (!m_isDoingSomething)
+  if (!m_isDoingSomething || m_player == nullptr)
     return;
   maxSpeed = m_baseMaxSpeed * 1.5f;
   glm::vec3 targets[2];
-  targets[0] = m_player->transform.position + glm::vec3(-30, 0, 0);
-  targets[1] = m_player->transform.position + glm::vec3(30, 0, 0);
+  targets[0] = m_player->transform.position + glm::vec3(-50, 0, 0);
+  targets[1] = m_player->transform.position + glm::vec3(50, 0, 0);
   m_goto = glm::distance(transform.position, targets[0]) < glm::distance(transform.position, targets[1]) ? targets[0]
                                                                                                          : targets[1];
   glm::vec2 position = (glm::vec2) transform.GetDepthPosition();
@@ -326,9 +326,8 @@ void Boss::SpawnWave3() {
 
 void Boss::EndedMove() {
   if (m_hasDoneDamage && m_nextState == STATE_BASIC) {
-    OnFullComboPerformed(false);
     return;
-  } else if (m_hasDoneDamage && m_nextState == STATE_BASIC || m_consectutiveAttack != 3) {
+  } else if (m_nextState == STATE_SPECIAL && m_consectutiveAttack != 3) {
     return;
   }
   OnFullComboPerformed(false);
@@ -348,15 +347,19 @@ void Boss::Destroy() {
   GET_FACTORY->DestroyObject(m_bar);
   GET_FACTORY->DestroyObject(m_barBackground);
 
-  for (auto &enemy: enemyDeletionQueue) {
-    enemy->OnDamage(Sigma::Damage::DamageEvent(enemy->GetId(), this, Sigma::Collision::DAMAGE, 100000, {0, 0},
-                                               Sigma::Damage::DamageType::DAMAGE));
+  for (auto& enemy: enemyDeletionQueue) {
+    GET_FACTORY->DestroyObject(enemy);
+    // enemy->OnDamage(Sigma::Damage::DamageEvent(enemy->GetId(),this,Sigma::Collision::DAMAGE, 100000, {0,0},Sigma::Damage::DamageType::DAMAGE));
   }
   enemyDeletionQueue.clear();
 }
 
 void Boss::OnDamage(const Sigma::Damage::DamageEvent &e) {
   Enemy::OnDamage(e);
+
+  if (e.GetOther() == this)
+    return;
+  
   OnFullComboPerformed(false);
   m_bar->m_currentHealth = GetHealth();
 

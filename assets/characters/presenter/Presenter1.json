@@ -338,7 +338,7 @@
 	"frame": {"x":93,"y":448,"w":32,"h":85},
 	"rotated": false,
 	"trimmed": true,
-  "fps": 1,
+  "fps": 2,
 	"spriteSourceSize": {"x":51,"y":43,"w":32,"h":85},
 	"sourceSize": {"w":128,"h":128},
 	"pivot": {"x":0.5,"y":1}
