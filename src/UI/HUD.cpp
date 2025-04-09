@@ -144,7 +144,8 @@ void HUD::Init() {
   player2.slash->m_screenSpaceTransform.scale = {1.0f, 1.8f};
   player2.slash->m_screenSpaceTransform.position.x += -136 + 274;
   player2.slash->m_screenSpaceTransform.position.y += 28;
-  player1.slash->m_screenSpaceTransform.scale.x = .5f;
+  player2.slash->m_screenSpaceTransform.scale.x = .5f;
+  player2.slash->m_screenSpaceTransform.scale.y = .75f;
   player2.slash->SetText("/");
   player2.slash->SetTint({1.0f, 1.0f, 1.0f, 1.0f});
 

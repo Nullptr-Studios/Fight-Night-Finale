@@ -376,6 +376,9 @@ void Boss::Destroy() {
     // enemy->OnDamage(Sigma::Damage::DamageEvent(enemy->GetId(),this,Sigma::Collision::DAMAGE, 100000, {0,0},Sigma::Damage::DamageType::DAMAGE));
   }
   enemyDeletionQueue.clear();
+
+  if (!GetAlive())
+    GameplayManager::GetInstance()->GotoNextScene();
 }
 
 void Boss::OnDamage(const Sigma::Damage::DamageEvent &e) {

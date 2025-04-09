@@ -39,7 +39,8 @@ void game::GameplayManager::Init() {
   GET_AUDIO->LoadBank("assets/Sound/Desktop/Music.bank");
   GET_AUDIO->LoadBank("assets/Sound/Desktop/SFX.bank");
   //StartGame();
-  GET_AUDIO->LoadEvent("event:/Music/MainMusic");
+  m_currentMusic = "event:/Music/MainMusic";
+  GET_AUDIO->LoadEvent(m_currentMusic.c_str());
 } // :3
 
 void game::GameplayManager::Start() {
@@ -280,7 +281,7 @@ void game::GameplayManager::UninitializeGame() {
 }
 
 void game::GameplayManager::BossMusic() {
-  GET_AUDIO->StopEvent("event:/Music/MainMusic");
+  GET_AUDIO->StopEvent(m_currentMusic.c_str());
 
   m_currentMusic = "event:/Music/BossMusic";
 
@@ -292,7 +293,7 @@ void game::GameplayManager::StartGame(const std::string& sceneName) {
   if (m_started)
     return;
 
-  m_uninitializeGame =false;
+  m_uninitializeGame = false;
 
   m_experience = 0;
 
