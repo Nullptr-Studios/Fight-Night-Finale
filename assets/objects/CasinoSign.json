@@ -20,7 +20,7 @@
 "meta": {
 	"app": "https://www.codeandweb.com/texturepacker",
 	"version": "1.0",
-	"image": "CasinoSign.png",
+	"image": "assets/objects/CasinoSign.png",
 	"format": "RGBA8888",
 	"size": {"w":57,"h":174},
 	"scale": "1",
