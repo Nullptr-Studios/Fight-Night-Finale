@@ -29,11 +29,11 @@ void Boss::Update(double delta) {
     m_phaseDose = true;
     Transition();
   }
-  if (m_currentState == 49 && m_timer >= 3) {
-    m_taunt = false;
-    m_invincible = false;
-  }
   if (m_animComp->GetCurrentAnimation()->name == "Taunt") {
+    if (m_timer >=3) {
+      m_taunt = false;
+      m_invincible = false;
+    }
     m_health += 1.0 * delta;
     m_bar->m_currentHealth = GetHealth();
   }
