@@ -151,6 +151,8 @@ void Boss::Pursue() {
   m_animComp->SetCurrentAnim("Idle");
 
   do {
+    if (m_player == nullptr)
+      return;
     m_goto = static_cast<glm::vec2>(m_player->transform.position) + (Sigma::Random::Circle() * 30.0f);
   } while (!IsInBounds(m_goto));
 
@@ -224,6 +226,8 @@ void Boss::SpecialOne() {
   FacePlayer();
   SuperAttack();
   m_consectutiveAttack++;
+  if (m_player == nullptr)
+    return;
   std::shared_ptr<Proj> proj = GET_FACTORY->CreateObject<game::Proj>("Proj");
   proj->transform.position = transform.position + glm::vec3(0, 60, 0);
   proj->velocity =
