@@ -53,6 +53,7 @@ public:
   void OnDamage(const Sigma::Damage::DamageEvent &e) override;
 
 private:
+  bool m_taunt = false;
   float m_baseMaxSpeed;
   Player *m_player{};
   float m_timer{};

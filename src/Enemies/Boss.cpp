@@ -29,10 +29,9 @@ void Boss::Update(double delta) {
     m_phaseDose = true;
     Transition();
   }
-  // if (m_currentState == 49 && m_timer >= 2) {
-    // SetState(STATE_IDLE);
-    // m_invincible = false;
-  // }
+  if (m_currentState == 49 && m_timer >= 2) {
+    m_taunt = false;
+  }
   if (m_animComp->GetCurrentAnimation()->name == "Taunt") {
     m_health += 1.0 * delta;
     m_bar->m_currentHealth = GetHealth();
@@ -82,7 +81,7 @@ void Boss::Init() {
 
 void Boss::Taunt() {
   m_animComp->SetCurrentAnim("Taunt");
-  m_invincible = true;
+  m_invincible = m_taunt;
 }
 
 void Boss::Start() {
@@ -103,6 +102,7 @@ void Boss::Transition() {
   velocity = {};
   m_timer = 0;
   m_invincible = true;
+  m_taunt = true;
   m_animComp->SetCurrentAnim("Taunt");
   SetState(49);
   float health = m_health;
