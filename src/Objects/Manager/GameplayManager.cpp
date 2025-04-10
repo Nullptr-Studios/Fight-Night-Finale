@@ -121,10 +121,14 @@ void game::GameplayManager::Update(double deltaTime) {
     UninitializeGame();
   }
 
+#if _DEBUG
   // Debug pass level
   if (AEInputKeyTriggered('P')) {
     GotoNextScene();
   }
+
+#endif
+  
 }
 
 void game::GameplayManager::RespawnPlayer(game::Player *player) {
