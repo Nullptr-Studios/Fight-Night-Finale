@@ -5,6 +5,7 @@
  * @brief Dead Scene
  */
 #pragma once
+#include "HUD.hpp"
 #include "Scene.hpp"
 namespace Sigma {
 class SceneButton;
@@ -14,10 +15,18 @@ class DeadScene final : public Sigma::Scene{
 public:
   DeadScene(const char *name, unsigned ID) : Scene(name, ID) {}
   void Load() override;
+  void Update(double delta) override;
   void Unload() override;
 private:
-  Sigma::SceneButton *m_quitButton = nullptr;
-  Sigma::Actor *m_background = nullptr;
-  Sigma::Actor *m_death = nullptr;
+  std::shared_ptr<Sigma::SceneButton> m_quitButton = nullptr;
+  std::shared_ptr<Sigma::Actor> m_background = nullptr;
+  std::shared_ptr<Sigma::Actor> m_death = nullptr;
+  std::shared_ptr<Sigma::Actor> m_topText = nullptr;
+  std::shared_ptr<Sigma::Actor> m_currentText = nullptr;
+  int m_topScore = 0;
+  int m_currentScore = 0;
+  UIMoneyBar m_top = {};
+  UIMoneyBar m_current = {};
+  std::string m_scoreJson = "assets/UI/Score.Json";
 };
 }

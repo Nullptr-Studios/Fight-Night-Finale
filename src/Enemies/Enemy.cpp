@@ -11,6 +11,7 @@ namespace game {
 void Enemy::Serialize() {
   Character::Serialize();
   m_attackDistance = j["distanceToAttack"];
+  m_xp = j["experience"];
 }
 
 void Enemy::Init() {
@@ -23,22 +24,41 @@ void Enemy::Init() {
 void Enemy::Start() {
   Character::Start();
 
-  BindState(STATE_IDLE, std::bind(&Enemy::IdleState, this));
-  BindState(STATE_WAIT, std::bind(&Enemy::TimerState, this));
-  BindState(STATE_DEAD, std::bind(&Enemy::DeadState, this));
+  BindState(STATE_IDLE, [this] { IdleState(); });
+  BindState(STATE_WAIT, [this] { TimerState(); });
+  BindState(STATE_DEAD, [this] { DeadState(); });
 
   SetState(STATE_IDLE);
 }
 
-void Enemy::OnDamage(const Sigma::Damage::DamageEvent& e) {
-  if (e.GetOther()->GetName().contains("Enemy")) return;
- 
-  Character::OnDamage(e);
-
-  if(m_invincible)
+void Enemy::OnDamage(const Sigma::Damage::DamageEvent &e) {
+  if (e.GetOther() == nullptr) return;
+  if (e.GetOther()->GetName().contains("Enemy") && !e.GetOther()->GetName().contains("Big"))
     return;
 
-  if (!GetAlive()) SetState(STATE_DEAD);
+  Character::OnDamage(e);
+
+  if (m_invincible)
+    return;
+
+  int money = m_xp * (e.GetDamageAmount() / m_maxHealth);
+  GameplayManager::GetInstance()->GiveXP(money);
+
+  if (!GetAlive()) {
+    SetState(STATE_DEAD);
+    m_collider->enabled = false;
+  }
+}
+bool Enemy::OnCollision(Sigma::Collision::CollisionEvent &e) {
+  auto enemy = dynamic_cast<Enemy*>(e.GetOther());
+  if (enemy) {
+    if (enemy->isInAir && !isInAir && enemy->isThrownByPlayer) {
+      this->TakeKnockback(enemy->velocity / 2.0f);
+      if (enemy->velocity.y != 0)
+        m_animComp->SetCurrentAnim("Thrown");
+    }
+  }
+  return true;
 }
 
 void Enemy::DeadAnimFinish() {
@@ -60,25 +80,24 @@ void Enemy::SetPlayers(std::array<PlayerStruct, 2>* players) { m_players = playe
 
 Player* Enemy::GetNearestPlayer() {
   if (!m_players->operator[](0).player && !m_players->operator[](1).player) return nullptr;
-  if (!m_players->operator[](1).player) return m_players->operator[](0).player;
-  if (!m_players->operator[](0).player) return m_players->operator[](1).player;
+  if (!m_players->operator[](1).player) return m_players->operator[](0).player.get();
+  if (!m_players->operator[](0).player) return m_players->operator[](1).player.get();
 
   float distance0 = glm::distance(transform.GetDepthPosition(), m_players->operator[](0).player->transform.GetDepthPosition());
   float distance1 = glm::distance(transform.GetDepthPosition(), m_players->operator[](1).player->transform.GetDepthPosition());
 
   if (distance0 >= distance1){
     if(m_players->operator[](1).player->GetAlive())
-      return m_players->operator[](1).player;
+      return m_players->operator[](1).player.get();
   }
   if(m_players->operator[](0).player->GetAlive())
-    return m_players->operator[](0).player;
+    return m_players->operator[](0).player.get();
 
   // if all checks fail return nullptr
   return nullptr;
 }
 
 void Enemy::Update(double delta) {
-
 
 
   if (m_currentState == STATE_IDLE && m_enabled) {
@@ -118,7 +137,7 @@ void Enemy::SetState(int state) {
 void Enemy::BindState(int state, const std::function<void()>& function) {
   // Sanity check
   if (!function) return;
-
+  // if (m_states.find(state) != m_states.end()) { m_states[state] = nullptr; }
   m_states.insert({state, function});
 
   #ifdef DEBUG_ENEMY

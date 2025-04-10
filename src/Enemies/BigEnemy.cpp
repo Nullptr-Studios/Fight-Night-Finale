@@ -1,12 +1,15 @@
 #include "BigEnemy.hpp"
-#include "Random.hpp"
-#include "Enemies/DefaultEnemy.hpp"
+
+#include "Controller/CameraController.hpp"
 #include "Enemies/Enemy.hpp"
+#include "Objects/Camera.hpp"
+#include "Effects/EffectObject.hpp"
 
 namespace game {
 
 void BigEnemy::Init() {
   Enemy::Init();
+  m_attackCollider = GET_FACTORY->CreateObject<Sigma::Collision::OneHitCollider>("Attack Collider");
   // Setup Animation
   auto anim = GET_ANIMATION->LoadTextureAtlas("assets/characters/bigEnemy/anim-data.json");
   m_animComp->SetTextureAtlas(anim);
@@ -21,48 +24,53 @@ void BigEnemy::Init() {
   m_collider->damage = 1.0f;
   m_collider->SetOwner(this);
 
-  m_defaultState = STATE_WANDER;
   m_defaultState = STATE_FOLLOW;
-  targetLeft = rand()%2;
-}
+  targetLeft = rand() % 2;
 
-void BigEnemy::FollowState() {
-  if (!m_isDoingSomething) return;
-
-  if (m_nearest == nullptr)
-    return;
-
-  
-  isAvoiding = false;
-  m_animComp->SetCurrentAnim("Walk");
-  glm::vec3 targets[2];
-  targets[0] = m_nearest->transform.GetDepthPosition()+ glm::vec3(-50,0,0);
-  targets[1] = m_nearest->transform.GetDepthPosition()+ glm::vec3(50,0,0);
-  m_position = ((targetLeft)?targets[0]:targets[1]);
-
-  if (fabs(m_distance.y) <= 25 && fabs(m_distance.x) <= 60 && fabs(m_distance.x) >= 30) {
-    m_timer = Sigma::Random::Float(.2f, .3f);
-    m_nextState = STATE_ATTACK;
-    SetState(STATE_PAUSED);
-  } else if (fabs(m_distance.y) <= 25 && fabs(m_distance.x) <= 60 && fabs(m_distance.x) <= 30) {
-    m_nextState = STATE_FOLLOW;
-    SetState(STATE_DISPERSE);
-  } else {
-    m_nextState = STATE_FOLLOW;
-    m_timer = 2;
-    SetState(STATE_GOTO);
-  }
+  hitEffectStr = "Fall";
 }
 
 void BigEnemy::AttackState() {
-  if (!m_isDoingSomething) return;
+  if (!m_isDoingSomething)
+    return;
   isAvoiding = false;
   if ((m_distance.x >= 0) != (transform.relativeScale.x >= 0)) {
     transform.relativeScale.x *= -1;
   }
-  if(rand()%3) {
+  if (rand() % 3) {
     targetLeft = !targetLeft;
-  } 
-  BasicAttack();
+  }
+  TakeKnockback({0, 600});
+  m_animComp->SetCurrentAnim("Thrown");
+  // BasicAttack();
+  attack = true;
+  m_nextState = STATE_FOLLOW;
+  m_timer = 2;
+  SetState(STATE_PAUSED);
 }
+
+void BigEnemy::LandedOnGround() {
+  Character::LandedOnGround();
+  transform.position.y = m_movementYFloor;
+  velocity.y = 0;
+  isInAir = false;
+
+  m_invincible = true;
+  m_isRecovering = true;
+  if (attack) {
+    m_attackCollider->Do(transform.position + glm::vec3(0), {150,50,100}, 13, this, Sigma::Damage::DAMAGE,{400,300},false);
+    attack = false;
+    // Shake the camera, this is beautifull
+    m_hitEffect->transform.position = m_attackCollider->transform.position;
+    m_hitEffect->DoEffect(hitEffectStr);
+    GET_CAMERA->GetCurrentCamera()->GetShakeObject()->StartShake(.5f,50,15, Sigma::EASE_OUT);
+  }
+  if (GetAlive())
+    m_animComp->SetCurrentAnim("Recover");
+  else {
+    m_animComp->SetCurrentAnim("Recover");
+    m_animComp->GotoFrame(0);
+    m_animComp->StopAnim();
+  }
 }
+} // namespace game

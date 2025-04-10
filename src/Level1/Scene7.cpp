@@ -5,28 +5,31 @@
 #include "GameManager.hpp"
 #include "Objects/Actor.hpp"
 #include "Objects/Camera.hpp"
-#include "Scene1.hpp"
+#include "UI/WinScene.hpp"
 
 #define DEBUG_CAMERA
 
 namespace game {
 
 void Scene7::Load() {
-  GameScene::Load();
 
   floor = GET_FACTORY->CreateObject<Sigma::Actor>();
   floor->SetTexture("assets/level-1/scene-7-floor.png");
-  floor->transform.scale = {2000.0f, 2000.0f};
-  floor->transform.position.z = -5000;
+  floor->transform.scale = {757.0f, 261.0f};
+  floor->transform.position = {-282, -22, -5000};
   AddChild(floor);
 
   walls = GET_FACTORY->CreateObject<Sigma::Actor>();
   walls->SetTexture("assets/level-1/scene-7-walls.png");
-  walls->transform.scale = {2000.0f, 2000.0f};
-  walls->transform.position.z = -5000;
+  walls->transform.scale = {757.0f, 261.0f};
+  walls->transform.position = {-282, -22, -5000};
   AddChild(walls);
 
-  SetNextScene(new Scene1("Game Scene 1", 1, "assets/level-1/scene-1.json"));
+  GameScene::Load();
+
+  GameplayManager::GetInstance()->BossMusic();
+
+  SetNextScene(new WinScene("Win Scene", 7));
 }
 
 void Scene7::Update(double delta) {

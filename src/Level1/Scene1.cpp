@@ -6,7 +6,9 @@
 #include "Objects/Actor.hpp"
 #include "Objects/Camera.hpp"
 #include "Objects/CameraFollow.hpp"
+#include "Objects/CasinoSign.hpp"
 #include "Objects/Destructibles/Box.hpp"
+#include "Objects/Door.hpp"
 #include "Scene2.hpp"
 #include "UI/HUD.hpp"
 #include "UI/HealthBar.hpp"
@@ -17,7 +19,8 @@
 namespace game {
 
 void Scene1::Load() {
-  GameScene::Load();
+
+  GameplayManager::GetInstance()->enableComboScore(true);
 
   floor = GET_FACTORY->CreateObject<Sigma::Actor>();
   floor->SetTexture("assets/level-1/scene-1-floor.png");
@@ -31,10 +34,25 @@ void Scene1::Load() {
   walls->transform.position.z = -5000;
   AddChild(walls);
 
+  m_exitLocationDoor = GET_FACTORY->CreateObject<Door>("Exit_Door", 2);
+  m_exitLocationDoor->transform.position = {344, -70, 70};
+  AddChild(m_exitLocationDoor);
+
+  auto overlay = GET_FACTORY->CreateObject<Sigma::Actor>("Overlay");
+  overlay->SetTexture("assets/level-1/scene-1-overlay.png");
+  overlay->transform.scale = {761.0f, 281.0f};
+  overlay->transform.position.z = 5000;
+  AddChild(overlay);
+
+  auto sign = GET_FACTORY->CreateObject<CasinoSign>("Sign");
+  sign->SetTexture("assets/objects/CasinoSign.png");
+  sign->transform.position = {346, -5, -5000};
+  AddChild(sign);
+
   // xd
   // auto nig = GET_FACTORY->CreateObject<HUD>("HUD");
 
-  
+  GameScene::Load();
 
   SetNextScene(new Scene2("Game Scene 2", 2, "assets/level-1/scene-2.json"));
 }

@@ -3,15 +3,16 @@
 
 #include "Controller/CameraController.hpp"
 #include "Core.hpp"
+#include "Credits.hpp"
+#include "DeadScene.hpp"
 #include "Level1/Scene1.hpp"
 #include "Objects/Camera.hpp"
 #include "Objects/Manager/GameplayManager.hpp"
 #include "Tutorial/Tutorial1.hpp"
 #include "Tutorial/Tutorial2.hpp"
 #include "Tutorial/Tutorial3.hpp"
-#include "UI/SceneButton.hpp"
 #include "UI/ControlButton.hpp"
-#include "DeadScene.hpp"
+#include "UI/SceneButton.hpp"
 #include "UI/UIText.hpp"
 #include "WinScene.hpp"
 
@@ -44,6 +45,7 @@ void game::MainMenu::Load() {
   // AddChild(m_studioLogo);
   
   auto s = new game::Tutorial1("Tutorial 1 ", 1, "assets/tutorial/tutorial-1.json");
+  // auto t = new game::Credits("Credits", 1);
   // auto s = new game::WinScene("Game Scene1", 0);
   m_playButton = GET_FACTORY->CreateObject<Sigma::SceneButton>("Play Button", s, GetID());
   m_playButton->m_screenSpaceTransform.scale = {200, 100};
@@ -57,13 +59,13 @@ void game::MainMenu::Load() {
   m_controlsButton->SetTexture("assets/UI/Sprites/Controls.png");
   AddChild(m_controlsButton);
 
-  m_scoreButton = GET_FACTORY->CreateObject<Sigma::SceneButton>("Score Button", nullptr,GetID());
+  /*m_scoreButton = GET_FACTORY->CreateObject<Sigma::SceneButton>("Score Button", nullptr,GetID());
   m_scoreButton->m_screenSpaceTransform.scale = {200, 100};
   m_scoreButton->m_screenSpaceTransform.position.y -= 340;
   m_scoreButton->SetTexture("assets/UI/Sprites/Score.png");
   m_scoreButton->SetTint({.5,.5,.5,1});
   m_scoreButton->DisableUpdate();
-  AddChild(m_scoreButton);
+  AddChild(m_scoreButton);*/
 
   m_quitButton = GET_FACTORY->CreateObject<Sigma::SceneButton>("Quit Button", nullptr,GetID());
   m_quitButton->m_screenSpaceTransform.scale = {200, 100};

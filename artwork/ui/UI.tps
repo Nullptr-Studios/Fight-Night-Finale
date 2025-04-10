@@ -161,7 +161,7 @@
             <key>trimMargin</key>
             <uint>1</uint>
             <key>trimMode</key>
-            <enum type="SpriteSettings::TrimMode">Trim</enum>
+            <enum type="SpriteSettings::TrimMode">None</enum>
             <key>tracerTolerance</key>
             <int>200</int>
             <key>heuristicMask</key>
@@ -173,6 +173,23 @@
         </struct>
         <key>individualSpriteSettings</key>
         <map type="IndividualSpriteSettingsMap">
+            <key type="filename">png/BossbarBackground_0.png</key>
+            <key type="filename">png/BossbarRed_0.png</key>
+            <key type="filename">png/BossbarRim_0.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>spriteScale</key>
+                <double>1</double>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>64,5,128,10</rect>
+                <key>scale9Paddings</key>
+                <rect>64,5,128,10</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
             <key type="filename">png/CharacterFrame_0.png</key>
             <key type="filename">png/PlaceholderFrame_0.png</key>
             <struct type="IndividualSpriteSettings">
@@ -202,6 +219,31 @@
                 <rect>5,1,10,2</rect>
                 <key>scale9Paddings</key>
                 <rect>5,1,10,2</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">png/Dollar_0.png</key>
+            <key type="filename">png/Numbers_0.png</key>
+            <key type="filename">png/Numbers_1.png</key>
+            <key type="filename">png/Numbers_2.png</key>
+            <key type="filename">png/Numbers_3.png</key>
+            <key type="filename">png/Numbers_4.png</key>
+            <key type="filename">png/Numbers_5.png</key>
+            <key type="filename">png/Numbers_6.png</key>
+            <key type="filename">png/Numbers_7.png</key>
+            <key type="filename">png/Numbers_8.png</key>
+            <key type="filename">png/Numbers_9.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>spriteScale</key>
+                <double>1</double>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>3,3,5,6</rect>
+                <key>scale9Paddings</key>
+                <rect>3,3,5,6</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
@@ -252,16 +294,8 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">png/Numbers_0.png</key>
-            <key type="filename">png/Numbers_1.png</key>
-            <key type="filename">png/Numbers_2.png</key>
-            <key type="filename">png/Numbers_3.png</key>
-            <key type="filename">png/Numbers_4.png</key>
-            <key type="filename">png/Numbers_5.png</key>
-            <key type="filename">png/Numbers_6.png</key>
-            <key type="filename">png/Numbers_7.png</key>
-            <key type="filename">png/Numbers_8.png</key>
-            <key type="filename">png/Numbers_9.png</key>
+            <key type="filename">png/PlayerUI_1.png</key>
+            <key type="filename">png/PlayerUI_2.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
@@ -270,9 +304,24 @@
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
-                <rect>3,3,5,6</rect>
+                <rect>13,13,25,27</rect>
                 <key>scale9Paddings</key>
-                <rect>3,3,5,6</rect>
+                <rect>13,13,25,27</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">png/SceneIntro_0.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>spriteScale</key>
+                <double>1</double>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>77,5,155,9</rect>
+                <key>scale9Paddings</key>
+                <rect>77,5,155,9</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
@@ -288,6 +337,21 @@
                 <rect>1,2,1,3</rect>
                 <key>scale9Paddings</key>
                 <rect>1,2,1,3</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">png/White_0.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>spriteScale</key>
+                <double>1</double>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>1,1,1,1</rect>
+                <key>scale9Paddings</key>
+                <rect>1,1,1,1</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>

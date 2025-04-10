@@ -1,10 +1,7 @@
 #include "Scene3.hpp"
-#include "Controller/CameraController.hpp"
 #include "Core.hpp"
 #include "Factory.hpp"
-#include "GameManager.hpp"
 #include "Objects/Actor.hpp"
-#include "Objects/Camera.hpp"
 #include "Objects/Destructibles/Box.hpp"
 #include "Scene4.hpp"
 
@@ -13,7 +10,6 @@
 namespace game {
 
 void Scene3::Load() {
-  GameScene::Load();
 
   floor = GET_FACTORY->CreateObject<Sigma::Actor>();
   floor->SetTexture("assets/level-1/scene-3-floor.png");
@@ -26,19 +22,34 @@ void Scene3::Load() {
   walls->transform.scale = {1066.0f, 298.0f};
   walls->transform.position.z = -5000;
   AddChild(walls);
-  
-  auto b1 = GET_FACTORY->CreateObject<Box>("Machine1");
-  b1->transform.position = {-250, 9, -9};
 
-  auto b2 = GET_FACTORY->CreateObject<Box>("Machine2");
-  b2->transform.position = {200, 10, -10};
-  
-  auto b3 = GET_FACTORY->CreateObject<Box>("Machine2");
-  b3->transform.position = {444, -75, 75};
+  m_exitLocationDoor = GET_FACTORY->CreateObject<Door>("Exit_Door", 2);
+  m_exitLocationDoor->transform.position = {496, -79, 79};
+  AddChild(m_exitLocationDoor);
+
+  auto b1 = GET_FACTORY->CreateObject<Box>("Machine1");
+  b1->transform.position = {230, -22, 22};
+
+  auto Sdoor1 = GET_FACTORY->CreateObject<Door>("Spawner_Door1", 1);
+  Sdoor1->transform.position = {-293, 54, -54};
+  AddChild(Sdoor1);
+  m_spawnerDoors.push_back(Sdoor1);
+
+  auto Sdoor2 = GET_FACTORY->CreateObject<Door>("Spawner_Door2", 1);
+  Sdoor2->transform.position = {-5, 54, -54};
+  AddChild(Sdoor2);
+  m_spawnerDoors.push_back(Sdoor2);
+
+  auto Sdoor3 = GET_FACTORY->CreateObject<Door>("Spawner_Door3", 2);
+  Sdoor3->transform.position = {264, -8, 8};
+  AddChild(Sdoor3);
+  m_spawnerDoors.push_back(Sdoor3);
+
+  m_spawnerDoors.emplace_back(m_exitLocationDoor);
 
   AddChild(b1);
-  AddChild(b2);
-  AddChild(b3);
+
+  GameScene::Load();
 
   SetNextScene(new Scene4("Game Scene 4", 4, "assets/level-1/scene-4.json"));
 }

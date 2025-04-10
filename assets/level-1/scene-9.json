@@ -1,0 +1,122 @@
+{
+  "playerStart": {"x": -396, "y": 44},
+  "exitLoc": {"x": 310, "y": -140},
+  "bounds": [
+    {"x": -440, "y": 73},
+    {"x": -426, "y": 63},
+    {"x": -458, "y": 63},
+    {"x": -422, "y": 27},
+    {"x": -390, "y": 27},
+    {"x": -186, "y": -177},
+    {"x": -144, "y": -189},
+    {"x": 244, "y": -189},
+    {"x": 284, "y": -201},
+    {"x": 406, "y": -201},
+    {"x": 426, "y": -189},
+    {"x": 458, "y": -189},
+    {"x": 398, "y": -131},
+    {"x": 14, "y": -131},
+    {"x": -32, "y": -85},
+    {"x": -68, "y": -85},
+    {"x": -80, "y": -71},
+    {"x": -176, "y": -71},
+    {"x": -320, "y": 73}
+  ],
+  "enemySpawners": [
+    {
+      "name": "Spawner 1",
+      "delayTime": 2,
+      "pos": {"x": -230, "y": -75},
+      "activationRange": 150,
+      "enemies": [
+        {
+          "id": 0,
+          "pos": {"x": -95, "y": -80},
+          "entranceId": 1,
+          "stepAmmount": 2
+        },
+        {
+          "id": 2,
+          "pos": {"x": -15, "y": -105},
+          "entranceId": 2
+        },
+        {
+          "id": 1,
+          "pos": {"x": -15, "y": -105},
+          "entranceId": 2
+        },
+        {
+          "id": 3,
+          "pos": {"x": -305, "y": 50},
+          "entranceId": 0
+        }
+      ]
+    },
+    {
+      "name": "Spawner 2",
+      "delayTime": 3,
+      "required": 0,
+      "pos": {"x": -80, "y": -130},
+      "activationRange": 150,
+      "enemies": [
+        {
+          "id": 1,
+          "pos": {"x": -95, "y": -80},
+          "entranceId": 1,
+          "stepAmmount": 2
+        },
+        {
+          "id": 2,
+          "pos": {"x": -15, "y": -105},
+          "entranceId": 2
+        },
+        {
+          "id": 0,
+          "pos": {"x": -95, "y": -80},
+          "entranceId": 1,
+          "stepAmmount": 2
+        },
+        {
+          "id": 2,
+          "pos": {"x": -305, "y": 50},
+          "entranceId": 0
+        }
+      ]
+    },
+    {
+      "name": "Spawner 3",
+      "delayTime": 3,
+      "required": 1,
+      "pos": {"x": 215, "y": -160},
+      "activationRange": 200,
+      "enemies": [
+        {
+          "id": 0,
+          "pos": {"x": -15, "y": -105},
+          "entranceId": 2,
+          "stepAmmount": 2
+        },
+        {
+          "id": 1,
+          "pos": {"x": -95, "y": -80},
+          "entranceId": 1
+        },
+        {
+          "id": 2,
+          "pos": {"x": -95, "y": -80},
+          "entranceId": 1
+        },
+        {
+          "id": 2,
+          "pos": {"x": 415, "y": -160},
+          "entranceId": 3
+        },
+        {
+          "id": 3,
+          "pos": {"x": -305, "y": 50},
+          "entranceId": 0
+        }
+      ]
+    }
+  ]
+}

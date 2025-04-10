@@ -6,6 +6,17 @@
 #include "Tutorial/Tutorial2.hpp"
 #include "UI/UIStaticImage.hpp"
 
+//Debugging purposes
+#include "Level1/Scene1.hpp"
+#include "Level1/Scene2.hpp"
+#include "Level1/Scene3.hpp"
+#include "Level1/Scene4.hpp"
+#include "Level1/Scene5.hpp"
+#include "Level1/Scene6.hpp"
+#include "Level1/Scene7.hpp"
+#include "Level1/Scene8.hpp"
+#include "Level1/Scene9.hpp"
+
 namespace game {
 
 void Tutorial1::Load() {
@@ -24,11 +35,14 @@ void Tutorial1::Load() {
   AddChild(m_glowArea);
 
   SetNextScene(new Tutorial2("Tutorial 2", 1, "assets/tutorial/tutorial-2.json"));
+  //SetNextScene(new Scene6("Game Scene 2", 2, "assets/level-1/scene-6.json"));
 
   auto tut = GET_FACTORY->CreateObject<Sigma::StaticImage>("StaticImage");
   tut->SetTexture("assets/tutorial/prompt1.png");
   tut->transform.scale = {320.0f, 180.0f};
   tut->transform.relativeScale = glm::vec2(2);
+
+  AddChild(tut);
 
   /*auto tut2 = GET_FACTORY->CreateObject<Sigma::Actor>();
   tut2->SetTexture("assets/tutorial/SpawnPrompt.png");

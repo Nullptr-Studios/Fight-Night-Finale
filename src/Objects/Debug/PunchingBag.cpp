@@ -28,8 +28,6 @@ void PunchingBag::Init() {
 }
 void PunchingBag::Update(double delta) {
   Damageable::Update(delta);
-
-  m_animComp->Update(delta);
   // m_collider->DebugDraw(m_debugCol, this, "assets/core/debug_blue.png");
 }
 void PunchingBag::OnDamage(const Sigma::Damage::DamageEvent &e) {

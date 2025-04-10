@@ -1,18 +1,12 @@
-//
-// Created by dariormt on 07/02/2025.
-//
-
 #include "GameScene.hpp"
 
 #include "Factory.hpp"
 #include "Polygon.hpp"
 #include "Objects/EnemySpawner.hpp"
-#include "Player/Player.hpp"
-#include "Controller/CameraController.hpp"
-#include "Objects/CameraFollow.hpp"
 #include "Scene.hpp"
-#include "Tutorial/GlowArea.hpp"
-#include "pch.hpp"
+#include "ScenePassTrigger.hpp"
+
+#include "Objects/Manager/GameplayManager.hpp"
 
 
 void game::GameScene::Load() {
@@ -36,7 +30,7 @@ void game::GameScene::Load() {
   m_playerStartPos = {J["playerStart"]["x"], J["playerStart"]["y"]};
 
   if (J.contains("exitLoc")) {
-    m_exitLocation = GET_FACTORY->CreateObject<GlowArea>("Exit");
+    m_exitLocation = GET_FACTORY->CreateObject<ScenePassTrigger>("Exit");
     m_exitLocation->transform.position = {J["exitLoc"]["x"], J["exitLoc"]["y"], -J["exitLoc"]["y"].get<int>()};
     m_exitLocation->SetActive(false);
     AddChild(m_exitLocation);
@@ -63,7 +57,7 @@ void game::GameScene::Load() {
 
   for (auto &spawners: J["enemySpawners"]) {
 
-    game::EnemySpawner* s;
+    std::shared_ptr<EnemySpawner> s;
     if (spawners.contains("required"))
       s = GET_FACTORY->CreateObject<EnemySpawner>(spawners["name"], spawners["activationRange"], m_enemySpawners[spawners["required"]]);
     else
@@ -92,6 +86,8 @@ void game::GameScene::Load() {
       s->AddEnemiesData(data);
     }
 
+//Door stuff
+    s->AddDoorData(m_spawnerDoors);
     m_enemySpawners.push_back(s);
   }
 
@@ -107,7 +103,7 @@ void game::GameScene::Update(double delta){
   Sigma::Scene::Update(delta);
 
   int spawnercount = 0;
-  for(auto enemyspawner : m_enemySpawners) {
+  for(const auto& enemyspawner : m_enemySpawners) {
    if(enemyspawner->GetFinished())
      spawnercount++;
   }
@@ -115,6 +111,9 @@ void game::GameScene::Update(double delta){
   if (spawnercount >= m_enemySpawners.size() && !m_isSceneFinished) {
     if (m_exitLocation)
       m_exitLocation->SetActive(true);
+    if (m_exitLocationDoor)
+    	m_exitLocationDoor->Open(0, true);
+    GameplayManager::GetInstance()->OnScenePass();
     m_isSceneFinished = true;
   }
 }
@@ -122,12 +121,14 @@ void game::GameScene::Update(double delta){
 void game::GameScene::Unload() {
   Scene::Unload();
 
-  for (auto spawner: m_enemySpawners) {
+  for (const auto& spawner: m_enemySpawners) {
     GET_FACTORY->DestroyObject(spawner);
   }
 
+  m_spawnerDoors.clear();
   delete m_sceneBoundsPoly;
 }
+
 void game::GameScene::DebugWindow() {
   Scene::DebugWindow();
   

@@ -24,15 +24,14 @@ void Box::Init() {
 
   // transform.scale = {m_size.x, m_size.y};
   m_collider = std::make_unique<Sigma::Collision::BoxCollider>(Sigma::Collision::PLAYER, Sigma::Collision::COLLISION);
-  m_collider->box.Set(m_size);
+  m_collider->box.Set(m_size, glm::vec2{transform.offset.x, transform.offset.y});
 
   SetMaxHealth(1);
+
 }
 void Box::Update(double deltaTime) {
   Damageable::Update(deltaTime);
-
-  if (m_animComp)
-    m_animComp->Update(deltaTime);
+  
 }
 
 void Box::OnDed() {
@@ -49,6 +48,7 @@ void Box::OnDed() {
 }
 void Box::Destroy() {
   Damageable::Destroy();
+  
   if (m_pickup)
     GET_FACTORY->DestroyObject(m_pickup);
 }

@@ -1,26 +1,29 @@
-//
-// Created by dariormt on 07/02/2025.
-//
+/**
+ * @file GameScene.hpp
+ * @author Missing Textures
+ * @date 13/03/25
+ *
+ * @brief [TODO: Brief description of the file's purpose]
+ */
 
 #pragma once
+#include "Objects/Door.hpp"
 #include "Scene.hpp"
 
-namespace game {
-class GlowArea;
-}
 namespace Sigma {
 class Polygon;
 }
 
 namespace game {
 
+class ScenePassTrigger;
 class EnemySpawner;
 class Player;
 
 class GameScene : public Sigma::Scene {
 public:
  
-  /**
+    /**
    * @brief Construct a new Game Scene object
    *
    * @param name
@@ -47,19 +50,21 @@ public:
 
   void SetNextScene(Sigma::Scene *nextScene) { m_nextScene = nextScene; }
 
-  bool IsSceneFinished() { return m_isSceneFinished; }
+  [[nodiscard]] bool IsSceneFinished() const { return m_isSceneFinished; }
 
 protected:
   bool m_debug = false;
 
   bool m_isSceneFinished = false;
 
-  GlowArea* m_exitLocation = nullptr;
+  std::shared_ptr<ScenePassTrigger> m_exitLocation = nullptr;
+  std::shared_ptr<Door> m_exitLocationDoor = nullptr;
+  std::vector<std::shared_ptr<Door>> m_spawnerDoors{};
   
   std::string m_jsonPath{};
   glm::vec2 m_playerStartPos{};
   std::vector<glm::vec2> m_sceneBounds{};
-  std::vector<EnemySpawner *> m_enemySpawners{};
+  std::vector<std::shared_ptr<EnemySpawner>> m_enemySpawners{};
   Sigma::Scene * m_nextScene = nullptr;
 };
 

@@ -5,6 +5,13 @@
   "jumpVel" : 0.0,
   "friction" : 1000,
   "distanceToAttack" : 30.0,
+  "knockbackRes" : 1.0,
+
+  "experience": 5000,
+
+  "hitAnimations" : [
+    "Hit1", "Hit2"
+  ],
 
   "basicCombo" : [
     {
