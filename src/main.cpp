@@ -16,7 +16,8 @@ int main() {
 
   gameManager->LoadScene(mainMenu);
 
-
+  // fucking windows
+  SetThreadDpiAwarenessContext(DPI_AWARENESS_CONTEXT_PER_MONITOR_AWARE_V2);
   AEGfxSetFullscreen(true);
   while (AESysWindowExists()) {
     gameManager->Run();

@@ -309,8 +309,9 @@ void game::GameplayManager::StartGame(const std::string& sceneName) {
   m_cameraFollow->size = 3;
   GET_CAMERA->SetCurrentCamera(m_cameraFollow);
 
-  
-  GET_AUDIO->PlayEvent("event:/Music/MainMusic");
+  m_currentMusic = "event:/Music/MainMusic";
+
+  GET_AUDIO->PlayEvent(m_currentMusic.c_str());
 }
 
 void game::GameplayManager::GiveXP(int xp) {

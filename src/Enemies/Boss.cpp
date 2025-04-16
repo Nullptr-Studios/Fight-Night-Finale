@@ -67,7 +67,7 @@ void Boss::Init() {
   m_animComp->SetCurrentAnim("Idle");
   m_animComp->PlayAnim();
 
-  m_animComp->SetupTrailEffect(20, .02f, .25f, glm::vec4(.7f, .4f, .6f, 1), glm::vec4(.7f, .4f, .6f, 0));
+  m_animComp->SetupTrailEffect(20, .02f, .25f, glm::vec4(.7f, .4f, .6f, .75f), glm::vec4(.7f, .4f, .6f, 0));
 
   // Setup player collider
   m_collider->box.Set(25, 25, 50, 50, 10, transform.offset);
